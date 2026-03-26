@@ -52,7 +52,7 @@
         <div class="chatbot-messages" id="chatbotMessages">
             <div class="chat-msg bot">
                 <div class="chat-bubble">
-                    Xin chào! 👋 Mình là AI trợ lý của EnglishMaster. Bạn có thể hỏi mình về:
+                    Xin chào! 👋 Mình là AI trợ lý của English Learning. Bạn có thể hỏi mình về:
                     <br>• Ngữ pháp tiếng Anh
                     <br>• Từ vựng & nghĩa
                     <br>• Dịch thuật

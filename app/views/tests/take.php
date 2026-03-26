@@ -193,7 +193,7 @@ function doSubmitTest() {
     const timeSpent = Math.floor((Date.now() - startTime) / 1000);
     const submitUrl = '<?= BASE_URL ?>/test/submit';
 
-    console.log('[EnglishMaster] Submitting test...', {test_id: <?= $test['id'] ?>, answers, timeSpent, url: submitUrl});
+    console.log('[English Learning] Submitting test...', {test_id: <?= $test['id'] ?>, answers, timeSpent, url: submitUrl});
 
     fetch(submitUrl, {
         method: 'POST',
@@ -206,19 +206,19 @@ function doSubmitTest() {
         })
     })
     .then(response => {
-        console.log('[EnglishMaster] Response status:', response.status);
+        console.log('[English Learning] Response status:', response.status);
         if (!response.ok) {
             throw new Error('Server responded with status ' + response.status);
         }
         return response.text();
     })
     .then(text => {
-        console.log('[EnglishMaster] Response body:', text);
+        console.log('[English Learning] Response body:', text);
         let data;
         try {
             data = JSON.parse(text);
         } catch(e) {
-            console.error('[EnglishMaster] Invalid JSON response:', text.substring(0, 200));
+            console.error('[English Learning] Invalid JSON response:', text.substring(0, 200));
             throw new Error('Server trả về dữ liệu không hợp lệ.');
         }
         if (data.success) {
@@ -229,7 +229,7 @@ function doSubmitTest() {
         }
     })
     .catch(err => {
-        console.error('[EnglishMaster] Fetch error:', err);
+        console.error('[English Learning] Fetch error:', err);
         alert('Lỗi kết nối: ' + err.message + '\nVui lòng thử lại.');
         resetButton();
     });

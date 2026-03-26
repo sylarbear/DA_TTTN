@@ -66,6 +66,7 @@
 <script>
 const vocabs = <?= json_encode(array_values($vocabularies), JSON_UNESCAPED_UNICODE) ?>;
 let deck = [...vocabs], currentIndex = 0, known = 0, unknown = 0;
+let unknownWords = [];
 
 function loadCard() {
     if (currentIndex >= deck.length) { showResult(); return; }
@@ -82,7 +83,12 @@ function loadCard() {
 function flipCard() { document.getElementById('flashcard').classList.toggle('flipped'); }
 
 function markCard(isKnown) {
-    if (isKnown) known++; else unknown++;
+    if (isKnown) {
+        known++;
+    } else {
+        unknown++;
+        unknownWords.push(deck[currentIndex]);
+    }
     currentIndex++;
     loadCard();
 }
@@ -100,19 +106,29 @@ function showResult() {
     document.getElementById('knownCount').textContent = known;
     document.getElementById('unknownCount').textContent = unknown;
     document.getElementById('progressFill').style.width = '100%';
+    
+    // Award XP for completing flashcard session
+    fetch('<?= BASE_URL ?>/topic/learnVocab', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+        credentials: 'same-origin',
+        body: 'topic_id=<?= $topic['id'] ?>'
+    }).catch(() => {});
 }
 
 function restartAll() {
-    deck = [...vocabs]; currentIndex = 0; known = 0; unknown = 0;
+    deck = [...vocabs]; currentIndex = 0; known = 0; unknown = 0; unknownWords = [];
     document.getElementById('flashcard').style.display = ''; document.querySelector('.flashcard-actions').style.display = '';
     document.getElementById('flashcardResult').style.display = 'none';
     loadCard();
 }
 
 function restartUnknown() {
-    // Keep only unknown words (simplified - restart all if none tracked)
-    if (unknown === 0) { alert('Bạn đã nhớ hết từ vựng! 🎉'); restartAll(); return; }
-    restartAll(); // In a full impl, would track unknown words
+    if (unknownWords.length === 0) { alert('Bạn đã nhớ hết từ vựng! 🎉'); return; }
+    deck = [...unknownWords]; currentIndex = 0; known = 0; unknown = 0; unknownWords = [];
+    document.getElementById('flashcard').style.display = ''; document.querySelector('.flashcard-actions').style.display = '';
+    document.getElementById('flashcardResult').style.display = 'none';
+    loadCard();
 }
 
 loadCard();

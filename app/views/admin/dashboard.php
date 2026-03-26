@@ -2,7 +2,7 @@
 <section class="page-header">
     <div class="container">
         <h1><i class="fas fa-shield-alt"></i> Admin Dashboard</h1>
-        <p>Quản lý hệ thống EnglishMaster</p>
+        <p>Quản lý hệ thống English Learning</p>
     </div>
 </section>
 

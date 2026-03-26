@@ -68,6 +68,12 @@ class TopicController extends Controller {
             if ($topicId > 0) {
                 $progressModel = $this->model('UserProgress');
                 $progressModel->increment($_SESSION['user_id'], $topicId, 'vocab_learned');
+                
+                // Award XP
+                require_once APP_PATH . '/core/StreakService.php';
+                StreakService::updateStreak($_SESSION['user_id']);
+                StreakService::addXP($_SESSION['user_id'], 10, 'vocab_learn', 'Học từ vựng');
+                
                 $this->json(['success' => true]);
             }
         }

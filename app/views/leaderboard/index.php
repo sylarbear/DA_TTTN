@@ -2,7 +2,7 @@
 <section class="page-header">
     <div class="container">
         <h1><i class="fas fa-trophy"></i> Bảng xếp hạng</h1>
-        <p>Top học viên xuất sắc nhất EnglishMaster</p>
+        <p>Top học viên xuất sắc nhất English Learning</p>
     </div>
 </section>
 

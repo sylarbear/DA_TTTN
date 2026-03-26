@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EnglishMaster - Hệ thống học tiếng Anh trực tuyến theo chủ đề, tích hợp đánh giá kỹ năng nói bằng AI">
+    <meta name="description" content="English Learning - Hệ thống học tiếng Anh trực tuyến theo chủ đề, tích hợp đánh giá kỹ năng nói bằng AI">
     <title><?= $title ?? APP_NAME ?></title>
     
     <!-- Google Fonts -->
