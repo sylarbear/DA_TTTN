@@ -222,6 +222,15 @@ function displayScores(scores) {
             </div>
         </div>
         <div class="feedback-text">${scores.feedback}</div>
+        <div class="pronunciation-heatmap" style="margin:1.5rem 0;">
+            <h4><i class="fas fa-highlighter"></i> Phân tích phát âm</h4>
+            <div id="heatmapDisplay" style="margin:0.5rem 0;line-height:2;"></div>
+            <div class="heatmap-legend">
+                <span class="leg-good">Đọc đúng</span>
+                <span class="leg-ok">Gần đúng</span>
+                <span class="leg-miss">Bị thiếu</span>
+            </div>
+        </div>
         <div class="practice-actions">
             <button class="btn btn-primary" onclick="resetPractice()">
                 <i class="fas fa-redo"></i> Thử lại
@@ -232,6 +241,46 @@ function displayScores(scores) {
         </div>
     `;
     scoreResult.style.display = 'block';
+
+    // Generate pronunciation heatmap
+    generateHeatmap();
+}
+
+/**
+ * Tạo Pronunciation Heatmap
+ * So sánh từng từ trong sample với transcript
+ */
+function generateHeatmap() {
+    const heatmapEl = document.getElementById('heatmapDisplay');
+    if (!heatmapEl) return;
+
+    const sampleText = SPEAKING_CONFIG.sampleAnswer || '';
+    const transcript = fullTranscript.trim();
+    
+    const sampleWords = sampleText.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/);
+    const transcriptWords = transcript.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/);
+    const transcriptSet = new Set(transcriptWords);
+    const originalWords = sampleText.split(/\s+/);
+
+    let html = '';
+    originalWords.forEach((word, i) => {
+        const clean = word.toLowerCase().replace(/[^a-z0-9]/g, '');
+        let cls = 'match-miss';
+        if (transcriptSet.has(clean)) {
+            cls = 'match-good';
+        } else {
+            // Check partial match (first 3+ chars)
+            for (const tw of transcriptWords) {
+                if (clean.length >= 3 && tw.length >= 3 && (tw.startsWith(clean.substring(0,3)) || clean.startsWith(tw.substring(0,3)))) {
+                    cls = 'match-ok';
+                    break;
+                }
+            }
+        }
+        html += `<span class="heatmap-word ${cls}">${word}</span> `;
+    });
+    
+    heatmapEl.innerHTML = html;
 }
 
 /**

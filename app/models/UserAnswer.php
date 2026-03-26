@@ -61,6 +61,11 @@ class UserAnswer extends Model {
         ]);
         $resultId = $this->db->lastInsertId();
 
+        // Award XP for completing test
+        require_once APP_PATH . '/core/StreakService.php';
+        StreakService::updateStreak($userId);
+        StreakService::addXP($userId, 50, 'test_complete', 'Hoàn thành bài test');
+
         // Lưu chi tiết từng câu
         $stmt = $this->db->prepare("
             INSERT INTO user_answers (test_result_id, question_id, user_answer, is_correct)

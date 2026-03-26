@@ -5,7 +5,7 @@
  */
 
 // Thông tin ứng dụng
-define('APP_NAME', 'EnglishMaster');
+define('APP_NAME', 'English Learning');
 define('APP_VERSION', '1.0.0');
 
 // URL gốc - thay đổi theo môi trường

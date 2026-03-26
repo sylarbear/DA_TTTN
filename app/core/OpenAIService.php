@@ -153,7 +153,7 @@ Respond ONLY in this exact JSON format:
      * @return string|null AI response hoặc null
      */
     public static function chatbot($userMessage, $history = []) {
-        $systemPrompt = "You are EnglishMaster AI Assistant - a friendly English learning chatbot. You help Vietnamese students learn English.
+        $systemPrompt = "You are English Learning AI Assistant - a friendly English learning chatbot. You help Vietnamese students learn English.
 
 Rules:
 - Answer in Vietnamese mixed with English examples when teaching
@@ -183,3 +183,4 @@ Rules:
         return $result['choices'][0]['message']['content'];
     }
 }
+

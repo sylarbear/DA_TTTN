@@ -38,6 +38,7 @@
                 
                 <?php if (Middleware::isLoggedIn()): ?>
                     <li><a href="<?= BASE_URL ?>/dashboard" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a></li>
+                    <li><a href="<?= BASE_URL ?>/grammar" class="nav-link"><i class="fas fa-graduation-cap"></i> Ngữ pháp</a></li>
                     <li><a href="<?= BASE_URL ?>/leaderboard" class="nav-link"><i class="fas fa-trophy"></i> Xếp hạng</a></li>
                     <?php if (!Middleware::isPro()): ?>
                         <li><a href="<?= BASE_URL ?>/membership" class="nav-link nav-upgrade-link"><i class="fas fa-crown"></i> Nâng cấp Pro</a></li>
@@ -54,6 +55,7 @@
                             </button>
                             <div class="dropdown-menu" id="userDropdown">
                                 <a href="<?= BASE_URL ?>/profile"><i class="fas fa-user"></i> Hồ sơ cá nhân</a>
+                                <a href="<?= BASE_URL ?>/bookmark"><i class="fas fa-bookmark"></i> Từ đã lưu</a>
                                 <a href="<?= BASE_URL ?>/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                                 <a href="<?= BASE_URL ?>/membership"><i class="fas fa-crown"></i> <?= Middleware::isPro() ? 'Quản lý Pro' : 'Nâng cấp Pro' ?></a>
                                 <?php if (Middleware::isAdmin()): ?>

@@ -105,6 +105,10 @@ class SpeakingController extends Controller {
         $progressModel->increment($_SESSION['user_id'], $prompt['topic_id'], 'speaking_practiced');
         $progressModel->addScore($_SESSION['user_id'], $prompt['topic_id'], $scores['overall_score']);
 
+        // Award XP
+        require_once APP_PATH . '/core/StreakService.php';
+        StreakService::addXP($_SESSION['user_id'], 30, 'speaking_practice', 'Luyện nói');
+
         $this->json([
             'success'    => true,
             'attempt_id' => $attemptId,

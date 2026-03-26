@@ -8,6 +8,42 @@
 
 <section class="dashboard-section">
     <div class="container">
+        <!-- Streak + XP + Daily Goal -->
+        <?php if (!empty($streak)): ?>
+        <div class="streak-bar">
+            <div class="streak-item">
+                <div class="streak-icon">🔥</div>
+                <div>
+                    <strong class="streak-count"><?= $streak['current_streak'] ?></strong>
+                    <small>ngày liên tiếp</small>
+                </div>
+            </div>
+            <div class="streak-item">
+                <div class="streak-icon">⭐</div>
+                <div>
+                    <strong>Lv.<?= $streak['level'] ?></strong>
+                    <div class="xp-mini-bar"><div class="xp-mini-fill" style="width:<?= $streak['level_progress'] ?>%"></div></div>
+                    <small><?= number_format($streak['total_xp']) ?> XP</small>
+                </div>
+            </div>
+            <div class="streak-item">
+                <div class="streak-icon">🎯</div>
+                <div>
+                    <strong><?= $streak['daily_xp_today'] ?>/<?= $streak['daily_goal'] ?> XP</strong>
+                    <div class="xp-mini-bar"><div class="xp-mini-fill" style="width:<?= $streak['daily_progress'] ?>%; background:<?= $streak['daily_progress'] >= 100 ? 'var(--success)' : 'var(--primary)' ?>;"></div></div>
+                    <small>Mục tiêu hôm nay <?= $streak['daily_progress'] >= 100 ? '✅' : '' ?></small>
+                </div>
+            </div>
+            <div class="streak-item">
+                <div class="streak-icon">🏆</div>
+                <div>
+                    <strong><?= $streak['longest_streak'] ?></strong>
+                    <small>Streak cao nhất</small>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
+
         <!-- Overall Stats -->
         <div class="stats-grid">
             <div class="stat-card">
