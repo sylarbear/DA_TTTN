@@ -426,3 +426,51 @@
     .vocab-grid { grid-template-columns:1fr; }
     .stats-grid { grid-template-columns:repeat(2, 1fr); }
 }
+
+/* ============================================= */
+/* Voice Selector & Free Text TTS               */
+/* ============================================= */
+
+.voice-selector-card { background:white; border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:1.5rem 2rem; margin-bottom:1.5rem; }
+.voice-selector-card h3 { margin-bottom:1rem; font-size:1.1rem; }
+.voice-options { display:flex; flex-wrap:wrap; gap:0.6rem; margin-bottom:1.2rem; }
+.voice-option { display:flex; align-items:center; gap:0.5rem; padding:0.55rem 1rem; background:var(--bg-surface); border:1.5px solid var(--border-color); border-radius:var(--radius-sm); cursor:pointer; transition:var(--transition); font-size:0.9rem; position:relative; }
+.voice-option:hover { border-color:var(--primary); }
+.voice-option.active { border-color:var(--primary); background:rgba(91,108,255,0.06); box-shadow:0 0 0 2px rgba(91,108,255,0.15); }
+.voice-option input[type="radio"] { display:none; }
+.voice-flag { font-size:1.2rem; }
+.voice-name { font-weight:600; color:var(--text-primary); }
+.voice-lang { font-size:0.75rem; color:var(--text-muted); background:var(--border-color); padding:0.1rem 0.4rem; border-radius:3px; }
+.voice-preview { background:none; border:none; color:var(--primary); cursor:pointer; font-size:0.8rem; padding:0.2rem 0.4rem; border-radius:3px; transition:var(--transition); margin-left:auto; }
+.voice-preview:hover { background:rgba(91,108,255,0.1); }
+.voice-settings { display:flex; gap:2rem; flex-wrap:wrap; }
+.setting-group { display:flex; align-items:center; gap:0.6rem; }
+.setting-group label { font-size:0.85rem; font-weight:600; color:var(--text-secondary); white-space:nowrap; }
+.setting-group input[type="range"] { width:120px; accent-color:var(--primary); }
+.setting-group span { font-size:0.85rem; color:var(--primary); font-weight:600; min-width:32px; }
+
+.freetext-card { background:white; border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:1.5rem 2rem; margin-bottom:1.5rem; }
+.freetext-card h3 { margin-bottom:1rem; font-size:1.1rem; }
+.freetext-textarea { width:100%; border:1.5px solid var(--border-color); border-radius:var(--radius-sm); padding:1rem; font-family:var(--font); font-size:1rem; line-height:1.7; resize:vertical; min-height:120px; transition:var(--transition); background:var(--bg-surface); color:var(--text-primary); }
+.freetext-textarea:focus { outline:none; border-color:var(--primary); box-shadow:0 0 0 3px rgba(91,108,255,0.12); background:white; }
+.freetext-actions { display:flex; gap:0.8rem; margin-top:1.2rem; flex-wrap:wrap; }
+
+.speaking-progress { margin-top:1rem; }
+.progress-bar-wrapper { height:6px; background:var(--border-color); border-radius:3px; overflow:hidden; }
+.progress-bar-fill { height:100%; background:linear-gradient(90deg, var(--primary), var(--secondary)); border-radius:3px; width:0; transition:width 0.3s ease; }
+.speaking-word { margin-top:0.5rem; font-size:1.1rem; font-weight:600; color:var(--primary); text-align:center; }
+
+.sample-texts-card { background:white; border:1px solid var(--border-color); border-radius:var(--radius-lg); padding:1.5rem 2rem; }
+.sample-texts-card h3 { margin-bottom:1rem; font-size:1.1rem; }
+.sample-texts-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(280px, 1fr)); gap:1rem; }
+.sample-text-item { padding:1rem; border:1.5px solid var(--border-color); border-radius:var(--radius-sm); cursor:pointer; transition:var(--transition); }
+.sample-text-item:hover { border-color:var(--primary); background:rgba(91,108,255,0.03); }
+.sample-text-item.selected { border-color:var(--primary); background:rgba(91,108,255,0.06); }
+.sample-label { display:inline-block; font-weight:600; font-size:0.9rem; margin-bottom:0.4rem; }
+.sample-text-item p { font-size:0.85rem; color:var(--text-secondary); line-height:1.6; margin:0; }
+
+/* Freetext link card on speaking index */
+.freetext-promo { background:linear-gradient(135deg, rgba(91,108,255,0.06), rgba(0,210,255,0.06)); border:1.5px solid var(--primary); border-radius:var(--radius-lg); padding:2rem; margin-bottom:2rem; text-align:center; }
+.freetext-promo h3 { font-size:1.2rem; margin-bottom:0.5rem; }
+.freetext-promo p { color:var(--text-secondary); margin-bottom:1.2rem; }
+

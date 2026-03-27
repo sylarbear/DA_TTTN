@@ -326,12 +326,266 @@ function resetPractice() {
 }
 
 /**
- * Phát câu mẫu bằng TTS
+ * Phát câu mẫu bằng TTS (dùng giọng đã chọn)
  */
 function speakSample() {
     if (typeof SPEAKING_CONFIG === 'undefined') return;
-    const utterance = new SpeechSynthesisUtterance(SPEAKING_CONFIG.sampleAnswer);
-    utterance.lang = 'en-US';
-    utterance.rate = 0.85;
-    speechSynthesis.speak(utterance);
+    speakText(SPEAKING_CONFIG.sampleAnswer);
 }
+
+// =============================================
+// VOICE SELECTOR & FREE TEXT TTS
+// =============================================
+
+let availableVoices = [];
+let selectedVoice = null;
+
+/**
+ * Khởi tạo Voice Selector - Lọc 5 giọng English hay nhất
+ */
+function initVoiceSelector() {
+    const loadVoices = () => {
+        const allVoices = speechSynthesis.getVoices();
+        
+        // Lọc giọng English
+        const enVoices = allVoices.filter(v => v.lang.startsWith('en'));
+        
+        // Ưu tiên giọng chất lượng cao
+        const preferredNames = [
+            'Google US English',          // Google Female (US)
+            'Google UK English Female',   // Google Female (UK)
+            'Google UK English Male',     // Google Male (UK)
+            'Microsoft Zira',             // Microsoft Female
+            'Microsoft David',            // Microsoft Male
+            'Microsoft Mark',             // Microsoft Male
+            'Samantha',                   // macOS
+            'Daniel',                     // macOS UK
+            'Karen',                      // macOS AU
+            'Alex'                        // macOS
+        ];
+
+        // Sắp xếp: ưu tiên tên quen thuộc trước
+        enVoices.sort((a, b) => {
+            const aIdx = preferredNames.findIndex(n => a.name.includes(n));
+            const bIdx = preferredNames.findIndex(n => b.name.includes(n));
+            if (aIdx !== -1 && bIdx !== -1) return aIdx - bIdx;
+            if (aIdx !== -1) return -1;
+            if (bIdx !== -1) return 1;
+            return 0;
+        });
+
+        // Lấy tối đa 5 giọng, đảm bảo đa dạng
+        availableVoices = enVoices.slice(0, 5);
+
+        if (availableVoices.length === 0) {
+            // Fallback: tạo default voice
+            availableVoices = [{ name: 'Default English', lang: 'en-US', default: true }];
+        }
+
+        // Khôi phục voice đã chọn từ localStorage
+        const savedVoice = localStorage.getItem('el_preferred_voice');
+        selectedVoice = availableVoices.find(v => v.name === savedVoice) || availableVoices[0];
+
+        renderVoiceOptions();
+    };
+
+    // Chrome cần sự kiện onvoiceschanged
+    if (speechSynthesis.getVoices().length) {
+        loadVoices();
+    } else {
+        speechSynthesis.onvoiceschanged = loadVoices;
+    }
+
+    // Rate & Pitch sliders
+    const rateSlider = document.getElementById('voiceRate');
+    const pitchSlider = document.getElementById('voicePitch');
+    
+    if (rateSlider) {
+        rateSlider.addEventListener('input', function() {
+            document.getElementById('voiceRateVal').textContent = this.value + 'x';
+            localStorage.setItem('el_voice_rate', this.value);
+        });
+        const savedRate = localStorage.getItem('el_voice_rate');
+        if (savedRate) { rateSlider.value = savedRate; document.getElementById('voiceRateVal').textContent = savedRate + 'x'; }
+    }
+    if (pitchSlider) {
+        pitchSlider.addEventListener('input', function() {
+            document.getElementById('voicePitchVal').textContent = this.value;
+            localStorage.setItem('el_voice_pitch', this.value);
+        });
+        const savedPitch = localStorage.getItem('el_voice_pitch');
+        if (savedPitch) { pitchSlider.value = savedPitch; document.getElementById('voicePitchVal').textContent = savedPitch; }
+    }
+}
+
+/**
+ * Render danh sách giọng đọc
+ */
+function renderVoiceOptions() {
+    const container = document.getElementById('voiceOptions');
+    if (!container) return;
+
+    const flagMap = { 'en-US': '🇺🇸', 'en-GB': '🇬🇧', 'en-AU': '🇦🇺', 'en-IN': '🇮🇳', 'en-IE': '🇮🇪', 'en-ZA': '🇿🇦' };
+
+    let html = '';
+    availableVoices.forEach((voice, idx) => {
+        const checked = voice === selectedVoice ? 'checked' : '';
+        const flag = flagMap[voice.lang] || '🌐';
+        const labelParts = voice.name.replace('Microsoft ', '').replace('Google ', '');
+        
+        html += `
+            <label class="voice-option ${checked ? 'active' : ''}" data-idx="${idx}">
+                <input type="radio" name="voiceSelect" value="${idx}" ${checked} onchange="selectVoice(${idx})">
+                <span class="voice-flag">${flag}</span>
+                <span class="voice-name">${labelParts}</span>
+                <span class="voice-lang">${voice.lang}</span>
+                <button type="button" class="voice-preview" onclick="previewVoice(${idx}, event)" title="Nghe thử">
+                    <i class="fas fa-play"></i>
+                </button>
+            </label>
+        `;
+    });
+    container.innerHTML = html;
+}
+
+/**
+ * Chọn giọng
+ */
+function selectVoice(idx) {
+    selectedVoice = availableVoices[idx];
+    localStorage.setItem('el_preferred_voice', selectedVoice.name);
+    
+    // Update UI
+    document.querySelectorAll('.voice-option').forEach(el => el.classList.remove('active'));
+    const selected = document.querySelector(`.voice-option[data-idx="${idx}"]`);
+    if (selected) selected.classList.add('active');
+}
+
+/**
+ * Nghe thử 1 giọng
+ */
+function previewVoice(idx, event) {
+    event.preventDefault();
+    event.stopPropagation();
+    speechSynthesis.cancel();
+    
+    const voice = availableVoices[idx];
+    const u = new SpeechSynthesisUtterance('Hello! This is how I sound. Nice to meet you!');
+    u.voice = voice;
+    u.lang = voice.lang;
+    u.rate = 0.9;
+    u.pitch = 1.0;
+    speechSynthesis.speak(u);
+}
+
+/**
+ * Phát text bằng giọng đã chọn
+ */
+function speakText(text) {
+    if (!text || !text.trim()) return;
+    speechSynthesis.cancel();
+
+    const rate  = parseFloat(document.getElementById('voiceRate')?.value || 0.9);
+    const pitch = parseFloat(document.getElementById('voicePitch')?.value || 1.0);
+
+    const u = new SpeechSynthesisUtterance(text.trim());
+    if (selectedVoice) {
+        u.voice = selectedVoice;
+        u.lang = selectedVoice.lang;
+    } else {
+        u.lang = 'en-US';
+    }
+    u.rate  = rate;
+    u.pitch = pitch;
+
+    // Progress tracking
+    const progressEl = document.getElementById('speakingProgress');
+    const wordEl = document.getElementById('speakingWord');
+    const barEl = document.getElementById('speakProgressBar');
+    const speakBtn = document.getElementById('speakFreeBtn');
+    const stopBtn = document.getElementById('stopSpeakBtn');
+
+    u.onstart = () => {
+        if (progressEl) progressEl.style.display = 'block';
+        if (speakBtn) speakBtn.style.display = 'none';
+        if (stopBtn) stopBtn.style.display = 'inline-flex';
+    };
+
+    u.onboundary = (e) => {
+        if (e.name === 'word' && wordEl) {
+            const word = text.substring(e.charIndex, e.charIndex + e.charLength);
+            wordEl.textContent = '🔊 ' + word;
+            if (barEl) {
+                const pct = Math.min(100, (e.charIndex / text.length) * 100);
+                barEl.style.width = pct + '%';
+            }
+        }
+    };
+
+    u.onend = () => {
+        if (barEl) barEl.style.width = '100%';
+        if (wordEl) wordEl.textContent = '✅ Hoàn tất!';
+        if (speakBtn) speakBtn.style.display = 'inline-flex';
+        if (stopBtn) stopBtn.style.display = 'none';
+        setTimeout(() => {
+            if (progressEl) progressEl.style.display = 'none';
+            if (barEl) barEl.style.width = '0%';
+        }, 1500);
+    };
+
+    speechSynthesis.speak(u);
+}
+
+/**
+ * Phát free text
+ */
+function speakFreeText() {
+    const textarea = document.getElementById('freetextInput');
+    if (!textarea) return;
+    const text = textarea.value.trim();
+    if (!text) {
+        alert('Vui lòng nhập đoạn văn bản tiếng Anh.');
+        textarea.focus();
+        return;
+    }
+    speakText(text);
+}
+
+/**
+ * Dừng phát
+ */
+function stopSpeaking() {
+    speechSynthesis.cancel();
+    const speakBtn = document.getElementById('speakFreeBtn');
+    const stopBtn = document.getElementById('stopSpeakBtn');
+    const progressEl = document.getElementById('speakingProgress');
+    if (speakBtn) speakBtn.style.display = 'inline-flex';
+    if (stopBtn) stopBtn.style.display = 'none';
+    if (progressEl) progressEl.style.display = 'none';
+}
+
+/**
+ * Dùng văn bản mẫu
+ */
+function useSampleText(el) {
+    const p = el.querySelector('p');
+    if (!p) return;
+    const textarea = document.getElementById('freetextInput');
+    if (textarea) {
+        textarea.value = p.textContent.trim();
+        textarea.focus();
+    }
+    // Highlight selected
+    document.querySelectorAll('.sample-text-item').forEach(i => i.classList.remove('selected'));
+    el.classList.add('selected');
+}
+
+/**
+ * Xóa textarea
+ */
+function clearFreeText() {
+    const textarea = document.getElementById('freetextInput');
+    if (textarea) { textarea.value = ''; textarea.focus(); }
+    document.querySelectorAll('.sample-text-item').forEach(i => i.classList.remove('selected'));
+}
+

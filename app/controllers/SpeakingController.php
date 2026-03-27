@@ -26,6 +26,18 @@ class SpeakingController extends Controller {
     }
 
     /**
+     * Trang luyện phát âm tự do (nhập text bất kỳ)
+     */
+    public function freetext() {
+        Middleware::requireLogin();
+
+        $this->view('speaking/freetext', [
+            'title' => 'Luyện phát âm tự do - ' . APP_NAME,
+            'user'  => Middleware::user()
+        ]);
+    }
+
+    /**
      * Trang luyện nói
      * @param int $promptId
      */

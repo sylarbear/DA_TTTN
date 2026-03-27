@@ -20,6 +20,17 @@
             <p class="info-note"><i class="fas fa-exclamation-triangle"></i> Yêu cầu sử dụng Chrome hoặc Edge. Cho phép truy cập microphone.</p>
         </div>
 
+        <!-- Free Text Mode Promo -->
+        <?php if (Middleware::isLoggedIn()): ?>
+        <div class="freetext-promo">
+            <h3><i class="fas fa-keyboard"></i> Luyện phát âm tự do</h3>
+            <p>Nhập bất kỳ đoạn văn tiếng Anh nào để nghe phát âm chuẩn với 5 giọng đọc khác nhau</p>
+            <a href="<?= BASE_URL ?>/speaking/freetext" class="btn btn-primary btn-lg">
+                <i class="fas fa-volume-up"></i> Bắt đầu ngay
+            </a>
+        </div>
+        <?php endif; ?>
+
         <?php if (empty($groupedPrompts)): ?>
             <div class="empty-state">
                 <i class="fas fa-microphone-slash"></i>
