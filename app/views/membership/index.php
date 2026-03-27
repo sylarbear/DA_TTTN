@@ -182,7 +182,7 @@
                     <div class="bank-info">
                         <div class="bank-detail"><strong>Ngân hàng:</strong> Vietcombank</div>
                         <div class="bank-detail"><strong>Số TK:</strong> 1234 5678 9012</div>
-                        <div class="bank-detail"><strong>Chủ TK:</strong> ENGLISH MASTER JSC</div>
+                        <div class="bank-detail"><strong>Chủ TK:</strong> ENGLISH LEARNING</div>
                         <div class="bank-detail"><strong>Nội dung CK:</strong> <code id="transferNote">EM-PRO-</code></div>
                         <div class="bank-detail"><strong>Số tiền:</strong> <span id="transferAmount" style="color:var(--accent-green); font-weight:700;"></span></div>
                     </div>
