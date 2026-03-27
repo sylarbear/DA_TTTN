@@ -39,12 +39,20 @@
                 <li><a href="<?= BASE_URL ?>/speaking" class="nav-link"><i class="fas fa-microphone"></i> Luyện nói</a></li>
                 
                 <?php if (Middleware::isLoggedIn()): ?>
-                    <li><a href="<?= BASE_URL ?>/dashboard" class="nav-link"><i class="fas fa-chart-line"></i> Dashboard</a></li>
-                    <li><a href="<?= BASE_URL ?>/grammar" class="nav-link"><i class="fas fa-graduation-cap"></i> Ngữ pháp</a></li>
-                    <li><a href="<?= BASE_URL ?>/leaderboard" class="nav-link"><i class="fas fa-trophy"></i> Xếp hạng</a></li>
-                    <?php if (!Middleware::isPro()): ?>
-                        <li><a href="<?= BASE_URL ?>/membership" class="nav-link nav-upgrade-link"><i class="fas fa-crown"></i> Nâng cấp Pro</a></li>
-                    <?php endif; ?>
+                    <!-- More menu for secondary items -->
+                    <li class="nav-more">
+                        <button class="nav-link nav-more-btn" id="navMoreBtn"><i class="fas fa-th-large"></i> Thêm <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></button>
+                        <div class="nav-more-menu" id="navMoreMenu">
+                            <a href="<?= BASE_URL ?>/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                            <a href="<?= BASE_URL ?>/grammar"><i class="fas fa-graduation-cap"></i> Ngữ pháp</a>
+                            <a href="<?= BASE_URL ?>/leaderboard"><i class="fas fa-trophy"></i> Xếp hạng</a>
+                            <a href="<?= BASE_URL ?>/bookmark"><i class="fas fa-bookmark"></i> Từ đã lưu</a>
+                            <?php if (!Middleware::isPro()): ?>
+                                <a href="<?= BASE_URL ?>/membership" class="nav-more-upgrade"><i class="fas fa-crown"></i> Nâng cấp Pro</a>
+                            <?php endif; ?>
+                        </div>
+                    </li>
+
                     <li class="nav-user">
                         <div class="user-dropdown">
                             <button class="user-btn" id="userDropdownBtn">
@@ -57,8 +65,6 @@
                             </button>
                             <div class="dropdown-menu" id="userDropdown">
                                 <a href="<?= BASE_URL ?>/profile"><i class="fas fa-user"></i> Hồ sơ cá nhân</a>
-                                <a href="<?= BASE_URL ?>/bookmark"><i class="fas fa-bookmark"></i> Từ đã lưu</a>
-                                <a href="<?= BASE_URL ?>/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
                                 <a href="<?= BASE_URL ?>/membership"><i class="fas fa-crown"></i> <?= Middleware::isPro() ? 'Quản lý Pro' : 'Nâng cấp Pro' ?></a>
                                 <?php if (Middleware::isAdmin()): ?>
                                     <a href="<?= BASE_URL ?>/admin" style="color:var(--primary)!important;"><i class="fas fa-shield-alt"></i> Admin Panel</a>

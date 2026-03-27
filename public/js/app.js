@@ -22,13 +22,30 @@ document.addEventListener('DOMContentLoaded', function() {
         userBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             userDropdown.classList.toggle('show');
+            // Close more menu if open
+            const moreMenu = document.getElementById('navMoreMenu');
+            if (moreMenu) moreMenu.classList.remove('show');
         });
+    }
 
-        // Đóng dropdown khi click ra ngoài
-        document.addEventListener('click', function() {
+    // === Nav More Dropdown ===
+    const moreBtn = document.getElementById('navMoreBtn');
+    const moreMenu = document.getElementById('navMoreMenu');
+
+    if (moreBtn) {
+        moreBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            moreMenu.classList.toggle('show');
+            // Close user dropdown if open
             if (userDropdown) userDropdown.classList.remove('show');
         });
     }
+
+    // === Close dropdowns on click outside ===
+    document.addEventListener('click', function() {
+        if (userDropdown) userDropdown.classList.remove('show');
+        if (moreMenu) moreMenu.classList.remove('show');
+    });
 
     // === Auto-hide Flash Messages ===
     const flash = document.getElementById('flashMessage');
