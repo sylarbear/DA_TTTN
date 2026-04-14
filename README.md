@@ -201,7 +201,7 @@ DATN/
 
 | File | Mô tả |
 |---|---|
-| [bao_cao_thuc_tap.docx](docs/bao_cao_thuc_tap.docx) | Báo cáo tốt nghiệp đầy đủ |
+| [bao_cao_thuc_tap.docx](docs/bao_cao_thuc_tap.docx) | Báo cáo thực tập tốt nghiệp |
 | [slide_bao_ve.pptx](docs/slide_bao_ve.pptx) | Slide trình bày (20 slides) |
 | [uml_diagrams.md](docs/uml_diagrams.md) | Sơ đồ UML (Mermaid) |
 | [wireframe.md](docs/wireframe.md) | Wireframe + screenshots |
@@ -219,4 +219,4 @@ GVHD: Vũ Thị Hường
 
 ## 📝 License
 
-Dự án này được phát triển cho mục đích học tập (đồ án tốt nghiệp).
+Dự án này được phát triển cho mục đích học tập (đồ án thực tập tốt nghiệp).
