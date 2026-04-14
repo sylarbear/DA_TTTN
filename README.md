@@ -56,7 +56,7 @@
 
 ```bash
 cd C:\xampp\htdocs
-git clone https://github.com/sylarbear/DATN.git
+git clone https://github.com/sylarbear/DA_TTTN.git
 ```
 
 ### Bước 2: Import Database
@@ -89,7 +89,7 @@ define('GOOGLE_CLIENT_SECRET', 'your_google_client_secret');
 ### Bước 4: Chạy
 
 1. Khởi động **Apache** và **MySQL** trong XAMPP Control Panel
-2. Truy cập: **http://localhost/DATN/public/**
+2. Truy cập: **http://localhost/DA_TTTN/public/**
 
 ### Tài khoản mẫu
 
@@ -138,7 +138,7 @@ define('GOOGLE_CLIENT_SECRET', 'your_google_client_secret');
 ## 📁 Cấu trúc dự án
 
 ```
-DATN/
+DA_TTTN/
 ├── app/
 │   ├── config/          # Cấu hình (app, database, env)
 │   ├── controllers/     # Controllers (Auth, Wallet, Membership, Admin...)
