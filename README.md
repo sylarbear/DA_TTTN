@@ -1,6 +1,6 @@
 # 🎓 English Learning — Website Học Tiếng Anh Trực Tuyến
 
-> **Đồ án tốt nghiệp** — Trường Cao đẳng Công Thương TPHCM  
+> **Đồ án thực tập tốt nghiệp** — Trường Cao đẳng Công Thương TPHCM  
 > GVHD: Vũ Thị Hường | SVTH: Phan Quang Thuật (2120110351)
 
 ![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php&logoColor=white)
