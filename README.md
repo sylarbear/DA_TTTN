@@ -56,7 +56,7 @@
 
 ```bash
 cd C:\xampp\htdocs
-git clone https://github.com/sylarbear/DA-TTTN.git
+git clone https://github.com/sylarbear/DATN.git
 ```
 
 ### Bước 2: Import Database
@@ -89,7 +89,7 @@ define('GOOGLE_CLIENT_SECRET', 'your_google_client_secret');
 ### Bước 4: Chạy
 
 1. Khởi động **Apache** và **MySQL** trong XAMPP Control Panel
-2. Truy cập: **http://localhost/DA-TTTN/public/**
+2. Truy cập: **http://localhost/DATN/public/**
 
 ### Tài khoản mẫu
 
@@ -138,7 +138,7 @@ define('GOOGLE_CLIENT_SECRET', 'your_google_client_secret');
 ## 📁 Cấu trúc dự án
 
 ```
-DA-TTTN/
+DATN/
 ├── app/
 │   ├── config/          # Cấu hình (app, database, env)
 │   ├── controllers/     # Controllers (Auth, Wallet, Membership, Admin...)
@@ -157,7 +157,7 @@ DA-TTTN/
 │   ├── english_master_full.sql # Full dump (schema + data mẫu)
 │   └── migration_v*.sql        # Các migration
 ├── docs/
-│   ├── bao_cao_thuc_tap.docx   # Báo cáo thực tập tốt nghiệp
+│   ├── bao_cao_thuc_tap.docx   # Báo cáo tốt nghiệp
 │   ├── slide_bao_ve.pptx       # Slide trình bày
 │   ├── uml_diagrams.md/.docx   # Sơ đồ UML
 │   ├── wireframe.md/.docx      # Wireframe + screenshots
@@ -201,7 +201,7 @@ DA-TTTN/
 
 | File | Mô tả |
 |---|---|
-| [bao_cao_thuc_tap.docx](docs/bao_cao_thuc_tap.docx) | Báo cáo thực tập tốt nghiệp đầy đủ |
+| [bao_cao_thuc_tap.docx](docs/bao_cao_thuc_tap.docx) | Báo cáo thực tập tốt nghiệp |
 | [slide_bao_ve.pptx](docs/slide_bao_ve.pptx) | Slide trình bày (20 slides) |
 | [uml_diagrams.md](docs/uml_diagrams.md) | Sơ đồ UML (Mermaid) |
 | [wireframe.md](docs/wireframe.md) | Wireframe + screenshots |
