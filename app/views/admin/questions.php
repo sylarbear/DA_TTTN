@@ -1,19 +1,9 @@
-<!-- Admin Questions Management -->
-<section class="page-header"><div class="container"><h1><i class="fas fa-question-circle"></i> Quản lý Câu hỏi</h1></div></section>
-
-<section style="padding:1rem 0; border-bottom:1px solid var(--border-color); background:white;">
-    <div class="container">
-        <div class="admin-nav">
-            <a href="<?= BASE_URL ?>/admin" class="admin-nav-item"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-            <a href="<?= BASE_URL ?>/admin/users" class="admin-nav-item"><i class="fas fa-users"></i> Users</a>
-            <a href="<?= BASE_URL ?>/admin/topics" class="admin-nav-item"><i class="fas fa-book"></i> Chủ đề</a>
-            <a href="<?= BASE_URL ?>/admin/questions" class="admin-nav-item active"><i class="fas fa-question-circle"></i> Câu hỏi</a>
-            <a href="<?= BASE_URL ?>/admin/codes" class="admin-nav-item"><i class="fas fa-key"></i> Mã kích hoạt</a>
-            <a href="<?= BASE_URL ?>/admin/orders" class="admin-nav-item"><i class="fas fa-file-invoice-dollar"></i> Đơn nâng cấp</a>
-            <a href="<?= BASE_URL ?>/admin/settings" class="admin-nav-item"><i class="fas fa-cog"></i> Cài đặt</a>
-        </div>
-    </div>
-</section>
+<?php
+$adminActive = 'questions';
+$adminTitle = 'Quản lý Câu hỏi';
+$adminSubtitle = 'Chọn bài test và cập nhật bộ câu hỏi, đáp án, đoạn đọc/nghe.';
+require APP_PATH . '/views/admin/_nav.php';
+?>
 
 <section class="dashboard-section">
     <div class="container">

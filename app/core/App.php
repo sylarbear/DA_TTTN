@@ -73,6 +73,15 @@ class App {
         // Lấy params còn lại
         $this->params = $url ? array_values($url) : [];
 
+        // Admin chỉ làm việc trong khu quản trị; vẫn cho phép đăng xuất.
+        if (isset($_SESSION['user_role']) && $_SESSION['user_role'] === 'admin') {
+            $allowedAdminControllers = ['AdminController', 'AuthController'];
+            if (!in_array(get_class($this->controller), $allowedAdminControllers)) {
+                header("Location: " . BASE_URL . "/admin");
+                exit;
+            }
+        }
+
         // Gọi controller->method(params)
         call_user_func_array([$this->controller, $this->method], $this->params);
     }

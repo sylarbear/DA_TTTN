@@ -33,52 +33,58 @@
             </button>
 
             <ul class="nav-menu" id="navMenu">
-                <li><a href="<?= BASE_URL ?>/topic/search" class="nav-link" title="Tìm kiếm"><i class="fas fa-search"></i> Tìm kiếm</a></li>
-                <li><a href="<?= BASE_URL ?>" class="nav-link"><i class="fas fa-home"></i> Trang chủ</a></li>
-                <li><a href="<?= BASE_URL ?>/topic" class="nav-link"><i class="fas fa-book-open"></i> Chủ đề</a></li>
-                <li><a href="<?= BASE_URL ?>/test" class="nav-link"><i class="fas fa-clipboard-check"></i> Bài test</a></li>
-                <li><a href="<?= BASE_URL ?>/speaking" class="nav-link"><i class="fas fa-microphone"></i> Luyện nói</a></li>
-                
-                <?php if (Middleware::isLoggedIn()): ?>
-                    <!-- More menu for secondary items -->
-                    <li class="nav-more">
-                        <button class="nav-link nav-more-btn" id="navMoreBtn"><i class="fas fa-th-large"></i> Thêm <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></button>
-                        <div class="nav-more-menu" id="navMoreMenu">
-                            <a href="<?= BASE_URL ?>/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
-                            <a href="<?= BASE_URL ?>/grammar"><i class="fas fa-graduation-cap"></i> Ngữ pháp</a>
-                            <a href="<?= BASE_URL ?>/leaderboard"><i class="fas fa-trophy"></i> Xếp hạng</a>
-                            <a href="<?= BASE_URL ?>/bookmark"><i class="fas fa-bookmark"></i> Từ đã lưu</a>
-                            <a href="<?= BASE_URL ?>/support"><i class="fas fa-headset"></i> Hỗ trợ</a>
-                            <a href="<?= BASE_URL ?>/wallet"><i class="fas fa-wallet"></i> Ví của tôi</a>
-                            <?php if (!Middleware::isPro()): ?>
-                                <a href="<?= BASE_URL ?>/membership" class="nav-more-upgrade"><i class="fas fa-crown"></i> Nâng cấp Pro</a>
-                            <?php endif; ?>
-                        </div>
-                    </li>
-
-                    <li class="nav-user">
-                        <div class="user-dropdown">
-                            <button class="user-btn" id="userDropdownBtn">
-                                <i class="fas fa-user-circle"></i>
-                                <span><?= htmlspecialchars($_SESSION['full_name'] ?? $_SESSION['username']) ?></span>
-                                <?php if (Middleware::isPro()): ?>
-                                    <span class="nav-pro-badge">PRO</span>
-                                <?php endif; ?>
-                                <i class="fas fa-chevron-down"></i>
-                            </button>
-                            <div class="dropdown-menu" id="userDropdown">
-                                <a href="<?= BASE_URL ?>/profile"><i class="fas fa-user"></i> Hồ sơ cá nhân</a>
-                                <a href="<?= BASE_URL ?>/membership"><i class="fas fa-crown"></i> <?= Middleware::isPro() ? 'Quản lý Pro' : 'Nâng cấp Pro' ?></a>
-                                <?php if (Middleware::isAdmin()): ?>
-                                    <a href="<?= BASE_URL ?>/admin" style="color:var(--primary)!important;"><i class="fas fa-shield-alt"></i> Admin Panel</a>
-                                <?php endif; ?>
-                                <a href="<?= BASE_URL ?>/auth/logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
-                            </div>
-                        </div>
-                    </li>
+                <?php if (Middleware::isAdmin()): ?>
+                    <li><a href="<?= BASE_URL ?>/admin" class="nav-link"><i class="fas fa-gauge-high"></i> Admin</a></li>
+                    <li><a href="<?= BASE_URL ?>/admin/users" class="nav-link"><i class="fas fa-users"></i> Users</a></li>
+                    <li><a href="<?= BASE_URL ?>/admin/topics" class="nav-link"><i class="fas fa-book-open"></i> Khóa học</a></li>
+                    <li><a href="<?= BASE_URL ?>/admin/questions" class="nav-link"><i class="fas fa-circle-question"></i> Câu hỏi</a></li>
+                    <li><a href="<?= BASE_URL ?>/admin/orders" class="nav-link"><i class="fas fa-file-invoice-dollar"></i> Đơn</a></li>
+                    <li><a href="<?= BASE_URL ?>/admin/tickets" class="nav-link"><i class="fas fa-headset"></i> Hỗ trợ</a></li>
+                    <li><a href="<?= BASE_URL ?>/auth/logout" class="nav-link btn-login"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 <?php else: ?>
-                    <li><a href="<?= BASE_URL ?>/auth/login" class="nav-link btn-login"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
-                    <li><a href="<?= BASE_URL ?>/auth/register" class="nav-link btn-register"><i class="fas fa-user-plus"></i> Đăng ký</a></li>
+                    <li><a href="<?= BASE_URL ?>/topic/search" class="nav-link" title="Tìm kiếm"><i class="fas fa-search"></i> Tìm kiếm</a></li>
+                    <li><a href="<?= BASE_URL ?>" class="nav-link"><i class="fas fa-home"></i> Trang chủ</a></li>
+                    <li><a href="<?= BASE_URL ?>/topic" class="nav-link"><i class="fas fa-book-open"></i> Chủ đề</a></li>
+                    <li><a href="<?= BASE_URL ?>/test" class="nav-link"><i class="fas fa-clipboard-check"></i> Bài test</a></li>
+                    <li><a href="<?= BASE_URL ?>/speaking" class="nav-link"><i class="fas fa-microphone"></i> Luyện nói</a></li>
+                    
+                    <?php if (Middleware::isLoggedIn()): ?>
+                        <li class="nav-more">
+                            <button class="nav-link nav-more-btn" id="navMoreBtn"><i class="fas fa-th-large"></i> Thêm <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></button>
+                            <div class="nav-more-menu" id="navMoreMenu">
+                                <a href="<?= BASE_URL ?>/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
+                                <a href="<?= BASE_URL ?>/grammar"><i class="fas fa-graduation-cap"></i> Ngữ pháp</a>
+                                <a href="<?= BASE_URL ?>/leaderboard"><i class="fas fa-trophy"></i> Xếp hạng</a>
+                                <a href="<?= BASE_URL ?>/bookmark"><i class="fas fa-bookmark"></i> Từ đã lưu</a>
+                                <a href="<?= BASE_URL ?>/support"><i class="fas fa-headset"></i> Hỗ trợ</a>
+                                <a href="<?= BASE_URL ?>/wallet"><i class="fas fa-wallet"></i> Ví của tôi</a>
+                                <?php if (!Middleware::isPro()): ?>
+                                    <a href="<?= BASE_URL ?>/membership" class="nav-more-upgrade"><i class="fas fa-crown"></i> Nâng cấp Pro</a>
+                                <?php endif; ?>
+                            </div>
+                        </li>
+
+                        <li class="nav-user">
+                            <div class="user-dropdown">
+                                <button class="user-btn" id="userDropdownBtn">
+                                    <i class="fas fa-user-circle"></i>
+                                    <span><?= htmlspecialchars($_SESSION['full_name'] ?? $_SESSION['username']) ?></span>
+                                    <?php if (Middleware::isPro()): ?>
+                                        <span class="nav-pro-badge">PRO</span>
+                                    <?php endif; ?>
+                                    <i class="fas fa-chevron-down"></i>
+                                </button>
+                                <div class="dropdown-menu" id="userDropdown">
+                                    <a href="<?= BASE_URL ?>/profile"><i class="fas fa-user"></i> Hồ sơ cá nhân</a>
+                                    <a href="<?= BASE_URL ?>/membership"><i class="fas fa-crown"></i> <?= Middleware::isPro() ? 'Quản lý Pro' : 'Nâng cấp Pro' ?></a>
+                                    <a href="<?= BASE_URL ?>/auth/logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+                                </div>
+                            </div>
+                        </li>
+                    <?php else: ?>
+                        <li><a href="<?= BASE_URL ?>/auth/login" class="nav-link btn-login"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
+                        <li><a href="<?= BASE_URL ?>/auth/register" class="nav-link btn-register"><i class="fas fa-user-plus"></i> Đăng ký</a></li>
+                    <?php endif; ?>
                 <?php endif; ?>
             </ul>
         </div>

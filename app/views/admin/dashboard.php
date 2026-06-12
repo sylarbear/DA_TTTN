@@ -1,26 +1,9 @@
-<!-- Admin Dashboard -->
-<section class="page-header">
-    <div class="container">
-        <h1><i class="fas fa-shield-alt"></i> Admin Dashboard</h1>
-        <p>Quản lý hệ thống English Learning</p>
-    </div>
-</section>
-
-<!-- Admin Nav -->
-<section style="padding:1rem 0; border-bottom:1px solid var(--border-color); background:white;">
-    <div class="container">
-        <div class="admin-nav">
-            <a href="<?= BASE_URL ?>/admin" class="admin-nav-item active"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-            <a href="<?= BASE_URL ?>/admin/users" class="admin-nav-item"><i class="fas fa-users"></i> Users</a>
-            <a href="<?= BASE_URL ?>/admin/topics" class="admin-nav-item"><i class="fas fa-book"></i> Chủ đề</a>
-            <a href="<?= BASE_URL ?>/admin/questions" class="admin-nav-item"><i class="fas fa-question-circle"></i> Câu hỏi</a>
-            <a href="<?= BASE_URL ?>/admin/codes" class="admin-nav-item"><i class="fas fa-key"></i> Mã kích hoạt</a>
-            <a href="<?= BASE_URL ?>/admin/orders" class="admin-nav-item"><i class="fas fa-file-invoice-dollar"></i> Đơn nâng cấp <?php $pc = $stats['pending_orders']; if($pc > 0) echo '<span style="background:#f59e0b;color:#fff;border-radius:50%;padding:1px 6px;font-size:0.7rem;margin-left:4px;">'.$pc.'</span>'; ?></a>
-            <a href="<?= BASE_URL ?>/admin/tickets" class="admin-nav-item"><i class="fas fa-headset"></i> Tickets <?php $tc = $stats['pending_tickets']; if($tc > 0) echo '<span style="background:#ef4444;color:#fff;border-radius:50%;padding:1px 6px;font-size:0.7rem;margin-left:4px;">'.$tc.'</span>'; ?></a>
-            <a href="<?= BASE_URL ?>/admin/settings" class="admin-nav-item"><i class="fas fa-cog"></i> Cài đặt</a>
-        </div>
-    </div>
-</section>
+<?php
+$adminActive = 'dashboard';
+$adminTitle = 'Admin Dashboard';
+$adminSubtitle = 'Theo dõi học viên, nội dung, đơn nâng cấp và hỗ trợ hệ thống.';
+require APP_PATH . '/views/admin/_nav.php';
+?>
 
 <section class="dashboard-section">
     <div class="container">

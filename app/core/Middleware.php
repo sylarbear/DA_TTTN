@@ -36,6 +36,28 @@ class Middleware {
     }
 
     /**
+     * Chỉ cho phép học viên dùng các luồng học tập.
+     * Admin được chuyển về khu quản trị để tránh lẫn vai trò.
+     */
+    public static function requireStudent() {
+        self::requireLogin();
+        if (self::isAdmin()) {
+            header("Location: " . BASE_URL . "/admin");
+            exit;
+        }
+    }
+
+    /**
+     * Chặn admin truy cập các trang dành cho học viên/public app.
+     */
+    public static function redirectAdminToPanel() {
+        if (self::isAdmin()) {
+            header("Location: " . BASE_URL . "/admin");
+            exit;
+        }
+    }
+
+    /**
      * Kiểm tra user có phải Pro không
      * Redirect đến trang nâng cấp nếu chưa
      */
@@ -56,7 +78,8 @@ class Middleware {
      */
     public static function guest() {
         if (isset($_SESSION['user_id'])) {
-            header("Location: " . BASE_URL);
+            $target = self::isAdmin() ? BASE_URL . "/admin" : BASE_URL;
+            header("Location: " . $target);
             exit;
         }
     }
@@ -97,11 +120,10 @@ class Middleware {
 
     /**
      * Kiểm tra có phải Pro không (không redirect)
-     * Admin luôn được coi là Pro
      */
     public static function isPro() {
         if (!isset($_SESSION['user_id'])) return false;
-        if (self::isAdmin()) return true;
+        if (self::isAdmin()) return false;
         if (($_SESSION['membership'] ?? 'free') !== 'pro') return false;
         // Kiểm tra hết hạn
         $expired = $_SESSION['membership_expired_at'] ?? null;

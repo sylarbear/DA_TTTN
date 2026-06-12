@@ -14,7 +14,7 @@ class AdminController extends Controller {
         $db = getDB();
         $stats = [];
         $stats['total_users'] = $db->query("SELECT COUNT(*) FROM users WHERE role='student'")->fetchColumn();
-        $stats['pro_users'] = $db->query("SELECT COUNT(*) FROM users WHERE membership='pro'")->fetchColumn();
+        $stats['pro_users'] = $db->query("SELECT COUNT(*) FROM users WHERE membership='pro' AND role='student'")->fetchColumn();
         $stats['total_topics'] = $db->query("SELECT COUNT(*) FROM topics")->fetchColumn();
         $stats['total_tests'] = $db->query("SELECT COUNT(*) FROM tests")->fetchColumn();
         $stats['total_questions'] = $db->query("SELECT COUNT(*) FROM questions")->fetchColumn();
@@ -26,7 +26,7 @@ class AdminController extends Controller {
         $stats['total_reviews'] = $db->query("SELECT COUNT(*) FROM lesson_reviews")->fetchColumn();
 
         // Recent users
-        $stats['recent_users'] = $db->query("SELECT * FROM users ORDER BY created_at DESC LIMIT 5")->fetchAll();
+        $stats['recent_users'] = $db->query("SELECT * FROM users WHERE role='student' ORDER BY created_at DESC LIMIT 5")->fetchAll();
         // Recent attempts
         $stats['recent_attempts'] = $db->query("
             SELECT ta.*, u.username, t.title as test_title,
@@ -83,13 +83,36 @@ class AdminController extends Controller {
         }
 
         $db = getDB();
-        $stmt = $db->prepare("UPDATE users SET full_name=:name, email=:email, role=:role, membership=:mem WHERE id=:id");
+        $userId = intval($input['id'] ?? 0);
+        $targetStmt = $db->prepare("SELECT role FROM users WHERE id=:id");
+        $targetStmt->execute(['id' => $userId]);
+        $targetRole = $targetStmt->fetchColumn();
+
+        if (!$targetRole) {
+            return $this->json(['error' => 'User không tồn tại'], 404);
+        }
+
+        if ($targetRole === 'admin' || $role === 'admin') {
+            $role = 'admin';
+            $membership = 'free';
+        }
+
+        $stmt = $db->prepare("
+            UPDATE users
+            SET full_name=:name,
+                email=:email,
+                role=:role,
+                membership=:mem,
+                membership_expired_at=IF(:role_check='admin', NULL, membership_expired_at)
+            WHERE id=:id
+        ");
         $stmt->execute([
             'name' => trim($input['full_name']),
             'email' => trim($input['email']),
             'role' => $role,
+            'role_check' => $role,
             'mem' => $membership,
-            'id' => intval($input['id'])
+            'id' => $userId
         ]);
         return $this->json(['success' => true, 'message' => 'Cập nhật thành công']);
     }
@@ -600,6 +623,10 @@ class AdminController extends Controller {
             'transactions' => $transactions,
             'pendingCount' => $pendingCount
         ]);
+    }
+
+    public function wallet() {
+        return $this->walletTransactions();
     }
 
     /** Duyệt giao dịch ví (nạp/rút) */

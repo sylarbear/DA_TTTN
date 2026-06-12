@@ -64,7 +64,7 @@ class AuthController extends Controller {
             }
 
             $this->setFlash('success', 'Đăng nhập thành công! Chào mừng ' . $user['full_name']);
-            return $this->redirect('');
+            return $this->redirect($user['role'] === 'admin' ? 'admin' : '');
         } else {
             $this->view('auth/login', [
                 'title' => 'Đăng nhập - ' . APP_NAME,
@@ -265,6 +265,6 @@ class AuthController extends Controller {
         }
 
         $this->setFlash('success', 'Đăng nhập Google thành công! Chào mừng ' . $user['full_name']);
-        return $this->redirect('');
+        return $this->redirect($user['role'] === 'admin' ? 'admin' : '');
     }
 }
