@@ -1,222 +1,242 @@
-# 🎓 English Learning — Website Học Tiếng Anh Trực Tuyến
+# EngPath - Website học tiếng Anh trực tuyến
 
-> **Đồ án thực tập tốt nghiệp** — Trường Cao đẳng Công Thương TPHCM  
-> GVHD: Vũ Thị Hường | SVTH: Phan Quang Thuật (2120110351)
+> Đồ án thực tập tốt nghiệp - Trường Cao đẳng Công Thương Thành phố Hồ Chí Minh  
+> Sinh viên: Phan Quang Thuật - MSSV: 2120110351  
+> Giảng viên hướng dẫn: Vũ Thị Hường
 
-![PHP](https://img.shields.io/badge/PHP-8.2-777BB4?logo=php&logoColor=white)
-![MySQL](https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES6-F7DF1E?logo=javascript&logoColor=black)
-![License](https://img.shields.io/badge/License-MIT-green)
-![Deploy](https://img.shields.io/badge/Demo-Live-brightgreen)
+EngPath là website học tiếng Anh trực tuyến xây dựng bằng PHP MVC thuần, MySQL và JavaScript. Giao diện đã được làm mới theo hướng hiện đại, thân thiện hơn với người học: trang chủ kiểu landing học ngoại ngữ, danh sách khóa học rõ ràng, trang bài test dễ quét, trang Pro nổi bật và khu quản trị riêng cho admin.
 
-### 🌐 Live Demo: [https://englishlearning.gt.tc](https://englishlearning.gt.tc)
+## Tính năng chính
 
----
+### Dành cho người học
 
-## 📋 Giới thiệu
+- Đăng ký, đăng nhập tài khoản thường hoặc Google OAuth.
+- Xem lộ trình học theo khóa học/chủ đề.
+- Học từ vựng theo topic, đánh dấu đã học và lưu bookmark.
+- Ôn tập bằng flashcard.
+- Đọc bài học theo từng chủ đề.
+- Làm bài test dạng Quiz, Listening và Reading.
+- Học ngữ pháp kèm câu hỏi luyện tập.
+- Luyện nói, ghi âm và nhận phản hồi chấm điểm.
+- Theo dõi dashboard học tập: XP, level, streak, tiến độ topic.
+- Xem bảng xếp hạng.
+- Quản lý hồ sơ cá nhân.
+- Quản lý ví điện tử, nạp/rút tiền và mua gói Pro.
+- Gửi yêu cầu hỗ trợ/ticket.
 
-**English Learning** là nền tảng học tiếng Anh trực tuyến toàn diện, hỗ trợ người dùng học qua nhiều kỹ năng: **Từ vựng, Ngữ pháp, Nghe, Đọc, Nói**. Đặc biệt, hệ thống tích hợp **AI (OpenAI GPT)** để đánh giá kỹ năng nói và cung cấp phản hồi chi tiết.
+### Dành cho admin
 
-### ✨ Tính năng nổi bật
+- Dashboard tổng quan hệ thống.
+- Quản lý tài khoản người dùng.
+- Quản lý khóa học/chủ đề.
+- Quản lý câu hỏi bài test.
+- Quản lý mã kích hoạt Pro.
+- Quản lý đơn nâng cấp Pro.
+- Quản lý ticket hỗ trợ.
+- Quản lý giao dịch ví.
+- Cấu hình API và trạng thái chatbot.
 
-| Tính năng | Mô tả |
+## Giao diện hiện tại
+
+Các màn hình chính đã được làm mới theo phong cách sáng, rõ ràng, nhiều khoảng thở và dễ thao tác:
+
+- Trang chủ EngPath với hero lớn, CTA học miễn phí và các khối giới thiệu lộ trình.
+- Trang khóa học có bộ lọc cấp độ và card topic trực quan.
+- Trang chi tiết khóa học gom từ vựng, bài học, test và speaking.
+- Trang bài test chia nhóm Quiz, Listening, Reading.
+- Trang Pro hiển thị các gói theo tháng, giá và quyền lợi.
+- Header điều hướng riêng cho user và admin.
+- Admin panel có sidebar, thống kê, bảng quản lý và thao tác nhanh.
+
+## Công nghệ sử dụng
+
+| Phần | Công nghệ |
 |---|---|
-| 📚 **Học từ vựng** | 6 chủ đề, flashcard lật, bookmark |
-| 📝 **Bài kiểm tra** | Quiz, Listening (Pro), Reading (Pro) |
-| 🗣️ **Luyện nói AI** | Ghi âm → AI chấm điểm Pronunciation/Fluency/Accuracy |
-| 📖 **Ngữ pháp** | 10 bài ngữ pháp + quiz thực hành |
-| 💰 **Ví điện tử** | Nạp tiền QR, mua gói Pro, rút tiền, hoàn tiền |
-| 🏆 **Gamification** | XP, Level, Streak, Leaderboard, Daily Goal |
-| 🎫 **Membership** | Free / Pro với mã kích hoạt hoặc thanh toán ví |
-| 🎧 **Hỗ trợ** | Ticket system, hủy đơn + hoàn tiền tự động |
-| 🔐 **Bảo mật** | Google OAuth 2.0, transaction locking, password hashing |
+| Backend | PHP 8.x, mô hình MVC thuần |
+| Database | MySQL, PDO, charset utf8mb4 |
+| Frontend | HTML5, CSS3, JavaScript, AJAX |
+| UI | CSS custom, Font Awesome, responsive layout |
+| Biểu đồ | Chart.js |
+| Đăng nhập | Google OAuth 2.0, session PHP |
+| Luyện nói | Web Speech API, microphone browser |
+| Thanh toán | Ví điện tử nội bộ, VietQR/Casso webhook mô phỏng |
+| Server local | XAMPP, Apache, MySQL |
 
----
+## Cài đặt local
 
-## 🛠️ Công nghệ sử dụng
-
-| Layer | Công nghệ |
-|---|---|
-| **Backend** | PHP 8.2 (MVC thuần), PDO |
-| **Database** | MySQL 8.0, InnoDB, utf8mb4 |
-| **Frontend** | HTML5, CSS3, JavaScript (ES6), AJAX |
-| **API** | Google OAuth 2.0, OpenAI GPT, Web Speech API, VietQR |
-| **Charts** | Chart.js |
-| **Server** | Apache (XAMPP) |
-
----
-
-## 🚀 Hướng dẫn cài đặt
-
-### Yêu cầu hệ thống
-- [XAMPP](https://www.apachefriends.org/) (PHP 8.2+, MySQL 8.0+, Apache)
-- Trình duyệt: Chrome hoặc Edge (cần cho Web Speech API)
-
-### Bước 1: Clone dự án
+### 1. Clone dự án
 
 ```bash
 cd C:\xampp\htdocs
 git clone https://github.com/sylarbear/DA_TTTN.git
 ```
 
-### Bước 2: Import Database
+Sau khi clone, thư mục dự án nên nằm tại:
 
-1. Mở **phpMyAdmin**: http://localhost/phpmyadmin
-2. Tạo database mới: `english_master` (charset: `utf8mb4_general_ci`)
-3. Import file: `database/english_master_full.sql`
+```text
+C:\xampp\htdocs\DA_TTTN
+```
 
-Hoặc dùng command line:
+### 2. Import database
+
+1. Mở XAMPP Control Panel.
+2. Start `Apache` và `MySQL`.
+3. Truy cập `http://localhost/phpmyadmin`.
+4. Tạo database mới tên `english_master`.
+5. Chọn charset/collation dạng UTF-8, ưu tiên `utf8mb4_general_ci`.
+6. Import file:
+
+```text
+database/english_master_full.sql
+```
+
+Có thể import bằng terminal:
+
 ```bash
 mysql -u root -e "CREATE DATABASE IF NOT EXISTS english_master CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;"
 mysql -u root english_master < database/english_master_full.sql
 ```
 
-### Bước 3: Cấu hình
+### 3. Cấu hình môi trường
 
-1. Copy file env mẫu:
+Copy file mẫu:
+
 ```bash
-cp app/config/env.example.php app/config/env.php
+copy app\config\env.example.php app\config\env.php
 ```
 
-2. Mở `app/config/env.php` và điền thông tin:
+Mở `app/config/env.php` và điền thông tin nếu muốn dùng Google OAuth hoặc Casso:
+
 ```php
-define('GOOGLE_CLIENT_ID', 'your_google_client_id');
-define('GOOGLE_CLIENT_SECRET', 'your_google_client_secret');
+define('GOOGLE_CLIENT_ID', 'YOUR_GOOGLE_CLIENT_ID');
+define('GOOGLE_CLIENT_SECRET', 'YOUR_GOOGLE_CLIENT_SECRET');
+define('CASSO_API_KEY', '');
+define('CASSO_WEBHOOK_SECRET', '');
 ```
 
-3. (Tùy chọn) Chỉnh `app/config/database.php` nếu cần đổi user/password MySQL.
+Nếu chạy local bằng XAMPP mặc định thì không cần đổi cấu hình database. File đang dùng:
 
-### Bước 4: Chạy
-
-1. Khởi động **Apache** và **MySQL** trong XAMPP Control Panel
-2. Truy cập: **http://localhost/DA_TTTN/public/**
-
-### Tài khoản mẫu
-
-| Role | Username | Password |
-|---|---|---|
-| **Admin** | `admin` | `admin123` |
-| **User (Pro)** | `student1` | `123456` |
-| **User (Free)** | `student2` | `123456` |
-
----
-
-## 🌐 Demo trực tuyến
-
-🔗 **Website**: [https://englishlearning.gt.tc](https://englishlearning.gt.tc)
-
-### Hướng dẫn test nhanh
-
-1. **Truy cập** [https://englishlearning.gt.tc](https://englishlearning.gt.tc)
-2. **Đăng nhập** với tài khoản demo:
-   - Admin: `admin` / `admin123`
-   - Student: `student1` / `123456`
-
-### Các tính năng có thể test
-
-| # | Tính năng | Cách test |
-|---|---|---|
-| 1 | 📚 **Học từ vựng** | Chủ đề → chọn topic → xem từ vựng, click "Đã học" |
-| 2 | 🃏 **Flashcard** | Chủ đề → chọn topic → tab "Flashcard" → lật thẻ |
-| 3 | 📖 **Bài học** | Chủ đề → chọn topic → tab "Bài học" |
-| 4 | 📝 **Làm bài test** | Bài test → chọn quiz → làm bài → xem kết quả |
-| 5 | 📗 **Ngữ pháp** | Thêm → Ngữ pháp → xem bài → làm quiz |
-| 6 | 🎤 **Luyện nói** | Luyện nói → chọn bài → ghi âm (cần Chrome) |
-| 7 | 📊 **Dashboard** | Thêm → Dashboard → xem thống kê học tập |
-| 8 | 🏆 **Xếp hạng** | Thêm → Xếp hạng → bảng xếp hạng XP |
-| 9 | 🔖 **Bookmark** | Thêm → Từ đã lưu → quản lý từ bookmark |
-| 10 | 💰 **Ví điện tử** | Thêm → Ví của tôi → xem số dư, lịch sử |
-| 11 | 💎 **Mua gói Pro** | Thêm → Quản lý Pro → mua gói membership |
-| 12 | 🎧 **Hỗ trợ** | Thêm → Hỗ trợ → tạo ticket mới |
-| 13 | ⚙️ **Admin Panel** | Đăng nhập admin → Admin Panel → quản lý hệ thống |
-
-> **Lưu ý**: Tính năng Luyện nói AI cần microphone và trình duyệt Chrome/Edge.
-> Google OAuth chưa được cấu hình trên bản demo.
-
----
-
-## 📁 Cấu trúc dự án
-
+```text
+app/config/database.php
 ```
+
+Thông tin mặc định:
+
+| Mục | Giá trị |
+|---|---|
+| Database | `english_master` |
+| User | `root` |
+| Password | rỗng |
+| Charset | `utf8mb4` |
+
+### 4. Chạy website
+
+Truy cập:
+
+```text
+http://localhost/DA_TTTN/public/
+```
+
+## Tài khoản mẫu
+
+| Vai trò | Username | Password |
+|---|---|---|
+| Admin | `admin` | `admin123` |
+| Học viên | `student1` | `student123` |
+
+Nếu tài khoản mẫu khác với database bạn đang import, hãy kiểm tra lại bảng `users` trong phpMyAdmin.
+
+## Các đường dẫn quan trọng
+
+| Trang | URL local |
+|---|---|
+| Trang chủ | `http://localhost/DA_TTTN/public/` |
+| Đăng nhập | `http://localhost/DA_TTTN/public/auth/login` |
+| Đăng ký | `http://localhost/DA_TTTN/public/auth/register` |
+| Khóa học | `http://localhost/DA_TTTN/public/topic` |
+| Bài test | `http://localhost/DA_TTTN/public/test` |
+| Luyện nói | `http://localhost/DA_TTTN/public/speaking` |
+| Ngữ pháp | `http://localhost/DA_TTTN/public/grammar` |
+| Pro | `http://localhost/DA_TTTN/public/membership` |
+| Dashboard học viên | `http://localhost/DA_TTTN/public/dashboard` |
+| Admin | `http://localhost/DA_TTTN/public/admin` |
+
+## Cấu trúc thư mục
+
+```text
 DA_TTTN/
 ├── app/
-│   ├── config/          # Cấu hình (app, database, env)
-│   ├── controllers/     # Controllers (Auth, Wallet, Membership, Admin...)
-│   ├── core/            # Core framework (App, Controller, Middleware, StreakService)
-│   ├── models/          # Models (User, Topic, Test, Vocabulary...)
-│   └── views/           # Views theo module
-│       ├── admin/       #   Trang quản trị
-│       ├── auth/        #   Đăng nhập, đăng ký
-│       ├── grammar/     #   Ngữ pháp
-│       ├── layouts/     #   Header, Footer
-│       ├── membership/  #   Nâng cấp Pro
-│       ├── wallet/      #   Ví điện tử
-│       └── ...
+│   ├── config/          # Cấu hình app, database, env
+│   ├── controllers/     # Controller theo từng module
+│   ├── core/            # App core, Controller base, Middleware
+│   ├── models/          # Model làm việc với database
+│   └── views/           # Giao diện người dùng và admin
 ├── database/
-│   ├── schema.sql              # Schema gốc
-│   ├── english_master_full.sql # Full dump (schema + data mẫu)
-│   └── migration_v*.sql        # Các migration
-├── docs/
-│   ├── bao_cao_thuc_tap.docx   # Báo cáo tốt nghiệp
-│   ├── slide_bao_ve.pptx       # Slide trình bày
-│   ├── uml_diagrams.md/.docx   # Sơ đồ UML
-│   ├── wireframe.md/.docx      # Wireframe + screenshots
-│   └── screenshots/            # 30 screenshots giao diện
+│   ├── schema.sql
+│   ├── english_master_full.sql
+│   └── migration_*.sql
+├── docs/                # Tài liệu báo cáo, UML, wireframe, ảnh minh họa
 ├── public/
 │   ├── index.php        # Entry point
-│   ├── css/             # Stylesheets
-│   ├── js/              # JavaScript
-│   └── uploads/         # File upload
-└── .gitignore
+│   ├── css/
+│   ├── js/
+│   └── uploads/
+├── .htaccess
+├── .gitignore
+└── README.md
 ```
 
----
+## Database
 
-## 📊 Database Schema
+Database hiện có 23 bảng chính:
 
-**23 bảng** — chia thành 4 nhóm chính:
+```text
+activation_codes, bookmarks, grammar_lessons, grammar_questions,
+lesson_contents, lesson_reviews, lessons, membership_orders,
+membership_plans, questions, speaking_attempts, speaking_prompts,
+support_tickets, test_results, tests, topics, user_answers,
+user_progress, users, vocab_reviews, vocabularies,
+wallet_transactions, xp_history
+```
 
-| Nhóm | Bảng | Mô tả |
-|---|---|---|
-| **Học tập** | topics, vocabularies, lessons, tests, questions, grammar_lessons, speaking_prompts | Nội dung học |
-| **Người dùng** | users, user_progress, bookmarks, test_results, xp_history, lesson_reviews | Dữ liệu user |
-| **Tài chính** | membership_plans, membership_orders, wallet_transactions, activation_codes | Thanh toán |
-| **Hỗ trợ** | support_tickets | Ticket hỗ trợ |
+Nhóm chức năng:
 
----
-
-## 📸 Screenshots
-
-| Trang chủ | Flashcard | Luyện nói AI |
-|---|---|---|
-| ![Homepage](docs/screenshots/02_homepage_top.png) | ![Flashcard](docs/screenshots/07_flashcard.png) | ![Speaking](docs/screenshots/10_speaking.png) |
-
-| Dashboard | Ví điện tử | Admin |
-|---|---|---|
-| ![Dashboard](docs/screenshots/11_dashboard.png) | ![Wallet](docs/screenshots/15_wallet.png) | ![Admin](docs/screenshots/22_admin_dashboard.png) |
-
----
-
-## 📄 Tài liệu
-
-| File | Mô tả |
+| Nhóm | Bảng tiêu biểu |
 |---|---|
-| [bao_cao_thuc_tap.docx](docs/bao_cao_thuc_tap.docx) | Báo cáo thực tập tốt nghiệp |
-| [slide_bao_ve.pptx](docs/slide_bao_ve.pptx) | Slide trình bày (20 slides) |
-| [uml_diagrams.md](docs/uml_diagrams.md) | Sơ đồ UML (Mermaid) |
-| [wireframe.md](docs/wireframe.md) | Wireframe + screenshots |
+| Người dùng | `users`, `user_progress`, `xp_history`, `bookmarks` |
+| Nội dung học | `topics`, `vocabularies`, `lessons`, `lesson_contents` |
+| Kiểm tra | `tests`, `questions`, `test_results`, `user_answers` |
+| Ngữ pháp | `grammar_lessons`, `grammar_questions` |
+| Luyện nói | `speaking_prompts`, `speaking_attempts` |
+| Pro và ví | `membership_plans`, `membership_orders`, `wallet_transactions`, `activation_codes` |
+| Hỗ trợ | `support_tickets` |
 
----
+## Screenshots
 
-## 👨‍💻 Tác giả
+Một số ảnh giao diện nằm trong thư mục `docs/screenshots/`:
 
-**Phan Quang Thuật**  
-MSSV: 2120110351 | Lớp: CCQ2011E | Khóa: K44  
-Trường Cao đẳng Công Thương TPHCM  
-GVHD: Vũ Thị Hường
+| Trang chủ | Khóa học | Bài test |
+|---|---|---|
+| ![Trang chủ](docs/screenshots/02_homepage_top.png) | ![Khóa học](docs/screenshots/04_topics.png) | ![Bài test](docs/screenshots/09_test.png) |
 
----
+| Pro | Dashboard | Admin |
+|---|---|---|
+| ![Pro](docs/screenshots/18_membership_pricing.png) | ![Dashboard](docs/screenshots/11_dashboard.png) | ![Admin](docs/screenshots/22_admin_dashboard.png) |
 
-## 📝 License
+## Ghi chú khi chạy local
 
-Dự án này được phát triển cho mục đích học tập (đồ án thực tập tốt nghiệp).
+- Nếu phpMyAdmin load mãi, hãy kiểm tra MySQL trong XAMPP đã chạy chưa.
+- Nếu MySQL báo lỗi port, kiểm tra cổng `3306` có bị phần mềm khác chiếm không.
+- Nếu website hiện lỗi font tiếng Việt, hãy chắc chắn database dùng `utf8mb4` và file SQL được import đúng encoding.
+- Tính năng luyện nói cần trình duyệt cho phép microphone.
+- Google OAuth chỉ hoạt động khi `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` và redirect URI được cấu hình đúng.
+
+## Tác giả
+
+Phan Quang Thuật  
+MSSV: 2120110351  
+Trường Cao đẳng Công Thương Thành phố Hồ Chí Minh
+
+## Mục đích
+
+Dự án được phát triển phục vụ đồ án thực tập tốt nghiệp, tập trung vào xây dựng website học tiếng Anh trực tuyến có giao diện thân thiện, chức năng học tập đầy đủ và khu quản trị nội dung.
