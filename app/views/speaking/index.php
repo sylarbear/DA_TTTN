@@ -1,35 +1,60 @@
-<!-- Speaking Index Page -->
-<section class="page-header">
-    <div class="container">
-        <h1><i class="fas fa-microphone"></i> Luyện nói</h1>
-        <p>Thực hành kỹ năng Speaking với AI chấm điểm</p>
+<section class="speaking-hero">
+    <div class="container speaking-hero-grid">
+        <div>
+            <span class="section-kicker">Speaking AI</span>
+            <h1>Luyện nói tiếng Anh và nhận phản hồi ngay.</h1>
+            <p>Chọn một chủ đề, ghi âm câu trả lời và để EngPath đánh giá phát âm, độ trôi chảy và độ chính xác.</p>
+            <div class="speaking-hero-actions">
+                <?php if (Middleware::isLoggedIn()): ?>
+                    <a href="<?= BASE_URL ?>/speaking/freetext" class="btn btn-primary btn-lg"><i class="fas fa-volume-up"></i> Luyện phát âm tự do</a>
+                <?php else: ?>
+                    <a href="<?= BASE_URL ?>/auth/login" class="btn btn-primary btn-lg"><i class="fas fa-lock"></i> Đăng nhập để luyện</a>
+                <?php endif; ?>
+                <a href="#prompt-list" class="btn btn-outline btn-lg"><i class="fas fa-list-check"></i> Xem đề luyện</a>
+            </div>
+        </div>
+
+        <div class="speaking-score-card">
+            <div class="feedback-header">
+                <i class="fas fa-headphones-simple"></i>
+                <div>
+                    <strong>AI speaking room</strong>
+                    <span>Practice preview</span>
+                </div>
+            </div>
+            <div class="voice-orb"><i class="fas fa-microphone-lines"></i></div>
+            <div class="feedback-meter">
+                <span><b>88</b><small>Pronunciation</small></span>
+                <span><b>81</b><small>Fluency</small></span>
+                <span><b>92</b><small>Accuracy</small></span>
+            </div>
+        </div>
     </div>
 </section>
 
-<section class="speaking-section">
+<section class="speaking-section" id="prompt-list">
     <div class="container">
-        <!-- Hướng dẫn -->
-        <div class="info-card">
-            <h3><i class="fas fa-info-circle"></i> Cách sử dụng</h3>
-            <ol>
-                <li>Chọn một đề bài phù hợp với trình độ</li>
-                <li>Đọc kỹ câu hỏi và chuẩn bị câu trả lời</li>
-                <li>Nhấn nút <strong>Ghi âm</strong> và nói bằng tiếng Anh</li>
-                <li>Hệ thống sẽ chuyển giọng nói thành văn bản và chấm điểm</li>
-            </ol>
-            <p class="info-note"><i class="fas fa-exclamation-triangle"></i> Yêu cầu sử dụng Chrome hoặc Edge. Cho phép truy cập microphone.</p>
+        <div class="section-header">
+            <span class="section-kicker">Practice sets</span>
+            <h2>Chọn đề luyện theo chủ đề</h2>
+            <p>Mỗi đề được thiết kế để người học trả lời ngắn, luyện phát âm và tăng phản xạ nói.</p>
         </div>
 
-        <!-- Free Text Mode Promo -->
-        <?php if (Middleware::isLoggedIn()): ?>
-        <div class="freetext-promo">
-            <h3><i class="fas fa-keyboard"></i> Luyện phát âm tự do</h3>
-            <p>Nhập bất kỳ đoạn văn tiếng Anh nào để nghe phát âm chuẩn với 5 giọng đọc khác nhau</p>
-            <a href="<?= BASE_URL ?>/speaking/freetext" class="btn btn-primary btn-lg">
-                <i class="fas fa-volume-up"></i> Bắt đầu ngay
-            </a>
+        <div class="speaking-help-grid">
+            <div class="info-card">
+                <h3><i class="fas fa-circle-info"></i> Cách luyện</h3>
+                <ol>
+                    <li>Chọn một đề phù hợp với trình độ.</li>
+                    <li>Đọc câu hỏi và chuẩn bị ý trả lời.</li>
+                    <li>Nhấn ghi âm rồi nói bằng tiếng Anh.</li>
+                    <li>Xem điểm và gợi ý cải thiện.</li>
+                </ol>
+            </div>
+            <div class="info-card accent">
+                <h3><i class="fas fa-lightbulb"></i> Mẹo nhỏ</h3>
+                <p>Dùng Chrome hoặc Edge, cho phép truy cập microphone và nói ở nơi ít tiếng ồn để kết quả ổn định hơn.</p>
+            </div>
         </div>
-        <?php endif; ?>
 
         <?php if (empty($groupedPrompts)): ?>
             <div class="empty-state">
@@ -39,17 +64,21 @@
         <?php else: ?>
             <?php foreach ($groupedPrompts as $topicName => $prompts): ?>
                 <div class="speaking-group">
-                    <h2 class="group-title"><?= htmlspecialchars($topicName) ?></h2>
+                    <div class="group-heading">
+                        <h2><?= htmlspecialchars($topicName) ?></h2>
+                        <span><?= count($prompts) ?> đề luyện</span>
+                    </div>
                     <div class="prompts-grid">
                         <?php foreach ($prompts as $prompt): ?>
                             <div class="prompt-card" id="prompt-<?= $prompt['id'] ?>">
                                 <div class="prompt-header">
-                                    <span class="difficulty diff-<?= $prompt['difficulty'] ?>">
-                                        <?= ucfirst($prompt['difficulty']) ?>
+                                    <span class="difficulty diff-<?= htmlspecialchars($prompt['difficulty']) ?>">
+                                        <?= ucfirst(htmlspecialchars($prompt['difficulty'])) ?>
                                     </span>
+                                    <i class="fas fa-microphone-lines"></i>
                                 </div>
                                 <div class="prompt-body">
-                                    <p><?= htmlspecialchars(mb_substr($prompt['prompt_text'], 0, 120)) ?>...</p>
+                                    <p><?= htmlspecialchars(mb_substr($prompt['prompt_text'], 0, 130)) ?><?= mb_strlen($prompt['prompt_text']) > 130 ? '...' : '' ?></p>
                                 </div>
                                 <div class="prompt-footer">
                                     <?php if (Middleware::isLoggedIn()): ?>

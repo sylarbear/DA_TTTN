@@ -1,27 +1,26 @@
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-brand">
-                    <h3><i class="fas fa-graduation-cap"></i> <?= APP_NAME ?></h3>
-                    <p>Hệ thống học tiếng Anh trực tuyến theo chủ đề, tích hợp đánh giá kỹ năng nói bằng AI.</p>
+                    <h3><span class="brand-mark"><i class="fas fa-route"></i></span> <?= APP_NAME ?></h3>
+                    <p>Nền tảng học tiếng Anh theo lộ trình, kết hợp từ vựng, bài học, kiểm tra và luyện nói AI trong một trải nghiệm gọn gàng.</p>
                 </div>
                 <div class="footer-links">
-                    <h4>Liên kết</h4>
+                    <h4>Học tập</h4>
                     <ul>
-                        <li><a href="<?= BASE_URL ?>/topic">Chủ đề học</a></li>
+                        <li><a href="<?= BASE_URL ?>/topic">Khóa học</a></li>
                         <li><a href="<?= BASE_URL ?>/test">Bài kiểm tra</a></li>
-                        <li><a href="<?= BASE_URL ?>/speaking">Luyện nói</a></li>
+                        <li><a href="<?= BASE_URL ?>/speaking">Luyện nói AI</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">
-                    <h4>Hỗ trợ</h4>
+                    <h4>Tài khoản</h4>
                     <ul>
-                        <li><a href="#">Hướng dẫn sử dụng</a></li>
-                        <li><a href="#">FAQ</a></li>
-                        <li><a href="#">Liên hệ</a></li>
+                        <li><a href="<?= BASE_URL ?>/dashboard">Dashboard</a></li>
+                        <li><a href="<?= BASE_URL ?>/membership">EngPath Pro</a></li>
+                        <li><a href="<?= BASE_URL ?>/support">Hỗ trợ</a></li>
                     </ul>
                 </div>
             </div>
@@ -32,7 +31,6 @@
     </footer>
 
     <?php if (Middleware::isLoggedIn()): ?>
-    <!-- AI Chatbot Widget -->
     <div class="chatbot-fab" id="chatbotFab" onclick="toggleChatbot()">
         <i class="fas fa-robot"></i>
     </div>
@@ -42,7 +40,7 @@
             <div class="chatbot-header-info">
                 <div class="chatbot-avatar"><i class="fas fa-robot"></i></div>
                 <div>
-                    <strong>AI Trợ lý</strong>
+                    <strong>Trợ lý EngPath</strong>
                     <small id="chatbotStatus">Sẵn sàng hỗ trợ</small>
                 </div>
             </div>
@@ -52,23 +50,19 @@
         <div class="chatbot-messages" id="chatbotMessages">
             <div class="chat-msg bot">
                 <div class="chat-bubble">
-                    Xin chào! 👋 Mình là AI trợ lý của English Learning. Bạn có thể hỏi mình về:
-                    <br>• Ngữ pháp tiếng Anh
-                    <br>• Từ vựng & nghĩa
-                    <br>• Dịch thuật
-                    <br>• Mẹo học tiếng Anh
+                    Xin chào! Mình là trợ lý AI của EngPath. Bạn có thể hỏi về ngữ pháp, từ vựng, dịch câu hoặc mẹo học tiếng Anh.
                 </div>
             </div>
         </div>
 
         <div class="chatbot-suggestions" id="chatbotSuggestions">
-            <button onclick="sendQuickQ('Giải thích cách dùng Present Perfect')">🕐 Present Perfect</button>
-            <button onclick="sendQuickQ('Phân biệt since và for')">📝 Since vs For</button>
-            <button onclick="sendQuickQ('Dịch: Tôi đang học tiếng Anh')">🔄 Dịch câu</button>
+            <button onclick="sendQuickQ('Giải thích cách dùng Present Perfect')">Present Perfect</button>
+            <button onclick="sendQuickQ('Phân biệt since và for')">Since vs For</button>
+            <button onclick="sendQuickQ('Dịch: Tôi đang học tiếng Anh')">Dịch câu</button>
         </div>
 
         <div class="chatbot-input">
-            <input type="text" id="chatbotInput" placeholder="Hỏi gì đó bằng tiếng Anh..." 
+            <input type="text" id="chatbotInput" placeholder="Hỏi gì đó về tiếng Anh..."
                    onkeydown="if(event.key==='Enter')sendChatMessage()">
             <button onclick="sendChatMessage()" id="chatSendBtn"><i class="fas fa-paper-plane"></i></button>
         </div>
@@ -78,7 +72,6 @@
     const chatHistory = [];
     let chatbotAvailable = false;
 
-    // Check chatbot status on load
     fetch('<?= BASE_URL ?>/chatbot/status', {credentials:'same-origin'})
     .then(r=>r.json()).then(d => {
         chatbotAvailable = d.available;
@@ -120,7 +113,6 @@
     }
 
     function formatMsg(text) {
-        // Escape HTML first, THEN apply markdown formatting
         let safe = escapeHtml(text);
         return safe
             .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
@@ -137,7 +129,6 @@
         chatHistory.push({role:'user', content: msg});
         input.value = '';
 
-        // Show typing
         const typing = document.createElement('div');
         typing.className = 'chat-msg bot typing-indicator';
         typing.innerHTML = '<div class="chat-bubble"><i class="fas fa-circle-notch fa-spin"></i> Đang suy nghĩ...</div>';
@@ -157,19 +148,17 @@
                 addMessage(d.message, true);
                 chatHistory.push({role:'assistant', content: d.message});
             } else {
-                addMessage('⚠️ ' + escapeHtml(d.error || 'Lỗi kết nối AI'), true);
+                addMessage('Không thể trả lời: ' + escapeHtml(d.error || 'Lỗi kết nối AI'), true);
             }
         })
         .catch(() => {
             typing.remove();
-            addMessage('⚠️ Không thể kết nối. Vui lòng thử lại.', true);
+            addMessage('Không thể kết nối. Vui lòng thử lại.', true);
         });
     }
     </script>
     <?php endif; ?>
 
-    <!-- Global JS -->
     <script src="<?= BASE_URL ?>/js/app.js"></script>
 </body>
 </html>
-

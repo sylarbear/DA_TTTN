@@ -1,72 +1,55 @@
-<!-- Topic Detail Page -->
-<section class="page-header">
-    <div class="container">
-        <nav class="breadcrumb">
-            <a href="<?= BASE_URL ?>/topic">Chủ đề</a>
-            <span>/</span>
-            <span><?= htmlspecialchars($topic['name']) ?></span>
-        </nav>
-        <h1><?= htmlspecialchars($topic['name']) ?></h1>
-        <p><?= htmlspecialchars($topic['description']) ?></p>
-        <span class="topic-level level-<?= $topic['level'] ?>"><?= ucfirst($topic['level']) ?></span>
-    </div>
-</section>
+<section class="course-detail-hero">
+    <div class="container course-detail-grid">
+        <div>
+            <nav class="breadcrumb">
+                <a href="<?= BASE_URL ?>/topic">Khóa học</a>
+                <span>/</span>
+                <span><?= htmlspecialchars($topic['name']) ?></span>
+            </nav>
+            <span class="topic-level level-<?= htmlspecialchars($topic['level']) ?>"><?= ucfirst(htmlspecialchars($topic['level'])) ?></span>
+            <h1><?= htmlspecialchars($topic['name']) ?></h1>
+            <p><?= htmlspecialchars($topic['description']) ?></p>
+            <div class="course-hero-actions">
+                <a href="<?= BASE_URL ?>/topic/flashcard/<?= $topic['id'] ?>" class="btn btn-primary"><i class="fas fa-clone"></i> Ôn flashcard</a>
+                <a href="#tab-lessons" class="btn btn-outline" onclick="showTab('lessons')"><i class="fas fa-book"></i> Xem bài học</a>
+            </div>
+        </div>
 
-<!-- Progress Bar (if logged in) -->
-<?php if ($progress): ?>
-<section class="progress-section">
-    <div class="container">
-        <div class="progress-overview">
-            <div class="progress-item">
-                <div class="progress-icon"><i class="fas fa-font"></i></div>
-                <div class="progress-info">
-                    <span><?= min($progress['vocab_learned'], $topic['vocab_count']) ?> / <?= $topic['vocab_count'] ?></span>
-                    <small>Từ vựng đã học</small>
-                </div>
-            </div>
-            <div class="progress-item">
-                <div class="progress-icon"><i class="fas fa-book"></i></div>
-                <div class="progress-info">
-                    <span><?= min($progress['lessons_completed'], $topic['lesson_count']) ?> / <?= $topic['lesson_count'] ?></span>
-                    <small>Bài học hoàn thành</small>
-                </div>
-            </div>
-            <div class="progress-item">
-                <div class="progress-icon"><i class="fas fa-trophy"></i></div>
-                <div class="progress-info">
-                    <span><?= min($progress['tests_passed'], $topic['test_count']) ?> / <?= $topic['test_count'] ?></span>
-                    <small>Test đã đạt</small>
-                </div>
-            </div>
-            <div class="progress-item">
-                <div class="progress-icon"><i class="fas fa-star"></i></div>
-                <div class="progress-info">
-                    <span><?= $progress['total_score'] ?></span>
-                    <small>Tổng điểm</small>
-                </div>
+        <div class="course-summary-card">
+            <h3>Tiến độ khóa học</h3>
+            <?php
+                $vocabDone = $progress ? min($progress['vocab_learned'], $topic['vocab_count']) : 0;
+                $lessonDone = $progress ? min($progress['lessons_completed'], $topic['lesson_count']) : 0;
+                $testDone = $progress ? min($progress['tests_passed'], $topic['test_count']) : 0;
+            ?>
+            <div class="summary-row"><span>Từ vựng</span><strong><?= $vocabDone ?> / <?= (int) $topic['vocab_count'] ?></strong></div>
+            <div class="summary-row"><span>Bài học</span><strong><?= $lessonDone ?> / <?= (int) $topic['lesson_count'] ?></strong></div>
+            <div class="summary-row"><span>Bài test</span><strong><?= $testDone ?> / <?= (int) $topic['test_count'] ?></strong></div>
+            <div class="summary-score">
+                <small>Tổng điểm</small>
+                <strong><?= $progress ? (int) $progress['total_score'] : 0 ?></strong>
             </div>
         </div>
     </div>
 </section>
-<?php endif; ?>
 
-<!-- Tab Navigation -->
 <section class="topic-content">
     <div class="container">
-        <div class="tab-nav">
+        <div class="tab-nav modern-tabs">
             <button class="tab-btn active" onclick="showTab('vocab')"><i class="fas fa-font"></i> Từ vựng (<?= count($vocabularies) ?>)</button>
             <button class="tab-btn" onclick="showTab('lessons')"><i class="fas fa-book"></i> Bài học (<?= count($lessons) ?>)</button>
-            <a href="<?= BASE_URL ?>/topic/flashcard/<?= $topic['id'] ?>" class="btn btn-primary btn-sm" style="margin-left:auto;"><i class="fas fa-clone"></i> Flashcard</a>
+            <a href="<?= BASE_URL ?>/test" class="btn btn-outline btn-sm"><i class="fas fa-clipboard-check"></i> Làm test</a>
         </div>
 
-        <!-- Vocabulary Tab -->
         <div class="tab-content active" id="tab-vocab">
             <div class="vocab-grid">
-                <?php foreach ($vocabularies as $i => $vocab): ?>
+                <?php foreach ($vocabularies as $vocab): ?>
                     <div class="vocab-card" id="vocab-<?= $vocab['id'] ?>">
                         <div class="vocab-word">
-                            <h3><?= htmlspecialchars($vocab['word']) ?></h3>
-                            <span class="vocab-pronunciation"><?= htmlspecialchars($vocab['pronunciation']) ?></span>
+                            <div>
+                                <h3><?= htmlspecialchars($vocab['word']) ?></h3>
+                                <span class="vocab-pronunciation"><?= htmlspecialchars($vocab['pronunciation']) ?></span>
+                            </div>
                             <button class="btn-speak" onclick="speakWord('<?= htmlspecialchars($vocab['word']) ?>')" title="Phát âm">
                                 <i class="fas fa-volume-up"></i>
                             </button>
@@ -78,8 +61,8 @@
                             <?php endif; ?>
                         </div>
                         <?php if (Middleware::isLoggedIn()): ?>
-                            <button class="btn btn-sm btn-success btn-learn" 
-                                    onclick="markLearned(this, <?= $topic['id'] ?>)" 
+                            <button class="btn btn-sm btn-success btn-learn"
+                                    onclick="markLearned(this, <?= $topic['id'] ?>)"
                                     data-vocab-id="<?= $vocab['id'] ?>">
                                 <i class="fas fa-check"></i> Đã học
                             </button>
@@ -89,7 +72,6 @@
             </div>
         </div>
 
-        <!-- Lessons Tab -->
         <div class="tab-content" id="tab-lessons">
             <div class="lessons-list">
                 <?php foreach ($lessons as $i => $lesson): ?>
@@ -108,29 +90,26 @@
 </section>
 
 <script>
-// Tab switching
 function showTab(tab) {
     document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
     document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-    
-    event.target.closest('.tab-btn').classList.add('active');
+    const button = event && event.target ? event.target.closest('.tab-btn') : null;
+    if (button) button.classList.add('active');
     document.getElementById('tab-' + tab).classList.add('active');
 }
 
-// Text-to-Speech cho từ vựng
 function speakWord(word) {
-    speechSynthesis.cancel(); // Dừng audio trước đó
+    speechSynthesis.cancel();
     const utterance = new SpeechSynthesisUtterance(word);
     utterance.lang = 'en-US';
-    utterance.rate = 0.8;
+    utterance.rate = 0.85;
     speechSynthesis.speak(utterance);
 }
 
-// Đánh dấu từ đã học
 function markLearned(btn, topicId) {
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang lưu...';
-    
+
     fetch('<?= BASE_URL ?>/topic/learnVocab', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },

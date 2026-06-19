@@ -3,32 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="English Learning - Hệ thống học tiếng Anh trực tuyến theo chủ đề, tích hợp đánh giá kỹ năng nói bằng AI">
+    <meta name="description" content="EngPath - nền tảng học tiếng Anh theo lộ trình, tích hợp từ vựng, bài học, kiểm tra và luyện nói AI.">
     <title><?= $title ?? APP_NAME ?></title>
-    
-    <!-- Google Fonts - Preconnect -->
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <!-- Main CSS -->
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css?v=<?= time() ?>">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/components.css?v=<?= time() ?>">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/pages.css?v=<?= time() ?>">
 </head>
 <body>
-    <!-- Navigation -->
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="<?= BASE_URL ?>" class="nav-logo">
-                <i class="fas fa-graduation-cap"></i>
+                <span class="brand-mark"><i class="fas fa-route"></i></span>
                 <span><?= APP_NAME ?></span>
             </a>
 
-            <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+            <button class="nav-toggle" id="navToggle" aria-label="Mở menu">
                 <span></span><span></span><span></span>
             </button>
 
@@ -42,20 +37,21 @@
                     <li><a href="<?= BASE_URL ?>/admin/tickets" class="nav-link"><i class="fas fa-headset"></i> Hỗ trợ</a></li>
                     <li><a href="<?= BASE_URL ?>/auth/logout" class="nav-link btn-login"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 <?php else: ?>
-                    <li><a href="<?= BASE_URL ?>/topic/search" class="nav-link" title="Tìm kiếm"><i class="fas fa-search"></i> Tìm kiếm</a></li>
                     <li><a href="<?= BASE_URL ?>" class="nav-link"><i class="fas fa-home"></i> Trang chủ</a></li>
-                    <li><a href="<?= BASE_URL ?>/topic" class="nav-link"><i class="fas fa-book-open"></i> Chủ đề</a></li>
+                    <li><a href="<?= BASE_URL ?>/topic" class="nav-link"><i class="fas fa-book-open"></i> Khóa học</a></li>
                     <li><a href="<?= BASE_URL ?>/test" class="nav-link"><i class="fas fa-clipboard-check"></i> Bài test</a></li>
                     <li><a href="<?= BASE_URL ?>/speaking" class="nav-link"><i class="fas fa-microphone"></i> Luyện nói</a></li>
-                    
+                    <li><a href="<?= BASE_URL ?>/membership" class="nav-link"><i class="fas fa-crown"></i> Pro</a></li>
+
                     <?php if (Middleware::isLoggedIn()): ?>
                         <li class="nav-more">
-                            <button class="nav-link nav-more-btn" id="navMoreBtn"><i class="fas fa-th-large"></i> Thêm <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></button>
+                            <button class="nav-link nav-more-btn" id="navMoreBtn"><i class="fas fa-border-all"></i> Thêm <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></button>
                             <div class="nav-more-menu" id="navMoreMenu">
                                 <a href="<?= BASE_URL ?>/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
                                 <a href="<?= BASE_URL ?>/grammar"><i class="fas fa-graduation-cap"></i> Ngữ pháp</a>
                                 <a href="<?= BASE_URL ?>/leaderboard"><i class="fas fa-trophy"></i> Xếp hạng</a>
                                 <a href="<?= BASE_URL ?>/bookmark"><i class="fas fa-bookmark"></i> Từ đã lưu</a>
+                                <a href="<?= BASE_URL ?>/topic/search"><i class="fas fa-search"></i> Tìm kiếm</a>
                                 <a href="<?= BASE_URL ?>/support"><i class="fas fa-headset"></i> Hỗ trợ</a>
                                 <a href="<?= BASE_URL ?>/wallet"><i class="fas fa-wallet"></i> Ví của tôi</a>
                                 <?php if (!Middleware::isPro()): ?>
@@ -83,14 +79,13 @@
                         </li>
                     <?php else: ?>
                         <li><a href="<?= BASE_URL ?>/auth/login" class="nav-link btn-login"><i class="fas fa-sign-in-alt"></i> Đăng nhập</a></li>
-                        <li><a href="<?= BASE_URL ?>/auth/register" class="nav-link btn-register"><i class="fas fa-user-plus"></i> Đăng ký</a></li>
+                        <li><a href="<?= BASE_URL ?>/auth/register" class="nav-link btn-register"><i class="fas fa-user-plus"></i> Học miễn phí</a></li>
                     <?php endif; ?>
                 <?php endif; ?>
             </ul>
         </div>
     </nav>
 
-    <!-- Flash Messages -->
     <?php if (isset($_SESSION['flash'])): ?>
         <div class="flash-message flash-<?= $_SESSION['flash']['type'] ?>" id="flashMessage">
             <div class="flash-content">
@@ -110,5 +105,4 @@
         <?php unset($_SESSION['flash']); ?>
     <?php endif; ?>
 
-    <!-- Main Content -->
     <main class="main-content">

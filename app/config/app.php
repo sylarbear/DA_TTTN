@@ -5,7 +5,7 @@
  */
 
 // Thông tin ứng dụng
-define('APP_NAME', 'English Learning');
+define('APP_NAME', 'EngPath');
 define('APP_VERSION', '1.0.0');
 
 // Load secrets từ env.php TRƯỚC (file không push lên GitHub)
