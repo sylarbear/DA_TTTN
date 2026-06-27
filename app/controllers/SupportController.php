@@ -1,8 +1,10 @@
 <?php
+
+
 /**
  * SupportController
  * Hệ thống gửi ticket hỗ trợ + hủy đơn
- * 
+ *
  * CHÍNH SÁCH HỦY ĐƠN:
  * 1. Chỉ đơn trạng thái "pending" (chưa kích hoạt) mới được hủy
  * 2. Đơn phải được tạo trong vòng 24 giờ
@@ -11,9 +13,10 @@
  * 5. Gói 3 tháng trở lên: hoàn 100% nếu hủy trong 24h, 50% nếu hủy trong 7 ngày, 0% sau đó
  * 6. Mỗi đơn chỉ được tạo 1 ticket hủy
  */
-class SupportController extends Controller {
-
-    public function __construct() {
+class SupportController extends Controller
+{
+    public function __construct()
+    {
         Middleware::requireLogin();
     }
 
@@ -21,17 +24,19 @@ class SupportController extends Controller {
      * Kiểm tra điều kiện hủy đơn
      * Trả về mảng: ['can_cancel' => bool, 'reason' => string, 'refund_percent' => int, 'policy_note' => string]
      */
-    public static function checkCancelEligibility($order, $plan = null) {
+    public static function checkCancelEligibility($order, $plan = null)
+    {
         $result = [
             'can_cancel' => false,
             'reason' => '',
             'refund_percent' => 0,
-            'policy_note' => ''
+            'policy_note' => '',
         ];
 
         // 1. Đơn đã cancelled → không thể hủy lại
         if ($order['status'] === 'cancelled') {
             $result['reason'] = 'Đơn này đã được hủy trước đó.';
+
             return $result;
         }
 
@@ -39,6 +44,7 @@ class SupportController extends Controller {
         if ($order['status'] === 'completed') {
             $result['reason'] = 'Đơn đã được kích hoạt. Bạn không thể hủy trực tiếp, nhưng có thể gửi ticket yêu cầu hoàn tiền.';
             $result['policy_note'] = 'refund_request';
+
             return $result;
         }
 
@@ -54,6 +60,7 @@ class SupportController extends Controller {
         $existing->execute(['oid' => $order['id']]);
         if ($existing->fetch()) {
             $result['reason'] = 'Bạn đã gửi yêu cầu hủy cho đơn này. Vui lòng chờ Admin xử lý.';
+
             return $result;
         }
 
@@ -86,28 +93,30 @@ class SupportController extends Controller {
     }
 
     /** Danh sách ticket của user */
-    public function index() {
+    public function index()
+    {
         $db = getDB();
-        $stmt = $db->prepare("
+        $stmt = $db->prepare('
             SELECT st.*, mo.status as order_status, mp.name as plan_name
             FROM support_tickets st
             LEFT JOIN membership_orders mo ON st.related_order_id = mo.id
             LEFT JOIN membership_plans mp ON mo.plan_id = mp.id
             WHERE st.user_id = :uid
             ORDER BY st.created_at DESC
-        ");
+        ');
         $stmt->execute(['uid' => $_SESSION['user_id']]);
         $tickets = $stmt->fetchAll();
 
         $this->view('support/index', [
             'title' => 'Hỗ trợ - ' . APP_NAME,
             'tickets' => $tickets,
-            'user' => Middleware::user()
+            'user' => Middleware::user(),
         ]);
     }
 
     /** Form tạo ticket */
-    public function create() {
+    public function create()
+    {
         $db = getDB();
 
         // Lấy đơn pending + plan info
@@ -137,12 +146,12 @@ class SupportController extends Controller {
         // Nếu pre-select cancel_order, kiểm tra điều kiện ngay
         $preOrderEligibility = null;
         if ($preType === 'cancel_order' && $preOrderId > 0) {
-            $orderCheck = $db->prepare("
+            $orderCheck = $db->prepare('
                 SELECT mo.*, mp.duration_months, mp.name as plan_name 
                 FROM membership_orders mo 
                 JOIN membership_plans mp ON mo.plan_id = mp.id 
                 WHERE mo.id = :id AND mo.user_id = :uid
-            ");
+            ');
             $orderCheck->execute(['id' => $preOrderId, 'uid' => $_SESSION['user_id']]);
             $orderData = $orderCheck->fetch();
             if ($orderData) {
@@ -156,15 +165,18 @@ class SupportController extends Controller {
             'preType' => $preType,
             'preOrderId' => $preOrderId,
             'preOrderEligibility' => $preOrderEligibility,
-            'user' => Middleware::user()
+            'user' => Middleware::user(),
         ]);
     }
 
     /** Lưu ticket (AJAX POST) */
-    public function store() {
-        if (!$this->isMethod('POST')) return $this->json(['error' => 'Method not allowed'], 405);
+    public function store()
+    {
+        if (!$this->isMethod('POST')) {
+            return $this->json(['error' => 'Method not allowed'], 405);
+        }
 
-        $input = json_decode(file_get_contents('php://input'), true);
+        $input = Request::json();
         $type = $input['type'] ?? 'general';
         $subject = trim($input['subject'] ?? '');
         $message = trim($input['message'] ?? '');
@@ -172,10 +184,18 @@ class SupportController extends Controller {
 
         // Validate
         $allowedTypes = ['general', 'cancel_order', 'bug_report', 'feedback'];
-        if (!in_array($type, $allowedTypes)) $type = 'general';
-        if (empty($subject)) return $this->json(['error' => 'Tiêu đề không được để trống.'], 400);
-        if (strlen($subject) > 200) return $this->json(['error' => 'Tiêu đề tối đa 200 ký tự.'], 400);
-        if (empty($message)) return $this->json(['error' => 'Nội dung không được để trống.'], 400);
+        if (!in_array($type, $allowedTypes)) {
+            $type = 'general';
+        }
+        if (empty($subject)) {
+            return $this->json(['error' => 'Tiêu đề không được để trống.'], 400);
+        }
+        if (strlen($subject) > 200) {
+            return $this->json(['error' => 'Tiêu đề tối đa 200 ký tự.'], 400);
+        }
+        if (empty($message)) {
+            return $this->json(['error' => 'Nội dung không được để trống.'], 400);
+        }
 
         $db = getDB();
 
@@ -184,12 +204,12 @@ class SupportController extends Controller {
         $refundPercent = 0;
         if ($type === 'cancel_order' && $orderId > 0) {
             // Lấy order + plan info
-            $orderCheck = $db->prepare("
+            $orderCheck = $db->prepare('
                 SELECT mo.*, mp.duration_months, mp.name as plan_name 
                 FROM membership_orders mo 
                 JOIN membership_plans mp ON mo.plan_id = mp.id 
                 WHERE mo.id = :id AND mo.user_id = :uid
-            ");
+            ');
             $orderCheck->execute(['id' => $orderId, 'uid' => $_SESSION['user_id']]);
             $orderData = $orderCheck->fetch();
 
@@ -202,7 +222,7 @@ class SupportController extends Controller {
             if (!$eligibility['can_cancel']) {
                 return $this->json([
                     'error' => $eligibility['reason'],
-                    'policy_note' => $eligibility['policy_note'] ?? ''
+                    'policy_note' => $eligibility['policy_note'] ?? '',
                 ], 400);
             }
 
@@ -212,9 +232,9 @@ class SupportController extends Controller {
             // Auto append refund info vào message
             $refundNote = "\n\n--- Thông tin đơn ---\n";
             $refundNote .= "Gói: {$orderData['plan_name']}\n";
-            $refundNote .= "Số tiền: " . number_format($orderData['amount']) . "đ\n";
+            $refundNote .= 'Số tiền: ' . number_format($orderData['amount']) . "đ\n";
             $refundNote .= "Tỷ lệ hoàn tiền: {$refundPercent}%\n";
-            $refundNote .= "Số tiền hoàn: " . number_format($orderData['amount'] * $refundPercent / 100) . "đ";
+            $refundNote .= 'Số tiền hoàn: ' . number_format($orderData['amount'] * $refundPercent / 100) . 'đ';
             $message .= $refundNote;
         }
 
@@ -225,16 +245,16 @@ class SupportController extends Controller {
             return $this->json(['error' => 'Bạn đã có 5 ticket đang mở. Vui lòng đợi xử lý trước khi gửi thêm.'], 400);
         }
 
-        $stmt = $db->prepare("
+        $stmt = $db->prepare('
             INSERT INTO support_tickets (user_id, type, related_order_id, subject, message)
             VALUES (:uid, :type, :oid, :subject, :msg)
-        ");
+        ');
         $stmt->execute([
             'uid' => $_SESSION['user_id'],
             'type' => $type,
             'oid' => $relatedOrderId,
             'subject' => $subject,
-            'msg' => $message
+            'msg' => $message,
         ]);
 
         $successMsg = 'Ticket đã được gửi thành công! Admin sẽ phản hồi sớm nhất.';
@@ -244,32 +264,40 @@ class SupportController extends Controller {
 
         return $this->json([
             'success' => true,
-            'message' => $successMsg
+            'message' => $successMsg,
         ]);
     }
 
     /** Shortcut: Tạo ticket hủy đơn nhanh */
-    public function cancelOrder($orderId = null) {
-        if (!$orderId) return $this->redirect('support');
+    public function cancelOrder($orderId = null)
+    {
+        if (!$orderId) {
+            return $this->redirect('support');
+        }
         $this->redirect('support/create?type=cancel_order&order_id=' . intval($orderId));
     }
 
     /** API: Kiểm tra điều kiện hủy (AJAX) */
-    public function checkCancel() {
+    public function checkCancel()
+    {
         $orderId = intval($_GET['order_id'] ?? 0);
-        if (!$orderId) return $this->json(['error' => 'Thiếu order_id'], 400);
+        if (!$orderId) {
+            return $this->json(['error' => 'Thiếu order_id'], 400);
+        }
 
         $db = getDB();
-        $orderCheck = $db->prepare("
+        $orderCheck = $db->prepare('
             SELECT mo.*, mp.duration_months, mp.name as plan_name 
             FROM membership_orders mo 
             JOIN membership_plans mp ON mo.plan_id = mp.id 
             WHERE mo.id = :id AND mo.user_id = :uid
-        ");
+        ');
         $orderCheck->execute(['id' => $orderId, 'uid' => $_SESSION['user_id']]);
         $orderData = $orderCheck->fetch();
 
-        if (!$orderData) return $this->json(['error' => 'Đơn không tồn tại'], 404);
+        if (!$orderData) {
+            return $this->json(['error' => 'Đơn không tồn tại'], 404);
+        }
 
         return $this->json(self::checkCancelEligibility($orderData, $orderData));
     }

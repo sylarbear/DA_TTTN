@@ -79,22 +79,22 @@
                     </label>
                     <div class="ticket-types" style="display:grid; grid-template-columns:repeat(2,1fr); gap:0.5rem;">
                         <label class="ticket-type-option" style="display:flex;align-items:center;gap:0.5rem;padding:0.75rem 1rem;border:2px solid var(--border-color);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;">
-                            <input type="radio" name="type" value="general" <?= $preType==='general'?'checked':'' ?> style="margin:0;">
+                            <input type="radio" name="type" value="general" <?= $preType === 'general' ? 'checked' : '' ?> style="margin:0;">
                             <i class="fas fa-question-circle" style="color:#6366f1;"></i>
                             <span style="font-size:0.9rem;">Hỗ trợ chung</span>
                         </label>
                         <label class="ticket-type-option" style="display:flex;align-items:center;gap:0.5rem;padding:0.75rem 1rem;border:2px solid var(--border-color);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;">
-                            <input type="radio" name="type" value="cancel_order" <?= $preType==='cancel_order'?'checked':'' ?> style="margin:0;">
+                            <input type="radio" name="type" value="cancel_order" <?= $preType === 'cancel_order' ? 'checked' : '' ?> style="margin:0;">
                             <i class="fas fa-ban" style="color:#ef4444;"></i>
                             <span style="font-size:0.9rem;">Hủy đơn nâng cấp</span>
                         </label>
                         <label class="ticket-type-option" style="display:flex;align-items:center;gap:0.5rem;padding:0.75rem 1rem;border:2px solid var(--border-color);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;">
-                            <input type="radio" name="type" value="bug_report" <?= $preType==='bug_report'?'checked':'' ?> style="margin:0;">
+                            <input type="radio" name="type" value="bug_report" <?= $preType === 'bug_report' ? 'checked' : '' ?> style="margin:0;">
                             <i class="fas fa-bug" style="color:#f59e0b;"></i>
                             <span style="font-size:0.9rem;">Báo lỗi</span>
                         </label>
                         <label class="ticket-type-option" style="display:flex;align-items:center;gap:0.5rem;padding:0.75rem 1rem;border:2px solid var(--border-color);border-radius:var(--radius-sm);cursor:pointer;transition:all 0.2s;">
-                            <input type="radio" name="type" value="feedback" <?= $preType==='feedback'?'checked':'' ?> style="margin:0;">
+                            <input type="radio" name="type" value="feedback" <?= $preType === 'feedback' ? 'checked' : '' ?> style="margin:0;">
                             <i class="fas fa-comment" style="color:#10b981;"></i>
                             <span style="font-size:0.9rem;">Góp ý</span>
                         </label>
@@ -102,7 +102,7 @@
                 </div>
 
                 <!-- Chọn đơn cần hủy (hiện khi type=cancel_order) -->
-                <div class="form-group" id="orderSelectGroup" style="margin-bottom:1.5rem; display:<?= $preType==='cancel_order'?'block':'none' ?>;">
+                <div class="form-group" id="orderSelectGroup" style="margin-bottom:1.5rem; display:<?= $preType === 'cancel_order' ? 'block' : 'none' ?>;">
                     <label style="font-weight:600; margin-bottom:0.5rem; display:block;">
                         <i class="fas fa-file-invoice"></i> Chọn đơn cần hủy
                     </label>
@@ -119,7 +119,7 @@
                                         data-reason="<?= htmlspecialchars($o['cancel_reason']) ?>"
                                         data-refund="<?= $o['refund_percent'] ?>"
                                         data-policy="<?= htmlspecialchars($o['policy_note']) ?>"
-                                        <?= $preOrderId==$o['id']?'selected':'' ?>>
+                                        <?= $preOrderId == $o['id'] ? 'selected' : '' ?>>
                                     #<?= $o['id'] ?> — <?= htmlspecialchars($o['plan_name']) ?> (<?= number_format($o['amount']) ?>đ) — <?= date('d/m/Y H:i', strtotime($o['activated_at'])) ?>
                                     <?php if ($o['can_cancel']): ?>
                                         ✅ Hoàn <?= $o['refund_percent'] ?>%

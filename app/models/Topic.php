@@ -1,47 +1,55 @@
 <?php
+
+
 /**
  * Topic Model
  * Quản lý chủ đề học tập
  */
-class Topic extends Model {
+class Topic extends Model
+{
     protected $table = 'topics';
 
     /**
      * Lấy tất cả topics đang active
      * @return array
      */
-    public function getActive() {
+    public function getActive()
+    {
         return $this->where('is_active', 1, 'sort_order ASC');
     }
 
     /**
      * Tìm topic theo slug
-     * @param string $slug
+     * @param  string      $slug
      * @return array|false
      */
-    public function findBySlug($slug) {
+    public function findBySlug($slug)
+    {
         return $this->findBy('slug', $slug);
     }
 
     /**
      * Lấy topics theo level
-     * @param string $level beginner|intermediate|advanced
+     * @param  string $level beginner|intermediate|advanced
      * @return array
      */
-    public function getByLevel($level) {
+    public function getByLevel($level)
+    {
         $stmt = $this->db->prepare(
             "SELECT * FROM {$this->table} WHERE level = :level AND is_active = 1 ORDER BY sort_order ASC"
         );
         $stmt->execute(['level' => $level]);
+
         return $stmt->fetchAll();
     }
 
     /**
      * Lấy topic kèm thống kê số lượng
-     * @param int $id
+     * @param  int         $id
      * @return array|false
      */
-    public function getWithStats($id) {
+    public function getWithStats($id)
+    {
         $stmt = $this->db->prepare("
             SELECT t.*,
                 (SELECT COUNT(*) FROM vocabularies WHERE topic_id = t.id) as vocab_count,
@@ -52,6 +60,7 @@ class Topic extends Model {
             WHERE t.id = :id
         ");
         $stmt->execute(['id' => $id]);
+
         return $stmt->fetch();
     }
 
@@ -61,10 +70,11 @@ class Topic extends Model {
      */
     /**
      * Tìm kiếm tổng hợp (topics, vocab, lessons, tests, grammar)
-     * @param string $keyword
+     * @param  string $keyword
      * @return array
      */
-    public function search($keyword) {
+    public function search($keyword)
+    {
         $like = '%' . addcslashes($keyword, '%_') . '%';
         $results = [];
 
@@ -119,7 +129,8 @@ class Topic extends Model {
         return $results;
     }
 
-    public function getAllWithStats() {
+    public function getAllWithStats()
+    {
         $stmt = $this->db->query("
             SELECT t.*,
                 (SELECT COUNT(*) FROM vocabularies WHERE topic_id = t.id) as vocab_count,
@@ -130,6 +141,7 @@ class Topic extends Model {
             WHERE t.is_active = 1
             ORDER BY t.sort_order ASC
         ");
+
         return $stmt->fetchAll();
     }
 }

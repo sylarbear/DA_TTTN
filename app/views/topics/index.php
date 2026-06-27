@@ -7,7 +7,9 @@ $levelLabels = [
 
 $visibleTopics = [];
 foreach ($topics as $topic) {
-    if ($level && $topic['level'] !== $level) continue;
+    if ($level && $topic['level'] !== $level) {
+        continue;
+    }
     $visibleTopics[] = $topic;
 }
 ?>
@@ -77,7 +79,7 @@ foreach ($topics as $topic) {
             <?php foreach ($visibleTopics as $index => $topic): ?>
                 <?php
                     $level = $topic['level'] ?? 'beginner';
-                    $progressSeed = min(86, 28 + (($index * 13) % 52));
+                $progressSeed = min(86, 28 + (($index * 13) % 52));
                 ?>
                 <a href="<?= BASE_URL ?>/topic/show/<?= $topic['id'] ?>" class="modern-course-card level-<?= htmlspecialchars($level) ?>" id="topic-<?= $topic['id'] ?>">
                     <div class="course-card-cover">
@@ -91,10 +93,10 @@ foreach ($topics as $topic) {
                             <span style="width:<?= $progressSeed ?>%"></span>
                         </div>
                         <div class="course-meta-row">
-                            <span><i class="fas fa-font"></i> <?= (int) $topic['vocab_count'] ?> từ</span>
-                            <span><i class="fas fa-book"></i> <?= (int) $topic['lesson_count'] ?> bài</span>
-                            <span><i class="fas fa-clipboard-check"></i> <?= (int) $topic['test_count'] ?> test</span>
-                            <span><i class="fas fa-microphone"></i> <?= (int) $topic['speaking_count'] ?> speaking</span>
+                            <span><i class="fas fa-font"></i> <?= (int)$topic['vocab_count'] ?> từ</span>
+                            <span><i class="fas fa-book"></i> <?= (int)$topic['lesson_count'] ?> bài</span>
+                            <span><i class="fas fa-clipboard-check"></i> <?= (int)$topic['test_count'] ?> test</span>
+                            <span><i class="fas fa-microphone"></i> <?= (int)$topic['speaking_count'] ?> speaking</span>
                         </div>
                     </div>
                     <div class="course-card-action">

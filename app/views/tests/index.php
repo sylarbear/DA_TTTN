@@ -4,7 +4,7 @@ $typeLabels = ['quiz' => 'Quiz', 'listening' => 'Listening', 'reading' => 'Readi
 $typeDescriptions = [
     'quiz' => 'Ôn nhanh từ vựng và kiến thức trong từng chủ đề.',
     'listening' => 'Luyện nghe hiểu và chọn đáp án chính xác.',
-    'reading' => 'Đọc đoạn văn, phân tích ý chính và trả lời câu hỏi.'
+    'reading' => 'Đọc đoạn văn, phân tích ý chính và trả lời câu hỏi.',
 ];
 $groupedTests = [];
 foreach ($tests ?? [] as $test) {
@@ -58,7 +58,9 @@ foreach ($tests ?? [] as $test) {
             </div>
         <?php else: ?>
             <?php foreach (['quiz', 'listening', 'reading'] as $type): ?>
-                <?php if (empty($groupedTests[$type])) continue; ?>
+                <?php if (empty($groupedTests[$type])) {
+                    continue;
+                } ?>
                 <div class="test-group" id="type-<?= $type ?>">
                     <div class="test-group-heading">
                         <div>
@@ -81,9 +83,9 @@ foreach ($tests ?? [] as $test) {
                                 <div class="test-card-body">
                                     <h3><?= htmlspecialchars($test['title']) ?></h3>
                                     <div class="test-meta modern-test-meta">
-                                        <span><i class="fas fa-list-ol"></i><b><?= (int) $test['question_count'] ?></b> câu</span>
-                                        <span><i class="fas fa-clock"></i><b><?= (int) $test['duration_minutes'] ?></b> phút</span>
-                                        <span><i class="fas fa-trophy"></i><b><?= (int) $test['pass_score'] ?>%</b> đạt</span>
+                                        <span><i class="fas fa-list-ol"></i><b><?= (int)$test['question_count'] ?></b> câu</span>
+                                        <span><i class="fas fa-clock"></i><b><?= (int)$test['duration_minutes'] ?></b> phút</span>
+                                        <span><i class="fas fa-trophy"></i><b><?= (int)$test['pass_score'] ?>%</b> đạt</span>
                                     </div>
                                 </div>
                                 <div class="test-card-footer">

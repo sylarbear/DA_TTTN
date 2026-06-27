@@ -17,9 +17,17 @@ desktop.ini
 debug_*.php
 
 # Sensitive files
+.env
 app/config/env.php
 app/config/openai_key.txt
 storage/logs/
+
+# Dependencies
+/vendor/
+
+# Tooling cache
+.php-cs-fixer.cache
+phpstan-baseline.neon
 
 # Gemini AI
 .gemini/

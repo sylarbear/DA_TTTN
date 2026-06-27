@@ -1,14 +1,17 @@
 <?php
+
+
 /**
  * DashboardController
  * Hiển thị tiến độ học tập
  */
-class DashboardController extends Controller {
-
+class DashboardController extends Controller
+{
     /**
      * Trang dashboard
      */
-    public function index() {
+    public function index()
+    {
         Middleware::requireLogin();
 
         // Update streak + login bonus
@@ -20,17 +23,18 @@ class DashboardController extends Controller {
         $dashboardData = $progressModel->getDashboardData($_SESSION['user_id']);
 
         $this->view('dashboard/index', [
-            'title'    => 'Dashboard - ' . APP_NAME,
-            'data'     => $dashboardData,
-            'streak'   => $streakStats,
-            'user'     => Middleware::user()
+            'title' => 'Dashboard - ' . APP_NAME,
+            'data' => $dashboardData,
+            'streak' => $streakStats,
+            'user' => Middleware::user(),
         ]);
     }
 
     /**
      * API lấy dữ liệu chart (AJAX)
      */
-    public function chartData() {
+    public function chartData()
+    {
         Middleware::requireLogin();
 
         $progressModel = $this->model('UserProgress');
@@ -40,16 +44,16 @@ class DashboardController extends Controller {
         $chartData = [
             'topics' => [],
             'scores' => [],
-            'vocab'  => [],
-            'tests'  => [],
-            'speaking' => []
+            'vocab' => [],
+            'tests' => [],
+            'speaking' => [],
         ];
 
         foreach ($data['topic_progress'] as $tp) {
-            $chartData['topics'][]   = $tp['topic_name'];
-            $chartData['scores'][]   = $tp['total_score'];
-            $chartData['vocab'][]    = $tp['vocab_learned'];
-            $chartData['tests'][]    = $tp['tests_passed'];
+            $chartData['topics'][] = $tp['topic_name'];
+            $chartData['scores'][] = $tp['total_score'];
+            $chartData['vocab'][] = $tp['vocab_learned'];
+            $chartData['tests'][] = $tp['tests_passed'];
             $chartData['speaking'][] = $tp['speaking_practiced'];
         }
 

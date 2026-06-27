@@ -27,7 +27,7 @@ $nextTopic = $topicProgress[0] ?? null;
                 <span class="pill-soft"><?= Middleware::isPro() ? 'PRO' : 'FREE' ?></span>
             </div>
             <div class="xp-mini-bar large">
-                <div class="xp-mini-fill" style="width:<?= !empty($streak) ? min(100, (int) $streak['daily_progress']) : 35 ?>%"></div>
+                <div class="xp-mini-fill" style="width:<?= !empty($streak) ? min(100, (int)$streak['daily_progress']) : 35 ?>%"></div>
             </div>
             <div class="daily-plan-list">
                 <a href="<?= BASE_URL ?>/topic"><i class="fas fa-clone"></i> Ôn flashcard 10 phút</a>
@@ -45,29 +45,29 @@ $nextTopic = $topicProgress[0] ?? null;
             <div class="streak-item">
                 <div class="streak-icon"><i class="fas fa-fire"></i></div>
                 <div>
-                    <strong class="streak-count"><?= (int) $streak['current_streak'] ?></strong>
+                    <strong class="streak-count"><?= (int)$streak['current_streak'] ?></strong>
                     <small>ngày liên tiếp</small>
                 </div>
             </div>
             <div class="streak-item">
                 <div class="streak-icon"><i class="fas fa-star"></i></div>
                 <div>
-                    <strong>Level <?= (int) $streak['level'] ?></strong>
-                    <div class="xp-mini-bar"><div class="xp-mini-fill" style="width:<?= (int) $streak['level_progress'] ?>%"></div></div>
+                    <strong>Level <?= (int)$streak['level'] ?></strong>
+                    <div class="xp-mini-bar"><div class="xp-mini-fill" style="width:<?= (int)$streak['level_progress'] ?>%"></div></div>
                     <small><?= number_format($streak['total_xp']) ?> XP</small>
                 </div>
             </div>
             <div class="streak-item">
                 <div class="streak-icon"><i class="fas fa-bullseye"></i></div>
                 <div>
-                    <strong><?= (int) $streak['daily_progress'] ?>%</strong>
+                    <strong><?= (int)$streak['daily_progress'] ?>%</strong>
                     <small>mục tiêu hôm nay</small>
                 </div>
             </div>
             <div class="streak-item">
                 <div class="streak-icon"><i class="fas fa-trophy"></i></div>
                 <div>
-                    <strong><?= (int) $streak['longest_streak'] ?></strong>
+                    <strong><?= (int)$streak['longest_streak'] ?></strong>
                     <small>streak cao nhất</small>
                 </div>
             </div>
@@ -78,28 +78,28 @@ $nextTopic = $topicProgress[0] ?? null;
             <div class="stat-card">
                 <div class="stat-icon"><i class="fas fa-font"></i></div>
                 <div class="stat-content">
-                    <span class="stat-value"><?= (int) ($overall['total_vocab_learned'] ?? 0) ?></span>
+                    <span class="stat-value"><?= (int)($overall['total_vocab_learned'] ?? 0) ?></span>
                     <span class="stat-title">Từ vựng đã học</span>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon"><i class="fas fa-book"></i></div>
                 <div class="stat-content">
-                    <span class="stat-value"><?= (int) ($overall['total_lessons_completed'] ?? 0) ?></span>
+                    <span class="stat-value"><?= (int)($overall['total_lessons_completed'] ?? 0) ?></span>
                     <span class="stat-title">Bài học hoàn thành</span>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon"><i class="fas fa-clipboard-check"></i></div>
                 <div class="stat-content">
-                    <span class="stat-value"><?= (int) ($overall['total_tests_passed'] ?? 0) ?></span>
+                    <span class="stat-value"><?= (int)($overall['total_tests_passed'] ?? 0) ?></span>
                     <span class="stat-title">Bài test đã đạt</span>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon"><i class="fas fa-microphone"></i></div>
                 <div class="stat-content">
-                    <span class="stat-value"><?= (int) ($overall['total_speaking_practiced'] ?? 0) ?></span>
+                    <span class="stat-value"><?= (int)($overall['total_speaking_practiced'] ?? 0) ?></span>
                     <span class="stat-title">Lượt luyện nói</span>
                 </div>
             </div>
@@ -113,10 +113,10 @@ $nextTopic = $topicProgress[0] ?? null;
                     <p>Tiếp tục hoàn thành từ vựng, bài học và speaking trong chủ đề này.</p>
                     <div class="mini-progress">
                         <?php
-                            $totalItems = max(1, (int) $nextTopic['total_vocab'] + (int) $nextTopic['total_lessons'] + (int) $nextTopic['total_tests'] + (int) $nextTopic['total_speaking']);
-                            $doneItems = (int) $nextTopic['vocab_learned'] + (int) $nextTopic['lessons_completed'] + (int) $nextTopic['tests_passed'] + (int) $nextTopic['speaking_practiced'];
-                            $pct = min(100, round($doneItems / $totalItems * 100));
-                        ?>
+                            $totalItems = max(1, (int)$nextTopic['total_vocab'] + (int)$nextTopic['total_lessons'] + (int)$nextTopic['total_tests'] + (int)$nextTopic['total_speaking']);
+                    $doneItems = (int)$nextTopic['vocab_learned'] + (int)$nextTopic['lessons_completed'] + (int)$nextTopic['tests_passed'] + (int)$nextTopic['speaking_practiced'];
+                    $pct = min(100, round($doneItems / $totalItems * 100));
+                    ?>
                         <div class="mini-bar" style="width:<?= $pct ?>%"></div>
                     </div>
                     <small><?= $pct ?>% hoàn thành</small>
@@ -181,7 +181,7 @@ $nextTopic = $topicProgress[0] ?? null;
                                     <td><?= min($tp['lessons_completed'], $tp['total_lessons']) ?>/<?= $tp['total_lessons'] ?></td>
                                     <td><?= min($tp['tests_passed'], $tp['total_tests']) ?>/<?= $tp['total_tests'] ?></td>
                                     <td><?= min($tp['speaking_practiced'], $tp['total_speaking']) ?>/<?= $tp['total_speaking'] ?></td>
-                                    <td><strong><?= (int) $tp['total_score'] ?></strong></td>
+                                    <td><strong><?= (int)$tp['total_score'] ?></strong></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>
@@ -230,7 +230,7 @@ $nextTopic = $topicProgress[0] ?? null;
                                     <small><?= htmlspecialchars($s['topic_name']) ?> - <?= date('d/m/Y', strtotime($s['created_at'])) ?></small>
                                 </div>
                                 <div class="activity-score">
-                                    <span class="<?= $s['overall_score'] >= 60 ? 'text-success' : 'text-danger' ?>"><?= (int) $s['overall_score'] ?></span>
+                                    <span class="<?= $s['overall_score'] >= 60 ? 'text-success' : 'text-danger' ?>"><?= (int)$s['overall_score'] ?></span>
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -246,8 +246,8 @@ $nextTopic = $topicProgress[0] ?? null;
 const chartData = <?= json_encode([
     'topics' => array_column($topicProgress, 'topic_name'),
     'scores' => array_column($topicProgress, 'total_score'),
-    'vocab'  => array_column($topicProgress, 'vocab_learned'),
-    'overall' => $overall
+    'vocab' => array_column($topicProgress, 'vocab_learned'),
+    'overall' => $overall,
 ]) ?>;
 
 if (typeof initDashboardCharts === 'function') {

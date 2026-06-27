@@ -39,17 +39,17 @@ require APP_PATH . '/views/admin/_nav.php';
                         if ($opts && isset($opts[0])) {
                             $opts = ['A' => $opts[0] ?? '', 'B' => $opts[1] ?? '', 'C' => $opts[2] ?? '', 'D' => $opts[3] ?? ''];
                         }
-                    ?>
+                        ?>
                         <tr>
-                            <td><?= $i+1 ?></td>
-                            <td style="max-width:300px;"><?= htmlspecialchars(mb_substr($q['question_text'],0,80)) ?>...</td>
-                            <td><?= htmlspecialchars(mb_substr($opts['A']??'',0,20)) ?></td>
-                            <td><?= htmlspecialchars(mb_substr($opts['B']??'',0,20)) ?></td>
-                            <td><?= htmlspecialchars(mb_substr($opts['C']??'',0,20)) ?></td>
-                            <td><?= htmlspecialchars(mb_substr($opts['D']??'',0,20)) ?></td>
+                            <td><?= $i + 1 ?></td>
+                            <td style="max-width:300px;"><?= htmlspecialchars(mb_substr($q['question_text'], 0, 80)) ?>...</td>
+                            <td><?= htmlspecialchars(mb_substr($opts['A'] ?? '', 0, 20)) ?></td>
+                            <td><?= htmlspecialchars(mb_substr($opts['B'] ?? '', 0, 20)) ?></td>
+                            <td><?= htmlspecialchars(mb_substr($opts['C'] ?? '', 0, 20)) ?></td>
+                            <td><?= htmlspecialchars(mb_substr($opts['D'] ?? '', 0, 20)) ?></td>
                             <td><span class="answer-badge correct"><?= htmlspecialchars($q['correct_answer']) ?></span></td>
                             <td style="white-space:nowrap;">
-                                <button class="btn btn-sm btn-outline" onclick='editQuestion(<?= htmlspecialchars(json_encode($q), ENT_QUOTES, "UTF-8") ?>)'><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-outline" onclick='editQuestion(<?= htmlspecialchars(json_encode($q), ENT_QUOTES, 'UTF-8') ?>)'><i class="fas fa-edit"></i></button>
                                 <button class="btn btn-sm" style="background:var(--error);color:white;" onclick="deleteQuestion(<?= $q['id'] ?>)"><i class="fas fa-trash"></i></button>
                             </td>
                         </tr>

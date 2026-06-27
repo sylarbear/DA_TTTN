@@ -1,14 +1,17 @@
 <?php
+
+
 /**
  * SpeakingController
  * Luyện nói + chấm điểm
  */
-class SpeakingController extends Controller {
-
+class SpeakingController extends Controller
+{
     /**
      * Danh sách bài speaking
      */
-    public function index() {
+    public function index()
+    {
         $speakingModel = $this->model('SpeakingAttempt');
         $prompts = $speakingModel->getAllPrompts();
 
@@ -19,21 +22,22 @@ class SpeakingController extends Controller {
         }
 
         $this->view('speaking/index', [
-            'title'          => 'Luyện nói - ' . APP_NAME,
+            'title' => 'Luyện nói - ' . APP_NAME,
             'groupedPrompts' => $groupedPrompts,
-            'user'           => Middleware::user()
+            'user' => Middleware::user(),
         ]);
     }
 
     /**
      * Trang luyện phát âm tự do (nhập text bất kỳ)
      */
-    public function freetext() {
+    public function freetext()
+    {
         Middleware::requireLogin();
 
         $this->view('speaking/freetext', [
             'title' => 'Luyện phát âm tự do - ' . APP_NAME,
-            'user'  => Middleware::user()
+            'user' => Middleware::user(),
         ]);
     }
 
@@ -41,29 +45,34 @@ class SpeakingController extends Controller {
      * Trang luyện nói
      * @param int $promptId
      */
-    public function practice($promptId = null) {
+    public function practice($promptId = null)
+    {
         Middleware::requireLogin();
         Middleware::requirePro();
-        if (!$promptId) return $this->redirect('speaking');
+        if (!$promptId) {
+            return $this->redirect('speaking');
+        }
 
         $speakingModel = $this->model('SpeakingAttempt');
         $prompt = $speakingModel->getPrompt($promptId);
-        if (!$prompt) return $this->redirect('speaking');
+        if (!$prompt) {
+            return $this->redirect('speaking');
+        }
 
         // Lấy lịch sử attempts
-        $stmt = getDB()->prepare("
+        $stmt = getDB()->prepare('
             SELECT * FROM speaking_attempts 
             WHERE user_id = :user_id AND prompt_id = :prompt_id 
             ORDER BY created_at DESC LIMIT 5
-        ");
+        ');
         $stmt->execute(['user_id' => $_SESSION['user_id'], 'prompt_id' => $promptId]);
         $history = $stmt->fetchAll();
 
         $this->view('speaking/practice', [
-            'title'   => 'Luyện nói - ' . APP_NAME,
-            'prompt'  => $prompt,
+            'title' => 'Luyện nói - ' . APP_NAME,
+            'prompt' => $prompt,
             'history' => $history,
-            'user'    => Middleware::user()
+            'user' => Middleware::user(),
         ]);
     }
 
@@ -71,15 +80,16 @@ class SpeakingController extends Controller {
      * Chấm điểm speaking (AJAX)
      * Ưu tiên dùng OpenAI, fallback về rule-based
      */
-    public function score() {
+    public function score()
+    {
         Middleware::requireLogin();
 
         if (!$this->isMethod('POST')) {
             return $this->json(['error' => 'Method not allowed'], 405);
         }
 
-        $input = json_decode(file_get_contents('php://input'), true);
-        $promptId   = intval($input['prompt_id'] ?? 0);
+        $input = Request::json();
+        $promptId = intval($input['prompt_id'] ?? 0);
         $transcript = $input['transcript'] ?? '';
         $confidence = floatval($input['confidence'] ?? 0.5);
 
@@ -98,10 +108,12 @@ class SpeakingController extends Controller {
         $scores = null;
         $aiUsed = false;
         require_once APP_PATH . '/core/OpenAIService.php';
-        
+
         if (OpenAIService::isAvailable()) {
             $scores = OpenAIService::scoreSpeaking($transcript, $prompt['sample_answer']);
-            if ($scores) $aiUsed = true;
+            if ($scores) {
+                $aiUsed = true;
+            }
         }
 
         // Fallback to local scoring
@@ -114,7 +126,7 @@ class SpeakingController extends Controller {
 
         // Cập nhật progress: chỉ increment speaking_practiced nếu chưa luyện prompt này
         $progressModel = $this->model('UserProgress');
-        $existingAttempts = getDB()->prepare("SELECT COUNT(*) FROM speaking_attempts WHERE user_id=:uid AND prompt_id=:pid AND id != :aid");
+        $existingAttempts = getDB()->prepare('SELECT COUNT(*) FROM speaking_attempts WHERE user_id=:uid AND prompt_id=:pid AND id != :aid');
         $existingAttempts->execute(['uid' => $_SESSION['user_id'], 'pid' => $promptId, 'aid' => $attemptId]);
         if ($existingAttempts->fetchColumn() == 0) {
             $progressModel->increment($_SESSION['user_id'], $prompt['topic_id'], 'speaking_practiced');
@@ -128,11 +140,11 @@ class SpeakingController extends Controller {
         }
 
         return $this->json([
-            'success'    => true,
+            'success' => true,
             'attempt_id' => $attemptId,
-            'scores'     => $scores,
+            'scores' => $scores,
             'transcript' => $transcript,
-            'ai_used'    => $aiUsed
+            'ai_used' => $aiUsed,
         ]);
     }
 }

@@ -3,14 +3,13 @@ $adminActive = $adminActive ?? 'dashboard';
 $adminTitle = $adminTitle ?? 'Admin Dashboard';
 $adminSubtitle = $adminSubtitle ?? 'Quản lý hệ thống English Learning';
 
-$adminBadges = ['orders' => 0, 'tickets' => 0, 'wallet' => 0];
+$adminBadges = ['orders' => 0, 'tickets' => 0];
 try {
     $adminDb = getDB();
-    $adminBadges['orders'] = (int) $adminDb->query("SELECT COUNT(*) FROM membership_orders WHERE status='pending'")->fetchColumn();
-    $adminBadges['tickets'] = (int) $adminDb->query("SELECT COUNT(*) FROM support_tickets WHERE status IN ('open','in_progress')")->fetchColumn();
-    $adminBadges['wallet'] = (int) $adminDb->query("SELECT COUNT(*) FROM wallet_transactions WHERE status='pending'")->fetchColumn();
+    $adminBadges['orders'] = (int)$adminDb->query("SELECT COUNT(*) FROM membership_orders WHERE status='pending'")->fetchColumn();
+    $adminBadges['tickets'] = (int)$adminDb->query("SELECT COUNT(*) FROM support_tickets WHERE status IN ('open','in_progress')")->fetchColumn();
 } catch (Exception $e) {
-    $adminBadges = ['orders' => 0, 'tickets' => 0, 'wallet' => 0];
+    $adminBadges = ['orders' => 0, 'tickets' => 0];
 }
 
 $adminNavItems = [
@@ -18,10 +17,8 @@ $adminNavItems = [
     ['key' => 'users', 'href' => BASE_URL . '/admin/users', 'icon' => 'fa-users', 'label' => 'Users'],
     ['key' => 'topics', 'href' => BASE_URL . '/admin/topics', 'icon' => 'fa-book-open', 'label' => 'Khóa học'],
     ['key' => 'questions', 'href' => BASE_URL . '/admin/questions', 'icon' => 'fa-circle-question', 'label' => 'Câu hỏi'],
-    ['key' => 'codes', 'href' => BASE_URL . '/admin/codes', 'icon' => 'fa-key', 'label' => 'Mã kích hoạt'],
     ['key' => 'orders', 'href' => BASE_URL . '/admin/orders', 'icon' => 'fa-file-invoice-dollar', 'label' => 'Đơn nâng cấp', 'badge' => $adminBadges['orders']],
     ['key' => 'tickets', 'href' => BASE_URL . '/admin/tickets', 'icon' => 'fa-headset', 'label' => 'Tickets', 'badge' => $adminBadges['tickets']],
-    ['key' => 'wallet', 'href' => BASE_URL . '/admin/walletTransactions', 'icon' => 'fa-wallet', 'label' => 'Ví', 'badge' => $adminBadges['wallet']],
     ['key' => 'settings', 'href' => BASE_URL . '/admin/settings', 'icon' => 'fa-gear', 'label' => 'Cài đặt'],
 ];
 ?>
@@ -47,7 +44,7 @@ $adminNavItems = [
                     <i class="fas <?= $item['icon'] ?>"></i>
                     <span><?= htmlspecialchars($item['label']) ?></span>
                     <?php if (!empty($item['badge'])): ?>
-                        <b class="admin-badge"><?= (int) $item['badge'] ?></b>
+                        <b class="admin-badge"><?= (int)$item['badge'] ?></b>
                     <?php endif; ?>
                 </a>
             <?php endforeach; ?>

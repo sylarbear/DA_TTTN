@@ -30,7 +30,7 @@
                         <span class="stat-label">Điểm</span>
                     </div>
                     <div class="result-stat">
-                        <span class="stat-value"><?= gmdate("i:s", $result['time_spent'] ?? 0) ?></span>
+                        <span class="stat-value"><?= gmdate('i:s', $result['time_spent'] ?? 0) ?></span>
                         <span class="stat-label">Thời gian</span>
                     </div>
                     <div class="result-stat">

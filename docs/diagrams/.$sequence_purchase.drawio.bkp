@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="Sequence - Upgrade Pro">
+    <mxGraphModel>
+      <root>
+        <mxCell id="0" /><mxCell id="1" parent="0" />
+
+        <mxCell id="title" value="Sequence Diagram — Nâng cấp Pro (QR + Admin duyệt)" style="text;html=1;fontSize=14;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="120" y="5" width="450" height="25" as="geometry" />
+        </mxCell>
+
+        <mxCell id="l1" value="User/Browser" style="shape=umlLifeline;participantLabel=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=10;container=1;collapsible=0;verticalAlign=top;" vertex="1" parent="1"><mxGeometry x="30" y="40" width="110" height="600" as="geometry" /></mxCell>
+        <mxCell id="l2" value="MembershipController" style="shape=umlLifeline;participantLabel=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=10;container=1;collapsible=0;verticalAlign=top;" vertex="1" parent="1"><mxGeometry x="210" y="40" width="130" height="600" as="geometry" /></mxCell>
+        <mxCell id="l3" value="Database&#xa;(MySQL)" style="shape=umlLifeline;participantLabel=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666;fontSize=10;container=1;collapsible=0;verticalAlign=top;" vertex="1" parent="1"><mxGeometry x="410" y="40" width="100" height="600" as="geometry" /></mxCell>
+        <mxCell id="l4" value="AdminController" style="shape=umlLifeline;participantLabel=0;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=10;container=1;collapsible=0;verticalAlign=top;" vertex="1" parent="1"><mxGeometry x="590" y="40" width="110" height="600" as="geometry" /></mxCell>
+
+        <!-- Phase label -->
+        <mxCell id="phase1" value="PHA 1 — User tạo đơn" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#6C8EBF;" vertex="1" parent="1"><mxGeometry x="30" y="75" width="160" height="18" as="geometry" /></mxCell>
+
+        <mxCell id="m1" value="1. User vào trang Pro, chọn gói" style="html=1;verticalAlign=bottom;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1"><mxGeometry x="40" y="100" width="200" height="22" as="geometry" /></mxCell>
+
+        <mxCell id="m2" value="2. POST /membership/createOrder&#xa;{plan_id, transfer_note}" style="html=1;verticalAlign=bottom;fontSize=9;align=left;spacingLeft=6;" vertex="1" parent="1"><mxGeometry x="40" y="145" width="210" height="30" as="geometry" /></mxCell>
+
+        <mxCell id="m3" value="3. INSERT membership_orders&#xa;(user_id, plan_id, amount,&#xa;payment_method='bank_transfer',&#xa;transfer_note, status='pending')" style="html=1;verticalAlign=bottom;fontSize=9;align=left;spacingLeft=4;" vertex="1" parent="1"><mxGeometry x="220" y="195" width="200" height="55" as="geometry" /></mxCell>
+
+        <mxCell id="m4" value="4. JSON {success, message}&#xa;+ hiển thị QR + bank info" style="html=1;verticalAlign=top;fontSize=9;align=left;spacingLeft=6;dashed=1;" vertex="1" parent="1"><mxGeometry x="100" y="270" width="200" height="28" as="geometry" /></mxCell>
+
+        <!-- Phase 2 -->
+        <mxCell id="phase2" value="PHA 2 — User chuyển khoản" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#D79B00;" vertex="1" parent="1"><mxGeometry x="30" y="320" width="200" height="18" as="geometry" /></mxCell>
+
+        <mxCell id="m5" value="5. User chuyển khoản ngân hàng&#xa;(nội dung CK khớp transfer_note đã khai)" style="html=1;verticalAlign=bottom;fontSize=9;align=left;spacingLeft=6;fontColor=#D79B00;" vertex="1" parent="1"><mxGeometry x="40" y="345" width="240" height="30" as="geometry" /></mxCell>
+
+        <!-- Phase 3 -->
+        <mxCell id="phase3" value="PHA 3 — Admin duyệt (hoặc từ chối)" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#82B366;" vertex="1" parent="1"><mxGeometry x="30" y="400" width="260" height="18" as="geometry" /></mxCell>
+
+        <mxCell id="m6" value="6. Admin kiểm tra app NH&#xa;→ POST /admin/approveOrder&#xa;{id: order_id}" style="html=1;verticalAlign=bottom;fontSize=9;align=left;spacingLeft=4;" vertex="1" parent="1"><mxGeometry x="590" y="425" width="200" height="40" as="geometry" /></mxCell>
+
+        <!-- DB operations in AdminController lane -->
+        <mxCell id="m7" value="7. BEGIN TRANSACTION" style="html=1;verticalAlign=bottom;fontSize=9;align=left;spacingLeft=4;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="590" y="480" width="170" height="20" as="geometry" /></mxCell>
+
+        <mxCell id="m8" value="8. UPDATE membership_orders&#xa;SET status='completed',&#xa;expired_at=?" style="html=1;verticalAlign=bottom;fontSize=9;align=left;spacingLeft=4;" vertex="1" parent="1"><mxGeometry x="580" y="515" width="200" height="40" as="geometry" /></mxCell>
+
+        <mxCell id="m9" value="9. UPDATE users&#xa;SET membership='pro',&#xa;membership_expired_at=?" style="html=1;verticalAlign=bottom;fontSize=9;align=left;spacingLeft=4;" vertex="1" parent="1"><mxGeometry x="580" y="570" width="200" height="40" as="geometry" /></mxCell>
+
+        <mxCell id="m10" value="10. COMMIT → thành công!" style="html=1;verticalAlign=bottom;fontSize=9;align=left;spacingLeft=4;fontStyle=1;fontColor=#82B366;" vertex="1" parent="1"><mxGeometry x="590" y="625" width="180" height="20" as="geometry" /></mxCell>
+
+        <!-- Reject branch -->
+        <mxCell id="m11" value="6b. POST /admin/rejectOrder&#xa;→ UPDATE status='cancelled'" style="html=1;verticalAlign=bottom;fontSize=9;align=left;spacingLeft=4;fontColor=#B85450;" vertex="1" parent="1"><mxGeometry x="380" y="490" width="200" height="30" as="geometry" /></mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

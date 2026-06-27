@@ -1,30 +1,37 @@
 <?php
+
+
 /**
  * LessonController
  * Hiển thị bài học
  */
-class LessonController extends Controller {
-
+class LessonController extends Controller
+{
     /**
      * Danh sách bài học theo topic
      * @param int $topicId
      */
-    public function index($topicId = null) {
-        if (!$topicId) return $this->redirect('topic');
+    public function index($topicId = null)
+    {
+        if (!$topicId) {
+            return $this->redirect('topic');
+        }
 
         $topicModel = $this->model('Topic');
         $lessonModel = $this->model('Lesson');
 
         $topic = $topicModel->find($topicId);
-        if (!$topic) return $this->redirect('topic');
+        if (!$topic) {
+            return $this->redirect('topic');
+        }
 
         $lessons = $lessonModel->getByTopic($topicId);
 
         $this->view('lessons/index', [
-            'title'   => 'Bài học: ' . $topic['name'] . ' - ' . APP_NAME,
-            'topic'   => $topic,
+            'title' => 'Bài học: ' . $topic['name'] . ' - ' . APP_NAME,
+            'topic' => $topic,
             'lessons' => $lessons,
-            'user'    => Middleware::user()
+            'user' => Middleware::user(),
         ]);
     }
 
@@ -32,12 +39,17 @@ class LessonController extends Controller {
      * Chi tiết bài học
      * @param int $id Lesson ID
      */
-    public function show($id = null) {
-        if (!$id) return $this->redirect('topic');
+    public function show($id = null)
+    {
+        if (!$id) {
+            return $this->redirect('topic');
+        }
 
         $lessonModel = $this->model('Lesson');
         $lesson = $lessonModel->getWithContents($id);
-        if (!$lesson) return $this->redirect('topic');
+        if (!$lesson) {
+            return $this->redirect('topic');
+        }
 
         $topicModel = $this->model('Topic');
         $topic = $topicModel->find($lesson['topic_id']);
@@ -73,50 +85,53 @@ class LessonController extends Controller {
 
         // Lấy reviews cho bài học này
         $db = getDB();
-        $reviewStmt = $db->prepare("
+        $reviewStmt = $db->prepare('
             SELECT lr.*, u.username, u.full_name, u.avatar 
             FROM lesson_reviews lr 
             JOIN users u ON lr.user_id = u.id 
             WHERE lr.lesson_id = :lid 
             ORDER BY lr.created_at DESC LIMIT 20
-        ");
+        ');
         $reviewStmt->execute(['lid' => $id]);
         $reviews = $reviewStmt->fetchAll();
 
         // Rating trung bình
-        $avgStmt = $db->prepare("SELECT AVG(rating) as avg_rating, COUNT(*) as total_reviews FROM lesson_reviews WHERE lesson_id = :lid");
+        $avgStmt = $db->prepare('SELECT AVG(rating) as avg_rating, COUNT(*) as total_reviews FROM lesson_reviews WHERE lesson_id = :lid');
         $avgStmt->execute(['lid' => $id]);
         $reviewStats = $avgStmt->fetch();
 
         // Review của user hiện tại (nếu đã login)
         $userReview = null;
         if (Middleware::isLoggedIn()) {
-            $myReview = $db->prepare("SELECT * FROM lesson_reviews WHERE user_id = :uid AND lesson_id = :lid");
+            $myReview = $db->prepare('SELECT * FROM lesson_reviews WHERE user_id = :uid AND lesson_id = :lid');
             $myReview->execute(['uid' => $_SESSION['user_id'], 'lid' => $id]);
             $userReview = $myReview->fetch();
         }
 
         $this->view('lessons/show', [
-            'title'       => $lesson['title'] . ' - ' . APP_NAME,
-            'lesson'      => $lesson,
-            'topic'       => $topic,
-            'nextLesson'  => $nextLesson,
-            'prevLesson'  => $prevLesson,
-            'reviews'     => $reviews,
+            'title' => $lesson['title'] . ' - ' . APP_NAME,
+            'lesson' => $lesson,
+            'topic' => $topic,
+            'nextLesson' => $nextLesson,
+            'prevLesson' => $prevLesson,
+            'reviews' => $reviews,
             'reviewStats' => $reviewStats,
-            'userReview'  => $userReview,
-            'user'        => Middleware::user()
+            'userReview' => $userReview,
+            'user' => Middleware::user(),
         ]);
     }
 
     /**
      * Đánh giá bài học (AJAX POST)
      */
-    public function review() {
+    public function review()
+    {
         Middleware::requireLogin();
-        if (!$this->isMethod('POST')) return $this->json(['error' => 'Method not allowed'], 405);
+        if (!$this->isMethod('POST')) {
+            return $this->json(['error' => 'Method not allowed'], 405);
+        }
 
-        $input = json_decode(file_get_contents('php://input'), true);
+        $input = Request::json();
         $lessonId = intval($input['lesson_id'] ?? 0);
         $rating = intval($input['rating'] ?? 0);
         $comment = trim($input['comment'] ?? '');
@@ -128,27 +143,29 @@ class LessonController extends Controller {
         $db = getDB();
 
         // Check lesson exists
-        $lesson = $db->prepare("SELECT id FROM lessons WHERE id = :id");
+        $lesson = $db->prepare('SELECT id FROM lessons WHERE id = :id');
         $lesson->execute(['id' => $lessonId]);
-        if (!$lesson->fetch()) return $this->json(['error' => 'Bài học không tồn tại.'], 404);
+        if (!$lesson->fetch()) {
+            return $this->json(['error' => 'Bài học không tồn tại.'], 404);
+        }
 
         // Upsert review
-        $stmt = $db->prepare("
+        $stmt = $db->prepare('
             INSERT INTO lesson_reviews (user_id, lesson_id, rating, comment) 
             VALUES (:uid, :lid, :r, :c)
             ON DUPLICATE KEY UPDATE rating = :r2, comment = :c2, updated_at = CURRENT_TIMESTAMP
-        ");
+        ');
         $stmt->execute([
             'uid' => $_SESSION['user_id'],
             'lid' => $lessonId,
             'r' => $rating,
             'c' => $comment ?: null,
             'r2' => $rating,
-            'c2' => $comment ?: null
+            'c2' => $comment ?: null,
         ]);
 
         // Get updated stats
-        $avg = $db->prepare("SELECT AVG(rating) as avg_rating, COUNT(*) as total_reviews FROM lesson_reviews WHERE lesson_id = :lid");
+        $avg = $db->prepare('SELECT AVG(rating) as avg_rating, COUNT(*) as total_reviews FROM lesson_reviews WHERE lesson_id = :lid');
         $avg->execute(['lid' => $lessonId]);
         $stats = $avg->fetch();
 
@@ -160,7 +177,7 @@ class LessonController extends Controller {
             'success' => true,
             'message' => 'Cảm ơn bạn đã đánh giá!',
             'avg_rating' => round($stats['avg_rating'], 1),
-            'total_reviews' => (int)$stats['total_reviews']
+            'total_reviews' => (int)$stats['total_reviews'],
         ]);
     }
 }

@@ -1,0 +1,110 @@
+<mxfile host="Electron">
+  <diagram name="State Diagrams" id="0">
+    <mxGraphModel dx="2904" dy="1201" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=15;fontStyle=1;fontColor=#15213A;" value="Sơ đồ Trạng thái — Membership, Order, Ticket" vertex="1">
+          <mxGeometry height="30" width="400" x="-200" y="100" as="geometry" />
+        </mxCell>
+        <mxCell id="s1_title" parent="1" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#6C8EBF;" value="Membership" vertex="1">
+          <mxGeometry height="20" width="100" x="-240" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="free" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=12;fontStyle=1;" value="Free" vertex="1">
+          <mxGeometry height="55" width="110" x="-250" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="pro" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFE6CC;strokeColor=#D79B00;fontSize=12;fontStyle=1;" value="Pro" vertex="1">
+          <mxGeometry height="55" width="110" x="-250" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="s1_a1" edge="1" parent="1" source="free" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=10;fontStyle=1;exitDx=0;exitDy=0;entryDx=0;entryDy=0;" target="pro" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s1_a1_label" parent="1" style="text;html=1;fontSize=10;fontStyle=1;fontColor=#82B366;" value="Admin duyệt đơn QR" vertex="1">
+          <mxGeometry height="18" width="140" x="-130" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="s1_a2" edge="1" parent="1" source="pro" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0;exitY=0.5;entryX=0;entryY=0.5;fontSize=10;exitDx=0;exitDy=0;entryDx=0;entryDy=0;" target="free" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-285" y="363" />
+              <mxPoint x="-285" y="227" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s1_a2_label" parent="1" style="text;html=1;fontSize=10;fontColor=#B85450;" value="Hết hạn / Admin hạ cấp" vertex="1">
+          <mxGeometry height="35" width="80" x="-330" y="280" as="geometry" />
+        </mxCell>
+        <mxCell id="s2_title" parent="1" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#D79B00;" value="Membership Order" vertex="1">
+          <mxGeometry height="20" width="150" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="pending" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;" value="Pending&#xa;chờ duyệt" vertex="1">
+          <mxGeometry height="55" width="110" x="-10" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="completed" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=11;" value="Completed&#xa;đã kích hoạt" vertex="1">
+          <mxGeometry height="55" width="110" x="160" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="cancelled" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=11;" value="Cancelled&#xa;đã hủy" vertex="1">
+          <mxGeometry height="55" width="110" x="75" y="335" as="geometry" />
+        </mxCell>
+        <mxCell id="s2_a1" edge="1" parent="1" source="pending" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontSize=10;" target="completed" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s2_a1_label" parent="1" style="text;html=1;fontSize=10;fontColor=#82B366;fontStyle=1;" value="Admin duyệt" vertex="1">
+          <mxGeometry height="18" width="80" x="110" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="s2_a2" edge="1" parent="1" source="pending" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=10;" target="cancelled" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s2_a2_label" parent="1" style="text;html=1;fontSize=10;fontColor=#B85450;" value="Admin từ chối" vertex="1">
+          <mxGeometry height="18" width="90" x="30" y="275" as="geometry" />
+        </mxCell>
+        <mxCell id="s2_a3" edge="1" parent="1" source="completed" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=1;entryY=0.5;fontSize=10;exitDx=0;exitDy=0;entryDx=0;entryDy=0;" target="cancelled" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="215" y="285" />
+              <mxPoint x="215" y="363" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="s2_a3_label" parent="1" style="text;html=1;fontSize=10;fontColor=#B85450;" value="Admin xử lý hủy&#xa;qua ticket" vertex="1">
+          <mxGeometry height="35" width="90" x="220" y="305" as="geometry" />
+        </mxCell>
+        <mxCell id="s3_title" parent="1" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#9673A6;" value="Support Ticket" vertex="1">
+          <mxGeometry height="20" width="120" x="-240" y="445" as="geometry" />
+        </mxCell>
+        <mxCell id="t_open" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=11;" value="Open" vertex="1">
+          <mxGeometry height="45" width="90" x="-270" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="t_progress" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=11;" value="In Progress" vertex="1">
+          <mxGeometry height="45" width="100" x="-130" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="t_resolved" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=11;" value="Resolved" vertex="1">
+          <mxGeometry height="45" width="95" x="20" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="t_closed" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666;fontSize=11;" value="Closed" vertex="1">
+          <mxGeometry height="45" width="95" x="20" y="560" as="geometry" />
+        </mxCell>
+        <mxCell id="s3_a1" edge="1" parent="1" source="t_open" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontSize=10;" target="t_progress" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s3_a1_label" parent="1" style="text;html=1;fontSize=10;" value="Admin xử lý" vertex="1">
+          <mxGeometry height="18" width="80" x="-170" y="467" as="geometry" />
+        </mxCell>
+        <mxCell id="s3_a2" edge="1" parent="1" source="t_progress" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontSize=10;" target="t_resolved" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s3_a2_label" parent="1" style="text;html=1;fontSize=10;" value="Admin reply" vertex="1">
+          <mxGeometry height="18" width="80" x="-22" y="467" as="geometry" />
+        </mxCell>
+        <mxCell id="s3_a3" edge="1" parent="1" source="t_resolved" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=10;" target="t_closed" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="s3_a3_label" parent="1" style="text;html=1;fontSize=10;" value="Đóng ticket" vertex="1">
+          <mxGeometry height="18" width="70" x="72" y="530" as="geometry" />
+        </mxCell>
+        <mxCell id="HMbMKBSothaFZDqVrlpn-1" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#6C8EBF;strokeWidth=2;fontSize=14;fontStyle=1;verticalAlign=top;" value="" vertex="1">
+          <mxGeometry height="490" width="710" x="-360" y="130" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

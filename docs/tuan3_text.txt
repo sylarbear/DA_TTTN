@@ -1,0 +1,5967 @@
+TRƯỜNG CAO ĐẲNG CÔNG THƯƠNG TPHCM
+KHOA CÔNG NGHỆ THÔNG TIN
+BÁO CÁO THỰC TẬP
+TỐT NGHIỆP
+ĐỀ TÀI: XÂY DỰNG WEBSITE HỌC TIẾNG ANH TRỰC TUYẾN
+GV 
+hướng
+ 
+dẫn
+: Vũ Thị Hường
+Sinh 
+viên
+ 
+thực
+ 
+hiện
+: Phan Quang 
+Thuật
+Mã
+ 
+số
+ 
+sinh
+ 
+viên
+: 2120110351
+Lớp
+: CCQ2011E
+Khoá
+: K44
+TPHCM, 
+tháng
+ 
+7
+ 
+năm
+ 202
+6
+LỜI CẢM ƠN
+Trong 
+quá
+ 
+trình
+ 
+thực
+ 
+hiện
+ 
+đề
+ 
+tài
+ "
+Xây
+ 
+dựng
+ website 
+học
+ 
+tiếng
+ Anh 
+trực
+ 
+tuyến
+ 
+EngPath
+", 
+em
+ 
+đã
+ 
+nhận
+ 
+được
+ 
+rất
+ 
+nhiều
+ 
+sự
+ 
+giúp
+ 
+đỡ
+ 
+và
+ 
+hướng
+ 
+dẫn
+ 
+tận
+ 
+tình
+.
+Trước
+ 
+hết
+, 
+em
+ 
+xin
+ 
+gửi
+ 
+lời
+ 
+cảm
+ 
+ơn
+ 
+chân
+ 
+thành
+ 
+đến
+ 
+cô
+ Vũ Thị Hường – 
+Giảng
+ 
+viên
+ 
+hướng
+ 
+dẫn
+, 
+người
+ 
+đã
+ 
+tận
+ 
+tình
+ 
+chỉ
+ 
+bảo
+, 
+định
+ 
+hướng
+ 
+và
+ 
+đóng
+ 
+góp
+ 
+những
+ ý 
+kiến
+ 
+quý
+ 
+báu
+ 
+trong
+ 
+suốt
+ 
+quá
+ 
+trình
+ 
+em
+ 
+thực
+ 
+hiện
+ 
+đề
+ 
+tài
+. 
+Những
+ 
+góp
+ ý 
+của
+ 
+cô
+ 
+đã
+ 
+giúp
+ 
+em
+ 
+hoàn
+ 
+thiện
+ 
+sản
+ 
+phẩm
+ 
+một
+ 
+cách
+ 
+tốt
+ 
+nhất
+.
+Em 
+xin
+ 
+cảm
+ 
+ơn
+ 
+quý
+ 
+Thầy
+ 
+Cô
+ 
+trong
+ Khoa Công 
+nghệ
+ Thông tin – Trường Cao 
+đẳng
+ Công Thương TPHCM 
+đã
+ 
+truyền
+ 
+đạt
+ 
+cho
+ 
+em
+ 
+những
+ 
+kiến
+ 
+thức
+ 
+nền
+ 
+tảng
+ 
+vững
+ 
+chắc
+ 
+trong
+ 
+suốt
+ 
+thời
+ 
+gian
+ 
+học
+ 
+tập
+ 
+tại
+ 
+trường
+, 
+tạo
+ 
+điều
+ 
+kiện
+ 
+cho
+ 
+em
+ 
+có
+ 
+thể
+ 
+áp
+ 
+dụng
+ 
+vào
+ 
+thực
+ 
+tế
+.
+Cuối
+ 
+cùng
+, 
+em
+ 
+xin
+ 
+gửi
+ 
+lời
+ 
+cảm
+ 
+ơn
+ 
+đến
+ 
+gia
+ 
+đình
+, 
+bạn
+ 
+bè
+ 
+đã
+ 
+luôn
+ 
+động
+ 
+viên
+, 
+hỗ
+ 
+trợ
+ 
+em
+ 
+trong
+ 
+suốt
+ 
+quá
+ 
+trình
+ 
+học
+ 
+tập
+ 
+và
+ 
+thực
+ 
+hiện
+ 
+đề
+ 
+tài
+.
+Trong 
+quá
+ 
+trình
+ 
+thực
+ 
+hiện
+, do 
+kiến
+ 
+thức
+ 
+và
+ 
+kinh
+ 
+nghiệm
+ 
+còn
+ 
+hạn
+ 
+chế
+ 
+nên
+ 
+đề
+ 
+tài
+ 
+không
+ 
+tránh
+ 
+khỏi
+ 
+những
+ 
+thiếu
+ 
+sót
+. Em 
+rất
+ 
+mong
+ 
+nhận
+ 
+được
+ 
+sự
+ 
+góp
+ ý 
+của
+ 
+quý
+ 
+Thầy
+ 
+Cô
+ 
+để
+ 
+em
+ 
+có
+ 
+thể
+ 
+hoàn
+ 
+thiện
+ 
+hơn
+.
+TPHCM, 
+tháng
+ 
+7
+ 
+năm
+ 2026
+Sinh 
+viên
+ 
+thực
+ 
+hiện
+Phan Quang 
+Thuật
+Mục
+ 
+lục
+LỜI CẢM ƠN
+2
+ĐỀ CƯƠNG ÔN TẬP
+7
+Chương 1.
+TỔNG QUAN VỀ TRƯỜNG CAO ĐẲNG CÔNG THƯƠNG THÀNH PHỐ HỒ CHÍ MINH
+9
+1.1.
+Giới thiệu chung về nhà trường
+9
+1.2.
+Khoa Công nghệ thông tin
+9
+1.3.
+Sự phù hợp của đề tài với môi trường thực tập
+9
+Chương 2.
+LÝ THUYẾT ÁP DỤNG THEO LĨNH VỰC THỰC TẬP
+9
+2.1.
+Tổng quan về đề tài
+9
+2.2.
+Cơ sở lý thuyết
+10
+2.2.1.
+Ngôn ngữ lập trình PHP
+10
+2.2.2.
+Mô hình MVC (Model-View-Controller)
+11
+2.2.3.
+Hệ quản trị CSDL MySQL
+11
+2.2.4.
+HTML5, CSS3 và JavaScript
+11
+2.2.5.
+Google OAuth 2.0
+11
+2.2.6.
+OpenAI GPT API
+12
+2.2.7.
+Web Speech API
+12
+2.2.8.
+VietQR – Thanh toán QR Code
+12
+Chương 3.
+NỘI DUNG THỰC TẬP
+13
+3.1.
+Phân tích và thiết kế hệ thống
+13
+3.1.1.
+Sơ đồ Use Case
+13
+3.1.2.
+Sơ đồ Sequence
+13
+3.1.3.
+Sơ đồ State (Trạng thái)
+15
+3.1.4.
+Thiết kế cơ sở dữ liệu
+17
+3.2.
+Xây dựng giao diện ứng dụng
+18
+3.2.1.
+Trang đăng nhập
+18
+3.2.2.
+Trang chủ
+19
+3.2.3.
+Danh sách chủ đề
+20
+3.2.4.
+Chi tiết chủ đề
+20
+3.2.5.
+Flashcard
+21
+3.2.6.
+Bài kiểm tra
+21
+3.2.7.
+Luyện nói (Speaking)
+22
+3.2.8.
+Dashboard
+22
+3.2.9.
+Ví điện tử
+23
+3.2.10.
+Nạp tiền
+23
+3.2.11.
+Nâng cấp Pro
+24
+3.3.
+Giao diện quản trị (Admin)
+24
+3.3.1.
+Dashboard Admin
+25
+3.3.2.
+Quản lý Đơn nâng cấp
+25
+3.3.3.
+Quản lý Ví
+26
+3.3.4.
+Quản lý Tickets
+26
+3.4.
+Xây dựng chức năng
+27
+3.4.1.
+Quản lý tài khoản
+27
+3.4.2.
+Hệ thống học tập
+27
+3.4.3.
+Hệ thống Gamification
+27
+3.4.4.
+Hệ thống tài chính
+27
+3.4.5.
+Hệ thống hỗ trợ
+27
+3.5.
+Kiểm thử
+27
+Chương 4.
+KẾT LUẬN VÀ KIẾN NGHỊ
+28
+4.1.
+Kết quả đạt được
+28
+4.1.1.
+Ưu điểm
+28
+4.1.2.
+Hạn chế
+28
+4.2.
+Hạn chế
+28
+4.3.
+Kiến nghị (Hướng phát triển trong tương lai)
+28
+Chương 5.
+TÀI LIỆU THAM KHẢO
+29
+NHẬN XÉT KẾT QUẢ THỰC TẬP
+(
+Dành
+ 
+cho
+ 
+Giảng
+ 
+viên
+ 
+hướng
+ 
+dẫn
+ 
+sinh
+ 
+viên
+ 
+thực
+ 
+tập
+)
+• 
+Họ
+ 
+tên
+ 
+sinh
+ 
+viên
+ 
+thực
+ 
+tập
+: Phan Quang 
+Thuật
+• 
+Mã
+ 
+số
+ 
+sinh
+ 
+viên
+: 2120110351
+• 
+Lớp
+: CCQ2011E – 
+Khóa
+: K44
+• 
+Giảng
+ 
+viên
+ 
+hướng
+ 
+dẫn
+ 
+thực
+ 
+tập
+: Vũ Thị Hường
+Sau 
+thời
+ 
+gian
+ 
+sinh
+ 
+viên
+ …………………………………. 
+thực
+ 
+tập
+ 
+tại
+ 
+đơn
+ 
+vị
+, 
+chúng
+ 
+tôi
+ 
+có
+ 
+nhận
+ 
+xét
+ 
+sau
+: 
+Về
+ ý 
+thức
+ 
+chấp
+ 
+hành
+ 
+nội
+ 
+quy
+, 
+quy
+ 
+định
+ 
+của
+ 
+công
+ ty
+: 
+Về
+ 
+đạo
+ 
+đức
+, 
+tác
+ 
+phong
+: 
+Về
+ 
+năng
+ 
+lực
+ 
+chuyên
+ 
+môn
+: 
+Kết
+ 
+luận
+: 
+Nhận
+ xét: 
+Điểm
+: 
+ 
+…………
+…..
+, 
+Ngày
+…… 
+tháng
+…… 
+năm
+……. 
+Cán
+ 
+bộ
+ 
+hướng
+ 
+dẫn
+Xác
+ 
+nhận
+ 
+của
+ 
+đơn
+ 
+vị
+ 
+ 
+ 
+ĐỀ CƯƠNG ÔN TẬP
+1. 
+Nơi
+ 
+thực
+ 
+tập
+: 
+Tên công ty/doanh nghiệp/trung tâm:
+ Trường Cao 
+Đẳng
+ Công Thương
+Địa chỉ:
+  
+Số
+ 20 
+Tăng
+ Nhon Phú, 
+Phường
+ 
+Phước
+ Long, TP. 
+Hồ
+ Chí Minh.
+Điện thoại:
+ 091 553 3130
+2. 
+Nhiệm vụ / Đề tài
+: (
+Xây
+ 
+dựng
+ website 
+học
+ 
+tiếng
+ Anh 
+trực
+ 
+tuyến
+ EngPath
+)
+3. 
+Mục
+ 
+tiêu
+ 
+đề
+ 
+tài
+:
+• 
+Đề
+ 
+tài
+ 
+thuộc
+ 
+lĩnh
+ 
+vực
+ 
+phát
+ 
+triển
+ 
+ứng
+ 
+dụng
+ web, 
+giải
+ 
+quyết
+ 
+bài
+ 
+toán
+ 
+hỗ
+ 
+trợ
+ 
+người
+ 
+dùng
+ 
+học
+ 
+tiếng
+ Anh 
+trực
+ 
+tuyến
+ 
+thông
+ qua 
+các
+ 
+phương
+ 
+pháp
+ 
+học
+ 
+tương
+ 
+tác
+: 
+từ
+ 
+vựng
+, 
+ngữ
+ 
+pháp
+, 
+luyện
+ 
+nghe
+, 
+đọc
+, 
+nói
+.
+• 
+Ứng
+ 
+dụng
+ 
+mang
+ ý 
+nghĩa
+ 
+thiết
+ 
+thực
+ 
+trong
+ 
+giáo
+ 
+dục
+, 
+giúp
+ 
+người
+ 
+học
+ 
+tiếp
+ 
+cận
+ 
+việc
+ 
+học
+ 
+tiếng
+ Anh 
+một
+ 
+cách
+ 
+dễ
+ 
+dàng
+, 
+miễn
+ 
+phí
+ 
+hoặc
+ 
+với
+ chi 
+phí
+ 
+thấp
+, 
+mọi
+ 
+lúc
+ 
+mọi
+ 
+nơi
+ 
+thông
+ qua 
+trình
+ 
+duyệt
+ web.
+• 
+Nắm
+ 
+vững
+ 
+kiến
+ 
+thức
+ 
+về
+ 
+xây
+ 
+dựng
+ website 
+theo
+ 
+mô
+ 
+hình
+ MVC 
+sử
+ 
+dụng
+ PHP 
+thuần
+, MySQL, HTML/CSS/JavaScript.
+• 
+Xây
+ 
+dựng
+ 
+một
+ 
+trang
+ web 
+thân
+ 
+thiện
+, 
+tích
+ 
+hợp
+ AI 
+đánh
+ 
+giá
+ 
+kỹ
+ 
+năng
+ 
+nói
+ 
+cho
+ 
+người
+ 
+học
+ 
+tiếng
+ Anh.
+• 
+Xây
+ 
+dựng
+ 
+hệ
+ 
+thống
+ 
+quản
+ 
+lý
+ membership (
+ví
+ 
+điện
+ 
+tử
+, 
+nạp
+ 
+tiền
+, 
+mua
+ 
+gói
+) 
+chuyên
+ 
+nghiệp
+ 
+và
+ 
+bảo
+ 
+mật
+.
+4. 
+Đối
+ 
+tượng
+ 
+nghiên
+ 
+cứu
+:
+• 
+Đối
+ 
+tượng
+ 
+nghiên
+ 
+cứu
+ 
+của
+ 
+đề
+ 
+tài
+ 
+là
+ 
+lập
+ 
+trình
+ web 
+nói
+ 
+chung
+ 
+và
+ 
+ngôn
+ 
+ngữ
+ 
+lập
+ 
+trình
+ PHP, HTML, CSS, JavaScript 
+nói
+ 
+riêng
+.
+• 
+Cơ
+ 
+sở
+ 
+dữ
+ 
+liệu
+ MySQL, 
+quản
+ 
+lý
+ 
+phiên
+ 
+bản
+ 
+với
+ Git/GitHub.
+• 
+Tích
+ 
+hợp
+ API: Google OAuth 2.0, OpenAI GPT, Web Speech API, 
+VietQR
+.
+• 
+Nghiên
+ 
+cứu
+ 
+nhu
+ 
+cầu
+ 
+của
+ 
+người
+ 
+dùng
+ 
+học
+ 
+tiếng
+ Anh online 
+để
+ 
+xây
+ 
+dựng
+ website 
+thân
+ 
+thiện
+, 
+dễ
+ 
+sử
+ 
+dụng
+.
+5. 
+Nội
+ dung 
+chính
+ 
+của
+ 
+thực
+ 
+tập
+:
+Chương 1: Tổng quan về đơn vị thực tập
+Chương 2: Lý thuyết áp dụng lĩnh vực thực tập
+Nghiên cứu tổng quan về đề tài.
+Nghiên cứu cơ sở lí thuyết của đề tài.
+Chương
+ 3: 
+Nội
+ dung 
+thực
+ 
+tập
+Tiến hành phân tích và thiết kế
+Phân tích thiết kế h
+ệ 
+thống.
+ Xây dựng cơ sở dữ liệu
+Xây dựng giao diện ứng dụng trên các nền tảng.
+Xây dựng chức năng cho ứng dụng
+Kiểm thử và kiểm tra, sữa lỗi
+Chương 4: Kết luận và kiến nghị
+Kết quả thưc hiện: Ưu điểm, Hạn chế,…
+Hướng phát triển
+Chương 
+5
+: 
+Tài 
+liệu
+ 
+tham
+ 
+khảo
+5. Tiến 
+độ
+ 
+thực
+ 
+hiện
+ 
+thực
+ 
+tập
+:
+TT
+Thời
+ 
+gian
+Nội
+ dung 
+công
+ 
+việc
+Kết
+ 
+quả
+ 
+dự
+ 
+kiến
+ 
+đạt
+ 
+được
+1
+16/03 - 22/03/2026
+Gặp
+ 
+mặt
+ 
+giáo
+ 
+viên
+ 
+hướng
+ 
+dẫn
+, 
+trao
+ 
+đổi
+ 
+định
+ 
+hướng
+ 
+thực
+ 
+tập
+, 
+nắm
+ 
+yêu
+ 
+cầu
+ 
+thực
+ 
+hiện
+ 
+đề
+ 
+tài
+ 
+và
+ 
+báo
+ 
+cáo
+Hoàn 
+thành
+2
+23/03 - 29/03/2026
+Đề
+ 
+xuất
+ 
+đề
+ 
+tài
+, 
+trao
+ 
+đổi
+ 
+tính
+ 
+khả
+ 
+thi
+, 
+xác
+ 
+định
+ 
+đối
+ 
+tượng
+ 
+sử
+ 
+dụng
+ 
+và
+ 
+các
+ 
+chức
+ 
+năng
+ 
+chính
+ 
+của
+ 
+hệ
+ 
+thống
+Hoàn 
+thành
+3
+30/03 - 05/04/2026
+Viết
+ 
+đề
+ 
+cương
+ 
+thực
+ 
+tập
+, 
+chỉnh
+ 
+sửa
+ 
+theo
+ 
+góp
+ ý 
+của
+ 
+giáo
+ 
+viên
+ 
+hướng
+ 
+dẫn
+ 
+và
+ 
+nộp
+ 
+đề
+ 
+cương
+Hoàn 
+thành
+4
+06/04 - 12/04/2026
+Khảo
+ 
+sát
+ 
+yêu
+ 
+cầu
+, 
+phân
+ 
+tích
+ 
+chức
+ 
+năng
+ 
+người
+ 
+dùng
+ 
+và
+ 
+quản
+ 
+trị
+ 
+viên
+; 
+thiết
+ 
+kế
+ 
+cơ
+ 
+sở
+ 
+dữ
+ 
+liệu
+, use case 
+và
+ wireframe ban 
+đầu
+Hoàn 
+thành
+5
+13/04 - 19/04/2026
+Thiết
+ 
+kế
+ 
+cơ
+ 
+sở
+ 
+dữ
+ 
+liệu
+, 
+sơ
+ 
+đồ
+ use case, sequence, state 
+và
+ wireframe
+Hoàn 
+thành
+6
+20/04 - 26/04/2026
+Xây
+ 
+dựng
+ 
+cấu
+ 
+trúc
+ MVC, 
+đăng
+ 
+nhập
+, 
+đăng
+ 
+ký
+, 
+trang
+ 
+chủ
+ 
+và
+ 
+giao
+ 
+diện
+ 
+cơ
+ 
+bản
+Hoàn 
+thành
+7
+27/04 - 03/05/2026
+Xây
+ 
+dựng
+ 
+chức
+ 
+năng
+ 
+khóa
+ 
+học
+, 
+chủ
+ 
+đề
+, 
+từ
+ 
+vựng
+, 
+bài
+ 
+học
+ 
+và
+ flashcard
+Hoàn 
+thành
+8
+04/05 - 10/05/2026
+Xây
+ 
+dựng
+ 
+bài
+ test, 
+ngữ
+ 
+pháp
+, 
+lưu
+ 
+tiến
+ 
+độ
+ 
+và
+ 
+kết
+ 
+quả
+ 
+học
+ 
+tập
+Hoàn 
+thành
+9
+11/05 - 17/05/2026
+Tích
+ 
+hợp
+ 
+luyện
+ 
+nói
+, 
+ví
+ 
+điện
+ 
+tử
+, 
+gói
+ Pro 
+và
+ 
+mã
+ 
+kích
+ 
+hoạt
+Hoàn 
+thành
+10
+18/05 - 24/05/2026
+Xây
+ 
+dựng
+ 
+trang
+ 
+quản
+ 
+trị
+: dashboard, 
+quản
+ 
+lý
+ user, 
+khóa
+ 
+học
+, 
+câu
+ 
+hỏi
+, 
+đơn
+ 
+nâng
+ 
+cấp
+Hoàn 
+thành
+11
+25/05 - 31/05/2026
+Xây
+ 
+dựng
+ 
+hỗ
+ 
+trợ
+ ticket, 
+hồ
+ 
+sơ
+ 
+cá
+ 
+nhân
+, 
+bảng
+ 
+xếp
+ 
+hạng
+, bookmark 
+và
+ 
+tinh
+ 
+chỉnh
+ 
+giao
+ 
+diện
+Hoàn 
+thành
+12
+01/06 - 07/06/2026
+Kiểm
+ 
+thử
+ 
+hệ
+ 
+thống
+, 
+sửa
+ 
+lỗi
+ 
+chức
+ 
+năng
+, 
+kiểm
+ 
+tra
+ database 
+và
+ 
+dữ
+ 
+liệu
+ 
+mẫu
+Hoàn 
+thành
+13
+08/06 - 14/06/2026
+Chỉnh
+ 
+sửa
+ 
+báo
+ 
+cáo
+, 
+cập
+ 
+nhật
+ 
+sơ
+ 
+đồ
+, 
+ảnh
+ 
+giao
+ 
+diện
+ 
+và
+ 
+nội
+ dung 
+theo
+ 
+góp
+ ý
+Hoàn 
+thành
+14
+15/06 - 21/06/2026
+Cải
+ 
+thiện
+ 
+giao
+ 
+diện
+ frontend, 
+sửa
+ 
+lỗi
+ font 
+dữ
+ 
+liệu
+, 
+cập
+ 
+nhật
+ README 
+và
+ 
+chuẩn
+ 
+bị
+ deploy
+Hoàn 
+thành
+15
+22/06 - 28/06/2026
+Rà
+ 
+soát
+ 
+toàn
+ 
+bộ
+ website, 
+hoàn
+ 
+thiện
+ 
+báo
+ 
+cáo
+, slide 
+và
+ 
+tài
+ 
+liệu
+ 
+liên
+ 
+quan
+Hoàn 
+thành
+16
+29/06 - 04/07/2026
+Kiểm
+ 
+tra
+ 
+lần
+ 
+cuối
+, 
+nộp
+ 
+sản
+ 
+phẩm
+, 
+báo
+ 
+cáo
+ 
+và
+ 
+chuẩn
+ 
+bị
+ 
+nội
+ dung 
+bảo
+ 
+vệ
+Hoàn 
+thành
+TỔNG QUAN VỀ ĐƠN VỊ THỰC TẬP
+Giới thiệu chung về Trường Cao đẳng Công Thương Thành phố Hồ Chí Minh
+Trường Cao đẳng Công Thương Thành phố Hồ Chí Minh là cơ sở giáo dục nghề nghiệp đào tạo nguồn nhân lực theo định hướng ứng dụng, chú trọng trang bị cho sinh viên kiến thức chuyên môn, kỹ năng thực hành, tác phong nghề nghiệp và khả năng thích ứng với môi trường làm việc thực tế.
+Trong quá trình đào tạo, nhà trường kết hợp giữa lý thuyết và thực hành thông qua các học phần chuyên ngành, bài tập lớn, đồ án, chuyên đề và thực tập tốt nghiệp. Đây là điều kiện thuận lợi để sinh viên tiếp cận quy trình xây dựng sản phẩm phần mềm, rèn luyện tư duy phân tích và hoàn thiện kỹ năng triển khai ứng dụng.
+Hình 1.1. Trường Cao đẳng Công Thương Thành phố Hồ Chí Minh
+Khoa Công nghệ thông tin
+Khoa Công nghệ thông tin là đơn vị đào tạo các kiến thức và kỹ năng liên quan đến lĩnh vực công nghệ phần mềm, lập trình ứng dụng, cơ sở dữ liệu, thiết kế giao diện, phân tích hệ thống, kiểm thử phần mềm và triển khai sản phẩm công nghệ thông tin.
+Đối với sinh viên ngành Công nghệ thông tin, quá trình học tập tại khoa không chỉ tập trung vào kiến thức lý thuyết mà còn chú trọng thực hành thông qua các bài tập lớn, đồ án môn học và các sản phẩm ứng dụng. Nhờ đó, sinh 
+viên có điều kiện vận dụng kiến thức đã học để xây dựng các hệ thống web, phần mềm quản lý và các ứng dụng phục vụ nhu cầu thực tế.
+Các hoạt động của Khoa Công nghệ thông tin
+Bên cạnh hoạt động giảng dạy, Khoa Công nghệ thông tin còn định hướng sinh viên tham gia các hoạt động học thuật, thực hành chuyên môn và rèn luyện kỹ năng nghề nghiệp. Các hoạt động như seminar, workshop, báo cáo chuyên đề, nghiên cứu khoa học sinh viên, thực tập tại doanh nghiệp và tham gia sự kiện công nghệ giúp sinh viên tiếp cận môi trường làm việc thực tế.
+Thông qua các hoạt động này, sinh viên được rèn luyện kỹ năng làm việc nhóm, kỹ năng trình bày, tư duy giải quyết vấn đề và khả năng ứng dụng công nghệ vào sản phẩm cụ thể. Đây là nền tảng quan trọng giúp sinh viên tự tin hơn khi thực hiện đồ án, xây dựng website, thiết kế cơ sở dữ liệu và triển khai ứng dụng phần mềm.
+Sự phù hợp của đề tài với môi trường thực tập
+Đề tài xây dựng website học tiếng Anh trực tuyến EngPath phù hợp với định hướng đào tạo ứng dụng của nhà trường và Khoa Công nghệ thông tin. Đề tài yêu cầu vận dụng nhiều mảng kiến thức như lập trình web, mô hình MVC, cơ sở dữ liệu MySQL, HTML, CSS, JavaScript, xử lý đăng nhập, phân quyền người dùng, thiết kế giao diện và kiểm thử chức năng.
+Thông qua quá trình thực hiện đề tài, sinh viên có cơ hội tổng hợp kiến thức đã học để tạo ra một sản phẩm có tính ứng dụng trong lĩnh vực giáo dục trực tuyến. Đồng thời, đề tài cũng giúp rèn luyện khả năng phân tích yêu cầu, thiết kế hệ thống, xây dựng giao diện thân thiện và hoàn thiện tài liệu báo cáo theo yêu cầu thực tập tốt nghiệp.
+LÝ THUYẾT ÁP DỤNG THEO LĨNH VỰC THỰC TẬP
+Tổng
+ 
+quan
+ 
+về
+ 
+đề
+ 
+tài
+Đề
+ 
+tài
+ "
+Xây
+ 
+dựng
+ website 
+học
+ 
+tiếng
+ Anh 
+trực
+ 
+tuyến
+ 
+EngPath
+" 
+được
+ 
+thực
+ 
+hiện
+ 
+nhằm
+ 
+xây
+ 
+dựng
+ 
+một
+ 
+nền
+ 
+tảng
+ web 
+hỗ
+ 
+trợ
+ 
+người
+ 
+học
+ 
+rèn
+ 
+luyện
+ 
+tiếng
+ Anh 
+theo
+ 
+chủ
+ 
+đề
+. 
+Hệ
+ 
+thống
+ 
+tập
+ 
+trung
+ 
+vào
+ 
+các
+ 
+hoạt
+ 
+động
+ 
+học
+ 
+tập
+ 
+phổ
+ 
+biến
+ 
+như
+ 
+học
+ 
+từ
+ 
+vựng
+, 
+xem
+ 
+bài
+ 
+học
+, 
+làm
+ 
+bài
+ 
+kiểm
+ 
+tra
+, 
+luyện
+ 
+nói
+ 
+và
+ 
+theo
+ 
+dõi
+ 
+tiến
+ 
+độ
+.
+Lý do 
+lựa
+ 
+chọn
+ 
+đề
+ 
+tài
+ 
+xuất
+ 
+phát
+ 
+từ
+ 
+nhu
+ 
+cầu
+ 
+học
+ 
+tiếng
+ Anh 
+trực
+ 
+tuyến
+ 
+ngày
+ 
+càng
+ 
+cao
+. 
+Người
+ 
+học
+ 
+cần
+ 
+một
+ 
+hệ
+ 
+thống
+ 
+dễ
+ 
+sử
+ 
+dụng
+, 
+có
+ 
+nội
+ dung 
+phân
+ 
+loại
+ 
+rõ
+ 
+ràng
+, 
+có
+ 
+thể
+ 
+tự
+ 
+luyện
+ 
+tập
+ 
+và
+ 
+nhận
+ 
+phản
+ 
+hồi
+ 
+sau
+ 
+mỗi
+ 
+hoạt
+ 
+động
+. 
+Vì
+ 
+vậy
+, website 
+được
+ 
+thiết
+ 
+kế
+ 
+theo
+ 
+hướng
+ 
+trực
+ 
+quan
+, chia 
+nhỏ
+ 
+nội
+ dung 
+học
+ 
+theo
+ 
+từng
+ 
+chủ
+ 
+đề
+, 
+đồng
+ 
+thời
+ 
+bổ
+ sung 
+các
+ 
+tính
+ 
+năng
+ 
+tạo
+ 
+động
+ 
+lực
+ 
+như
+ 
+điểm
+ 
+kinh
+ 
+nghiệm
+, streak, 
+bảng
+ 
+xếp
+ 
+hạng
+ 
+và
+ dashboard 
+tiến
+ 
+độ
+.
+Về
+ 
+mặt
+ 
+kỹ
+ 
+thuật
+, 
+đề
+ 
+tài
+ 
+được
+ 
+phát
+ 
+triển
+ 
+theo
+ 
+mô
+ 
+hình
+ MVC 
+để
+ 
+tách
+ 
+biệt
+ 
+dữ
+ 
+liệu
+, 
+xử
+ 
+lý
+ 
+nghiệp
+ 
+vụ
+ 
+và
+ 
+giao
+ 
+diện
+. 
+Dữ
+ 
+liệu
+ 
+được
+ 
+quản
+ 
+lý
+ 
+bằng
+ MySQL; 
+giao
+ 
+diện
+ 
+sử
+ 
+dụng
+ HTML, CSS 
+và
+ JavaScript; 
+các
+ 
+chức
+ 
+năng
+ 
+nâng
+ 
+cao
+ 
+gồm
+ 
+đăng
+ 
+nhập
+ Google OAuth, 
+luyện
+ 
+nói
+ 
+với
+ Web Speech API, 
+chấm
+ 
+điểm
+ 
+bằng
+ OpenAI API, 
+thanh
+ 
+toán
+ 
+VietQR
+, 
+ví
+ 
+điện
+ 
+tử
+ 
+và
+ 
+trang
+ 
+quản
+ 
+trị
+ 
+nội
+ dung.
+Hệ
+ 
+thống
+ 
+hướng
+ 
+đến
+ 
+hai
+ 
+nhóm
+ 
+người
+ 
+dùng
+ 
+chính
+:
+• Học 
+viên
+: 
+đăng
+ 
+ký
+, 
+đăng
+ 
+nhập
+, 
+học
+ 
+chủ
+ 
+đề
+, 
+ôn
+ flashcard, 
+làm
+ 
+bài
+ 
+kiểm
+ 
+tra
+, 
+luyện
+ 
+nói
+, 
+xem
+ 
+tiến
+ 
+độ
+ 
+và
+ 
+sử
+ 
+dụng
+ 
+các
+ 
+chức
+ 
+năng
+ 
+tài
+ 
+khoản
+.
+• Quản 
+trị
+ 
+viên
+: 
+quản
+ 
+lý
+ dashboard, 
+học
+ 
+viên
+, 
+khóa
+ 
+học
+/
+chủ
+ 
+đề
+, 
+câu
+ 
+hỏi
+, 
+mã
+ 
+kích
+ 
+hoạt
+, 
+đơn
+ 
+nâng
+ 
+cấp
+, tickets, 
+giao
+ 
+dịch
+ 
+ví
+ 
+và
+ 
+cấu
+ 
+hình
+ 
+hệ
+ 
+thống
+.
+Phạm vi 
+đề
+ 
+tài
+ 
+tập
+ 
+trung
+ 
+vào
+ 
+việc
+ 
+hoàn
+ 
+thiện
+ 
+một
+ website 
+học
+ 
+tiếng
+ Anh 
+có
+ 
+thể
+ 
+chạy
+ 
+trên
+ 
+môi
+ 
+trường
+ localhost/XAMPP, 
+có
+ 
+cơ
+ 
+sở
+ 
+dữ
+ 
+liệu
+ 
+đầy
+ 
+đủ
+ 
+và
+ 
+có
+ 
+giao
+ 
+diện
+ 
+người
+ 
+dùng
+ 
+lẫn
+ 
+giao
+ 
+diện
+ 
+quản
+ 
+trị
+. Các 
+chức
+ 
+năng
+ 
+được
+ 
+xây
+ 
+dựng
+ 
+theo
+ 
+hướng
+ 
+phục
+ 
+vụ
+ 
+báo
+ 
+cáo
+ 
+thực
+ 
+tập
+ 
+tốt
+ 
+nghiệp
+ 
+và
+ 
+có
+ 
+thể
+ 
+mở
+ 
+rộng
+ 
+trong
+ 
+tương
+ lai.
+Cơ
+ 
+sở
+ 
+lý
+ 
+thuyết
+Ngôn
+ 
+ngữ
+ 
+lập
+ 
+trình
+ PHP
+PHP (PHP: Hypertext Preprocessor) 
+là
+ 
+ngôn
+ 
+ngữ
+ 
+lập
+ 
+trình
+ 
+kịch
+ 
+bản
+ 
+phía
+ 
+máy
+ 
+chủ
+ (server-side scripting language) 
+được
+ 
+sử
+ 
+dụng
+ 
+rộng
+ 
+rãi
+ 
+trong
+ 
+phát
+ 
+triển
+ web. PHP 
+được
+ 
+thiết
+ 
+kế
+ 
+để
+ 
+tạo
+ 
+ra
+ 
+các
+ 
+trang
+ web 
+động
+, 
+xử
+ 
+lý
+ form, 
+quản
+ 
+lý
+ session, cookie, 
+và
+ 
+tương
+ 
+tác
+ 
+với
+ 
+cơ
+ 
+sở
+ 
+dữ
+ 
+liệu
+.
+Đặc
+ 
+điểm
+ 
+nổi
+ 
+bật
+ 
+của
+ PHP:
+• 
+Mã
+ 
+nguồn
+ 
+mở
+, 
+miễn
+ 
+phí
+, 
+cộng
+ 
+đồng
+ 
+hỗ
+ 
+trợ
+ 
+lớn
+.
+• 
+Hỗ
+ 
+trợ
+ 
+nhiều
+ 
+hệ
+ 
+quản
+ 
+trị
+ CSDL: MySQL, PostgreSQL, SQLite, Oracle.
+• 
+Tích
+ 
+hợp
+ 
+tốt
+ 
+với
+ 
+các
+ web server: Apache, Nginx, IIS.
+• Cú 
+pháp
+ 
+đơn
+ 
+giản
+, 
+dễ
+ 
+học
+, 
+dễ
+ 
+triển
+ 
+khai
+.
+Trong 
+đề
+ 
+tài
+ 
+này
+, PHP 
+được
+ 
+sử
+ 
+dụng
+ 
+phiên
+ 
+bản
+ 8.2 
+trở
+ 
+lên
+, 
+áp
+ 
+dụng
+ 
+mô
+ 
+hình
+ MVC 
+để
+ 
+tổ
+ 
+chức
+ 
+mã
+ 
+nguồn
+ 
+một
+ 
+cách
+ khoa 
+học
+ 
+và
+ 
+dễ
+ 
+bảo
+ 
+trì
+.
+Mô
+ 
+hình
+ MVC (Model-View-Controller)
+MVC 
+là
+ 
+một
+ design pattern 
+phổ
+ 
+biến
+ 
+trong
+ 
+phát
+ 
+triển
+ web, chia 
+ứng
+ 
+dụng
+ 
+thành
+ 3 
+thành
+ 
+phần
+ 
+chính
+:
+• Model: 
+Xử
+ 
+lý
+ logic 
+nghiệp
+ 
+vụ
+ 
+và
+ 
+tương
+ 
+tác
+ 
+với
+ 
+cơ
+ 
+sở
+ 
+dữ
+ 
+liệu
+.
+• View: Hiển 
+thị
+ 
+giao
+ 
+diện
+ 
+người
+ 
+dùng
+ (HTML, CSS, JavaScript).
+• Controller: 
+Tiếp
+ 
+nhận
+ request 
+từ
+ 
+người
+ 
+dùng
+, 
+gọi
+ Model 
+xử
+ 
+lý
+, 
+và
+ 
+chuyển
+ 
+kết
+ 
+quả
+ 
+đến
+ View.
+Ưu
+ 
+điểm
+ 
+của
+ MVC: 
+tách
+ 
+biệt
+ logic 
+nghiệp
+ 
+vụ
+ 
+và
+ 
+giao
+ 
+diện
+, 
+dễ
+ 
+bảo
+ 
+trì
+ 
+và
+ 
+mở
+ 
+rộng
+, 
+hỗ
+ 
+trợ
+ 
+làm
+ 
+việc
+ 
+nhóm
+ 
+hiệu
+ 
+quả
+, 
+tái
+ 
+sử
+ 
+dụng
+ code.
+Hình 2.1. Minh họa mô hình MVC được áp dụng trong hệ thống EngPath
+Hệ
+ 
+quản
+ 
+trị
+ CSDL MySQL
+MySQL 
+là
+ 
+hệ
+ 
+quản
+ 
+trị
+ 
+cơ
+ 
+sở
+ 
+dữ
+ 
+liệu
+ 
+quan
+ 
+hệ
+ (RDBMS) 
+mã
+ 
+nguồn
+ 
+mở
+ 
+phổ
+ 
+biến
+ 
+nhất
+ 
+thế
+ 
+giới
+. MySQL 
+sử
+ 
+dụng
+ 
+ngôn
+ 
+ngữ
+ SQL 
+để
+ 
+quản
+ 
+lý
+ 
+và
+ 
+truy
+ 
+vấn
+ 
+dữ
+ 
+liệu
+.
+Đặc
+ 
+điểm
+ 
+của
+ MySQL:
+• Hiệu 
+suất
+ 
+cao
+, 
+xử
+ 
+lý
+ 
+nhanh
+, 
+hỗ
+ 
+trợ
+ transaction (
+InnoDB
+ engine).
+• 
+Hỗ
+ 
+trợ
+ ACID 
+đảm
+ 
+bảo
+ 
+tính
+ 
+toàn
+ 
+vẹn
+ 
+dữ
+ 
+liệu
+.
+• Bảo 
+mật
+ 
+tốt
+ 
+với
+ 
+hệ
+ 
+thống
+ 
+phân
+ 
+quyền
+ chi 
+tiết
+.
+• 
+Tích
+ 
+hợp
+ 
+tốt
+ 
+với
+ PHP 
+thông
+ qua PDO (PHP Data Objects).
+Trong 
+đề
+ 
+tài
+, MySQL 
+được
+ 
+sử
+ 
+dụng
+ 
+với
+ charset utf8mb4 
+để
+ 
+hỗ
+ 
+trợ
+ 
+đầy
+ 
+đủ
+ 
+ký
+ 
+tự
+ 
+tiếng
+ Việt. Database 
+gồm
+ 23 
+bảng
+ 
+quản
+ 
+lý
+ 
+toàn
+ 
+bộ
+ 
+dữ
+ 
+liệu
+ 
+hệ
+ 
+thống
+.
+Hình 2.2. Minh họa các nhóm bảng chính trong cơ sở dữ liệu MySQL
+HTML5, CSS3 
+và
+ JavaScript
+HTML5 (
+HyperText
+ Markup Language 5) 
+là
+ 
+phiên
+ 
+bản
+ 
+mới
+ 
+nhất
+ 
+của
+ 
+ngôn
+ 
+ngữ
+ 
+đánh
+ 
+dấu
+ 
+dùng
+ 
+để
+ 
+cấu
+ 
+trúc
+ 
+nội
+ dung 
+trang
+ web. HTML5 
+bổ
+ sung 
+các
+ 
+thẻ
+ semantic (header, nav, section, article, footer) 
+và
+ 
+hỗ
+ 
+trợ
+ multimedia.
+CSS3 (Cascading Style Sheets 3) 
+dùng
+ 
+để
+ 
+định
+ 
+dạng
+ 
+giao
+ 
+diện
+ web. CSS3 
+bổ
+ sung 
+nhiều
+ 
+tính
+ 
+năng
+: Flexbox, Grid Layout, Animation, Gradient, Media Queries 
+cho
+ responsive design.
+JavaScript 
+là
+ 
+ngôn
+ 
+ngữ
+ 
+lập
+ 
+trình
+ 
+phía
+ client, 
+cho
+ 
+phép
+ 
+tạo
+ 
+tương
+ 
+tác
+ 
+động
+ 
+trên
+ 
+trang
+ web. Trong 
+đề
+ 
+tài
+, JavaScript 
+được
+ 
+sử
+ 
+dụng
+ 
+cho
+: AJAX, Web Speech API, Chart.js, 
+và
+ DOM manipulation.
+Hình 2.3. Vai trò của HTML5, CSS3 và JavaScript trong giao diện website
+Google OAuth 2.0
+OAuth 2.0 
+là
+ 
+giao
+ 
+thức
+ 
+ủy
+ 
+quyền
+ 
+cho
+ 
+phép
+ 
+ứng
+ 
+dụng
+ 
+bên
+ 
+thứ
+ 
+ba
+ 
+truy
+ 
+cập
+ 
+tài
+ 
+nguyên
+ 
+của
+ 
+người
+ 
+dùng
+ 
+mà
+ 
+không
+ 
+cần
+ 
+biết
+ 
+mật
+ 
+khẩu
+. Google OAuth 2.0 
+cho
+ 
+phép
+ 
+người
+ 
+dùng
+ 
+đăng
+ 
+nhập
+ 
+bằng
+ 
+tài
+ 
+khoản
+ Google, 
+đơn
+ 
+giản
+ 
+hóa
+ 
+quy
+ 
+trình
+ 
+đăng
+ 
+ký
+/
+đăng
+ 
+nhập
+ 
+và
+ 
+tăng
+ 
+bảo
+ 
+mật
+.
+OpenAI GPT API
+OpenAI GPT (Generative Pre-trained Transformer) 
+là
+ 
+mô
+ 
+hình
+ 
+ngôn
+ 
+ngữ
+ 
+lớn
+ (LLM) 
+có
+ 
+khả
+ 
+năng
+ 
+hiểu
+ 
+và
+ 
+tạo
+ 
+văn
+ 
+bản
+ 
+tự
+ 
+nhiên
+. Trong 
+đề
+ 
+tài
+, GPT API 
+được
+ 
+sử
+ 
+dụng
+ 
+để
+ 
+đánh
+ 
+giá
+ 
+kỹ
+ 
+năng
+ 
+nói
+: 
+phân
+ 
+tích
+ transcript 
+từ
+ Web Speech API, 
+chấm
+ 
+điểm
+ Pronunciation, Fluency, Accuracy 
+và
+ 
+cung
+ 
+cấp
+ feedback chi 
+tiết
+.
+Web Speech API
+Web Speech API 
+là
+ API 
+trình
+ 
+duyệt
+ 
+cho
+ 
+phép
+ 
+tích
+ 
+hợp
+ 
+tính
+ 
+năng
+ 
+nhận
+ 
+dạng
+ 
+giọng
+ 
+nói
+ (Speech Recognition) 
+và
+ 
+tổng
+ 
+hợp
+ 
+giọng
+ 
+nói
+ (Speech Synthesis) 
+trực
+ 
+tiếp
+ 
+trên
+ 
+trình
+ 
+duyệt
+ web. Trong 
+đề
+ 
+tài
+, Speech Recognition API 
+được
+ 
+sử
+ 
+dụng
+ 
+để
+ 
+ghi
+ 
+nhận
+ 
+giọng
+ 
+nói
+ 
+của
+ 
+người
+ 
+dùng
+ 
+khi
+ 
+luyện
+ 
+nói
+ 
+tiếng
+ Anh, 
+chuyển
+ 
+đổi
+ 
+thành
+ 
+văn
+ 
+bản
+ 
+rồi
+ 
+gửi
+ 
+lên
+ server 
+để
+ AI 
+đánh
+ 
+giá
+.
+Hình 2.4. Luồng luyện nói sử dụng Web Speech API và OpenAI GPT API
+VietQR
+ – Thanh 
+toán
+ QR Code
+VietQR
+ 
+là
+ 
+tiêu
+ 
+chuẩn
+ QR Code 
+thanh
+ 
+toán
+ 
+được
+ Ngân 
+hàng
+ 
+Nhà
+ 
+nước
+ Việt Nam ban 
+hành
+. 
+VietQR
+ API 
+cho
+ 
+phép
+ 
+tạo
+ 
+mã
+ QR 
+chuyển
+ 
+khoản
+ 
+tự
+ 
+động
+ 
+với
+ 
+đầy
+ 
+đủ
+ 
+thông
+ tin: 
+số
+ 
+tài
+ 
+khoản
+, 
+ngân
+ 
+hàng
+, 
+số
+ 
+tiền
+, 
+nội
+ dung 
+chuyển
+ 
+khoản
+. Trong 
+đề
+ 
+tài
+, 
+VietQR
+ 
+được
+ 
+tích
+ 
+hợp
+ 
+vào
+ 
+tính
+ 
+năng
+ 
+nạp
+ 
+tiền
+ 
+vào
+ 
+ví
+.
+Hình 2.5. Quy trình thanh toán VietQR và ví điện tử trong hệ thống
+NỘI DUNG THỰC TẬP
+Phân
+ 
+tích
+ 
+và
+ 
+thiết
+ 
+kế
+ 
+hệ
+ 
+thống
+Sơ
+ 
+đồ
+ Use Case
+Sơ
+ 
+đồ
+ Use Case 
+mô
+ 
+tả
+ 
+các
+ 
+chức
+ 
+năng
+ 
+chính
+ 
+của
+ 
+hệ
+ 
+thống
+ 
+và
+ 
+mối
+ 
+quan
+ 
+hệ
+ 
+giữa
+ 
+các
+ actor 
+với
+ 
+hệ
+ 
+thống
+. 
+Hệ
+ 
+thống
+ 
+EngPath
+ 
+có
+ 3 
+nhóm
+ actor 
+chính
+:
+• Guest (
+Khách
+): 
+Người
+ 
+dùng
+ 
+chưa
+ 
+đăng
+ 
+nhập
+, 
+có
+ 
+thể
+ 
+xem
+ 
+trang
+ 
+giới
+ 
+thiệu
+, 
+tìm
+ 
+kiếm
+ 
+nội
+ dung, 
+đăng
+ 
+ký
+ 
+và
+ 
+đăng
+ 
+nhập
+.
+• Học 
+viên
+: 
+sử
+ 
+dụng
+ 
+các
+ 
+chức
+ 
+năng
+ 
+học
+ 
+tập
+ 
+như
+ 
+học
+ 
+chủ
+ 
+đề
+, 
+ôn
+ flashcard, 
+làm
+ 
+bài
+ 
+kiểm
+ 
+tra
+, 
+luyện
+ 
+nói
+, 
+xem
+ 
+tiến
+ 
+độ
+, 
+quản
+ 
+lý
+ 
+ví
+ 
+và
+ 
+nâng
+ 
+cấp
+ Pro.
+• 
+Hội
+ 
+viên
+ Pro: 
+sử
+ 
+dụng
+ 
+thêm
+ 
+các
+ 
+nội
+ dung 
+nâng
+ 
+cao
+ 
+như
+ Listening, Reading 
+và
+ 
+các
+ 
+bài
+ 
+luyện
+ 
+nói
+ 
+chuyên
+ 
+sâu
+.
+• Admin (Quản 
+trị
+ 
+viên
+): 
+chỉ
+ 
+sử
+ 
+dụng
+ 
+khu
+ 
+vực
+ 
+quản
+ 
+trị
+ 
+để
+ 
+quản
+ 
+lý
+ dashboard, 
+khóa
+ 
+học
+, 
+câu
+ 
+hỏi
+, 
+đơn
+ 
+nâng
+ 
+cấp
+, tickets, 
+ví
+ 
+và
+ 
+cấu
+ 
+hình
+ 
+hệ
+ 
+thống
+.
+Hình
+ 3.1: 
+Sơ
+ 
+đồ
+ Use Case 
+tổng
+ quan
+Sơ
+ 
+đồ
+ Sequence
+Sơ
+ 
+đồ
+ Sequence 
+mô
+ 
+tả
+ 
+luồng
+ 
+tương
+ 
+tác
+ 
+giữa
+ 
+các
+ 
+thành
+ 
+phần
+ 
+trong
+ 
+hệ
+ 
+thống
+ 
+theo
+ 
+thời
+ 
+gian
+.
+a) 
+Luồng
+ 
+đăng
+ 
+nhập
+Hình
+ 3.2: Sequence Diagram – 
+Đăng
+ 
+nhập
+b) 
+Luồng
+ 
+nạp
+ 
+tiền
+ 
+vào
+ 
+ví
+Hình
+ 3.3: Sequence Diagram – 
+Nạp
+ 
+tiền
+ 
+vào
+ 
+ví
+c) 
+Luồng
+ 
+mua
+ 
+gói
+ Pro 
+bằng
+ 
+ví
+Hình
+ 3.4: Sequence Diagram – Mua 
+gói
+ Pro
+d) 
+Luồng
+ 
+hủy
+ 
+đơn
+ 
+và
+ 
+hoàn
+ 
+tiền
+Hình
+ 3.5: Sequence Diagram – 
+Hủy
+ 
+đơn
+ + Hoàn 
+tiền
+Sơ
+ 
+đồ
+ State (
+Trạng
+ 
+thái
+)
+Sơ
+ 
+đồ
+ State 
+mô
+ 
+tả
+ 
+các
+ 
+trạng
+ 
+thái
+ 
+có
+ 
+thể
+ 
+có
+ 
+của
+ 
+một
+ 
+đối
+ 
+tượng
+ 
+và
+ 
+sự
+ 
+chuyển
+ 
+đổi
+ 
+giữa
+ 
+chúng
+.
+a) 
+Trạng
+ 
+thái
+ 
+Đơn
+ 
+hàng
+Hình
+ 3.6: State Diagram – Membership Order
+b) 
+Trạng
+ 
+thái
+ Giao 
+dịch
+ 
+Ví
+Hình
+ 3.7: State Diagram – Wallet Transaction
+c) 
+Trạng
+ 
+thái
+ Support Ticket
+Hình
+ 3.8: State Diagram – Support Ticket
+Thiết
+ 
+kế
+ 
+cơ
+ 
+sở
+ 
+dữ
+ 
+liệu
+Hệ thống sử dụng MySQL với 23 bảng chính. Danh sách dưới đây được đối chiếu theo cấu trúc database hiện tại của dự án, bao gồm nhóm người dùng, nội dung học, kiểm tra, luyện nói, ví điện tử, membership và hỗ trợ.
+STT
+Tên bảng
+Mô tả
+1
+users
+Lưu tài khoản, vai trò, số dư ví, gói membership, XP và streak.
+2
+topics
+Danh mục chủ đề học tiếng Anh, cấp độ, mô tả và trạng thái hiển thị.
+3
+vocabularies
+Kho từ vựng theo chủ đề: từ, phiên âm, nghĩa, ví dụ, audio và hình ảnh.
+4
+lessons
+Thông tin bài học thuộc từng chủ đề.
+5
+lesson_contents
+Nội dung chi tiết của bài học theo từng khối text/video/image/audio.
+6
+lesson_reviews
+Đánh giá bài học của người dùng.
+7
+tests
+Bài kiểm tra theo chủ đề, thời lượng, điểm đạt và trạng thái.
+8
+questions
+Câu hỏi của bài test, đáp án, audio/passage và 
+điểm.
+9
+test_results
+Kết quả làm bài của người dùng.
+10
+user_answers
+Câu trả lời chi tiết của người dùng trong từng lần làm bài.
+11
+user_progress
+Tiến độ học theo chủ đề: từ đã học, bài hoàn thành, test, speaking và điểm.
+12
+speaking_prompts
+Đề luyện nói theo chủ đề, câu trả lời mẫu và độ khó.
+13
+speaking_attempts
+Kết quả luyện nói, transcript, điểm AI và feedback.
+14
+grammar_lessons
+Bài học ngữ pháp theo danh mục và cấp độ.
+15
+grammar_questions
+Câu hỏi luyện tập ngữ pháp và giải thích đáp án.
+16
+bookmarks
+Từ vựng người dùng lưu lại kèm ghi chú.
+17
+vocab_reviews
+Dữ liệu ôn tập từ vựng theo spaced repetition.
+18
+xp_history
+Lịch sử cộng XP theo hoạt động học tập.
+19
+membership_plans
+Danh sách gói Pro, thời hạn, giá và tính năng.
+20
+membership_orders
+Đơn đăng ký gói Pro, phương thức thanh toán, trạng thái và hạn sử dụng.
+21
+activation_codes
+Mã kích hoạt Pro và trạng thái sử dụng.
+22
+wallet_transactions
+Giao dịch ví: nạp, rút, mua gói, hoàn tiền và trạng thái xử lý.
+23
+support_tickets
+Ticket hỗ trợ, loại yêu cầu, đơn liên quan, trạng thái và phản hồi admin.
+Xây
+ 
+dựng
+ 
+giao
+ 
+diện
+ 
+ứng
+ 
+dụng
+Giao 
+diện
+ website 
+EngPath
+ 
+được
+ 
+thiết
+ 
+kế
+ 
+theo
+ 
+phong
+ 
+cách
+ 
+hiện
+ 
+đại
+, 
+sử
+ 
+dụng
+ tone 
+màu
+ 
+xanh
+ 
+dương
+ 
+làm
+ 
+chủ
+ 
+đạo
+, 
+phối
+ 
+hợp
+ 
+với
+ 
+nền
+ 
+sáng
+ 
+tạo
+ 
+cảm
+ 
+giác
+ 
+thân
+ 
+thiện
+ 
+và
+ 
+dễ
+ 
+nhìn
+. Giao 
+diện
+ responsive, 
+tương
+ 
+thích
+ 
+cả
+ PC 
+và
+ mobile.
+Trang 
+đăng
+ 
+nhập
+Cho 
+phép
+ 
+người
+ 
+dùng
+ 
+đăng
+ 
+nhập
+ 
+bằng
+ username/password 
+hoặc
+ 
+tài
+ 
+khoản
+ Google.
+Hình
+ 3.9: Giao 
+diện
+ Trang 
+đăng
+ 
+nhập
+Trang 
+chủ
+Hiển 
+thị
+ 
+giao
+ 
+diện
+ 
+trang
+ 
+chủ
+ 
+dạng
+ learning dashboard, 
+gồm
+ 
+nhiệm
+ 
+vụ
+ 
+học
+ 
+hôm
+ nay, 
+lối
+ 
+vào
+ 
+nhanh
+, 
+khu
+ 
+vực
+ speaking feedback 
+và
+ 
+danh
+ 
+sách
+ 
+chủ
+ 
+đề
+ 
+nổi
+ 
+bật
+.
+Hình
+ 3.10: Giao 
+diện
+ Trang 
+chủ
+Danh 
+sách
+ 
+chủ
+ 
+đề
+Hiển 
+thị
+ 
+các
+ 
+chủ
+ 
+đề
+ 
+theo
+ level Beginner, Intermediate, Advanced, 
+kèm
+ 
+số
+ 
+từ
+ 
+vựng
+, 
+bài
+ 
+học
+ 
+và
+ 
+bài
+ test.
+Hình
+ 3.11: Giao 
+diện
+ Danh 
+sách
+ 
+chủ
+ 
+đề
+Chi 
+tiết
+ 
+chủ
+ 
+đề
+Danh 
+sách
+ 
+từ
+ 
+vựng
+, 
+nút
+ 
+học
+ Flashcard, 
+làm
+ 
+bài
+ test, 
+danh
+ 
+sách
+ 
+bài
+ 
+học
+.
+Hình
+ 3.12: Giao 
+diện
+ Chi 
+tiết
+ 
+chủ
+ 
+đề
+Flashcard
+Thẻ
+ 
+lật
+ 
+hiển
+ 
+thị
+ 
+từ
+ 
+vựng
+: 
+mặt
+ 
+trước
+ 
+từ
+ 
+tiếng
+ Anh + IPA, 
+mặt
+ 
+sau
+ 
+nghĩa
+ + 
+ví
+ 
+dụ
+.
+Hình
+ 3.13: Giao 
+diện
+ Flashcard
+Bài
+ 
+kiểm
+ 
+tra
+Danh 
+sách
+ 
+bài
+ test: Quiz (Free), Listening + Reading (Pro), 
+có
+ 
+đếm
+ 
+thời
+ 
+gian
+.
+Hình
+ 3.14: Giao 
+diện
+ 
+Bài
+ 
+kiểm
+ 
+tra
+Luyện
+ 
+nói
+ (Speaking)
+Ghi
+ 
+âm
+ 
+giọng
+ 
+nói
+, 
+chuyển
+ 
+thành
+ 
+văn
+ 
+bản
+, 
+chấm
+ 
+điểm
+ Pronunciation, Fluency, Accuracy 
+và
+ 
+hiển
+ 
+thị
+ feedback 
+cải
+ 
+thiện
+.
+Hình
+ 3.15: Giao 
+diện
+ 
+Luyện
+ 
+nói
+ (Speaking)
+Dashboard
+Thống
+ 
+kê
+ 
+tiến
+ 
+độ
+: streak, XP, Level, 
+mục
+ 
+tiêu
+ 
+hàng
+ 
+ngày
+, 
+biểu
+ 
+đồ
+ 
+tiến
+ 
+độ
+.
+Hình
+ 3.16: Giao 
+diện
+ Dashboard
+Ví
+ 
+điện
+ 
+tử
+Số
+ 
+dư
+, 
+nút
+ 
+nạp
+/
+rút
+/
+mua
+ 
+gói
+, 
+lịch
+ 
+sử
+ 
+giao
+ 
+dịch
+ chi 
+tiết
+.
+Hình
+ 3.17: Giao 
+diện
+ 
+Ví
+ 
+điện
+ 
+tử
+Nạp
+ 
+tiền
+Tích
+ 
+hợp
+ 
+VietQR
+: 
+nhập
+ 
+số
+ 
+tiền
+, 
+hệ
+ 
+thống
+ 
+tự
+ 
+tạo
+ QR code 
+chuyển
+ 
+khoản
+.
+Hình
+ 3.18: Giao 
+diện
+ 
+Nạp
+ 
+tiền
+Nâng
+ 
+cấp
+ Pro
+Bảng
+ 
+giá
+ 3 
+gói
+, so 
+sánh
+ Free vs Pro, 
+thanh
+ 
+toán
+ 
+bằng
+ 
+ví
+.
+Hình
+ 3.19: Giao 
+diện
+ 
+Nâng
+ 
+cấp
+ Pro
+Giao 
+diện
+ 
+quản
+ 
+trị
+ (Admin)
+Trang 
+quản
+ 
+trị
+ 
+dành
+ 
+cho
+ Admin 
+với
+ 
+đầy
+ 
+đủ
+ 
+chức
+ 
+năng
+ 
+quản
+ 
+lý
+ 
+hệ
+ 
+thống
+:
+Dashboard Admin
+Thống
+ 
+kê
+ 
+tổng
+ 
+quan
+ 
+học
+ 
+viên
+, Pro Members, 
+chủ
+ 
+đề
+, 
+lượt
+ 
+làm
+ 
+bài
+, tickets 
+và
+ 
+các
+ 
+biểu
+ 
+đồ
+ 
+vận
+ 
+hành
+. Admin 
+chỉ
+ 
+sử
+ 
+dụng
+ 
+khu
+ 
+vực
+ 
+quản
+ 
+trị
+, 
+không
+ 
+dùng
+ 
+các
+ 
+chức
+ 
+năng
+ 
+học
+ 
+viên
+.
+Hình
+ 3.20: Giao 
+diện
+ Dashboard Admin
+Quản 
+lý
+ 
+Đơn
+ 
+nâng
+ 
+cấp
+Danh 
+sách
+ 
+đơn
+ 
+hàng
+ membership. Admin 
+duyệt
+ 
+hoặc
+ 
+từ
+ 
+chối
+ 
+đơn
+ pending.
+Hình
+ 3.21: Giao 
+diện
+ Quản 
+lý
+ 
+Đơn
+ 
+nâng
+ 
+cấp
+Quản 
+lý
+ 
+Ví
+Danh 
+sách
+ 
+giao
+ 
+dịch
+ 
+ví
+. Admin 
+duyệt
+/
+từ
+ 
+chối
+ 
+nạp
+/
+rút
+ 
+tiền
+.
+Hình
+ 3.22: Giao 
+diện
+ Quản 
+lý
+ 
+Ví
+Quản 
+lý
+ Tickets
+Danh 
+sách
+ tickets. Admin 
+phản
+ 
+hồi
+, 
+duyệt
+ 
+hủy
+ 
+đơn
+ + 
+hoàn
+ 
+tiền
+ 
+tự
+ 
+động
+.
+Hình
+ 3.23: Giao 
+diện
+ Quản 
+lý
+ Tickets
+Xây
+ 
+dựng
+ 
+chức
+ 
+năng
+Hệ
+ 
+thống
+ 
+EngPath
+ bao 
+gồm
+ 
+các
+ 
+nhóm
+ 
+chức
+ 
+năng
+ 
+chính
+ 
+sau
+:
+Quản 
+lý
+ 
+tài
+ 
+khoản
+• 
+Đăng
+ 
+ký
+ 
+tài
+ 
+khoản
+ 
+mới
+ (username, email, password).
+• 
+Đăng
+ 
+nhập
+ 
+bằng
+ username/password 
+hoặc
+ Google OAuth 2.0.
+• Quản 
+lý
+ 
+hồ
+ 
+sơ
+: 
+cập
+ 
+nhật
+ 
+thông
+ tin, 
+đổi
+ avatar, 
+đổi
+ 
+mật
+ 
+khẩu
+.
+• 
+Phân
+ 
+quyền
+: Student (Free/Pro) 
+và
+ Admin.
+Hệ
+ 
+thống
+ 
+học
+ 
+tập
+• 
+Chủ
+ 
+đề
+ 
+từ
+ 
+vựng
+: 6 
+chủ
+ 
+đề
+, 
+mỗi
+ 
+chủ
+ 
+đề
+ 
+có
+ 
+từ
+ 
+vựng
+, 
+bài
+ 
+học
+, 
+bài
+ 
+kiểm
+ 
+tra
+.
+• Flashcard: 
+Thẻ
+ 
+lật
+ 
+hiển
+ 
+thị
+ 
+từ
+ 
+vựng
+, bookmark 
+từ
+ 
+yêu
+ 
+thích
+.
+• 
+Bài
+ 
+học
+ (Lesson): 
+Nội
+ dung 
+đa
+ 
+phương
+ 
+tiện
+, 
+đánh
+ 
+giá
+ 
+sao
+.
+• 
+Ngữ
+ 
+pháp
+: 10 
+bài
+ 
+ngữ
+ 
+pháp
+ 
+với
+ quiz 
+trắc
+ 
+nghiệm
+.
+• 
+Bài
+ 
+kiểm
+ 
+tra
+: Quiz (Free), Listening + Reading (Pro), 
+đếm
+ 
+thời
+ 
+gian
+, 
+chấm
+ 
+điểm
+ 
+tự
+ 
+động
+.
+• 
+Luyện
+ 
+nói
+: 
+Ghi
+ 
+âm
+ → Speech-to-Text → AI 
+đánh
+ 
+giá
+ → Feedback chi 
+tiết
+.
+Hệ
+ 
+thống
+ Gamification
+• XP (Experience Points): 
+Nhận
+ XP 
+khi
+ 
+hoàn
+ 
+thành
+ 
+hoạt
+ 
+động
+ 
+học
+ 
+tập
+.
+• Level: 
+Nâng
+ level 
+khi
+ 
+đạt
+ 
+đủ
+ XP (
+mỗi
+ level 
+cần
+ 100 XP).
+• Streak: 
+Đếm
+ 
+số
+ 
+ngày
+ 
+học
+ 
+liên
+ 
+tiếp
+, 
+tặng
+ bonus XP.
+• Leaderboard: 
+Bảng
+ 
+xếp
+ 
+hạng
+ top users 
+theo
+ XP.
+• Daily Goal: 
+Mục
+ 
+tiêu
+ XP 
+hàng
+ 
+ngày
+ (
+mặc
+ 
+định
+ 50 XP).
+Hệ
+ 
+thống
+ 
+tài
+ 
+chính
+• 
+Ví
+ 
+điện
+ 
+tử
+: 
+Mỗi
+ user 
+có
+ balance 
+riêng
+, 
+ghi
+ 
+nhận
+ 
+tất
+ 
+cả
+ 
+giao
+ 
+dịch
+.
+• 
+Nạp
+ 
+tiền
+: User 
+chuyển
+ 
+khoản
+ → Admin 
+duyệt
+ → 
+Cộng
+ balance.
+• Mua 
+gói
+ Pro: 
+Trừ
+ balance → 
+Tạo
+ order completed → 
+Nâng
+ 
+cấp
+ Pro.
+• Rút 
+tiền
+: User 
+yêu
+ 
+cầu
+ → Admin 
+chuyển
+ 
+khoản
+ → 
+Trừ
+ balance.
+• Hoàn 
+tiền
+: 
+Hủy
+ 
+đơn
+ → Admin 
+duyệt
+ → Hoàn 
+tiền
+ 
+vào
+ 
+ví
+ (
+tỷ
+ 
+lệ
+ 
+theo
+ 
+thời
+ 
+gian
+).
+• Bảo 
+mật
+: 
+Sử
+ 
+dụng
+ transaction + row locking (FOR UPDATE) 
+tránh
+ race condition.
+Hệ
+ 
+thống
+ 
+hỗ
+ 
+trợ
+• Ticket 
+hỗ
+ 
+trợ
+: User 
+gửi
+ ticket (
+Hỗ
+ 
+trợ
+ 
+chung
+, 
+Hủy
+ 
+đơn
+, Báo 
+lỗi
+, 
+Góp
+ ý).
+• Admin 
+phản
+ 
+hồi
+: 
+Trả
+ 
+lời
+ ticket, 
+đổi
+ 
+trạng
+ 
+thái
+ (Open → Resolved → Closed).
+• 
+Hủy
+ 
+đơn
+ + Hoàn 
+tiền
+: 
+Chính
+ 
+sách
+ 
+theo
+ 
+thời
+ 
+gian
+ (24h: 100%, 1-7 
+ngày
+: 50%).
+Kiểm
+ 
+thử
+Quá
+ 
+trình
+ 
+kiểm
+ 
+thử
+ 
+được
+ 
+thực
+ 
+hiện
+ 
+trên
+ 30 
+trang
+ web, bao 
+gồm
+ 
+cả
+ 
+giao
+ 
+diện
+ 
+người
+ 
+dùng
+ 
+và
+ 
+quản
+ 
+trị
+. 
+Kết
+ 
+quả
+ 
+kiểm
+ 
+thử
+:
+• 30/30 
+trang
+ 
+hoạt
+ 
+động
+ 
+bình
+ 
+thường
+, 
+không
+ 
+lỗi
+ PHP.
+• Vietnamese encoding 
+hiển
+ 
+thị
+ 
+chính
+ 
+xác
+ 
+trên
+ 
+tất
+ 
+cả
+ 
+các
+ 
+trang
+.
+• Wallet + Membership flows 
+hoạt
+ 
+động
+ 
+đúng
+: 
+nạp
+ 
+tiền
+, 
+mua
+ 
+gói
+, 
+hủy
+ 
+đơn
+, 
+hoàn
+ 
+tiền
+.
+• Google OAuth 
+đăng
+ 
+nhập
+ 
+thành
+ 
+công
+.
+• Speaking AI 
+chấm
+ 
+điểm
+ 
+chính
+ 
+xác
+.
+• Responsive design 
+hoạt
+ 
+động
+ 
+tốt
+ 
+trên
+ PC 
+và
+ mobile.
+KẾT LUẬN VÀ KIẾN NGHỊ
+Kết
+ 
+quả
+ 
+đạt
+ 
+được
+Ưu
+ 
+điểm
+• Hoàn 
+thành
+ 
+đầy
+ 
+đủ
+ 
+các
+ 
+chức
+ 
+năng
+ 
+đề
+ 
+ra
+: 
+học
+ 
+từ
+ 
+vựng
+, 
+ngữ
+ 
+pháp
+, 
+bài
+ 
+kiểm
+ 
+tra
+, 
+luyện
+ 
+nói
+, flashcard, bookmark.
+• 
+Tích
+ 
+hợp
+ 
+thành
+ 
+công
+ AI (OpenAI GPT) 
+vào
+ 
+đánh
+ 
+giá
+ 
+kỹ
+ 
+năng
+ 
+nói
+ – 
+điểm
+ 
+nổi
+ 
+bật
+ 
+của
+ 
+đề
+ 
+tài
+.
+• 
+Hệ
+ 
+thống
+ 
+ví
+ 
+điện
+ 
+tử
+ + membership 
+chuyên
+ 
+nghiệp
+ 
+với
+ 
+đầy
+ 
+đủ
+ flow: 
+nạp
+, 
+mua
+, 
+rút
+, 
+hoàn
+ 
+tiền
+.
+• Giao 
+diện
+ 
+người
+ 
+dùng
+ 
+đẹp
+, 
+hiện
+ 
+đại
+, responsive, 
+trải
+ 
+nghiệm
+ 
+mượt
+ 
+mà
+.
+• 
+Hệ
+ 
+thống
+ gamification (XP, Level, Streak, Leaderboard) 
+tạo
+ 
+động
+ 
+lực
+ 
+học
+ 
+tập
+.
+• Bảo 
+mật
+ 
+giao
+ 
+dịch
+ 
+tài
+ 
+chính
+: 
+sử
+ 
+dụng
+ database transaction + row locking.
+• Code 
+sạch
+, 
+tổ
+ 
+chức
+ 
+theo
+ 
+mô
+ 
+hình
+ MVC, 
+dễ
+ 
+bảo
+ 
+trì
+ 
+và
+ 
+mở
+ 
+rộng
+.
+• 
+Đăng
+ 
+nhập
+ 
+bằng
+ Google OAuth 2.0 
+tiện
+ 
+lợi
+ 
+cho
+ 
+người
+ 
+dùng
+.
+Hạn
+ 
+chế
+• 
+Tính
+ 
+năng
+ 
+nạp
+ 
+tiền
+ 
+chưa
+ 
+tích
+ 
+hợp
+ 
+tự
+ 
+động
+ (
+cần
+ Admin 
+duyệt
+ 
+thủ
+ 
+công
+).
+• 
+Chưa
+ 
+có
+ 
+ứng
+ 
+dụng
+ mobile native (
+chỉ
+ 
+hoạt
+ 
+động
+ 
+trên
+ 
+trình
+ 
+duyệt
+ web).
+• 
+Nội
+ dung 
+học
+ 
+tập
+ 
+còn
+ 
+hạn
+ 
+chế
+ (6 
+chủ
+ 
+đề
+), 
+cần
+ 
+bổ
+ sung 
+thêm
+.
+• 
+Chưa
+ 
+có
+ 
+tính
+ 
+năng
+ chat/forum 
+cho
+ 
+người
+ 
+dùng
+ 
+trao
+ 
+đổi
+.
+• Speaking 
+chỉ
+ 
+hoạt
+ 
+động
+ 
+trên
+ 
+trình
+ 
+duyệt
+ 
+hỗ
+ 
+trợ
+ Web Speech API (Chrome, Edge).
+Hạn
+ 
+chế
+Do 
+thời
+ 
+gian
+ 
+và
+ 
+kiến
+ 
+thức
+ 
+còn
+ 
+hạn
+ 
+chế
+, 
+đề
+ 
+tài
+ 
+chưa
+ 
+thể
+ 
+triển
+ 
+khai
+ 
+trên
+ 
+môi
+ 
+trường
+ hosting 
+thật
+ 
+và
+ 
+chưa
+ 
+tích
+ 
+hợp
+ 
+cổng
+ 
+thanh
+ 
+toán
+ 
+tự
+ 
+động
+. 
+Nội
+ dung 
+học
+ 
+tập
+ 
+cần
+ 
+được
+ 
+bổ
+ sung 
+thêm
+ 
+nhiều
+ 
+chủ
+ 
+đề
+ 
+hơn
+ 
+để
+ 
+phục
+ 
+vụ
+ 
+đa
+ 
+dạng
+ 
+nhu
+ 
+cầu
+ 
+người
+ 
+học
+.
+Kiến
+ 
+nghị
+ (
+Hướng
+ 
+phát
+ 
+triển
+ 
+trong
+ 
+tương
+ lai)
+• 
+Tích
+ 
+hợp
+ 
+cổng
+ 
+thanh
+ 
+toán
+ 
+tự
+ 
+động
+: 
+VNPay
+, Momo, 
+ZaloPay
+ 
+để
+ 
+xác
+ 
+nhận
+ 
+nạp
+ 
+tiền
+ real-time.
+• 
+Phát
+ 
+triển
+ 
+ứng
+ 
+dụng
+ mobile 
+bằng
+ React Native 
+hoặc
+ Flutter.
+• 
+Bổ
+ sung 
+thêm
+ 
+nội
+ dung: 
+nhiều
+ 
+chủ
+ 
+đề
+ 
+hơn
+, video 
+bài
+ 
+giảng
+, podcast 
+tiếng
+ Anh.
+• 
+Tích
+ 
+hợp
+ Spaced Repetition System (SRS) 
+để
+ 
+tối
+ 
+ưu
+ 
+hóa
+ 
+việc
+ 
+ôn
+ 
+tập
+ 
+từ
+ 
+vựng
+.
+• 
+Thêm
+ 
+tính
+ 
+năng
+ 
+học
+ 
+nhóm
+, 
+diễn
+ 
+đàn
+ 
+trao
+ 
+đổi
+ 
+giữa
+ 
+người
+ 
+dùng
+.
+• 
+Sử
+ 
+dụng
+ AI 
+nâng
+ 
+cao
+: chatbot 
+hội
+ 
+thoại
+, 
+tự
+ 
+động
+ 
+tạo
+ 
+đề
+ 
+thi
+.
+• Deploy 
+lên
+ hosting 
+thật
+ (VPS, Cloud) 
+để
+ 
+phục
+ 
+vụ
+ 
+người
+ 
+dùng
+ 
+thực
+ 
+tế
+.
+TÀI LIỆU THAM KHẢO
+Tài 
+liệu
+ 
+tham
+ 
+khảo
+ 
+xếp
+ 
+theo
+ 
+thứ
+ 
+tự
+ ABC 
+họ
+ 
+tên
+ 
+tác
+ 
+giả
+:
+Tiếng
+ Việt
+[1]
+Nguyễn Văn Hiệp (2023), 
+Giáo
+ 
+trình
+ 
+Lập
+ 
+trình
+ Web 
+với
+ PHP 
+và
+ MySQL, NXB 
+Giáo
+ 
+dục
+ Việt Nam.
+Tiếng
+ Anh
+[2]
+Matt Zandstra (2021), PHP 8 Objects, Patterns, and Practice, 
+Apress
+, 6th Edition.
+[3]
+Luke Welling, Laura Thomson (2021), PHP and MySQL Web Development, Addison-Wesley, 5th Edition.
+[4]
+Robin Nixon (2021), Learning PHP, MySQL &amp; JavaScript, O'Reilly Media, 6th Edition.
+Trang web
+[5]
+PHP Official Documentation. 
+Địa
+ 
+chỉ
+: https://www.php.net/docs.php
+[6]
+MySQL Reference Manual. 
+Địa
+ 
+chỉ
+: https://dev.mysql.com/doc/refman/8.0/en/
+[7]
+MDN Web Docs – HTML, CSS, JavaScript. 
+Địa
+ 
+chỉ
+: https://developer.mozilla.org/
+[8]
+Google OAuth 2.0 Documentation. 
+Địa
+ 
+chỉ
+: https://developers.google.com/identity/protocols/oauth2
+[9]
+OpenAI API Documentation. 
+Địa
+ 
+chỉ
+: https://platform.openai.com/docs/
+[10]
+Web Speech API – MDN. 
+Địa
+ 
+chỉ
+: https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API
+[11]
+VietQR
+ API Documentation. 
+Địa
+ 
+chỉ
+: https://www.vietqr.io/
+[12]
+Chart.js Documentation. 
+Địa
+ chỉ: https://www.chartjs.org/docs/

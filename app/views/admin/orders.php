@@ -8,11 +8,11 @@ require APP_PATH . '/views/admin/_nav.php';
 <section style="padding:2rem 0;">
     <div class="container">
         <!-- Pending Orders -->
-        <?php 
-        $pending = array_filter($orders, fn($o) => $o['status'] === 'pending');
-        $completed = array_filter($orders, fn($o) => $o['status'] === 'completed');
-        $cancelled = array_filter($orders, fn($o) => $o['status'] === 'cancelled');
-        ?>
+        <?php
+        $pending = array_filter($orders, fn ($o) => $o['status'] === 'pending');
+$completed = array_filter($orders, fn ($o) => $o['status'] === 'completed');
+$cancelled = array_filter($orders, fn ($o) => $o['status'] === 'cancelled');
+?>
 
         <?php if (!empty($pending)): ?>
         <div class="section-card" style="border-left:4px solid #f59e0b; margin-bottom:2rem;">
@@ -142,7 +142,7 @@ require APP_PATH . '/views/admin/_nav.php';
                 <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
                     <?php foreach ($pending as $order): ?>
                     <button class="btn btn-outline" style="padding:6px 14px; font-size:0.85rem;" 
-                        onclick="simulateForOrder('<?= htmlspecialchars($order['transfer_note'] ?? 'EMPRO '.$order['user_id'].' GOI'.$order['plan_id']) ?>', <?= $order['amount'] ?>)">
+                        onclick="simulateForOrder('<?= htmlspecialchars($order['transfer_note'] ?? 'EMPRO ' . $order['user_id'] . ' GOI' . $order['plan_id']) ?>', <?= $order['amount'] ?>)">
                         <i class="fas fa-bolt"></i> #<?= $order['id'] ?> — <?= htmlspecialchars($order['transfer_note'] ?? 'N/A') ?> (<?= number_format($order['amount']) ?>đ)
                     </button>
                     <?php endforeach; ?>

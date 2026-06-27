@@ -1,17 +1,21 @@
 <?php
+
+
 /**
  * Question Model
  * Quản lý câu hỏi
  */
-class Question extends Model {
+class Question extends Model
+{
     protected $table = 'questions';
 
     /**
      * Lấy câu hỏi theo test
-     * @param int $testId
+     * @param  int   $testId
      * @return array
      */
-    public function getByTest($testId) {
+    public function getByTest($testId)
+    {
         $questions = $this->where('test_id', $testId, 'sort_order ASC');
         foreach ($questions as &$q) {
             if ($q['options_json']) {
@@ -20,6 +24,7 @@ class Question extends Model {
                 $q['options'] = [];
             }
         }
+
         return $questions;
     }
 }

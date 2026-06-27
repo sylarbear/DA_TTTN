@@ -50,7 +50,8 @@
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
                 <h3 style="margin:0;"><i class="fas fa-star" style="color:#f59e0b;"></i> Đánh giá bài học</h3>
                 <div style="display:flex; align-items:center; gap:0.5rem;">
-                    <?php $avg = round($reviewStats['avg_rating'] ?? 0, 1); $total = (int)($reviewStats['total_reviews'] ?? 0); ?>
+                    <?php $avg = round($reviewStats['avg_rating'] ?? 0, 1);
+            $total = (int)($reviewStats['total_reviews'] ?? 0); ?>
                     <span style="font-size:1.5rem; font-weight:700; color:#f59e0b;" id="avgRatingDisplay"><?= $avg ?: '—' ?></span>
                     <div style="display:flex; gap:2px;" id="avgStarsDisplay">
                         <?php for ($s = 1; $s <= 5; $s++): ?>

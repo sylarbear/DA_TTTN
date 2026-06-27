@@ -31,7 +31,7 @@
             <form id="grammarQuiz">
                 <?php foreach ($questions as $i => $q):
                     $opts = json_decode($q['options'], true);
-                ?>
+                    ?>
                     <div class="quiz-question" id="gq-<?= $q['id'] ?>">
                         <p class="quiz-q-text"><strong><?= $i + 1 ?>.</strong> <?= htmlspecialchars($q['question_text']) ?></p>
                         <div class="quiz-options">

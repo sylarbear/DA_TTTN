@@ -21,13 +21,13 @@
                 $vocabDone = $progress ? min($progress['vocab_learned'], $topic['vocab_count']) : 0;
                 $lessonDone = $progress ? min($progress['lessons_completed'], $topic['lesson_count']) : 0;
                 $testDone = $progress ? min($progress['tests_passed'], $topic['test_count']) : 0;
-            ?>
-            <div class="summary-row"><span>Từ vựng</span><strong><?= $vocabDone ?> / <?= (int) $topic['vocab_count'] ?></strong></div>
-            <div class="summary-row"><span>Bài học</span><strong><?= $lessonDone ?> / <?= (int) $topic['lesson_count'] ?></strong></div>
-            <div class="summary-row"><span>Bài test</span><strong><?= $testDone ?> / <?= (int) $topic['test_count'] ?></strong></div>
+                ?>
+            <div class="summary-row"><span>Từ vựng</span><strong><?= $vocabDone ?> / <?= (int)$topic['vocab_count'] ?></strong></div>
+            <div class="summary-row"><span>Bài học</span><strong><?= $lessonDone ?> / <?= (int)$topic['lesson_count'] ?></strong></div>
+            <div class="summary-row"><span>Bài test</span><strong><?= $testDone ?> / <?= (int)$topic['test_count'] ?></strong></div>
             <div class="summary-score">
                 <small>Tổng điểm</small>
-                <strong><?= $progress ? (int) $progress['total_score'] : 0 ?></strong>
+                <strong><?= $progress ? (int)$progress['total_score'] : 0 ?></strong>
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@
                 <h2><?= htmlspecialchars($user['full_name'] ?? $user['username']) ?></h2>
                 <p style="color:var(--text-secondary);">@<?= htmlspecialchars($user['username']) ?> · <?= htmlspecialchars($user['email']) ?></p>
                 <div class="profile-badges">
-                    <span class="answer-badge <?= $user['membership']==='pro' ? 'correct' : '' ?>"><?= strtoupper($user['membership']) ?></span>
+                    <span class="answer-badge <?= $user['membership'] === 'pro' ? 'correct' : '' ?>"><?= strtoupper($user['membership']) ?></span>
                     <span class="answer-badge" style="background:var(--bg-surface);"><?= ucfirst($user['role']) ?></span>
                     <span style="color:var(--text-muted); font-size:0.85rem;"><i class="fas fa-calendar"></i> Tham gia <?= date('d/m/Y', strtotime($user['created_at'])) ?></span>
                 </div>
@@ -71,7 +71,7 @@
             <div>
                 <!-- Badges -->
                 <div class="section-card">
-                    <h3><i class="fas fa-medal"></i> Huy hiệu (<?= count(array_filter($badges, fn($b) => $b['earned'])) ?>/<?= count($badges) ?>)</h3>
+                    <h3><i class="fas fa-medal"></i> Huy hiệu (<?= count(array_filter($badges, fn ($b) => $b['earned'])) ?>/<?= count($badges) ?>)</h3>
                     <div class="badge-grid" style="margin-top:1rem;">
                         <?php foreach ($badges as $b): ?>
                             <div class="badge-card <?= $b['earned'] ? 'earned' : 'locked' ?>">
@@ -92,12 +92,12 @@
                         <div class="activity-list" style="margin-top:0.8rem;">
                             <?php foreach ($recentTests as $t): ?>
                                 <div class="activity-item">
-                                    <div class="activity-icon type-<?= $t['test_type'] ?>"><i class="fas fa-<?= $t['test_type']==='quiz'?'question':($t['test_type']==='listening'?'headphones':'book-reader') ?>"></i></div>
+                                    <div class="activity-icon type-<?= $t['test_type'] ?>"><i class="fas fa-<?= $t['test_type'] === 'quiz' ? 'question' : ($t['test_type'] === 'listening' ? 'headphones' : 'book-reader') ?>"></i></div>
                                     <div class="activity-info">
                                         <strong><?= htmlspecialchars($t['title']) ?></strong>
                                         <small><?= date('d/m/Y H:i', strtotime($t['completed_at'])) ?></small>
                                     </div>
-                                    <span class="activity-score" style="color:<?= $t['percentage']>=70?'var(--success)':'var(--error)' ?>"><?= $t['percentage'] ?>%</span>
+                                    <span class="activity-score" style="color:<?= $t['percentage'] >= 70 ? 'var(--success)' : 'var(--error)' ?>"><?= $t['percentage'] ?>%</span>
                                 </div>
                             <?php endforeach; ?>
                         </div>

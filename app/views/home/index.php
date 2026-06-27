@@ -1,9 +1,15 @@
 <?php
 $isLoggedIn = Middleware::isLoggedIn();
 $topicCount = count($topics);
-$totalVocab = array_sum(array_map(function ($topic) { return (int) ($topic['vocab_count'] ?? 0); }, $topics));
-$totalLessons = array_sum(array_map(function ($topic) { return (int) ($topic['lesson_count'] ?? 0); }, $topics));
-$totalTests = array_sum(array_map(function ($topic) { return (int) ($topic['test_count'] ?? 0); }, $topics));
+$totalVocab = array_sum(array_map(function ($topic) {
+    return (int)($topic['vocab_count'] ?? 0);
+}, $topics));
+$totalLessons = array_sum(array_map(function ($topic) {
+    return (int)($topic['lesson_count'] ?? 0);
+}, $topics));
+$totalTests = array_sum(array_map(function ($topic) {
+    return (int)($topic['test_count'] ?? 0);
+}, $topics));
 $featuredTopic = $topics[0] ?? null;
 
 $topicIcons = [
@@ -13,13 +19,13 @@ $topicIcons = [
     'technology' => 'fa-microchip',
     'health' => 'fa-heart-pulse',
     'business' => 'fa-briefcase',
-    'default' => 'fa-layer-group'
+    'default' => 'fa-layer-group',
 ];
 
 $topicAccent = [
     'beginner' => 'topic-accent-green',
     'intermediate' => 'topic-accent-blue',
-    'advanced' => 'topic-accent-purple'
+    'advanced' => 'topic-accent-purple',
 ];
 ?>
 
@@ -151,17 +157,17 @@ $topicAccent = [
             <?php foreach (array_slice($topics, 0, 6) as $topic): ?>
                 <?php
                     $topicName = strtolower($topic['name'] ?? '');
-                    $slug = strtolower($topic['slug'] ?? '');
-                    $icon = $topicIcons['default'];
-                    foreach ($topicIcons as $keyword => $iconClass) {
-                        if ($keyword !== 'default' && (strpos($topicName, $keyword) !== false || strpos($slug, $keyword) !== false)) {
-                            $icon = $iconClass;
-                            break;
-                        }
+                $slug = strtolower($topic['slug'] ?? '');
+                $icon = $topicIcons['default'];
+                foreach ($topicIcons as $keyword => $iconClass) {
+                    if ($keyword !== 'default' && (strpos($topicName, $keyword) !== false || strpos($slug, $keyword) !== false)) {
+                        $icon = $iconClass;
+                        break;
                     }
-                    $level = $topic['level'] ?? 'beginner';
-                    $accentClass = $topicAccent[$level] ?? 'topic-accent-blue';
-                    $description = trim((string) ($topic['description'] ?? ''));
+                }
+                $level = $topic['level'] ?? 'beginner';
+                $accentClass = $topicAccent[$level] ?? 'topic-accent-blue';
+                $description = trim((string)($topic['description'] ?? ''));
                 ?>
                 <a href="<?= BASE_URL ?>/topic/show/<?= $topic['id'] ?>" class="busuu-course-card <?= $accentClass ?>">
                     <div class="course-icon"><i class="fas <?= $icon ?>"></i></div>
@@ -169,9 +175,9 @@ $topicAccent = [
                     <h3><?= htmlspecialchars($topic['name']) ?></h3>
                     <p><?= htmlspecialchars(mb_substr($description, 0, 92)) ?><?= mb_strlen($description) > 92 ? '...' : '' ?></p>
                     <div class="course-stats">
-                        <b><?= (int) $topic['vocab_count'] ?> từ</b>
-                        <b><?= (int) $topic['lesson_count'] ?> bài</b>
-                        <b><?= (int) $topic['test_count'] ?> test</b>
+                        <b><?= (int)$topic['vocab_count'] ?> từ</b>
+                        <b><?= (int)$topic['lesson_count'] ?> bài</b>
+                        <b><?= (int)$topic['test_count'] ?> test</b>
                     </div>
                 </a>
             <?php endforeach; ?>

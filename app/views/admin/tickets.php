@@ -23,11 +23,11 @@ require APP_PATH . '/views/admin/_nav.php';
                             <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem; flex-wrap:wrap;">
                                 <strong style="color:var(--primary);">#<?= $ticket['id'] ?></strong>
                                 <?php
-                                    $typeLabels = ['general'=>'Hỗ trợ chung','cancel_order'=>'Hủy đơn','bug_report'=>'Báo lỗi','feedback'=>'Góp ý'];
-                                    $typeColors = ['general'=>'#6366f1','cancel_order'=>'#ef4444','bug_report'=>'#f59e0b','feedback'=>'#10b981'];
-                                    $statusLabels = ['open'=>'Mở','in_progress'=>'Đang xử lý','resolved'=>'Đã xử lý','closed'=>'Đóng'];
-                                    $statusColors = ['open'=>'#3b82f6','in_progress'=>'#f59e0b','resolved'=>'#10b981','closed'=>'#6b7280'];
-                                ?>
+                                    $typeLabels = ['general' => 'Hỗ trợ chung', 'cancel_order' => 'Hủy đơn', 'bug_report' => 'Báo lỗi', 'feedback' => 'Góp ý'];
+                    $typeColors = ['general' => '#6366f1', 'cancel_order' => '#ef4444', 'bug_report' => '#f59e0b', 'feedback' => '#10b981'];
+                    $statusLabels = ['open' => 'Mở', 'in_progress' => 'Đang xử lý', 'resolved' => 'Đã xử lý', 'closed' => 'Đóng'];
+                    $statusColors = ['open' => '#3b82f6', 'in_progress' => '#f59e0b', 'resolved' => '#10b981', 'closed' => '#6b7280'];
+                    ?>
                                 <span style="background:<?= $typeColors[$ticket['type']] ?>20; color:<?= $typeColors[$ticket['type']] ?>; padding:2px 8px; border-radius:20px; font-size:0.7rem; font-weight:600;">
                                     <?= $typeLabels[$ticket['type']] ?>
                                 </span>
@@ -48,8 +48,8 @@ require APP_PATH . '/views/admin/_nav.php';
                                 <div style="margin-top:0.5rem; padding:0.5rem; background:#fef2f2; border-radius:var(--radius-sm); font-size:0.85rem;">
                                     <i class="fas fa-file-invoice" style="color:#ef4444;"></i>
                                     Đơn #<?= $ticket['related_order_id'] ?> — <?= htmlspecialchars($ticket['plan_name']) ?> — <?= number_format($ticket['order_amount']) ?>đ
-                                    <span style="padding:2px 8px; border-radius:10px; font-size:0.7rem; background:<?= $ticket['order_status']==='pending'?'#fef3c7':'#dcfce7' ?>; color:<?= $ticket['order_status']==='pending'?'#d97706':'#16a34a' ?>;">
-                                        <?= $ticket['order_status']==='pending'?'Đang chờ':'Đã xử lý' ?>
+                                    <span style="padding:2px 8px; border-radius:10px; font-size:0.7rem; background:<?= $ticket['order_status'] === 'pending' ? '#fef3c7' : '#dcfce7' ?>; color:<?= $ticket['order_status'] === 'pending' ? '#d97706' : '#16a34a' ?>;">
+                                        <?= $ticket['order_status'] === 'pending' ? 'Đang chờ' : 'Đã xử lý' ?>
                                     </span>
                                 </div>
                             <?php endif; ?>
@@ -78,10 +78,10 @@ require APP_PATH . '/views/admin/_nav.php';
                                 <select onchange="changeTicketStatus(<?= $ticket['id'] ?>, this.value)" 
                                         style="padding:6px; font-size:0.8rem; border-radius:var(--radius-sm); border:1px solid var(--border-color);">
                                     <option value="">Đổi trạng thái</option>
-                                    <option value="open" <?= $ticket['status']==='open'?'selected':'' ?>>Mở</option>
-                                    <option value="in_progress" <?= $ticket['status']==='in_progress'?'selected':'' ?>>Đang xử lý</option>
-                                    <option value="resolved" <?= $ticket['status']==='resolved'?'selected':'' ?>>Đã xử lý</option>
-                                    <option value="closed" <?= $ticket['status']==='closed'?'selected':'' ?>>Đóng</option>
+                                    <option value="open" <?= $ticket['status'] === 'open' ? 'selected' : '' ?>>Mở</option>
+                                    <option value="in_progress" <?= $ticket['status'] === 'in_progress' ? 'selected' : '' ?>>Đang xử lý</option>
+                                    <option value="resolved" <?= $ticket['status'] === 'resolved' ? 'selected' : '' ?>>Đã xử lý</option>
+                                    <option value="closed" <?= $ticket['status'] === 'closed' ? 'selected' : '' ?>>Đóng</option>
                                 </select>
                             <?php else: ?>
                                 <span style="color:var(--text-muted); font-size:0.8rem; text-align:center;">Đã đóng</span>

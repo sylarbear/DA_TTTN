@@ -26,7 +26,7 @@ require APP_PATH . '/views/admin/_nav.php';
                             <td><?= $t['vocab_count'] ?></td>
                             <td><?= $t['test_count'] ?></td>
                             <td>
-                                <button class="btn btn-sm btn-outline" onclick='editTopic(<?= htmlspecialchars(json_encode($t), ENT_QUOTES, "UTF-8") ?>)'><i class="fas fa-edit"></i></button>
+                                <button class="btn btn-sm btn-outline" onclick='editTopic(<?= htmlspecialchars(json_encode($t), ENT_QUOTES, 'UTF-8') ?>)'><i class="fas fa-edit"></i></button>
                             </td>
                         </tr>
                     <?php endforeach; ?>

@@ -1,17 +1,21 @@
 <?php
+
+
 /**
  * LeaderboardController
  * Bảng xếp hạng học viên
  */
-class LeaderboardController extends Controller {
-
-    public function __construct() {
+class LeaderboardController extends Controller
+{
+    public function __construct()
+    {
         Middleware::requireLogin();
     }
 
-    public function index() {
+    public function index()
+    {
         $db = getDB();
-        
+
         // Top users by total score and tests completed
         $leaders = $db->query("
             SELECT u.id, u.username, u.full_name, u.avatar, u.membership,
@@ -41,7 +45,7 @@ class LeaderboardController extends Controller {
             'title' => 'Bảng xếp hạng - ' . APP_NAME,
             'leaders' => $leaders,
             'myRank' => $myRank,
-            'user' => Middleware::user()
+            'user' => Middleware::user(),
         ]);
     }
 }

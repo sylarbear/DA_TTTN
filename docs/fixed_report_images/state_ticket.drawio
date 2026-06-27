@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="drawio" version="26.0.0">
+  <diagram name="State-Ticket">
+    <mxGraphModel dx="750" dy="500" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="750" pageHeight="500">
+      <root>
+        <mxCell id="0" /><mxCell id="1" parent="0" />
+
+        <mxCell id="t1" value="State Diagram: Trạng thái Ticket Hỗ trợ (Support Ticket)" style="text;html=1;fontSize=16;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="130" y="10" width="450" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Initial -->
+        <mxCell id="start" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#333333;" vertex="1" parent="1">
+          <mxGeometry x="105" y="55" width="20" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="s0" style="endArrow=block;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="115" y="75"/><mxPoint x="115" y="95"/></mxGeometry>
+        </mxCell>
+
+        <!-- OPEN -->
+        <mxCell id="open" value="OPEN&#xa;(Mở)&#xa;&#xa;User tạo ticket&#xa;type: general/cancel_order/&#xa;bug_report/feedback" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="30" y="95" width="180" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- IN_PROGRESS -->
+        <mxCell id="inprog" value="IN_PROGRESS&#xa;(Đang xử lý)&#xa;&#xa;Admin đang làm việc&#xa;trên ticket" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="280" y="95" width="180" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- RESOLVED -->
+        <mxCell id="resolved" value="RESOLVED&#xa;(Đã giải quyết)&#xa;&#xa;Admin đã reply&#xa;admin_reply + replied_at" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="530" y="95" width="180" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- CLOSED -->
+        <mxCell id="closed" value="CLOSED&#xa;(Đóng)&#xa;&#xa;Trạng thái cuối&#xa;Không thể mở lại" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=12;fontStyle=1;align=center;" vertex="1" parent="1">
+          <mxGeometry x="280" y="280" width="180" height="85" as="geometry" />
+        </mxCell>
+
+        <!-- Transitions -->
+        <mxCell id="t1a" value="Admin nhận xử lý&#xa;(updateTicketStatus)" style="endArrow=block;html=1;fontSize=10;fontColor=#d79b00;rounded=1;" edge="1" parent="1" source="open" target="inprog">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t2" value="Admin reply&#xa;(replyTicket)" style="endArrow=block;html=1;fontSize=10;fontColor=#2d7a3a;rounded=1;" edge="1" parent="1" source="open" target="resolved">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points"><mxPoint x="260" y="80"/><mxPoint x="260" y="80"/></Array>
+          </mxGeometry>
+        </mxCell>
+
+        <mxCell id="t3" value="Admin reply&#xa;(replyTicket)" style="endArrow=block;html=1;fontSize=10;fontColor=#2d7a3a;rounded=1;" edge="1" parent="1" source="inprog" target="resolved">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t4" value="Admin close (updateTicketStatus)" style="endArrow=block;html=1;fontSize=10;fontColor=#666666;rounded=1;" edge="1" parent="1" source="open" target="closed">
+          <mxGeometry relative="1" as="geometry"><mxPoint x="120" y="190"/><mxPoint x="280" y="280"/></mxGeometry>
+        </mxCell>
+
+        <mxCell id="t5" value="Admin close" style="endArrow=block;html=1;fontSize=10;fontColor=#666666;rounded=1;" edge="1" parent="1" source="inprog" target="closed">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <mxCell id="t6" value="Admin close" style="endArrow=block;html=1;fontSize=10;fontColor=#666666;rounded=1;" edge="1" parent="1" source="resolved" target="closed">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Notes -->
+        <mxCell id="note1" value="Ticket hủy đơn (cancel_order):&#xa;Khi Admin duyệt hủy → tự động resolved&#xa;+ Hoàn tiền vào ví + Ghi wallet_transaction" style="text;html=1;fontSize=10;align=left;fillColor=#fff2cc;strokeColor=#d6b656;" vertex="1" parent="1">
+          <mxGeometry x="30" y="260" width="220" height="65" as="geometry" />
+        </mxCell>
+
+        <mxCell id="note2" value="Giới hạn:&#xa;Tối đa 5 ticket open/in_progress/user&#xa;Hủy đơn: 1 ticket/order" style="text;html=1;fontSize=10;align=left;fillColor=#f5f5f5;strokeColor=#666666;" vertex="1" parent="1">
+          <mxGeometry x="30" y="340" width="200" height="55" as="geometry" />
+        </mxCell>
+
+        <!-- Final -->
+        <mxCell id="end" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=none;strokeColor=#333333;strokeWidth=3;" vertex="1" parent="1">
+          <mxGeometry x="355" y="420" width="30" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="f1" style="endArrow=block;html=1;fontSize=10;" edge="1" parent="1" source="closed" target="end">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

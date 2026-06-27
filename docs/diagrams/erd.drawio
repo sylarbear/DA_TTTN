@@ -1,0 +1,237 @@
+<mxfile host="Electron">
+  <diagram name="ERD" id="0">
+    <mxGraphModel dx="2054" dy="1201" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=16;fontStyle=1;fontColor=#15213A;" value="Sơ đồ Cơ sở Dữ liệu EngPath&amp;nbsp;" vertex="1">
+          <mxGeometry height="28" width="500" x="730" y="90" as="geometry" />
+        </mxCell>
+        <mxCell id="g1" parent="1" style="swimlane;startSize=22;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=10;fontStyle=1;" value="Người dùng" vertex="1">
+          <mxGeometry height="715" width="240" x="310" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="users" parent="g1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="users&#xa;────────&#xa;+id INT PK&#xa;username VARCHAR(50) UNIQUE&#xa;email VARCHAR(100) UNIQUE&#xa;password_hash VARCHAR(255)&#xa;full_name VARCHAR(100)&#xa;avatar VARCHAR(255)&#xa;role: student|admin&#xa;membership: free|pro&#xa;membership_expired_at DATETIME&#xa;balance DECIMAL(12,0)&#xa;current_streak INT&#xa;longest_streak INT&#xa;last_activity_date DATE&#xa;total_xp INT  level INT&#xa;daily_goal INT&#xa;daily_xp_today INT&#xa;created_at TIMESTAMP" vertex="1">
+          <mxGeometry height="240" width="210" x="15" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="user_progress" parent="g1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="user_progress&#xa;────────&#xa;+user_id INT FK&#xa;+topic_id INT FK&#xa;vocab_learned INT&#xa;lessons_completed INT&#xa;tests_completed INT&#xa;speaking_practiced INT&#xa;total_score INT&#xa;is_completed TINYINT" vertex="1">
+          <mxGeometry height="110" width="210" x="15" y="300" as="geometry" />
+        </mxCell>
+        <mxCell id="xp_history" parent="g1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="xp_history&#xa;────────&#xa;+id INT PK&#xa;user_id INT FK&#xa;xp_amount INT&#xa;activity_type ENUM&#xa;description VARCHAR(255)" vertex="1">
+          <mxGeometry height="80" width="210" x="15" y="440" as="geometry" />
+        </mxCell>
+        <mxCell id="B1N90H2T-uQfKkMjxuuh-2" edge="1" parent="g1" source="bookmarks" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" target="users">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="-40" y="590" />
+              <mxPoint x="-40" y="150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bookmarks" parent="g1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#DAE8FC;strokeColor=#6C8EBF;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="bookmarks&#xa;────────&#xa;+id INT PK&#xa;user_id INT FK&#xa;vocabulary_id INT FK&#xa;note TEXT&#xa;created_at TIMESTAMP&#xa;UNIQUE(user_id, vocabulary_id)" vertex="1">
+          <mxGeometry height="90" width="210" x="15" y="545" as="geometry" />
+        </mxCell>
+        <mxCell id="g2" parent="1" style="swimlane;startSize=22;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=10;fontStyle=1;" value="Học tập" vertex="1">
+          <mxGeometry height="715" width="360" x="710" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="topics" parent="g2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="topics&#xa;────────&#xa;+id INT PK&#xa;name VARCHAR(100)&#xa;slug VARCHAR(100) UNIQUE&#xa;description TEXT&#xa;level ENUM&#xa;sort_order INT&#xa;is_active TINYINT" vertex="1">
+          <mxGeometry height="110" width="145" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lessons" parent="g2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="lessons&#xa;────────&#xa;+id INT PK&#xa;topic_id INT FK&#xa;title VARCHAR(200)&#xa;content TEXT&#xa;sort_order INT&#xa;is_active TINYINT" vertex="1">
+          <mxGeometry height="90" width="145" x="10" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="grammar_lessons" parent="g2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="grammar_lessons&#xa;────────&#xa;+id INT PK&#xa;title VARCHAR(255)&#xa;slug VARCHAR(100) UNIQUE&#xa;category ENUM&#xa;level ENUM&#xa;content_html TEXT&#xa;examples TEXT" vertex="1">
+          <mxGeometry height="90" width="145" x="10" y="290" as="geometry" />
+        </mxCell>
+        <mxCell id="grammar_questions" parent="g2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="grammar_questions&#xa;────────&#xa;+id INT PK&#xa;grammar_id INT FK&#xa;question_text TEXT&#xa;options_json TEXT&#xa;correct_answer CHAR(1)" vertex="1">
+          <mxGeometry height="80" width="145" x="10" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="vocab_reviews" parent="g2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="vocab_reviews&#xa;────────&#xa;+id INT PK&#xa;user_id INT FK&#xa;vocabulary_id INT FK&#xa;ease_factor FLOAT&#xa;interval_days INT&#xa;repetitions INT&#xa;next_review DATE" vertex="1">
+          <mxGeometry height="105" width="145" x="10" y="520" as="geometry" />
+        </mxCell>
+        <mxCell id="B1N90H2T-uQfKkMjxuuh-3" edge="1" parent="g2" source="vocabularies" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=1;entryY=0.638;entryDx=0;entryDy=0;entryPerimeter=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;" target="vocab_reviews">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="78" />
+              <mxPoint x="380" y="587" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="vocabularies" parent="g2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="vocabularies&#xa;────────&#xa;+id INT PK&#xa;topic_id INT FK&#xa;word VARCHAR(100)&#xa;pronunciation VARCHAR(100)&#xa;meaning_vi VARCHAR(255)&#xa;example_sentence TEXT" vertex="1">
+          <mxGeometry height="95" width="140" x="205" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="lesson_contents" parent="g2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="lesson_contents&#xa;────────&#xa;+id INT PK&#xa;lesson_id INT FK&#xa;content_type ENUM&#xa;content TEXT&#xa;sort_order INT" vertex="1">
+          <mxGeometry height="80" width="140" x="205" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="lesson_reviews" parent="g2" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#D5E8D4;strokeColor=#82B366;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="lesson_reviews&#xa;────────&#xa;+id INT PK&#xa;lesson_id INT FK&#xa;user_id INT FK&#xa;rating INT&#xa;comment TEXT" vertex="1">
+          <mxGeometry height="80" width="140" x="205" y="265" as="geometry" />
+        </mxCell>
+        <mxCell id="e_topic_vocab" edge="1" parent="g2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;entryX=0;entryY=0.3;fontSize=7;" target="vocabularies" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="85" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_lesson_lc" edge="1" parent="g2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;entryX=0;entryY=0.5;fontSize=7;" target="lesson_contents" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="160" y="225" as="sourcePoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="g3" parent="1" style="swimlane;startSize=22;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=10;fontStyle=1;" value="Kiểm tra + Luyện nói" vertex="1">
+          <mxGeometry height="405" width="310" x="1200" y="175" as="geometry" />
+        </mxCell>
+        <mxCell id="tests" parent="g3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="tests&#xa;────────&#xa;+id INT PK&#xa;topic_id INT FK&#xa;title VARCHAR(200)&#xa;test_type ENUM&#xa;duration_minutes INT&#xa;pass_score INT&#xa;is_active TINYINT" vertex="1">
+          <mxGeometry height="110" width="140" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="questions" parent="g3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="questions&#xa;────────&#xa;+id INT PK&#xa;test_id INT FK&#xa;question_text TEXT&#xa;options_json TEXT&#xa;correct_answer CHAR(1)&#xa;passage TEXT" vertex="1">
+          <mxGeometry height="90" width="135" x="165" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="test_results" parent="g3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="test_results&#xa;────────&#xa;+id INT PK&#xa;user_id INT FK&#xa;test_id INT FK&#xa;score INT&#xa;total_points INT&#xa;completed_at DATETIME" vertex="1">
+          <mxGeometry height="90" width="140" x="10" y="170" as="geometry" />
+        </mxCell>
+        <mxCell id="user_answers" parent="g3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="user_answers&#xa;────────&#xa;+id INT PK&#xa;test_result_id INT FK&#xa;question_id INT FK&#xa;selected_answer CHAR(1)&#xa;is_correct TINYINT" vertex="1">
+          <mxGeometry height="80" width="135" x="165" y="155" as="geometry" />
+        </mxCell>
+        <mxCell id="speaking_prompts" parent="g3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="speaking_prompts&#xa;────────&#xa;+id INT PK&#xa;topic_id INT FK&#xa;prompt_text TEXT&#xa;sample_answer TEXT&#xa;difficulty ENUM" vertex="1">
+          <mxGeometry height="80" width="140" x="10" y="295" as="geometry" />
+        </mxCell>
+        <mxCell id="speaking_attempts" parent="g3" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFF2CC;strokeColor=#D6B656;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="speaking_attempts&#xa;────────&#xa;+id INT PK&#xa;user_id INT FK&#xa;prompt_id INT FK&#xa;transcript TEXT&#xa;accuracy_score INT&#xa;fluency_score INT&#xa;pronunciation_score INT&#xa;overall_score INT&#xa;feedback TEXT" vertex="1">
+          <mxGeometry height="120" width="135" x="165" y="270" as="geometry" />
+        </mxCell>
+        <mxCell id="g4" parent="1" style="swimlane;startSize=22;fillColor=#F8CECC;strokeColor=#B85450;fontSize=10;fontStyle=1;" value="Membership + Hỗ trợ" vertex="1">
+          <mxGeometry height="340" width="310" x="1200" y="600" as="geometry" />
+        </mxCell>
+        <mxCell id="membership_plans" parent="g4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="membership_plans&#xa;────────&#xa;+id INT PK&#xa;name VARCHAR(100)&#xa;duration_months INT&#xa;price INT" vertex="1">
+          <mxGeometry height="70" width="135" x="10" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="membership_orders" parent="g4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="membership_orders&#xa;────────&#xa;+id INT PK&#xa;user_id INT FK&#xa;plan_id INT FK&#xa;amount INT&#xa;payment_method VARCHAR(50)&#xa;transfer_note TEXT&#xa;status ENUM&#xa;expired_at DATETIME&#xa;activated_at TIMESTAMP" vertex="1">
+          <mxGeometry height="130" width="140" x="160" y="30" as="geometry" />
+        </mxCell>
+        <mxCell id="activation_codes" parent="g4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#999;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;dashed=1;" value="activation_codes&#xa;────────&#xa;+id INT PK&#xa;code VARCHAR(30) UNIQUE&#xa;plan_id INT FK&#xa;is_used TINYINT&#xa;used_by INT FK&#xa;used_at DATETIME&#xa;(không dùng trong code)" vertex="1">
+          <mxGeometry height="95" width="135" x="10" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="support_tickets" parent="g4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8CECC;strokeColor=#B85450;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;" value="support_tickets&#xa;────────&#xa;+id INT PK&#xa;user_id INT FK&#xa;type ENUM&#xa;related_order_id INT FK&#xa;subject VARCHAR(200)&#xa;message TEXT&#xa;status ENUM&#xa;admin_reply TEXT" vertex="1">
+          <mxGeometry height="110" width="140" x="10" y="230" as="geometry" />
+        </mxCell>
+        <mxCell id="wallet_transactions" parent="g4" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#999;fontSize=8;align=left;spacingLeft=5;verticalAlign=top;dashed=1;" value="wallet_transactions&#xa;────────&#xa;+id INT PK&#xa;user_id INT FK&#xa;type ENUM&#xa;amount INT&#xa;balance_after INT&#xa;status ENUM&#xa;(không dùng trong code)" vertex="1">
+          <mxGeometry height="100" width="140" x="160" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="e_progress_u" edge="1" parent="1" source="user_progress" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=0;entryX=0.5;entryY=1;fontSize=7;" target="users" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_xp_u" edge="1" parent="1" source="xp_history" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0;exitY=0.5;entryX=0;entryY=0.5;fontSize=7;entryDx=0;entryDy=0;exitDx=0;exitDy=0;" target="users" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="290" y="655" />
+              <mxPoint x="290" y="325" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_test_u" edge="1" parent="1" source="test_results" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.3;fontSize=7;exitDx=0;exitDy=0;entryDx=0;entryDy=0;" target="users" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1160" y="390" />
+              <mxPoint x="1160" y="170" />
+              <mxPoint x="570" y="170" />
+              <mxPoint x="570" y="277" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_speak_u" edge="1" parent="1" source="speaking_attempts" style="rounded=1;html=1;exitX=1;exitY=0.5;entryX=1;entryY=0.5;fontSize=7;exitDx=0;exitDy=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" target="users" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1510" y="505" />
+              <mxPoint x="1510" y="130" />
+              <mxPoint x="610" y="130" />
+              <mxPoint x="610" y="325" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_order_u" edge="1" parent="1" source="membership_orders" style="rounded=1;html=1;exitX=1;exitY=0.5;entryX=1;entryY=0.5;fontSize=7;exitDx=0;exitDy=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" target="users" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1530" y="695" />
+              <mxPoint x="1530" y="150" />
+              <mxPoint x="580" y="150" />
+              <mxPoint x="580" y="325" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_ticket_u" edge="1" parent="1" source="support_tickets" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0;exitY=0.5;entryX=1;entryY=0.5;fontSize=7;exitDx=0;exitDy=0;entryDx=0;entryDy=0;" target="users" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="890" y="815" />
+              <mxPoint x="550" y="815" />
+              <mxPoint x="550" y="595" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_topic_lesson" edge="1" parent="1" source="topics" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=7;" target="lessons" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_topic_sp" edge="1" parent="1" source="topics" style="rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontSize=7;exitDx=0;exitDy=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" target="speaking_prompts" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="920" y="260" />
+              <mxPoint x="920" y="315" />
+              <mxPoint x="1170" y="315" />
+              <mxPoint x="1170" y="510" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_topic_progress" edge="1" parent="1" source="topics" style="rounded=1;html=1;exitX=0;exitY=0.7;entryX=1;entryY=0.382;fontSize=7;exitDx=0;exitDy=0;entryDx=0;entryDy=0;entryPerimeter=0;edgeStyle=orthogonalEdgeStyle;" target="user_progress" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_lesson_lr" edge="1" parent="1" source="lessons" style="rounded=1;html=1;exitX=1.007;exitY=0.611;entryX=0;entryY=0.5;fontSize=7;exitDx=0;exitDy=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;exitPerimeter=0;" target="lesson_reviews" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_test_q" edge="1" parent="1" source="tests" style="rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontSize=7;" target="questions" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_test_tr" edge="1" parent="1" source="tests" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=7;" target="test_results" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_tr_ua" edge="1" parent="1" source="test_results" style="rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontSize=7;" target="user_answers" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_q_ua" edge="1" parent="1" source="questions" style="rounded=1;html=1;exitX=0.5;exitY=1;fontSize=7;exitDx=0;exitDy=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="1433" y="330" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_sp_sa" edge="1" parent="1" source="speaking_prompts" style="rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontSize=7;" target="speaking_attempts" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mp_mo" edge="1" parent="1" source="membership_plans" style="rounded=1;html=1;exitX=1;exitY=0.3;entryX=0;entryY=0.3;fontSize=7;" target="membership_orders" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_mp_ac" edge="1" parent="1" source="membership_plans" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=7;" target="activation_codes" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_gl_gq" edge="1" parent="1" source="grammar_lessons" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=0.5;exitY=1;entryX=0.5;entryY=0;fontSize=7;" target="grammar_questions" value="">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e_vocab_bm" edge="1" parent="1" source="vocabularies" style="rounded=1;html=1;exitX=1;exitY=0.5;entryX=1;entryY=0.5;fontSize=7;exitDx=0;exitDy=0;entryDx=0;entryDy=0;edgeStyle=orthogonalEdgeStyle;" target="bookmarks" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1105" y="253" />
+              <mxPoint x="1105" y="160" />
+              <mxPoint x="580" y="160" />
+              <mxPoint x="580" y="765" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_topic_test" edge="1" parent="1" source="topics" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;exitX=1;exitY=0.5;entryX=0;entryY=0.5;fontSize=7;exitDx=0;exitDy=0;entryDx=0;entryDy=0;" target="tests" value="">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="920" y="260" />
+              <mxPoint x="920" y="315" />
+              <mxPoint x="1140" y="315" />
+              <mxPoint x="1140" y="260" />
+            </Array>
+            <mxPoint x="905" y="315" as="sourcePoint" />
+            <mxPoint x="1210" y="315" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

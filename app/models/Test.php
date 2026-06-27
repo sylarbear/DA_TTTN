@@ -1,17 +1,21 @@
 <?php
+
+
 /**
  * Test Model
  * Quản lý bài kiểm tra
  */
-class Test extends Model {
+class Test extends Model
+{
     protected $table = 'tests';
 
     /**
      * Lấy tests theo topic
-     * @param int $topicId
+     * @param  int   $topicId
      * @return array
      */
-    public function getByTopic($topicId) {
+    public function getByTopic($topicId)
+    {
         $stmt = $this->db->prepare("
             SELECT t.*, 
                 (SELECT COUNT(*) FROM questions WHERE test_id = t.id) as question_count
@@ -20,6 +24,7 @@ class Test extends Model {
             ORDER BY t.id ASC
         ");
         $stmt->execute(['topic_id' => $topicId]);
+
         return $stmt->fetchAll();
     }
 
@@ -27,7 +32,8 @@ class Test extends Model {
      * Lấy tất cả tests kèm thông tin topic
      * @return array
      */
-    public function getAllWithTopic() {
+    public function getAllWithTopic()
+    {
         $stmt = $this->db->query("
             SELECT t.*, tp.name as topic_name, tp.slug as topic_slug,
                 (SELECT COUNT(*) FROM questions WHERE test_id = t.id) as question_count
@@ -36,23 +42,27 @@ class Test extends Model {
             WHERE t.is_active = 1
             ORDER BY tp.sort_order ASC, t.id ASC
         ");
+
         return $stmt->fetchAll();
     }
 
     /**
      * Lấy test kèm câu hỏi
-     * @param int $id
+     * @param  int         $id
      * @return array|false
      */
-    public function getWithQuestions($id) {
+    public function getWithQuestions($id)
+    {
         $test = $this->find($id);
-        if (!$test) return false;
+        if (!$test) {
+            return false;
+        }
 
-        $stmt = $this->db->prepare("
+        $stmt = $this->db->prepare('
             SELECT * FROM questions 
             WHERE test_id = :test_id 
             ORDER BY sort_order ASC
-        ");
+        ');
         $stmt->execute(['test_id' => $id]);
         $test['questions'] = $stmt->fetchAll();
 
@@ -81,29 +91,31 @@ class Test extends Model {
 
     /**
      * Lấy lịch sử làm bài của user
-     * @param int $userId
-     * @param int|null $testId
+     * @param  int      $userId
+     * @param  int|null $testId
      * @return array
      */
-    public function getUserResults($userId, $testId = null) {
-        $sql = "
+    public function getUserResults($userId, $testId = null)
+    {
+        $sql = '
             SELECT tr.*, t.title as test_title, t.test_type, tp.name as topic_name
             FROM test_results tr
             JOIN tests t ON tr.test_id = t.id
             JOIN topics tp ON t.topic_id = tp.id
             WHERE tr.user_id = :user_id
-        ";
+        ';
         $params = ['user_id' => $userId];
 
         if ($testId) {
-            $sql .= " AND tr.test_id = :test_id";
+            $sql .= ' AND tr.test_id = :test_id';
             $params['test_id'] = $testId;
         }
 
-        $sql .= " ORDER BY tr.completed_at DESC";
+        $sql .= ' ORDER BY tr.completed_at DESC';
 
         $stmt = $this->db->prepare($sql);
         $stmt->execute($params);
+
         return $stmt->fetchAll();
     }
 }

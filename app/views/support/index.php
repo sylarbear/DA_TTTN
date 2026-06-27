@@ -32,18 +32,18 @@
                         <div style="flex:1; min-width:200px;">
                             <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.5rem;">
                                 <?php
-                                    $typeLabels = ['general'=>'Hỗ trợ chung','cancel_order'=>'Hủy đơn','bug_report'=>'Báo lỗi','feedback'=>'Góp ý'];
-                                    $typeIcons = ['general'=>'question-circle','cancel_order'=>'ban','bug_report'=>'bug','feedback'=>'comment'];
-                                    $typeColors = ['general'=>'#6366f1','cancel_order'=>'#ef4444','bug_report'=>'#f59e0b','feedback'=>'#10b981'];
-                                ?>
+                                    $typeLabels = ['general' => 'Hỗ trợ chung', 'cancel_order' => 'Hủy đơn', 'bug_report' => 'Báo lỗi', 'feedback' => 'Góp ý'];
+                    $typeIcons = ['general' => 'question-circle', 'cancel_order' => 'ban', 'bug_report' => 'bug', 'feedback' => 'comment'];
+                    $typeColors = ['general' => '#6366f1', 'cancel_order' => '#ef4444', 'bug_report' => '#f59e0b', 'feedback' => '#10b981'];
+                    ?>
                                 <span style="background:<?= $typeColors[$ticket['type']] ?? '#6366f1' ?>20; color:<?= $typeColors[$ticket['type']] ?? '#6366f1' ?>; padding:3px 10px; border-radius:20px; font-size:0.75rem; font-weight:600;">
                                     <i class="fas fa-<?= $typeIcons[$ticket['type']] ?? 'question-circle' ?>"></i>
                                     <?= $typeLabels[$ticket['type']] ?? 'Khác' ?>
                                 </span>
                                 <?php
-                                    $statusLabels = ['open'=>'Mở','in_progress'=>'Đang xử lý','resolved'=>'Đã xử lý','closed'=>'Đóng'];
-                                    $statusColors = ['open'=>'#3b82f6','in_progress'=>'#f59e0b','resolved'=>'#10b981','closed'=>'#6b7280'];
-                                ?>
+                        $statusLabels = ['open' => 'Mở', 'in_progress' => 'Đang xử lý', 'resolved' => 'Đã xử lý', 'closed' => 'Đóng'];
+                    $statusColors = ['open' => '#3b82f6', 'in_progress' => '#f59e0b', 'resolved' => '#10b981', 'closed' => '#6b7280'];
+                    ?>
                                 <span style="background:<?= $statusColors[$ticket['status']] ?>20; color:<?= $statusColors[$ticket['status']] ?>; padding:3px 10px; border-radius:20px; font-size:0.75rem; font-weight:600;">
                                     <?= $statusLabels[$ticket['status']] ?>
                                 </span>

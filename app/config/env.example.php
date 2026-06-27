@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Environment Configuration Template
  * Copy file này thành env.php và điền thông tin thực

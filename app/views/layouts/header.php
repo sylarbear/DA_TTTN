@@ -53,7 +53,6 @@
                                 <a href="<?= BASE_URL ?>/bookmark"><i class="fas fa-bookmark"></i> Từ đã lưu</a>
                                 <a href="<?= BASE_URL ?>/topic/search"><i class="fas fa-search"></i> Tìm kiếm</a>
                                 <a href="<?= BASE_URL ?>/support"><i class="fas fa-headset"></i> Hỗ trợ</a>
-                                <a href="<?= BASE_URL ?>/wallet"><i class="fas fa-wallet"></i> Ví của tôi</a>
                                 <?php if (!Middleware::isPro()): ?>
                                     <a href="<?= BASE_URL ?>/membership" class="nav-more-upgrade"><i class="fas fa-crown"></i> Nâng cấp Pro</a>
                                 <?php endif; ?>

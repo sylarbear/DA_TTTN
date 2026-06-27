@@ -114,12 +114,12 @@ require APP_PATH . '/views/admin/_nav.php';
                         <div class="progress-info"><span><?= $stats['total_questions'] ?></span><small>Câu hỏi</small></div>
                     </div>
                     <div class="progress-item">
-                        <div class="progress-icon"><i class="fas fa-key"></i></div>
-                        <div class="progress-info"><span><?= $stats['unused_codes'] ?></span><small>Mã chưa dùng</small></div>
+                        <div class="progress-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+                        <div class="progress-info"><span><?= $stats['pending_orders'] ?></span><small>Đơn chờ duyệt</small></div>
                     </div>
                     <div class="progress-item">
-                        <div class="progress-icon"><i class="fas fa-star"></i></div>
-                        <div class="progress-info"><span><?= $stats['total_reviews'] ?></span><small>Đánh giá bài học</small></div>
+                        <div class="progress-icon"><i class="fas fa-headset"></i></div>
+                        <div class="progress-info"><span><?= $stats['pending_tickets'] ?></span><small>Tickets mở</small></div>
                     </div>
                 </div>
             </div>

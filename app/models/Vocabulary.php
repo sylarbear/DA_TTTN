@@ -1,26 +1,31 @@
 <?php
+
+
 /**
  * Vocabulary Model
  * Quản lý từ vựng
  */
-class Vocabulary extends Model {
+class Vocabulary extends Model
+{
     protected $table = 'vocabularies';
 
     /**
      * Lấy từ vựng theo topic
-     * @param int $topicId
+     * @param  int   $topicId
      * @return array
      */
-    public function getByTopic($topicId) {
+    public function getByTopic($topicId)
+    {
         return $this->where('topic_id', $topicId, 'id ASC');
     }
 
     /**
      * Tìm kiếm từ vựng
-     * @param string $keyword
+     * @param  string $keyword
      * @return array
      */
-    public function search($keyword) {
+    public function search($keyword)
+    {
         $escapedKeyword = str_replace(['%', '_'], ['\\%', '\\_'], $keyword);
         $stmt = $this->db->prepare("
             SELECT v.*, t.name as topic_name 
@@ -31,9 +36,10 @@ class Vocabulary extends Model {
             LIMIT 50
         ");
         $stmt->execute([
-            'keyword'  => "%{$escapedKeyword}%",
-            'keyword2' => "%{$escapedKeyword}%"
+            'keyword' => "%{$escapedKeyword}%",
+            'keyword2' => "%{$escapedKeyword}%",
         ]);
+
         return $stmt->fetchAll();
     }
 }

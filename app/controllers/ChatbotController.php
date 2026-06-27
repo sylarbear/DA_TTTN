@@ -1,11 +1,14 @@
 <?php
+
+
 /**
  * ChatbotController
  * AI Chatbot trợ lý học tiếng Anh
  */
-class ChatbotController extends Controller {
-
-    public function __construct() {
+class ChatbotController extends Controller
+{
+    public function __construct()
+    {
         Middleware::requireLogin();
     }
 
@@ -13,19 +16,21 @@ class ChatbotController extends Controller {
      * Chatbot không có trang riêng (là widget nổi)
      * Redirect về trang chủ nếu user truy cập trực tiếp
      */
-    public function index() {
+    public function index()
+    {
         $this->redirect('');
     }
 
     /**
      * API chat (AJAX)
      */
-    public function send() {
+    public function send()
+    {
         if (!$this->isMethod('POST')) {
             return $this->json(['error' => 'Method not allowed'], 405);
         }
 
-        $input = json_decode(file_get_contents('php://input'), true);
+        $input = Request::json();
         $message = trim($input['message'] ?? '');
         $history = $input['history'] ?? [];
 
@@ -48,18 +53,20 @@ class ChatbotController extends Controller {
 
         return $this->json([
             'success' => true,
-            'message' => $response
+            'message' => $response,
         ]);
     }
 
     /**
      * Kiểm tra chatbot có sẵn không (AJAX)
      */
-    public function status() {
+    public function status()
+    {
         require_once APP_PATH . '/core/OpenAIService.php';
+
         return $this->json([
             'available' => OpenAIService::isAvailable(),
-            'logged_in' => Middleware::isLoggedIn()
+            'logged_in' => Middleware::isLoggedIn(),
         ]);
     }
 }

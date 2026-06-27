@@ -1,11 +1,16 @@
 <?php
-function planDisplayData($plan) {
+function planDisplayData($plan)
+{
     $duration = (int)($plan['duration_months'] ?? 0);
     $price = (int)($plan['price'] ?? 0);
     $monthLabel = $duration > 0 ? $duration . ' tháng' : 'Pro';
     $saving = '';
-    if ($duration === 3) $saving = 'Tiết kiệm 17% so với gói 1 tháng';
-    if ($duration === 12) $saving = $price <= 350000 ? 'Gói Pro 12 tháng, tiết kiệm 42%' : 'Tiết kiệm 33%, đề xuất dài hạn';
+    if ($duration === 3) {
+        $saving = 'Tiết kiệm 17% so với gói 1 tháng';
+    }
+    if ($duration === 12) {
+        $saving = $price <= 350000 ? 'Gói Pro 12 tháng, tiết kiệm 42%' : 'Tiết kiệm 33%, đề xuất dài hạn';
+    }
 
     return [
         'name' => $duration > 0 ? 'Pro ' . $monthLabel : htmlspecialchars($plan['name'] ?? 'EngPath Pro'),
@@ -15,8 +20,8 @@ function planDisplayData($plan) {
             'Luyện nói với AI chấm điểm',
             'Bài test Listening và Reading',
             'Theo dõi tiến độ học tập',
-            $duration >= 12 ? 'Ưu tiên hỗ trợ khi cần' : null
-        ]
+            $duration >= 12 ? 'Ưu tiên hỗ trợ' : null,
+        ],
     ];
 }
 ?>
@@ -29,7 +34,6 @@ function planDisplayData($plan) {
             <p>Pro giúp người học truy cập đầy đủ khóa học, bài test nâng cao, luyện speaking AI và theo dõi tiến độ học tập sâu hơn.</p>
             <div class="learn-hero-actions">
                 <a href="#pricing" class="busuu-primary-btn">Xem gói Pro</a>
-                <a href="#activation" class="busuu-secondary-btn">Nhập mã kích hoạt</a>
             </div>
         </div>
 
@@ -112,33 +116,14 @@ function planDisplayData($plan) {
                         <?php endforeach; ?>
                     </div>
                     <div class="pricing-footer">
-                        <button class="busuu-primary-btn price-action" onclick="showPayment(<?= (int) $plan['id'] ?>, '<?= htmlspecialchars($display['name'], ENT_QUOTES) ?>', <?= (int) $plan['price'] ?>)">
-                            Chọn gói này
+                        <button class="busuu-primary-btn price-action"
+                                onclick="showPayment(<?= (int)$plan['id'] ?>, '<?= htmlspecialchars($display['name'], ENT_QUOTES) ?>', <?= (int)$plan['price'] ?>)"
+                                <?= $hasPending ? 'disabled' : '' ?>>
+                            <?= $hasPending ? 'Đang có đơn chờ duyệt' : 'Chọn gói này' ?>
                         </button>
                     </div>
                 </article>
             <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-
-<section class="eng-section activation-section" id="activation">
-    <div class="container">
-        <div class="activation-card polished-activation">
-            <div>
-                <span class="busuu-label">Mã kích hoạt</span>
-                <h3>Kích hoạt Pro bằng mã có sẵn</h3>
-                <p>Nếu bạn đã được cấp mã kích hoạt, nhập mã để nâng cấp tài khoản ngay.</p>
-            </div>
-            <div>
-                <div class="activation-form">
-                    <input type="text" id="activationCode" placeholder="Nhập mã kích hoạt" class="input-lg" autocomplete="off">
-                    <button class="btn btn-primary btn-lg" id="activateBtn" onclick="activateCode()">
-                        <i class="fas fa-bolt"></i> Kích hoạt
-                    </button>
-                </div>
-                <div id="activationResult"></div>
-            </div>
         </div>
     </div>
 </section>
@@ -153,23 +138,23 @@ function planDisplayData($plan) {
                     <thead>
                         <tr>
                             <th>Gói</th>
-                            <th>Mã</th>
-                            <th>Ngày kích hoạt</th>
+                            <th>Ngày tạo</th>
                             <th>Hết hạn</th>
+                            <th>Phương thức</th>
                             <th>Trạng thái</th>
                         </tr>
                     </thead>
                     <tbody>
                     <?php foreach ($orders as $order): ?>
                         <?php
-                            $statusLabels = ['pending'=>'Đang chờ','completed'=>'Hoàn tất','cancelled'=>'Đã hủy'];
-                            $status = $order['status'] ?? 'completed';
+                        $statusLabels = ['pending' => 'Đang chờ', 'completed' => 'Hoàn tất', 'cancelled' => 'Đã hủy'];
+                        $status = $order['status'] ?? 'completed';
                         ?>
                         <tr>
                             <td><?= htmlspecialchars($order['plan_name'] ?? '') ?></td>
-                            <td><?= htmlspecialchars($order['activation_code'] ?? '-') ?></td>
                             <td><?= !empty($order['activated_at']) ? date('d/m/Y H:i', strtotime($order['activated_at'])) : '-' ?></td>
                             <td><?= !empty($order['expired_at']) ? date('d/m/Y', strtotime($order['expired_at'])) : '-' ?></td>
+                            <td>Chuyển khoản</td>
                             <td><span class="status-pill status-<?= htmlspecialchars($status) ?>"><?= $statusLabels[$status] ?? htmlspecialchars($status) ?></span></td>
                         </tr>
                     <?php endforeach; ?>
@@ -181,11 +166,12 @@ function planDisplayData($plan) {
 </section>
 <?php endif; ?>
 
+<!-- QR Payment Modal -->
 <div class="modal" id="paymentModal">
     <div class="modal-overlay" onclick="closePayment()"></div>
-    <div class="modal-content payment-modal">
+    <div class="modal-content payment-modal" style="max-width:540px;">
         <div class="modal-header">
-            <h2><i class="fas fa-wallet"></i> Thanh toán bằng ví</h2>
+            <h2><i class="fas fa-qrcode"></i> Chuyển khoản ngân hàng</h2>
             <button onclick="closePayment()" class="modal-close">&times;</button>
         </div>
         <div class="payment-body">
@@ -194,21 +180,39 @@ function planDisplayData($plan) {
                 <div id="paymentAmount" class="payment-amount"></div>
             </div>
 
-            <div class="wallet-row">
-                <span><i class="fas fa-wallet"></i> Số dư ví</span>
-                <strong id="walletBalanceDisplay"><?= number_format($user['balance'] ?? 0) ?>đ</strong>
-                <div id="balanceStatus"></div>
+            <div class="qr-payment-area" style="text-align:center; margin:1rem 0;">
+                <div class="qr-code-wrapper" style="display:inline-block; padding:1rem; background:#fff; border-radius:12px; border:1px solid #e0e7f0;">
+                    <img src="<?= BASE_URL ?>/images/qr_payment.png"
+                         alt="QR Code"
+                         style="width:200px; height:200px; object-fit:contain;">
+                </div>
             </div>
 
-            <div id="paymentAction"></div>
+            <div class="bank-info" style="background:#f5f7fa; border-radius:12px; padding:1rem; margin-bottom:1rem;">
+                <p style="margin:0 0 0.5rem; font-weight:700;">Thông tin chuyển khoản</p>
+                <p style="margin:0.2rem 0; font-size:0.9rem;"><strong>Ngân hàng:</strong> Techcombank</p>
+                <p style="margin:0.2rem 0; font-size:0.9rem;"><strong>Số TK:</strong> 19036785007013</p>
+                <p style="margin:0.2rem 0; font-size:0.9rem;"><strong>Chủ TK:</strong> PHAN QUANG THUAT</p>
+            </div>
 
-            <div class="modal-activation">
-                <h4><i class="fas fa-key"></i> Có mã kích hoạt?</h4>
-                <div class="activation-form">
-                    <input type="text" id="modalActivationCode" placeholder="Nhập mã kích hoạt" class="input-lg" autocomplete="off">
-                    <button class="btn btn-primary" onclick="activateFromModal()">Kích hoạt</button>
-                </div>
-                <div id="modalResult"></div>
+            <div class="form-group" style="margin-bottom:1rem;">
+                <label style="font-weight:700; display:block; margin-bottom:0.4rem;">
+                    <i class="fas fa-edit"></i> Nội dung chuyển khoản <span style="color:#f44;">*</span>
+                </label>
+                <input type="text" id="transferNote" class="form-input"
+                       placeholder="EMPRO <?= $_SESSION['user_id'] ?? '' ?> GOI..."
+                       style="font-family:monospace; font-size:1rem; padding:0.7rem; width:100%;"
+                       autocomplete="off">
+                <small style="color:#888; display:block; margin-top:0.3rem;">
+                    Định dạng: <code style="background:#f0f4ff; padding:0.1rem 0.4rem; border-radius:3px;">EMPRO {Mã ND} GOI{Mã gói}</code>
+                </small>
+            </div>
+
+            <div id="paymentAction">
+                <button class="btn btn-primary btn-lg btn-block" id="submitOrderBtn" onclick="submitOrder()">
+                    <i class="fas fa-paper-plane"></i> Xác nhận đã chuyển khoản
+                </button>
+                <div id="orderResult" style="margin-top:0.8rem;"></div>
             </div>
         </div>
     </div>
@@ -217,46 +221,16 @@ function planDisplayData($plan) {
 <script>
 let selectedPlanId = null;
 let selectedPlanPrice = 0;
-const userBalance = <?= intval($user['balance'] ?? 0) ?>;
-
-function escapeHtml(str) {
-    const div = document.createElement('div');
-    div.textContent = str;
-    return div.innerHTML;
-}
 
 function showPayment(planId, planName, price) {
     selectedPlanId = planId;
     selectedPlanPrice = price;
     document.getElementById('paymentPlanName').textContent = planName;
     document.getElementById('paymentAmount').textContent = new Intl.NumberFormat('vi-VN').format(price) + ' VNĐ';
-
-    const actionEl = document.getElementById('paymentAction');
-    const statusEl = document.getElementById('balanceStatus');
-
-    if (userBalance >= price) {
-        statusEl.innerHTML = '<span class="status-pill status-completed">Đủ tiền</span>';
-        const remaining = userBalance - price;
-        actionEl.innerHTML = `
-            <p class="payment-note">Sau khi mua, số dư còn lại: <strong>${new Intl.NumberFormat('vi-VN').format(remaining)}đ</strong></p>
-            <button class="btn btn-primary btn-lg btn-block" id="buyBtn" onclick="buyWithWallet()">
-                <i class="fas fa-shopping-cart"></i> Thanh toán bằng ví
-            </button>
-            <div id="buyResult"></div>
-        `;
-    } else {
-        const shortage = price - userBalance;
-        statusEl.innerHTML = '<span class="status-pill status-cancelled">Thiếu tiền</span>';
-        actionEl.innerHTML = `
-            <div class="payment-warning">
-                Ví không đủ. Cần nạp thêm <strong>${new Intl.NumberFormat('vi-VN').format(shortage)}đ</strong>.
-            </div>
-            <a href="<?= BASE_URL ?>/wallet/deposit" class="btn btn-primary btn-lg btn-block">
-                <i class="fas fa-plus-circle"></i> Nạp tiền vào ví
-            </a>
-        `;
-    }
-
+    document.getElementById('transferNote').value = 'EMPRO <?= $_SESSION['user_id'] ?? '' ?> GOI' + planId;
+    document.getElementById('orderResult').innerHTML = '';
+    document.getElementById('submitOrderBtn').disabled = false;
+    document.getElementById('submitOrderBtn').innerHTML = '<i class="fas fa-paper-plane"></i> Xác nhận đã chuyển khoản';
     document.getElementById('paymentModal').classList.add('active');
 }
 
@@ -264,12 +238,15 @@ function closePayment() {
     document.getElementById('paymentModal').classList.remove('active');
 }
 
-function buyWithWallet() {
-    const btn = document.getElementById('buyBtn');
-    const resultEl = document.getElementById('buyResult');
+function submitOrder() {
+    const note = document.getElementById('transferNote').value.trim();
+    if (!note) {
+        document.getElementById('orderResult').innerHTML =
+            '<div class="alert alert-error">Vui lòng nhập nội dung chuyển khoản.</div>';
+        return;
+    }
 
-    if (!confirm('Xác nhận thanh toán ' + new Intl.NumberFormat('vi-VN').format(selectedPlanPrice) + 'đ từ ví?')) return;
-
+    const btn = document.getElementById('submitOrderBtn');
     btn.disabled = true;
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
 
@@ -277,75 +254,30 @@ function buyWithWallet() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         credentials: 'same-origin',
-        body: JSON.stringify({ plan_id: selectedPlanId })
+        body: JSON.stringify({ plan_id: selectedPlanId, transfer_note: note })
     })
     .then(r => r.json())
     .then(data => {
         if (data.success) {
-            resultEl.innerHTML = `
-                <div class="payment-success">
-                    <i class="fas fa-crown"></i>
-                    <h3>${escapeHtml(data.message)}</h3>
-                    <p>Hết hạn: ${escapeHtml(data.expired_at)}</p>
-                    <button class="btn btn-primary" onclick="location.reload()">Bắt đầu dùng Pro</button>
+            document.getElementById('orderResult').innerHTML = `
+                <div class="alert alert-success" style="background:#ecfdf5; border:1px solid #a7f3d0; color:#059669; padding:1rem; border-radius:8px;">
+                    <i class="fas fa-check-circle"></i> <strong>${data.message}</strong>
                 </div>
             `;
             btn.style.display = 'none';
+            setTimeout(() => location.reload(), 3000);
         } else {
-            resultEl.innerHTML = '<div class="payment-error">' + escapeHtml(data.error || 'Không thể thanh toán') + '</div>';
+            document.getElementById('orderResult').innerHTML =
+                '<div class="alert alert-error">' + (data.error || 'Có lỗi xảy ra') + '</div>';
             btn.disabled = false;
-            btn.innerHTML = '<i class="fas fa-shopping-cart"></i> Thanh toán bằng ví';
+            btn.innerHTML = '<i class="fas fa-paper-plane"></i> Xác nhận đã chuyển khoản';
         }
     })
     .catch(() => {
-        resultEl.innerHTML = '<div class="payment-error">Lỗi kết nối.</div>';
+        document.getElementById('orderResult').innerHTML =
+            '<div class="alert alert-error">Lỗi kết nối. Vui lòng thử lại.</div>';
         btn.disabled = false;
-        btn.innerHTML = '<i class="fas fa-shopping-cart"></i> Thanh toán bằng ví';
-    });
-}
-
-function activateCode() {
-    const code = document.getElementById('activationCode').value.trim();
-    if (!code) { alert('Vui lòng nhập mã kích hoạt.'); return; }
-    doActivate(code, 'activationResult', 'activateBtn');
-}
-
-function activateFromModal() {
-    const code = document.getElementById('modalActivationCode').value.trim();
-    if (!code) { alert('Vui lòng nhập mã kích hoạt.'); return; }
-    doActivate(code, 'modalResult');
-}
-
-function doActivate(code, resultId, btnId) {
-    const resultEl = document.getElementById(resultId);
-    resultEl.innerHTML = '<div class="payment-note"><i class="fas fa-spinner fa-spin"></i> Đang xử lý...</div>';
-    if (btnId) document.getElementById(btnId).disabled = true;
-
-    fetch('<?= BASE_URL ?>/membership/activate', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'same-origin',
-        body: JSON.stringify({ code: code })
-    })
-    .then(r => r.json())
-    .then(data => {
-        if (data.success) {
-            resultEl.innerHTML = `
-                <div class="payment-success compact">
-                    <i class="fas fa-check-circle"></i>
-                    <h4>${escapeHtml(data.message)}</h4>
-                    <p>Hết hạn: ${escapeHtml(data.expired_at)}</p>
-                    <button class="btn btn-primary" onclick="location.reload()">Tải lại trang</button>
-                </div>
-            `;
-        } else {
-            resultEl.innerHTML = '<div class="payment-error">' + escapeHtml(data.error || 'Mã không hợp lệ') + '</div>';
-        }
-        if (btnId) document.getElementById(btnId).disabled = false;
-    })
-    .catch(() => {
-        resultEl.innerHTML = '<div class="payment-error">Lỗi kết nối.</div>';
-        if (btnId) document.getElementById(btnId).disabled = false;
+        btn.innerHTML = '<i class="fas fa-paper-plane"></i> Xác nhận đã chuyển khoản';
     });
 }
 </script>

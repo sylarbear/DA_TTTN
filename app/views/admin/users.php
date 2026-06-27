@@ -31,15 +31,15 @@ require APP_PATH . '/views/admin/_nav.php';
                             <td class="editable" data-field="full_name"><?= htmlspecialchars($u['full_name'] ?? '-') ?></td>
                             <td class="editable" data-field="email"><?= htmlspecialchars($u['email']) ?></td>
                             <td>
-                                <select class="form-input mini-select" data-field="role" data-id="<?= $u['id'] ?>" onchange="updateUserField(this)" <?= $u['role']==='admin' ? 'disabled' : '' ?>>
-                                    <option value="student" <?= $u['role']==='student'?'selected':'' ?>>Student</option>
-                                    <option value="admin" <?= $u['role']==='admin'?'selected':'' ?>>Admin</option>
+                                <select class="form-input mini-select" data-field="role" data-id="<?= $u['id'] ?>" onchange="updateUserField(this)" <?= $u['role'] === 'admin' ? 'disabled' : '' ?>>
+                                    <option value="student" <?= $u['role'] === 'student' ? 'selected' : '' ?>>Student</option>
+                                    <option value="admin" <?= $u['role'] === 'admin' ? 'selected' : '' ?>>Admin</option>
                                 </select>
                             </td>
                             <td>
-                                <select class="form-input mini-select" data-field="membership" data-id="<?= $u['id'] ?>" onchange="updateUserField(this)" <?= $u['role']==='admin' ? 'disabled' : '' ?>>
-                                    <option value="free" <?= $u['membership']==='free'?'selected':'' ?>>Free</option>
-                                    <option value="pro" <?= $u['membership']==='pro'?'selected':'' ?>>Pro</option>
+                                <select class="form-input mini-select" data-field="membership" data-id="<?= $u['id'] ?>" onchange="updateUserField(this)" <?= $u['role'] === 'admin' ? 'disabled' : '' ?>>
+                                    <option value="free" <?= $u['membership'] === 'free' ? 'selected' : '' ?>>Free</option>
+                                    <option value="pro" <?= $u['membership'] === 'pro' ? 'selected' : '' ?>>Pro</option>
                                 </select>
                             </td>
                             <td><?= date('d/m/Y', strtotime($u['created_at'])) ?></td>

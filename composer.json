@@ -1,0 +1,31 @@
+{
+    "name": "englishmaster/engpath",
+    "description": "EngPath - English Learning Platform",
+    "type": "project",
+    "license": "proprietary",
+    "require": {
+        "php": ">=8.0",
+        "monolog/monolog": "^2.0",
+        "vlucas/phpdotenv": "^5.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.6",
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpstan/phpstan": "^1.10"
+    },
+    "autoload": {
+        "classmap": [
+            "app/core/",
+            "app/controllers/",
+            "app/models/"
+        ],
+        "psr-4": {
+            "App\\Services\\": "app/Services/",
+            "App\\Helpers\\": "app/Helpers/"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true
+    }
+}

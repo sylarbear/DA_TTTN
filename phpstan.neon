@@ -1,0 +1,22 @@
+parameters:
+    level: 5
+    paths:
+        - app/
+        - public/
+    excludePaths:
+        - vendor/
+        - app/views/
+    bootstrapFiles:
+        - phpstan-bootstrap.php
+    scanDirectories:
+        - app/config/
+        - app/core/
+        - app/controllers/
+        - app/models/
+        - app/Services/
+        - app/Helpers/
+    universalObjectCratesClasses:
+        - stdClass
+
+includes:
+    - phpstan-baseline.neon

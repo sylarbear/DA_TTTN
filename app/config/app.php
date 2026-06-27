@@ -1,22 +1,44 @@
 <?php
+
 /**
  * App Configuration
  * Cấu hình chung cho ứng dụng
  */
 
+// Environment: tự động detect 'development' (localhost) hoặc 'production'
+if (!getenv('APP_ENV')) {
+    $isLocal = (isset($_SERVER['HTTP_HOST']) && (
+        strpos($_SERVER['HTTP_HOST'], 'localhost') !== false ||
+        strpos($_SERVER['HTTP_HOST'], '127.0.0.1') !== false
+    ));
+    putenv('APP_ENV=' . ($isLocal ? 'development' : 'production'));
+}
+defined('APP_ENV') || define('APP_ENV', getenv('APP_ENV') ?: 'development');
+
 // Thông tin ứng dụng
 define('APP_NAME', 'EngPath');
 define('APP_VERSION', '1.0.0');
 
-// Load secrets từ env.php TRƯỚC (file không push lên GitHub)
-if (file_exists(__DIR__ . '/env.php')) {
+// Load secrets từ .env (ưu tiên) hoặc env.php (backward compat)
+if (class_exists('Env')) {
+    define('GOOGLE_CLIENT_ID', Env::get('GOOGLE_CLIENT_ID', ''));
+    define('GOOGLE_CLIENT_SECRET', Env::get('GOOGLE_CLIENT_SECRET', ''));
+    define('CASSO_API_KEY', Env::get('CASSO_API_KEY', ''));
+    define('CASSO_WEBHOOK_SECRET', Env::get('CASSO_WEBHOOK_SECRET', ''));
+    // OPENAI_API_KEY đọc trực tiếp từ OpenAIService, không cần define ở đây
+} elseif (file_exists(__DIR__ . '/env.php')) {
     require_once __DIR__ . '/env.php';
 } else {
-    // Fallback: placeholder values nếu chưa tạo env.php
+    // Fallback: placeholder values nếu chưa tạo .env hoặc env.php
     defined('GOOGLE_CLIENT_ID') || define('GOOGLE_CLIENT_ID', '');
     defined('GOOGLE_CLIENT_SECRET') || define('GOOGLE_CLIENT_SECRET', '');
     defined('CASSO_API_KEY') || define('CASSO_API_KEY', '');
     defined('CASSO_WEBHOOK_SECRET') || define('CASSO_WEBHOOK_SECRET', '');
+}
+
+// Site URL có thể override qua .env
+if (class_exists('Env') && Env::get('SITE_URL')) {
+    define('SITE_URL', Env::get('SITE_URL'));
 }
 
 // URL gốc - tự động detect môi trường
