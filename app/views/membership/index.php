@@ -3,7 +3,8 @@ function planDisplayData($plan)
 {
     $duration = (int)($plan['duration_months'] ?? 0);
     $price = (int)($plan['price'] ?? 0);
-    $monthLabel = $duration > 0 ? $duration . ' tháng' : 'Pro';
+    $isLifetime = $duration === -1;
+    $monthLabel = $isLifetime ? 'Lifetime' : ($duration > 0 ? $duration . ' tháng' : 'Pro');
     $saving = '';
     if ($duration === 3) {
         $saving = 'Tiết kiệm 17% so với gói 1 tháng';
@@ -11,17 +12,28 @@ function planDisplayData($plan)
     if ($duration === 12) {
         $saving = $price <= 350000 ? 'Gói Pro 12 tháng, tiết kiệm 42%' : 'Tiết kiệm 33%, đề xuất dài hạn';
     }
+    if ($isLifetime) {
+        $saving = 'Học trọn đời không giới hạn, tiết kiệm nhất';
+    }
+
+    $baseFeatures = [
+        'Mở khóa tất cả khóa học',
+        'Luyện nói với AI chấm điểm',
+        'Bài test Listening và Reading',
+        'Theo dõi tiến độ học tập',
+    ];
+
+    if ($duration >= 12) {
+        $baseFeatures[] = 'Ưu tiên hỗ trợ';
+    }
+    if ($isLifetime) {
+        $baseFeatures[] = 'Cập nhật nội dung mới vĩnh viễn';
+    }
 
     return [
-        'name' => $duration > 0 ? 'Pro ' . $monthLabel : htmlspecialchars($plan['name'] ?? 'EngPath Pro'),
+        'name' => $isLifetime ? 'Pro Lifetime' : ($duration > 0 ? 'Pro ' . $monthLabel : htmlspecialchars($plan['name'] ?? 'EngPath Pro')),
         'description' => $saving ?: 'Trải nghiệm đầy đủ các tính năng học tập trong ' . $monthLabel,
-        'features' => [
-            'Mở khóa tất cả khóa học',
-            'Luyện nói với AI chấm điểm',
-            'Bài test Listening và Reading',
-            'Theo dõi tiến độ học tập',
-            $duration >= 12 ? 'Ưu tiên hỗ trợ' : null,
-        ],
+        'features' => array_values(array_filter($baseFeatures)),
     ];
 }
 ?>

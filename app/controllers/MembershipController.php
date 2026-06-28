@@ -17,7 +17,7 @@ class MembershipController extends Controller
         $db = getDB();
 
         // Danh sách gói
-        $plans = $db->query('SELECT * FROM membership_plans ORDER BY duration_months ASC')->fetchAll();
+        $plans = $db->query("SELECT * FROM membership_plans ORDER BY CASE WHEN duration_months = -1 THEN 9999 ELSE duration_months END ASC")->fetchAll();
 
         // Lịch sử đơn của user
         $stmt = $db->prepare('

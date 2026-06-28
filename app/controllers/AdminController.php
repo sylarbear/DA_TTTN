@@ -368,8 +368,14 @@ class AdminController extends Controller
 
         $now = new DateTime();
         $currentExpiry = $user['membership_expired_at'] ?? null;
-        $baseDate = ($currentExpiry && strtotime($currentExpiry) > time()) ? new DateTime($currentExpiry) : $now;
-        $expiredAt = $baseDate->modify('+' . $order['duration_months'] . ' months')->format('Y-m-d H:i:s');
+
+        // Lifetime plan (duration_months = -1) → không giới hạn thời gian
+        if ((int)$order['duration_months'] === -1) {
+            $expiredAt = null;
+        } else {
+            $baseDate = ($currentExpiry && strtotime($currentExpiry) > time()) ? new DateTime($currentExpiry) : $now;
+            $expiredAt = $baseDate->modify('+' . $order['duration_months'] . ' months')->format('Y-m-d H:i:s');
+        }
 
         try {
             $db->beginTransaction();
@@ -382,9 +388,10 @@ class AdminController extends Controller
 
             $db->commit();
 
+            $expiryMsg = $expiredAt ? ' đến ' . date('d/m/Y', strtotime($expiredAt)) : ' (trọn đời)';
             return $this->json([
                 'success' => true,
-                'message' => 'Đã duyệt đơn! User được nâng cấp Pro đến ' . date('d/m/Y', strtotime($expiredAt)),
+                'message' => 'Đã duyệt đơn! User được nâng cấp Pro' . $expiryMsg,
             ]);
         } catch (Exception $e) {
             $db->rollBack();
