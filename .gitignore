@@ -29,5 +29,8 @@ storage/logs/
 .php-cs-fixer.cache
 phpstan-baseline.neon
 
+# Deploy artifacts
+deploy/
+
 # Gemini AI
 .gemini/

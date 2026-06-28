@@ -5,12 +5,22 @@
  * Kết nối MySQL bằng PDO
  */
 
-// Thông tin kết nối database (có thể override trong env.php)
-defined('DB_HOST') || define('DB_HOST', 'localhost');
-defined('DB_NAME') || define('DB_NAME', 'english_master');
-defined('DB_USER') || define('DB_USER', 'root');
-defined('DB_PASS') || define('DB_PASS', '');
-define('DB_CHARSET', 'utf8mb4');
+// Thông tin kết nối database (có thể override trong .env)
+$env = static function ($key, $default = '') {
+    if (class_exists('Env')) {
+        return Env::get($key, $default);
+    }
+
+    $value = getenv($key);
+
+    return $value === false ? $default : $value;
+};
+
+defined('DB_HOST') || define('DB_HOST', $env('DB_HOST', 'localhost'));
+defined('DB_NAME') || define('DB_NAME', $env('DB_NAME', 'english_master'));
+defined('DB_USER') || define('DB_USER', $env('DB_USER', 'root'));
+defined('DB_PASS') || define('DB_PASS', $env('DB_PASS', ''));
+defined('DB_CHARSET') || define('DB_CHARSET', $env('DB_CHARSET', 'utf8mb4'));
 
 /**
  * Lấy kết nối PDO (Singleton pattern)
