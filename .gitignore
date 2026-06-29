@@ -24,13 +24,27 @@ storage/logs/
 
 # Dependencies
 /vendor/
+node_modules/
 
-# Tooling cache
+# Dev tools (local only)
+composer.phar
+composer.lock
+package.json
+package-lock.json
 .php-cs-fixer.cache
+.php-cs-fixer.php
 phpstan-baseline.neon
+phpstan.neon
+phpstan-bootstrap.php
+tests/
+scripts/
 
 # Deploy artifacts
 deploy/
+
+# Word temp files
+~$*
+.~lock*
 
 # Gemini AI
 .gemini/
