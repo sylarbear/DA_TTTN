@@ -22,11 +22,23 @@ class DashboardController extends Controller
         $progressModel = $this->model('UserProgress');
         $dashboardData = $progressModel->getDashboardData($_SESSION['user_id']);
 
+        // Lấy kết quả placement (nếu có)
+        $placementModel = $this->model('Placement');
+        $placement = $placementModel->getLastResult($_SESSION['user_id']);
+
+        // Lấy placement_level từ DB (không có trong session)
+        $userData = Middleware::user();
+        $stmt = getDB()->prepare('SELECT placement_level FROM users WHERE id = :id');
+        $stmt->execute(['id' => $_SESSION['user_id']]);
+        $dbUser = $stmt->fetch();
+        $userData['placement_level'] = $dbUser['placement_level'] ?? null;
+
         $this->view('dashboard/index', [
             'title' => 'Dashboard - ' . APP_NAME,
             'data' => $dashboardData,
             'streak' => $streakStats,
-            'user' => Middleware::user(),
+            'placement' => $placement,
+            'user' => $userData,
         ]);
     }
 

@@ -82,7 +82,16 @@ class AuthController extends Controller
 
             $this->setFlash('success', 'Đăng nhập thành công! Chào mừng ' . $user['full_name']);
 
-            return $this->redirect($user['role'] === 'admin' ? 'admin' : '');
+            if ($user['role'] === 'admin') {
+                return $this->redirect('admin');
+            }
+
+            // Kiểm tra nếu user chưa có placement → redirect sang placement intro
+            if (empty($user['placement_level'])) {
+                return $this->redirect('placement/intro');
+            }
+
+            return $this->redirect('');
         } else {
             $this->view('auth/login', [
                 'title' => 'Đăng nhập - ' . APP_NAME,
@@ -300,6 +309,15 @@ class AuthController extends Controller
 
         $this->setFlash('success', 'Đăng nhập Google thành công! Chào mừng ' . $user['full_name']);
 
-        return $this->redirect($user['role'] === 'admin' ? 'admin' : '');
+        if ($user['role'] === 'admin') {
+            return $this->redirect('admin');
+        }
+
+        // Kiểm tra nếu user chưa có placement → redirect sang placement intro
+        if (empty($user['placement_level'])) {
+            return $this->redirect('placement/intro');
+        }
+
+        return $this->redirect('');
     }
 }

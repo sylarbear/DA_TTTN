@@ -71,6 +71,7 @@
                                 </button>
                                 <div class="dropdown-menu" id="userDropdown">
                                     <a href="<?= BASE_URL ?>/profile"><i class="fas fa-user"></i> Hồ sơ cá nhân</a>
+                                    <a href="<?= BASE_URL ?>/placement/intro"><i class="fas fa-clipboard-check"></i> Kiểm tra đầu vào</a>
                                     <a href="<?= BASE_URL ?>/membership"><i class="fas fa-crown"></i> <?= Middleware::isPro() ? 'Quản lý Pro' : 'Nâng cấp Pro' ?></a>
                                     <a href="<?= BASE_URL ?>/auth/logout"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
                                 </div>

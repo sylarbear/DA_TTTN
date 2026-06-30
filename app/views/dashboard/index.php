@@ -6,6 +6,8 @@ $recentSpeaking = $data['recent_speaking'] ?? [];
 $nextTopic = $topicProgress[0] ?? null;
 ?>
 
+<link rel="stylesheet" href="<?= BASE_URL ?>/css/placement.css">
+
 <section class="dashboard-hero">
     <div class="container dashboard-hero-grid">
         <div>
@@ -71,6 +73,28 @@ $nextTopic = $topicProgress[0] ?? null;
                     <small>streak cao nhất</small>
                 </div>
             </div>
+            <?php if (!empty($placement)): ?>
+            <div class="streak-item">
+                <div class="streak-icon"><i class="fas fa-certificate"></i></div>
+                <div>
+                    <strong><?= htmlspecialchars($placement['final_cefr']) ?></strong>
+                    <small>trình độ CEFR</small>
+                </div>
+            </div>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
+
+        <?php if (empty($placement) && empty($user['placement_level'])): ?>
+        <div class="placement-banner">
+            <div class="placement-banner-icon">
+                <i class="fas fa-clipboard-check"></i>
+            </div>
+            <div class="placement-banner-text">
+                <strong>Xác định trình độ của bạn</strong>
+                <p>Làm bài kiểm tra đầu vào 5 phút để nhận lộ trình học phù hợp với trình độ của bạn.</p>
+            </div>
+            <a href="<?= BASE_URL ?>/placement/intro" class="btn btn-primary btn-sm">Kiểm tra ngay</a>
         </div>
         <?php endif; ?>
 
