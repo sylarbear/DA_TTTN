@@ -29,8 +29,8 @@
                         <span class="question-points"><?= $q['points'] ?> điểm</span>
                     </div>
 
-                    <!-- Passage cho Reading -->
-                    <?php if (!empty($q['passage'])): ?>
+                    <!-- Passage cho Reading (không hiện với listening) -->
+                    <?php if (!empty($q['passage']) && $test['test_type'] !== 'listening'): ?>
                         <div class="reading-passage">
                             <h4><i class="fas fa-book-reader"></i> Đoạn văn:</h4>
                             <p><?= nl2br(htmlspecialchars($q['passage'])) ?></p>
@@ -43,6 +43,13 @@
                             <audio controls>
                                 <source src="<?= htmlspecialchars($q['audio_url']) ?>" type="audio/mpeg">
                             </audio>
+                        </div>
+                    <?php elseif (!empty($q['passage']) && $test['test_type'] === 'listening'): ?>
+                        <div class="listening-audio tts-audio" data-passage="<?= htmlspecialchars($q['passage']) ?>" data-qid="<?= $q['id'] ?>">
+                            <button type="button" class="btn-listen" onclick="playAudio(this)" title="Nghe đoạn audio">
+                                <i class="fas fa-volume-up"></i> Nghe
+                            </button>
+                            <span class="listen-hint">(Bấm nút để nghe. Có thể nghe lại nhiều lần.)</span>
                         </div>
                     <?php endif; ?>
 
@@ -106,7 +113,7 @@
 
 <script>
 // Timer
-let timeLeft = <?= $test['duration_minutes'] ?> * 60;
+let timeLeft = <?= isset($test['duration_minutes']) ? (int)$test['duration_minutes'] : 0 ?> * 60;
 let startTime = Date.now();
 let testSubmitted = false;
 
@@ -273,5 +280,69 @@ function showResult(data) {
 document.querySelector('.modal-overlay').addEventListener('click', function() {
     document.getElementById('resultModal').classList.remove('active');
 });
+
+// ─── TTS (Text-to-Speech) cho Listening Tests ────────────────────
+let currentUtterance = null;
+
+function playAudio(btn) {
+    // Stop any currently playing audio
+    if (currentUtterance) {
+        window.speechSynthesis.cancel();
+    }
+
+    const container = btn.closest('.tts-audio');
+    const passage = container.dataset.passage;
+
+    if (!passage || !window.speechSynthesis) {
+        alert('Trình duyệt của bạn không hỗ trợ Speech Synthesis. Vui lòng đọc đoạn text hiển thị bên dưới.');
+        return;
+    }
+
+    // Update button state
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang đọc...';
+    btn.classList.add('playing');
+
+    const utterance = new SpeechSynthesisUtterance(passage);
+    utterance.lang = 'en-US';
+    utterance.rate = 0.85;  // Slightly slower for learners
+    utterance.pitch = 1;
+
+    // Try to use a good English voice
+    const voices = window.speechSynthesis.getVoices();
+    const englishVoice = voices.find(v => v.lang === 'en-US' && v.name.includes('Google'))
+                      || voices.find(v => v.lang === 'en-US')
+                      || voices.find(v => v.lang.startsWith('en'));
+    if (englishVoice) utterance.voice = englishVoice;
+
+    currentUtterance = utterance;
+
+    utterance.onend = function() {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-volume-up"></i> Nghe lại';
+        btn.classList.remove('playing');
+        currentUtterance = null;
+    };
+
+    utterance.onerror = function(e) {
+        btn.disabled = false;
+        btn.innerHTML = '<i class="fas fa-volume-up"></i> Nghe';
+        btn.classList.remove('playing');
+        currentUtterance = null;
+        if (e.error !== 'canceled') {
+            console.error('TTS error:', e.error);
+        }
+    };
+
+    window.speechSynthesis.speak(utterance);
+}
+
+// Pre-load voices
+if (window.speechSynthesis) {
+    window.speechSynthesis.getVoices();
+    window.speechSynthesis.onvoiceschanged = function() {
+        window.speechSynthesis.getVoices();
+    };
+}
 </script>
 

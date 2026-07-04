@@ -38,9 +38,9 @@ class Test extends Model
             SELECT t.*, tp.name as topic_name, tp.slug as topic_slug,
                 (SELECT COUNT(*) FROM questions WHERE test_id = t.id) as question_count
             FROM {$this->table} t
-            JOIN topics tp ON t.topic_id = tp.id
+            LEFT JOIN topics tp ON t.topic_id = tp.id
             WHERE t.is_active = 1
-            ORDER BY tp.sort_order ASC, t.id ASC
+            ORDER BY t.is_final ASC, tp.sort_order ASC, t.id ASC
         ");
 
         return $stmt->fetchAll();

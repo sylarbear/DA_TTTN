@@ -38,7 +38,7 @@
                     <li><a href="<?= BASE_URL ?>/auth/logout" class="nav-link btn-login"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
                 <?php else: ?>
                     <li><a href="<?= BASE_URL ?>" class="nav-link"><i class="fas fa-home"></i> Trang chủ</a></li>
-                    <li><a href="<?= BASE_URL ?>/topic" class="nav-link"><i class="fas fa-book-open"></i> Khóa học</a></li>
+                    <li><a href="<?= BASE_URL ?>/course" class="nav-link"><i class="fas fa-book-open"></i> Khóa học</a></li>
                     <li><a href="<?= BASE_URL ?>/test" class="nav-link"><i class="fas fa-clipboard-check"></i> Bài test</a></li>
                     <li><a href="<?= BASE_URL ?>/speaking" class="nav-link"><i class="fas fa-microphone"></i> Luyện nói</a></li>
                     <li><a href="<?= BASE_URL ?>/membership" class="nav-link"><i class="fas fa-crown"></i> Pro</a></li>

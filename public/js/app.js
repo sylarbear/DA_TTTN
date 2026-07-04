@@ -76,7 +76,9 @@ document.addEventListener('DOMContentLoaded', function() {
  */
 function togglePassword(inputId) {
     const input = document.getElementById(inputId);
+    if (!input) return;
     const icon = input.parentElement.querySelector('.password-toggle i');
+    if (!icon) return;
     
     if (input.type === 'password') {
         input.type = 'text';

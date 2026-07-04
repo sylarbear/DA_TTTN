@@ -76,7 +76,14 @@ function initSpeechRecognition() {
 
     recognition.onend = function() {
         if (isRecording) {
-            try { recognition.start(); } catch(e) {}
+            if (!recognition._retryCount) recognition._retryCount = 0;
+            if (recognition._retryCount < 5) {
+                recognition._retryCount++;
+                try { recognition.start(); } catch(e) { isRecording = false; }
+            } else {
+                console.error('Speech recognition retry limit exceeded');
+                isRecording = false;
+            }
         }
     };
 
@@ -99,9 +106,9 @@ function initSpeechRecognition() {
 function toggleRecording() {
     if (!recognition && !initSpeechRecognition()) return;
 
-    if (typeof SPEAKING_CONFIG === 'undefined') {
-        console.error('SPEAKING_CONFIG not defined');
-        alert('Lỗi cấu hình. Vui lòng reload trang.');
+    if (typeof SPEAKING_CONFIG === 'undefined' || !SPEAKING_CONFIG.submitUrl) {
+        console.error('SPEAKING_CONFIG not defined or missing submitUrl');
+        scoreResult.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--error);"><i class="fas fa-exclamation-circle fa-2x"></i><p style="margin-top:0.5rem;">Lỗi cấu hình. Vui lòng reload trang.</p></div>';
         return;
     }
 
@@ -159,7 +166,11 @@ function toggleRecording() {
  * Gửi transcript để chấm điểm
  */
 function submitSpeaking() {
-    const scoreResult = document.getElementById('scoreResult');
+    var scoreResult = document.getElementById('scoreResult');
+    if (!SPEAKING_CONFIG || !SPEAKING_CONFIG.submitUrl) {
+        if (scoreResult) scoreResult.innerHTML = '<div style="text-align:center;padding:1rem;color:var(--error);"><p>Lỗi cấu hình.</p></div>';
+        return;
+    }
     
     scoreResult.style.display = 'block';
     scoreResult.innerHTML = '<div style="text-align:center;padding:2rem;"><i class="fas fa-spinner fa-spin fa-2x"></i><p style="margin-top:1rem;">Đang chấm điểm...</p></div>';
@@ -214,7 +225,7 @@ function submitSpeaking() {
  */
 function displayScores(scores) {
     const scoreResult = document.getElementById('scoreResult');
-    const baseUrl = SPEAKING_CONFIG.baseUrl || '';
+    const baseUrl = (typeof SPEAKING_CONFIG !== 'undefined' && SPEAKING_CONFIG.baseUrl) || '';
     
     scoreResult.innerHTML = `
         <h3><i class="fas fa-star"></i> Kết quả chấm điểm</h3>
@@ -277,7 +288,7 @@ function generateHeatmap() {
     const heatmapEl = document.getElementById('heatmapDisplay');
     if (!heatmapEl) return;
 
-    const sampleText = SPEAKING_CONFIG.sampleAnswer || '';
+    const sampleText = (typeof SPEAKING_CONFIG !== 'undefined' && SPEAKING_CONFIG.sampleAnswer) ? SPEAKING_CONFIG.sampleAnswer : '';
     const transcript = fullTranscript.trim();
     
     const sampleWords = sampleText.toLowerCase().replace(/[^a-z0-9\s]/g, '').split(/\s+/);

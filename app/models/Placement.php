@@ -198,6 +198,15 @@ class Placement extends Model
         // Chấm điểm (giống logic UserAnswer::submitTest)
         $isCorrect = $this->scoreAnswer($question, $userAnswer);
 
+        // Resolve correct_answer nếu options_json là object format {"A":"..","B":".."}
+        $resolvedAnswer = $question['correct_answer'];
+        if (!empty($question['options_json'])) {
+            $parsed = json_decode($question['options_json'], true);
+            if ($parsed && isset($parsed['A']) && isset($parsed[$resolvedAnswer])) {
+                $resolvedAnswer = $parsed[$resolvedAnswer];
+            }
+        }
+
         // Cập nhật theta dùng IRT
         $thetaBefore = (float) $session['current_theta'];
         $questionDifficulty = self::cefrToNumeric($question['cefr_level']) * (float) $question['difficulty_weight'];
@@ -234,7 +243,7 @@ class Placement extends Model
 
         return [
             'is_correct'       => $isCorrect,
-            'correct_answer'   => $question['correct_answer'],
+            'correct_answer'   => $resolvedAnswer,
             'explanation'      => $question['explanation'] ?? null,
             'theta'            => $thetaAfter,
             'questions_answered' => $newCount,
@@ -364,11 +373,15 @@ class Placement extends Model
             'UPDATE users SET placement_level = :pl, placement_completed_at = NOW() WHERE id = :id'
         )->execute(['pl' => 'A1', 'id' => $userId]);
 
-        // Log XP nếu cần (0 XP cho A1)
+        // Log XP
         $this->db->prepare(
             "INSERT INTO xp_history (user_id, xp_amount, activity_type, description)
              VALUES (:uid, 0, 'placement_test', :desc)"
         )->execute(['uid' => $userId, 'desc' => 'Xac nhan trinh do: Moi bat dau (A1)']);
+
+        // Khởi tạo course progress cho A1
+        require_once APP_PATH . '/models/CourseProgress.php';
+        CourseProgress::initializeForUser($userId, 'A1');
     }
 
     // ============================================
@@ -438,6 +451,10 @@ class Placement extends Model
                 'UPDATE users SET placement_level = :pl, placement_completed_at = NOW(), placement_session_id = :sid WHERE id = :id'
             )->execute(['pl' => $cefr, 'sid' => $sessionId, 'id' => $userId]);
         }
+
+        // Khởi tạo course progress theo CEFR level
+        require_once APP_PATH . '/models/CourseProgress.php';
+        CourseProgress::initializeForUser($userId, $cefr);
     }
 
     /**

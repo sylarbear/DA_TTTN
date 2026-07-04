@@ -12,18 +12,8 @@ class TopicController extends Controller
      */
     public function index()
     {
-        $topicModel = $this->model('Topic');
-        $topics = $topicModel->getAllWithStats();
-
-        // Lọc theo level nếu có
-        $level = $this->query('level');
-
-        $this->view('topics/index', [
-            'title' => 'Chủ đề học tập - ' . APP_NAME,
-            'topics' => $topics,
-            'level' => $level,
-            'user' => Middleware::user(),
-        ]);
+        // Redirect to course-based learning
+        return $this->redirect('course');
     }
 
     /**
@@ -55,7 +45,7 @@ class TopicController extends Controller
         }
 
         $this->view('topics/search', [
-            'title' => 'Tìm kiếm: ' . $keyword . ' - ' . APP_NAME,
+            'title' => 'Tìm kiếm: ' . htmlspecialchars($keyword) . ' - ' . APP_NAME,
             'keyword' => $keyword,
             'results' => $results,
             'totalResults' => $totalResults,

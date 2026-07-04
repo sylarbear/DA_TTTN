@@ -5,6 +5,7 @@
 
 function initDashboardCharts(data) {
     if (!data || !data.topics || data.topics.length === 0) return;
+    if (typeof Chart === 'undefined') { console.warn('Chart.js not loaded, skipping charts.'); return; }
 
     // Light theme config
     Chart.defaults.color = '#64748B';

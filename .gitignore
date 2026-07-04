@@ -36,7 +36,7 @@ package-lock.json
 phpstan-baseline.neon
 phpstan.neon
 phpstan-bootstrap.php
-tests/
+/tests/
 scripts/
 
 # Deploy artifacts
