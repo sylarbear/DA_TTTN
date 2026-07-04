@@ -58,6 +58,31 @@
         </div>
         <?php endif; ?>
 
+        <!-- Mastered Courses (có thể ôn tập) -->
+        <?php if (!empty($mastered)): ?>
+        <div class="course-group course-mastered-section">
+            <h2 class="course-group-title"><i class="fas fa-book-open"></i> Ôn tập kiến thức</h2>
+            <div class="course-grid">
+                <?php foreach ($mastered as $c): ?>
+                <a href="<?= BASE_URL ?>/course/show/<?= $c['id'] ?>" class="course-card course-mastered-card">
+                    <div class="course-mastered-check"><i class="fas fa-book-open"></i></div>
+                    <div class="course-card-badge cefr-<?= strtolower($c['cefr_level']) ?> mastered-badge">
+                        <?= $c['cefr_level'] ?>
+                    </div>
+                    <h3><?= htmlspecialchars($c['title']) ?></h3>
+                    <p><?= htmlspecialchars($c['description'] ?? '') ?></p>
+                    <div class="course-card-footer">
+                        <span class="course-mastered-text">Ôn tập ngay</span>
+                        <a href="<?= BASE_URL ?>/course/certificate/<?= $c['id'] ?>" class="cert-link" onclick="event.stopPropagation()">
+                            <i class="fas fa-certificate"></i> Xem chứng chỉ
+                        </a>
+                    </div>
+                </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endif; ?>
+
         <!-- Locked Courses -->
         <?php if (!empty($locked)): ?>
         <div class="course-group">
@@ -73,31 +98,6 @@
                     <p><?= htmlspecialchars($c['description'] ?? '') ?></p>
                     <span class="course-locked-text">Hoàn thành khóa trước để mở</span>
                 </div>
-                <?php endforeach; ?>
-            </div>
-        </div>
-        <?php endif; ?>
-
-        <!-- Mastered Courses -->
-        <?php if (!empty($mastered)): ?>
-        <div class="course-group course-mastered-section">
-            <h2 class="course-group-title"><i class="fas fa-check-circle"></i> Đã mastered</h2>
-            <div class="course-grid">
-                <?php foreach ($mastered as $c): ?>
-                <a href="<?= BASE_URL ?>/course/show/<?= $c['id'] ?>" class="course-card course-mastered-card">
-                    <div class="course-mastered-check"><i class="fas fa-check-circle"></i></div>
-                    <div class="course-card-badge cefr-<?= strtolower($c['cefr_level']) ?> mastered-badge">
-                        <?= $c['cefr_level'] ?>
-                    </div>
-                    <h3><?= htmlspecialchars($c['title']) ?></h3>
-                    <p><?= htmlspecialchars($c['description'] ?? '') ?></p>
-                    <div class="course-card-footer">
-                        <span class="course-mastered-text">Đã hoàn thành</span>
-                        <a href="<?= BASE_URL ?>/course/certificate/<?= $c['id'] ?>" class="cert-link" onclick="event.stopPropagation()">
-                            <i class="fas fa-certificate"></i> Xem chứng chỉ
-                        </a>
-                    </div>
-                </a>
                 <?php endforeach; ?>
             </div>
         </div>

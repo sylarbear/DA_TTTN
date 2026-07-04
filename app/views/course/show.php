@@ -29,6 +29,17 @@ $completedMap  = array_fill_keys($completedLessonIds, true);
     </div>
 </section>
 
+<?php if (!empty($isReview)): ?>
+<section class="course-review-banner">
+    <div class="container">
+        <div class="review-banner-content">
+            <i class="fas fa-info-circle"></i>
+            <span>Trình độ của bạn đã vượt qua cấp độ này. Bạn có thể ôn tập lại các bài học bên dưới.</span>
+        </div>
+    </div>
+</section>
+<?php endif; ?>
+
 <section class="course-learn-body">
     <div class="container course-learn-container">
         <!-- SIDEBAR — Curriculum -->

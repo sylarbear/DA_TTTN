@@ -149,6 +149,7 @@ class CourseController extends Controller
             'canTakeFinal'       => $canTakeFinal,
             'finalExam'          => $finalExam,
             'finalResult'        => $finalResult,
+            'isReview'           => $progress['status'] === 'mastered',
             'user'               => Middleware::user(),
         ]);
     }
