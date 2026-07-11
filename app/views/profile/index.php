@@ -35,10 +35,6 @@
                 <div class="stat-content"><span class="stat-value"><?= $stats['avg_score'] ?>%</span><span class="stat-title">Điểm trung bình</span></div>
             </div>
             <div class="stat-card">
-                <div class="stat-icon" style="background:linear-gradient(135deg, #F43F5E, #FB7185);"><i class="fas fa-microphone"></i></div>
-                <div class="stat-content"><span class="stat-value"><?= $stats['speaking_attempts'] ?></span><span class="stat-title">Lần luyện nói</span></div>
-            </div>
-            <div class="stat-card">
                 <div class="stat-icon" style="background:linear-gradient(135deg, #06B6D4, #22D3EE);"><i class="fas fa-book-open"></i></div>
                 <div class="stat-content"><span class="stat-value"><?= $stats['topics_studied'] ?></span><span class="stat-title">Chủ đề đã học</span></div>
             </div>

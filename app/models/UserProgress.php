@@ -46,7 +46,7 @@ class UserProgress extends Model
     public function increment($userId, $topicId, $field, $increment = 1)
     {
         // Whitelist allowed fields to prevent SQL injection
-        $allowed = ['vocab_learned', 'lessons_completed', 'tests_passed', 'speaking_practiced'];
+        $allowed = ['vocab_learned', 'lessons_completed', 'tests_passed'];
         if (!in_array($field, $allowed)) {
             return;
         }
@@ -96,8 +96,7 @@ class UserProgress extends Model
             SELECT up.*, t.name as topic_name, t.slug as topic_slug, t.level,
                 (SELECT COUNT(*) FROM vocabularies WHERE topic_id = t.id) as total_vocab,
                 (SELECT COUNT(*) FROM lessons WHERE topic_id = t.id AND is_active = 1) as total_lessons,
-                (SELECT COUNT(*) FROM tests WHERE topic_id = t.id AND is_active = 1) as total_tests,
-                (SELECT COUNT(*) FROM speaking_prompts WHERE topic_id = t.id) as total_speaking
+                (SELECT COUNT(*) FROM tests WHERE topic_id = t.id AND is_active = 1) as total_tests
             FROM {$this->table} up
             JOIN topics t ON up.topic_id = t.id
             WHERE up.user_id = :user_id
@@ -112,7 +111,6 @@ class UserProgress extends Model
                 COALESCE(SUM(vocab_learned), 0) as total_vocab_learned,
                 COALESCE(SUM(lessons_completed), 0) as total_lessons_completed,
                 COALESCE(SUM(tests_passed), 0) as total_tests_passed,
-                COALESCE(SUM(speaking_practiced), 0) as total_speaking_practiced,
                 COALESCE(SUM(total_score), 0) as grand_total_score
             FROM {$this->table}
             WHERE user_id = :user_id
@@ -133,24 +131,10 @@ class UserProgress extends Model
         $stmt->execute(['user_id' => $userId]);
         $recentTests = $stmt->fetchAll();
 
-        // Speaking attempts gần đây
-        $stmt = $this->db->prepare('
-            SELECT sa.*, sp.prompt_text, t.name as topic_name
-            FROM speaking_attempts sa
-            JOIN speaking_prompts sp ON sa.prompt_id = sp.id
-            JOIN topics t ON sp.topic_id = t.id
-            WHERE sa.user_id = :user_id
-            ORDER BY sa.created_at DESC
-            LIMIT 10
-        ');
-        $stmt->execute(['user_id' => $userId]);
-        $recentSpeaking = $stmt->fetchAll();
-
         return [
             'topic_progress' => $topicProgress,
             'overall' => $overall,
             'recent_tests' => $recentTests,
-            'recent_speaking' => $recentSpeaking,
         ];
     }
 }

@@ -140,4 +140,47 @@ class Course extends Model
     {
         return $this->getCompletionPercent($userId, $courseId) >= 100;
     }
+
+    /**
+     * Tính tổng số phút của tất cả lessons + tests trong khóa
+     */
+    public function getTotalMinutes(int $courseId): int
+    {
+        $lessonMinutes = 0;
+        $testMinutes = 0;
+
+        $stmt = $this->db->prepare(
+            'SELECT COALESCE(SUM(l.estimated_minutes), 0) AS total
+             FROM lessons l
+             JOIN topics t ON t.id = l.topic_id
+             WHERE t.course_id = :cid AND l.is_active = 1'
+        );
+        $stmt->execute(['cid' => $courseId]);
+        $lessonMinutes = (int) $stmt->fetch()['total'];
+
+        $stmt = $this->db->prepare(
+            'SELECT COALESCE(SUM(tt.duration_minutes), 0) AS total
+             FROM tests tt
+             JOIN topics t ON t.id = tt.topic_id
+             WHERE t.course_id = :cid AND tt.is_active = 1'
+        );
+        $stmt->execute(['cid' => $courseId]);
+        $testMinutes = (int) $stmt->fetch()['total'];
+
+        return $lessonMinutes + $testMinutes;
+    }
+
+    /**
+     * Đếm số middle test (is_final = 0) trong khóa
+     */
+    public function countMiddleTests(int $courseId): int
+    {
+        $stmt = $this->db->prepare(
+            'SELECT COUNT(*) AS total FROM tests tt
+             JOIN topics t ON t.id = tt.topic_id
+             WHERE t.course_id = :cid AND tt.is_active = 1 AND tt.is_final = 0'
+        );
+        $stmt->execute(['cid' => $courseId]);
+        return (int) $stmt->fetch()['total'];
+    }
 }

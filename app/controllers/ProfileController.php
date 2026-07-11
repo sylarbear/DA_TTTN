@@ -33,10 +33,6 @@ class ProfileController extends Controller
         $stats['avg_score']->execute(['id' => $userId]);
         $stats['avg_score'] = $stats['avg_score']->fetchColumn() ?: 0;
 
-        $stats['speaking_attempts'] = $db->prepare('SELECT COUNT(*) FROM speaking_attempts WHERE user_id=:id');
-        $stats['speaking_attempts']->execute(['id' => $userId]);
-        $stats['speaking_attempts'] = $stats['speaking_attempts']->fetchColumn();
-
         $stats['topics_studied'] = $db->prepare('SELECT COUNT(DISTINCT topic_id) FROM user_progress WHERE user_id=:id');
         $stats['topics_studied']->execute(['id' => $userId]);
         $stats['topics_studied'] = $stats['topics_studied']->fetchColumn();
@@ -142,7 +138,6 @@ class ProfileController extends Controller
             ['icon' => '🌱', 'name' => 'Người mới', 'desc' => 'Hoàn thành bài test đầu tiên', 'earned' => $stats['total_tests'] >= 1],
             ['icon' => '📚', 'name' => 'Bookworm', 'desc' => 'Học 3 chủ đề', 'earned' => $stats['topics_studied'] >= 3],
             ['icon' => '🎯', 'name' => 'Perfect Score', 'desc' => 'Đạt 100% bài test', 'earned' => false],
-            ['icon' => '🗣️', 'name' => 'Speaker', 'desc' => 'Luyện nói 10 lần', 'earned' => $stats['speaking_attempts'] >= 10],
             ['icon' => '⭐', 'name' => 'Star Student', 'desc' => 'Làm 10 bài test', 'earned' => $stats['total_tests'] >= 10],
             ['icon' => '🏆', 'name' => 'Champion', 'desc' => 'Điểm TB ≥ 80', 'earned' => $stats['avg_score'] >= 80],
             ['icon' => '💎', 'name' => 'Pro Member', 'desc' => 'Nâng cấp Pro', 'earned' => Middleware::isPro()],

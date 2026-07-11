@@ -54,8 +54,7 @@ class Topic extends Model
             SELECT t.*,
                 (SELECT COUNT(*) FROM vocabularies WHERE topic_id = t.id) as vocab_count,
                 (SELECT COUNT(*) FROM lessons WHERE topic_id = t.id AND is_active = 1) as lesson_count,
-                (SELECT COUNT(*) FROM tests WHERE topic_id = t.id AND is_active = 1) as test_count,
-                (SELECT COUNT(*) FROM speaking_prompts WHERE topic_id = t.id) as speaking_count
+                (SELECT COUNT(*) FROM tests WHERE topic_id = t.id AND is_active = 1) as test_count
             FROM {$this->table} t
             WHERE t.id = :id
         ");
@@ -117,15 +116,6 @@ class Topic extends Model
         $stmt->execute(['k' => $like]);
         $results['lessons'] = $stmt->fetchAll();
 
-        // Tìm trong ngữ pháp
-        $stmt = $this->db->prepare("
-            SELECT id, title, category as description, level, 'grammar' as type
-            FROM grammar_lessons WHERE title LIKE :k
-            LIMIT 10
-        ");
-        $stmt->execute(['k' => $like]);
-        $results['grammar'] = $stmt->fetchAll();
-
         return $results;
     }
 
@@ -135,8 +125,7 @@ class Topic extends Model
             SELECT t.*,
                 (SELECT COUNT(*) FROM vocabularies WHERE topic_id = t.id) as vocab_count,
                 (SELECT COUNT(*) FROM lessons WHERE topic_id = t.id AND is_active = 1) as lesson_count,
-                (SELECT COUNT(*) FROM tests WHERE topic_id = t.id AND is_active = 1) as test_count,
-                (SELECT COUNT(*) FROM speaking_prompts WHERE topic_id = t.id) as speaking_count
+                (SELECT COUNT(*) FROM tests WHERE topic_id = t.id AND is_active = 1) as test_count
             FROM {$this->table} t
             WHERE t.is_active = 1
             ORDER BY t.sort_order ASC

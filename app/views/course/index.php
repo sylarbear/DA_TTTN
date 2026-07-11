@@ -23,10 +23,13 @@
             <h2 class="course-group-title"><i class="fas fa-play-circle"></i> Đang học</h2>
             <div class="course-grid">
                 <?php foreach ($active as $c): ?>
-                <a href="<?= BASE_URL ?>/course/show/<?= $c['id'] ?>" class="course-card"
-                   style="border-left: 4px solid <?= $c['status'] === 'in_progress' ? '#4f46e5' : '#22c55e' ?>">
-                    <div class="course-card-badge cefr-<?= strtolower($c['cefr_level']) ?>">
-                        <?= $c['cefr_level'] ?>
+                <?php $cefrIcons = ['A1'=>'fa-seedling','A2'=>'fa-comments','B1'=>'fa-bullseye','B2'=>'fa-chart-line','C1'=>'fa-rocket'];
+                      $cefrGradients = ['A1'=>'linear-gradient(135deg, #059669, #34D399)','A2'=>'linear-gradient(135deg, #0284C7, #38BDF8)','B1'=>'linear-gradient(135deg, #D97706, #FBBF24)','B2'=>'linear-gradient(135deg, #EA580C, #FB923C)','C1'=>'linear-gradient(135deg, #7C3AED, #A78BFA)'];
+                      $icon = $cefrIcons[$c['cefr_level']] ?? 'fa-book'; ?>
+                <a href="<?= BASE_URL ?>/course/show/<?= $c['id'] ?>" class="course-card">
+                    <div class="course-card-img" style="background:<?= $cefrGradients[$c['cefr_level']] ?? '#4f46e5' ?>">
+                        <i class="fas <?= $icon ?>"></i>
+                        <span class="card-badge"><?= $c['cefr_level'] ?></span>
                     </div>
                     <h3><?= htmlspecialchars($c['title']) ?></h3>
                     <p><?= htmlspecialchars($c['description'] ?? '') ?></p>
@@ -64,10 +67,13 @@
             <h2 class="course-group-title"><i class="fas fa-book-open"></i> Ôn tập kiến thức</h2>
             <div class="course-grid">
                 <?php foreach ($mastered as $c): ?>
+                <?php $cefrIcons = ['A1'=>'fa-seedling','A2'=>'fa-comments','B1'=>'fa-bullseye','B2'=>'fa-chart-line','C1'=>'fa-rocket'];
+                      $cefrGradients = ['A1'=>'linear-gradient(135deg, #059669, #34D399)','A2'=>'linear-gradient(135deg, #0284C7, #38BDF8)','B1'=>'linear-gradient(135deg, #D97706, #FBBF24)','B2'=>'linear-gradient(135deg, #EA580C, #FB923C)','C1'=>'linear-gradient(135deg, #7C3AED, #A78BFA)'];
+                      $icon = $cefrIcons[$c['cefr_level']] ?? 'fa-book'; ?>
                 <a href="<?= BASE_URL ?>/course/show/<?= $c['id'] ?>" class="course-card course-mastered-card">
-                    <div class="course-mastered-check"><i class="fas fa-book-open"></i></div>
-                    <div class="course-card-badge cefr-<?= strtolower($c['cefr_level']) ?> mastered-badge">
-                        <?= $c['cefr_level'] ?>
+                    <div class="course-card-img" style="background:<?= $cefrGradients[$c['cefr_level']] ?? '#4f46e5' ?>; opacity:0.7;">
+                        <i class="fas <?= $icon ?>"></i>
+                        <span class="card-badge"><?= $c['cefr_level'] ?></span>
                     </div>
                     <h3><?= htmlspecialchars($c['title']) ?></h3>
                     <p><?= htmlspecialchars($c['description'] ?? '') ?></p>
@@ -89,10 +95,11 @@
             <h2 class="course-group-title"><i class="fas fa-lock"></i> Sẽ mở sau</h2>
             <div class="course-grid">
                 <?php foreach ($locked as $c): ?>
+                <?php $cefrGradients = ['A1'=>'linear-gradient(135deg, #059669, #34D399)','A2'=>'linear-gradient(135deg, #0284C7, #38BDF8)','B1'=>'linear-gradient(135deg, #D97706, #FBBF24)','B2'=>'linear-gradient(135deg, #EA580C, #FB923C)','C1'=>'linear-gradient(135deg, #7C3AED, #A78BFA)']; ?>
                 <div class="course-card course-locked">
-                    <div class="course-lock-icon"><i class="fas fa-lock"></i></div>
-                    <div class="course-card-badge cefr-<?= strtolower($c['cefr_level']) ?>">
-                        <?= $c['cefr_level'] ?>
+                    <div class="course-card-img" style="background:<?= $cefrGradients[$c['cefr_level']] ?? '#94a3b8' ?>; opacity:0.45;">
+                        <i class="fas fa-lock" style="font-size:2rem;"></i>
+                        <span class="card-badge"><?= $c['cefr_level'] ?></span>
                     </div>
                     <h3><?= htmlspecialchars($c['title']) ?></h3>
                     <p><?= htmlspecialchars($c['description'] ?? '') ?></p>
@@ -105,4 +112,4 @@
     </div>
 </section>
 
-<link rel="stylesheet" href="<?= BASE_URL ?>/css/course.css?v=<?= time() ?>">
+<link rel="stylesheet" href="<?= BASE_URL ?>/css/course.css?v=<?= APP_VERSION ?>">

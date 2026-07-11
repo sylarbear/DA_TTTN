@@ -2,40 +2,34 @@
 $overall = $data['overall'] ?? [];
 $topicProgress = $data['topic_progress'] ?? [];
 $recentTests = $data['recent_tests'] ?? [];
-$recentSpeaking = $data['recent_speaking'] ?? [];
 $nextTopic = $topicProgress[0] ?? null;
 ?>
 
-<link rel="stylesheet" href="<?= BASE_URL ?>/css/placement.css">
+<div class="dashboard-page">
 
 <section class="dashboard-hero">
     <div class="container dashboard-hero-grid">
-        <div>
-            <span class="section-kicker">Your learning space</span>
-            <h1>Chào <?= htmlspecialchars($_SESSION['full_name'] ?? $_SESSION['username'] ?? 'bạn') ?>, hôm nay học gì?</h1>
-            <p>Dashboard giúp bạn nhìn nhanh tiến độ, chọn bài học tiếp theo và quay lại các hoạt động quan trọng nhất.</p>
-            <div class="dashboard-actions">
-                <a href="<?= BASE_URL ?>/topic" class="btn btn-primary"><i class="fas fa-book-open"></i> Tiếp tục học</a>
-                <a href="<?= BASE_URL ?>/speaking" class="btn btn-outline"><i class="fas fa-microphone"></i> Luyện speaking</a>
+        <div class="dashboard-welcome">
+            <span class="section-kicker"><?= Middleware::isPro() ? 'PRO' : 'FREE' ?> Plan</span>
+            <h1>Chào <?= htmlspecialchars($_SESSION['full_name'] ?? $_SESSION['username'] ?? 'bạn') ?>,<br>hôm nay học gì?</h1>
+            <p>Theo dõi tiến độ, chọn bài học tiếp theo và duy trì streak mỗi ngày.</p>
+            <div class="hero-actions">
+                <a href="<?= BASE_URL ?>/course" class="btn btn-cta btn-lg"><i class="fas fa-book-open"></i> Tiếp tục học</a>
             </div>
         </div>
 
         <div class="daily-plan-card">
-            <div class="study-card-top">
-                <div>
-                    <small>Mục tiêu hôm nay</small>
-                    <strong><?= !empty($streak) ? number_format($streak['daily_xp_today']) . '/' . number_format($streak['daily_goal']) . ' XP' : 'Hoàn thành 1 bài học' ?></strong>
-                </div>
+            <div class="plan-header">
+                <span class="plan-title"><i class="fas fa-bullseye"></i> Mục tiêu hôm nay</span>
                 <span class="pill-soft"><?= Middleware::isPro() ? 'PRO' : 'FREE' ?></span>
             </div>
-            <div class="xp-mini-bar large">
-                <div class="xp-mini-fill" style="width:<?= !empty($streak) ? min(100, (int)$streak['daily_progress']) : 35 ?>%"></div>
+            <div class="plan-goal">
+                <?= !empty($streak) ? number_format($streak['daily_xp_today']) . ' / ' . number_format($streak['daily_goal']) . ' XP' : 'Hoàn thành 1 bài học' ?>
             </div>
-            <div class="daily-plan-list">
-                <a href="<?= BASE_URL ?>/topic"><i class="fas fa-clone"></i> Ôn flashcard 10 phút</a>
-                <a href="<?= BASE_URL ?>/test"><i class="fas fa-clipboard-check"></i> Làm một bài kiểm tra</a>
-                <a href="<?= BASE_URL ?>/speaking"><i class="fas fa-microphone-lines"></i> Luyện nói một chủ đề</a>
+            <div class="plan-progress-bar">
+                <div class="plan-progress-fill" style="width:<?= !empty($streak) ? min(100, (int)$streak['daily_progress']) : 35 ?>%"></div>
             </div>
+            <a href="<?= BASE_URL ?>/course" class="plan-link">Học khóa học <i class="fas fa-arrow-right"></i></a>
         </div>
     </div>
 </section>
@@ -43,42 +37,51 @@ $nextTopic = $topicProgress[0] ?? null;
 <section class="dashboard-section">
     <div class="container">
         <?php if (!empty($streak)): ?>
-        <div class="streak-bar learning-stats-row">
-            <div class="streak-item">
-                <div class="streak-icon"><i class="fas fa-fire"></i></div>
+        <div class="streak-row">
+            <div class="streak-card">
+                <div class="streak-card-icon" style="background:linear-gradient(135deg, #F59E0B, #EF4444);">
+                    <i class="fas fa-fire"></i>
+                </div>
                 <div>
-                    <strong class="streak-count"><?= (int)$streak['current_streak'] ?></strong>
-                    <small>ngày liên tiếp</small>
+                    <div class="streak-card-value"><?= (int)$streak['current_streak'] ?></div>
+                    <div class="streak-card-label">ngày liên tiếp</div>
                 </div>
             </div>
-            <div class="streak-item">
-                <div class="streak-icon"><i class="fas fa-star"></i></div>
+            <div class="streak-card">
+                <div class="streak-card-icon" style="background:linear-gradient(135deg, #8B5CF6, #6366F1);">
+                    <i class="fas fa-star"></i>
+                </div>
                 <div>
-                    <strong>Level <?= (int)$streak['level'] ?></strong>
-                    <div class="xp-mini-bar"><div class="xp-mini-fill" style="width:<?= (int)$streak['level_progress'] ?>%"></div></div>
-                    <small><?= number_format($streak['total_xp']) ?> XP</small>
+                    <div class="streak-card-value">Lv.<?= (int)$streak['level'] ?></div>
+                    <div class="streak-card-label"><?= number_format($streak['total_xp']) ?> XP</div>
                 </div>
             </div>
-            <div class="streak-item">
-                <div class="streak-icon"><i class="fas fa-bullseye"></i></div>
+            <div class="streak-card">
+                <div class="streak-card-icon" style="background:linear-gradient(135deg, #10B981, #059669);">
+                    <i class="fas fa-bullseye"></i>
+                </div>
                 <div>
-                    <strong><?= (int)$streak['daily_progress'] ?>%</strong>
-                    <small>mục tiêu hôm nay</small>
+                    <div class="streak-card-value"><?= (int)$streak['daily_progress'] ?>%</div>
+                    <div class="streak-card-label">mục tiêu hôm nay</div>
                 </div>
             </div>
-            <div class="streak-item">
-                <div class="streak-icon"><i class="fas fa-trophy"></i></div>
+            <div class="streak-card">
+                <div class="streak-card-icon" style="background:linear-gradient(135deg, #3B82F6, #2563EB);">
+                    <i class="fas fa-trophy"></i>
+                </div>
                 <div>
-                    <strong><?= (int)$streak['longest_streak'] ?></strong>
-                    <small>streak cao nhất</small>
+                    <div class="streak-card-value"><?= (int)$streak['longest_streak'] ?></div>
+                    <div class="streak-card-label">streak cao nhất</div>
                 </div>
             </div>
             <?php if (!empty($placement)): ?>
-            <div class="streak-item">
-                <div class="streak-icon"><i class="fas fa-certificate"></i></div>
+            <div class="streak-card">
+                <div class="streak-card-icon" style="background:linear-gradient(135deg, #EC4899, #8B5CF6);">
+                    <i class="fas fa-certificate"></i>
+                </div>
                 <div>
-                    <strong><?= htmlspecialchars($placement['final_cefr']) ?></strong>
-                    <small>trình độ CEFR</small>
+                    <div class="streak-card-value"><?= htmlspecialchars($placement['final_cefr']) ?></div>
+                    <div class="streak-card-label">trình độ CEFR</div>
                 </div>
             </div>
             <?php endif; ?>
@@ -87,78 +90,50 @@ $nextTopic = $topicProgress[0] ?? null;
 
         <?php if (empty($placement) && empty($user['placement_level'])): ?>
         <div class="placement-banner">
-            <div class="placement-banner-icon">
-                <i class="fas fa-clipboard-check"></i>
-            </div>
+            <div class="placement-banner-icon"><i class="fas fa-clipboard-check"></i></div>
             <div class="placement-banner-text">
                 <strong>Xác định trình độ của bạn</strong>
-                <p>Làm bài kiểm tra đầu vào 5 phút để nhận lộ trình học phù hợp với trình độ của bạn.</p>
+                <p>Làm bài kiểm tra đầu vào 5 phút để nhận lộ trình học phù hợp.</p>
             </div>
-            <a href="<?= BASE_URL ?>/placement/intro" class="btn btn-primary btn-sm">Kiểm tra ngay</a>
+            <a href="<?= BASE_URL ?>/placement/intro" class="btn btn-primary btn-sm" style="flex-shrink:0;">Kiểm tra ngay</a>
         </div>
         <?php endif; ?>
 
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-font"></i></div>
-                <div class="stat-content">
-                    <span class="stat-value"><?= (int)($overall['total_vocab_learned'] ?? 0) ?></span>
-                    <span class="stat-title">Từ vựng đã học</span>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-book"></i></div>
-                <div class="stat-content">
-                    <span class="stat-value"><?= (int)($overall['total_lessons_completed'] ?? 0) ?></span>
-                    <span class="stat-title">Bài học hoàn thành</span>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-clipboard-check"></i></div>
-                <div class="stat-content">
-                    <span class="stat-value"><?= (int)($overall['total_tests_passed'] ?? 0) ?></span>
-                    <span class="stat-title">Bài test đã đạt</span>
-                </div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon"><i class="fas fa-microphone"></i></div>
-                <div class="stat-content">
-                    <span class="stat-value"><?= (int)($overall['total_speaking_practiced'] ?? 0) ?></span>
-                    <span class="stat-title">Lượt luyện nói</span>
-                </div>
-            </div>
-        </div>
-
-        <div class="dashboard-learning-grid">
-            <div class="section-card next-lesson-card">
-                <span class="section-kicker">Bài học tiếp theo</span>
+        <div class="dashboard-grid">
+            <div class="dashboard-section-card">
+                <h3><i class="fas fa-graduation-cap"></i> Bài học tiếp theo</h3>
                 <?php if ($nextTopic): ?>
-                    <h3><?= htmlspecialchars($nextTopic['topic_name']) ?></h3>
-                    <p>Tiếp tục hoàn thành từ vựng, bài học và speaking trong chủ đề này.</p>
-                    <div class="mini-progress">
-                        <?php
-                            $totalItems = max(1, (int)$nextTopic['total_vocab'] + (int)$nextTopic['total_lessons'] + (int)$nextTopic['total_tests'] + (int)$nextTopic['total_speaking']);
-                    $doneItems = (int)$nextTopic['vocab_learned'] + (int)$nextTopic['lessons_completed'] + (int)$nextTopic['tests_passed'] + (int)$nextTopic['speaking_practiced'];
-                    $pct = min(100, round($doneItems / $totalItems * 100));
+                    <p style="font-weight:700; font-size:1.1rem; margin-bottom:4px;"><?= htmlspecialchars($nextTopic['topic_name']) ?></p>
+                    <p style="color:var(--color-text-secondary); font-size:0.9rem; margin-bottom:16px;">Tiếp tục hoàn thành từ vựng và bài học trong chủ đề này.</p>
+                    <?php
+                        $totalItems = max(1, (int)$nextTopic['total_vocab'] + (int)$nextTopic['total_lessons'] + (int)$nextTopic['total_tests']);
+                        $doneItems = (int)$nextTopic['vocab_learned'] + (int)$nextTopic['lessons_completed'] + (int)$nextTopic['tests_passed'];
+                        $pct = min(100, round($doneItems / $totalItems * 100));
                     ?>
-                        <div class="mini-bar" style="width:<?= $pct ?>%"></div>
+                    <div class="plan-progress-bar" style="margin-bottom:8px;">
+                        <div class="plan-progress-fill" style="width:<?= $pct ?>%"></div>
                     </div>
-                    <small><?= $pct ?>% hoàn thành</small>
-                    <a href="<?= BASE_URL ?>/topic/show/<?= $nextTopic['topic_id'] ?>" class="btn btn-primary btn-sm">Học tiếp <i class="fas fa-arrow-right"></i></a>
+                    <small style="color:var(--color-text-tertiary);"><?= $pct ?>% hoàn thành</small>
+                    <div style="margin-top:16px;">
+                        <a href="<?= BASE_URL ?>/course" class="btn btn-primary btn-sm">Học tiếp <i class="fas fa-arrow-right"></i></a>
+                    </div>
                 <?php else: ?>
-                    <h3>Bắt đầu khóa học đầu tiên</h3>
-                    <p>Chọn một chủ đề để EngPath có dữ liệu theo dõi tiến độ cho bạn.</p>
-                    <a href="<?= BASE_URL ?>/topic" class="btn btn-primary btn-sm">Chọn khóa học</a>
+                    <p style="color:var(--color-text-secondary);">Chọn một chủ đề để bắt đầu theo dõi tiến độ.</p>
+                    <a href="<?= BASE_URL ?>/course" class="btn btn-primary btn-sm" style="margin-top:12px;">Chọn khóa học</a>
                 <?php endif; ?>
             </div>
 
-            <div class="section-card quick-practice-card">
-                <span class="section-kicker">Luyện nhanh</span>
-                <div class="practice-links">
-                    <a href="<?= BASE_URL ?>/topic"><i class="fas fa-clone"></i><span>Flashcard</span></a>
-                    <a href="<?= BASE_URL ?>/test"><i class="fas fa-clipboard-check"></i><span>Quiz</span></a>
-                    <a href="<?= BASE_URL ?>/speaking"><i class="fas fa-microphone"></i><span>Speaking</span></a>
-                    <a href="<?= BASE_URL ?>/grammar"><i class="fas fa-graduation-cap"></i><span>Grammar</span></a>
+            <div class="dashboard-section-card">
+                <h3><i class="fas fa-chart-simple"></i> Tổng quan</h3>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4);">
+                    <div style="text-align:center; padding:var(--space-4); background:var(--color-bg); border-radius:var(--radius-lg);">
+                        <div style="font-size:2rem; font-weight:800; color:var(--color-primary);"><?= (int)($overall['total_vocab_learned'] ?? 0) ?></div>
+                        <div style="font-size:0.8rem; color:var(--color-text-tertiary);">Từ vựng đã học</div>
+                    </div>
+                    <div style="text-align:center; padding:var(--space-4); background:var(--color-bg); border-radius:var(--radius-lg);">
+                        <div style="font-size:2rem; font-weight:800; color:var(--color-emerald-500);"><?= (int)($overall['total_lessons_completed'] ?? 0) ?></div>
+                        <div style="font-size:0.8rem; color:var(--color-text-tertiary);">Bài học hoàn thành</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -174,13 +149,14 @@ $nextTopic = $topicProgress[0] ?? null;
             </div>
         </div>
 
-        <div class="section-card">
+        <div class="dashboard-section-card" style="margin-bottom:var(--space-8);">
             <h3><i class="fas fa-tasks"></i> Tiến độ theo chủ đề</h3>
             <?php if (empty($topicProgress)): ?>
                 <div class="empty-state">
                     <i class="fas fa-chart-line"></i>
-                    <p>Chưa có dữ liệu. Hãy bắt đầu học để theo dõi tiến độ.</p>
-                    <a href="<?= BASE_URL ?>/topic" class="btn btn-primary">Bắt đầu học</a>
+                    <h3>Chưa có dữ liệu</h3>
+                    <p>Hãy bắt đầu học để theo dõi tiến độ của bạn.</p>
+                    <a href="<?= BASE_URL ?>/course" class="btn btn-primary">Bắt đầu học</a>
                 </div>
             <?php else: ?>
                 <div class="progress-table">
@@ -191,20 +167,16 @@ $nextTopic = $topicProgress[0] ?? null;
                                 <th>Level</th>
                                 <th>Từ vựng</th>
                                 <th>Bài học</th>
-                                <th>Test</th>
-                                <th>Speaking</th>
                                 <th>Điểm</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php foreach ($topicProgress as $tp): ?>
                                 <tr>
-                                    <td><a href="<?= BASE_URL ?>/topic/show/<?= $tp['topic_id'] ?>"><?= htmlspecialchars($tp['topic_name']) ?></a></td>
+                                    <td style="font-weight:600;"><?= htmlspecialchars($tp['topic_name']) ?></td>
                                     <td><span class="topic-level level-<?= htmlspecialchars($tp['level']) ?>"><?= ucfirst(htmlspecialchars($tp['level'])) ?></span></td>
                                     <td><?= min($tp['vocab_learned'], $tp['total_vocab']) ?>/<?= $tp['total_vocab'] ?></td>
                                     <td><?= min($tp['lessons_completed'], $tp['total_lessons']) ?>/<?= $tp['total_lessons'] ?></td>
-                                    <td><?= min($tp['tests_passed'], $tp['total_tests']) ?>/<?= $tp['total_tests'] ?></td>
-                                    <td><?= min($tp['speaking_practiced'], $tp['total_speaking']) ?>/<?= $tp['total_speaking'] ?></td>
                                     <td><strong><?= (int)$tp['total_score'] ?></strong></td>
                                 </tr>
                             <?php endforeach; ?>
@@ -213,59 +185,12 @@ $nextTopic = $topicProgress[0] ?? null;
                 </div>
             <?php endif; ?>
         </div>
-
-        <div class="activities-grid">
-            <div class="section-card">
-                <h3><i class="fas fa-clipboard-check"></i> Bài test gần đây</h3>
-                <?php if (empty($recentTests)): ?>
-                    <p class="empty-text">Chưa có bài test nào.</p>
-                <?php else: ?>
-                    <div class="activity-list">
-                        <?php foreach (array_slice($recentTests, 0, 5) as $t): ?>
-                            <div class="activity-item">
-                                <div class="activity-icon type-<?= htmlspecialchars($t['test_type']) ?>">
-                                    <i class="fas fa-<?= $t['test_type'] === 'quiz' ? 'question-circle' : ($t['test_type'] === 'listening' ? 'headphones' : 'book-reader') ?>"></i>
-                                </div>
-                                <div class="activity-info">
-                                    <strong><?= htmlspecialchars($t['test_title']) ?></strong>
-                                    <small><?= htmlspecialchars($t['topic_name']) ?> - <?= date('d/m/Y', strtotime($t['completed_at'])) ?></small>
-                                </div>
-                                <div class="activity-score">
-                                    <?php $pct = $t['total_points'] > 0 ? round($t['score'] / $t['total_points'] * 100) : 0; ?>
-                                    <span class="<?= $pct >= 60 ? 'text-success' : 'text-danger' ?>"><?= $pct ?>%</span>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-
-            <div class="section-card">
-                <h3><i class="fas fa-microphone"></i> Speaking gần đây</h3>
-                <?php if (empty($recentSpeaking)): ?>
-                    <p class="empty-text">Chưa có lượt luyện nói nào.</p>
-                <?php else: ?>
-                    <div class="activity-list">
-                        <?php foreach (array_slice($recentSpeaking, 0, 5) as $s): ?>
-                            <div class="activity-item">
-                                <div class="activity-icon"><i class="fas fa-microphone"></i></div>
-                                <div class="activity-info">
-                                    <strong><?= htmlspecialchars(mb_substr($s['prompt_text'], 0, 56)) ?>...</strong>
-                                    <small><?= htmlspecialchars($s['topic_name']) ?> - <?= date('d/m/Y', strtotime($s['created_at'])) ?></small>
-                                </div>
-                                <div class="activity-score">
-                                    <span class="<?= $s['overall_score'] >= 60 ? 'text-success' : 'text-danger' ?>"><?= (int)$s['overall_score'] ?></span>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                <?php endif; ?>
-            </div>
-        </div>
     </div>
 </section>
 
-<script src="<?= BASE_URL ?>/js/dashboard.js"></script>
+</div><!-- /.dashboard-page -->
+
+<script src="<?= BASE_URL ?>/js/dashboard.js?v=<?= APP_VERSION ?>"></script>
 <script>
 const chartData = <?= json_encode([
     'topics' => array_column($topicProgress, 'topic_name'),

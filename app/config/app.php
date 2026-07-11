@@ -68,11 +68,6 @@ define('ALLOWED_AUDIO_TYPES', ['audio/mpeg', 'audio/wav', 'audio/ogg']);
 // Cấu hình session
 define('SESSION_LIFETIME', 3600); // 1 giờ
 
-// Cấu hình Speaking Score
-define('ACCURACY_WEIGHT', 0.4);
-define('FLUENCY_WEIGHT', 0.3);
-define('PRONUNCIATION_WEIGHT', 0.3);
-
 define('GOOGLE_REDIRECT_URI', BASE_URL . '/auth/googleCallback');
 
 // Bank info (public, hiển thị cho user)

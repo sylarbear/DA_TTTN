@@ -189,6 +189,9 @@ window.CoursePlayer = (function () {
             var display = document.getElementById('courseContent');
             if (display) display.innerHTML = data.html;
 
+            // Enhance audio players in quiz
+            enhanceMediaPlayers();
+
             // Hide overview/resume/loading
             var resume   = document.getElementById('contentResume');
             var overview = document.getElementById('contentOverview');
@@ -523,6 +526,58 @@ window.CoursePlayer = (function () {
         });
     }
 
+    // ─── TTS cho Listening Test ──────────────────────────────────
+
+    function speakPassage(btn) {
+        if (!('speechSynthesis' in window)) {
+            showToast('Trình duyệt không hỗ trợ đọc văn bản.', 'error');
+            return;
+        }
+        var passage = btn.dataset.passage;
+        if (!passage) return;
+
+        if (window.speechSynthesis.speaking) {
+            window.speechSynthesis.cancel();
+            btn.innerHTML = '<i class="fas fa-volume-up"></i> Nghe';
+            return;
+        }
+
+        var utterance = new SpeechSynthesisUtterance(passage);
+        utterance.lang = 'en-US';
+        utterance.rate = 0.9;
+        utterance.pitch = 1;
+
+        // Chọn giọng đọc tiếng Anh tự nhiên nhất
+        var voices = window.speechSynthesis.getVoices();
+        var best = null;
+        for (var i = 0; i < voices.length; i++) {
+            var v = voices[i];
+            if (v.lang.indexOf('en') !== 0) continue;
+            // Ưu tiên cao nhất: giọng Neural/Online (Microsoft Edge)
+            if (v.name.indexOf('Online') !== -1 || v.name.indexOf('Natural') !== -1) {
+                best = v; break;
+            }
+            // Ưu tiên nhì: Google voices
+            if (v.name.indexOf('Google') !== -1 && !best) best = v;
+            // Ưu tiên ba: Microsoft voices
+            if (v.name.indexOf('Microsoft') !== -1 && !best) best = v;
+            // Fallback: bất kỳ giọng en-US nào
+            if (!best && v.lang === 'en-US') best = v;
+            if (!best) best = v;
+        }
+        if (best) utterance.voice = best;
+
+        utterance.onend = function () {
+            btn.innerHTML = '<i class="fas fa-volume-up"></i> Nghe';
+        };
+        utterance.onerror = function () {
+            btn.innerHTML = '<i class="fas fa-volume-up"></i> Nghe';
+        };
+
+        btn.innerHTML = '<i class="fas fa-stop"></i> Dừng';
+        window.speechSynthesis.speak(utterance);
+    }
+
     // ─── Toast Notifications ──────────────────────────────────────
 
     function showToast(message, type) {
@@ -781,6 +836,7 @@ window.CoursePlayer = (function () {
         setRating:      setRating,
         autoSaveReview: autoSaveReview,
         submitReview:   submitReview,
+        speakPassage:   speakPassage,
         init:           init,
     };
 })();

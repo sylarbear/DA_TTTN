@@ -1,29 +1,31 @@
-<!-- Course Detail — Coursera-style 2-panel layout with enhanced UX -->
+<!-- Course Info Landing Page — Udemy/Coursera-style -->
 <?php
 $courseTitle = htmlspecialchars($course['title']);
 $courseDesc  = htmlspecialchars($course['description'] ?? '');
 $cefr        = $course['cefr_level'];
 $hasLastLesson = !empty($lastLesson);
-$completedMap  = array_fill_keys($completedLessonIds, true);
+$learnUrl = BASE_URL . '/course/learn/' . $course['id'];
 ?>
-<section class="course-learn-header">
+<!-- Hero Banner -->
+<section class="course-hero-banner">
     <div class="container">
-        <a href="<?= BASE_URL ?>/course" class="back-link"><i class="fas fa-arrow-left"></i> Quay lại khóa học</a>
-        <div class="course-learn-title-row">
-            <div>
+        <a href="<?= BASE_URL ?>/course" class="back-link"><i class="fas fa-arrow-left"></i> Khóa học</a>
+        <div style="display:flex; gap:2rem; align-items:flex-start; flex-wrap:wrap;">
+            <div style="flex:1; min-width:280px;">
                 <span class="course-level-badge cefr-<?= strtolower($cefr) ?>"><?= $cefr ?></span>
-                <h1><?= $courseTitle ?></h1>
+                <h1 style="color:#fff; font-size:2rem; font-weight:800; margin-top:0.5rem;"><?= $courseTitle ?></h1>
+                <?php if (!empty($course['subtitle'])): ?>
+                <p style="color:rgba(255,255,255,0.8); font-size:1rem;"><?= htmlspecialchars($course['subtitle']) ?></p>
+                <?php endif; ?>
             </div>
-            <div class="course-learn-progress">
-                <div class="mini-ring" id="progressRing">
-                    <svg viewBox="0 0 36 36" width="56" height="56">
-                        <circle cx="18" cy="18" r="15" fill="none" stroke="#e2e8f0" stroke-width="3"/>
-                        <circle cx="18" cy="18" r="15" fill="none" stroke="#4f46e5" stroke-width="3"
-                            stroke-dasharray="0, 100" stroke-linecap="round"
-                            transform="rotate(-90 18 18)" id="progressCircle"/>
-                    </svg>
-                    <span id="progressPercent">0%</span>
+            <div class="course-hero-sidebar" style="background:rgba(255,255,255,0.12); border-radius:8px; padding:1.5rem; min-width:220px; text-align:center;">
+                <div style="color:#fff; font-size:0.85rem; margin-bottom:0.5rem;">
+                    <i class="fas fa-clock"></i> <?= $courseOverview['total_hours'] ?> giờ · <?= $courseOverview['total_lessons'] ?> bài học
                 </div>
+                <a href="<?= $learnUrl ?>" class="btn btn-cta btn-lg" style="width:100%; margin-bottom:0.5rem;">
+                    <?= $hasLastLesson ? 'Tiếp tục học' : 'Bắt đầu học' ?>
+                </a>
+                <div style="color:rgba(255,255,255,0.6); font-size:0.78rem;">Trình độ: <?= $cefr ?> — <?= $skillLevel ?></div>
             </div>
         </div>
     </div>
@@ -40,242 +42,184 @@ $completedMap  = array_fill_keys($completedLessonIds, true);
 </section>
 <?php endif; ?>
 
-<section class="course-learn-body">
-    <div class="container course-learn-container">
-        <!-- SIDEBAR — Curriculum -->
-        <aside class="course-sidebar" id="courseSidebar">
-            <div class="sidebar-search">
-                <i class="fas fa-search"></i>
-                <input type="text" id="courseSearch" placeholder="Tìm trong khóa học..." autocomplete="off">
-            </div>
+<section class="course-landing-body">
+    <div class="container" style="max-width: 900px; margin: 0 auto; padding: 32px 16px;">
 
-            <h3><i class="fas fa-list"></i> Nội dung khóa học</h3>
-
-            <?php foreach ($course['chapters'] as $wi => $chapter): ?>
-            <?php
-                $weekNum       = $wi + 1;
-                $weekCompleted = $chapter['is_completed'];
-                $isFirstIncomplete = !$weekCompleted && ($wi == 0 || $course['chapters'][$wi - 1]['is_completed']);
-
-                // Get lessons for this chapter
-                $stmt = getDB()->prepare('SELECT id, title, estimated_minutes FROM lessons WHERE topic_id = :tid AND is_active = 1 ORDER BY sort_order');
-                $stmt->execute(['tid' => $chapter['id']]);
-                $chapterLessons = $stmt->fetchAll();
-
-                // Get quizzes for this chapter
-                $stmt = getDB()->prepare('SELECT id, title FROM tests WHERE topic_id = :tid AND is_active = 1 AND is_final = 0 ORDER BY id');
-                $stmt->execute(['tid' => $chapter['id']]);
-                $chapterQuizzes = $stmt->fetchAll();
-
-                // Count completed lessons in this chapter
-                $chapCompletedCount = 0;
-                foreach ($chapterLessons as $cl) {
-                    if (isset($completedMap[$cl['id']])) $chapCompletedCount++;
-                }
-                $chapTotalItems = count($chapterLessons) + count($chapterQuizzes);
-                $chapProgressPct = $chapTotalItems > 0 ? round($chapCompletedCount / max(count($chapterLessons), 1) * 100) : 0;
-            ?>
-            <div class="sidebar-week <?= $weekCompleted ? 'done' : '' ?> <?= $isFirstIncomplete ? 'current' : '' ?>" data-week="<?= $weekNum ?>">
-                <div class="sidebar-week-header" onclick="CoursePlayer.toggleWeek(this)">
-                    <div class="week-indicator">
-                        <?php if ($weekCompleted): ?><i class="fas fa-check-circle"></i>
-                        <?php elseif ($isFirstIncomplete): ?><span><?= $weekNum ?></span>
-                        <?php else: ?><i class="fas fa-lock"></i><?php endif; ?>
-                    </div>
-                    <div class="week-info">
-                        <strong>Chương <?= $weekNum ?>: <?= htmlspecialchars($chapter['name']) ?></strong>
-                        <small><?= $chapter['lesson_count'] ?> bài học · <?= $chapter['test_count'] ?> quiz</small>
-                        <div class="week-mini-progress">
-                            <div class="week-mini-bar"><div class="week-mini-fill" style="width: <?= $chapProgressPct ?>%"></div></div>
-                        </div>
-                    </div>
+        <?php if ($hasLastLesson): ?>
+        <!-- Resume Banner -->
+        <div class="resume-banner">
+            <div class="resume-banner-content">
+                <div class="resume-banner-info">
+                    <i class="fas fa-play-circle"></i>
+                    <span>Bạn đang học dở: <strong><?= htmlspecialchars($lastLesson['title']) ?></strong></span>
                 </div>
-                <div class="sidebar-week-items" style="<?= $isFirstIncomplete || $weekCompleted ? '' : 'display:none' ?>">
-                    <?php foreach ($chapterLessons as $li => $lesson):
-                        $isDone = isset($completedMap[$lesson['id']]);
-                        $duration = !empty($lesson['estimated_minutes']) ? $lesson['estimated_minutes'] . ' phút' : '';
-                    ?>
-                    <div class="sidebar-item <?= $isDone ? 'done' : '' ?>" data-type="lesson" data-id="<?= $lesson['id'] ?>" data-topic="<?= $chapter['id'] ?>" data-title="<?= htmlspecialchars($lesson['title']) ?>">
-                        <div class="sidebar-item-icon"><?= $isDone ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-play-circle"></i>' ?></div>
-                        <div class="sidebar-item-text">
-                            <span><?= htmlspecialchars($lesson['title']) ?></span>
-                            <small><?= $duration ?: 'Lý thuyết' ?></small>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
+                <div class="resume-banner-actions">
+                    <a href="<?= $learnUrl ?>" class="btn btn-primary btn-sm">
+                        <i class="fas fa-play"></i> Tiếp tục học
+                    </a>
+                </div>
+            </div>
+        </div>
+        <?php endif; ?>
 
-                    <?php foreach ($chapterQuizzes as $quiz):
-                        $quizDone = false;
-                        $stmt2 = getDB()->prepare('SELECT tests_passed FROM user_progress WHERE user_id = :uid AND topic_id = :tid');
-                        $stmt2->execute(['uid' => $_SESSION['user_id'], 'tid' => $chapter['id']]);
-                        $tp = $stmt2->fetch();
-                        $quizDone = ($tp['tests_passed'] ?? 0) > 0;
-                    ?>
-                    <div class="sidebar-item quiz-item <?= $quizDone ? 'done' : '' ?>" data-type="quiz" data-id="<?= $quiz['id'] ?>" data-topic="<?= $chapter['id'] ?>" data-title="<?= htmlspecialchars($quiz['title']) ?>">
-                        <div class="sidebar-item-icon"><?= $quizDone ? '<i class="fas fa-check-circle"></i>' : '<i class="fas fa-question-circle"></i>' ?></div>
-                        <div class="sidebar-item-text">
-                            <span><?= htmlspecialchars($quiz['title']) ?></span>
-                            <small>Quiz</small>
-                        </div>
+        <!-- 1. Hero -->
+        <div class="overview-hero">
+            <span class="course-level-badge cefr-<?= strtolower($cefr) ?>" style="font-size: 14px; padding: 6px 16px;"><?= $cefr ?></span>
+            <h2><?= $courseTitle ?></h2>
+            <?php if (!empty($course['subtitle'])): ?>
+            <p class="overview-subtitle"><?= htmlspecialchars($course['subtitle']) ?></p>
+            <?php endif; ?>
+            <p class="overview-desc"><?= $courseDesc ?></p>
+        </div>
+
+        <!-- 2. Stats Row -->
+        <div class="overview-stats">
+            <div class="overview-stat">
+                <div class="stat-icon"><i class="fas fa-clock"></i></div>
+                <strong><?= $courseOverview['total_hours'] ?></strong>
+                <span>Tổng giờ</span>
+            </div>
+            <div class="overview-stat">
+                <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
+                <strong><?= $courseOverview['total_chapters'] ?></strong>
+                <span>Chương</span>
+            </div>
+            <div class="overview-stat">
+                <div class="stat-icon"><i class="fas fa-book-open"></i></div>
+                <strong><?= $courseOverview['total_lessons'] ?></strong>
+                <span>Bài học</span>
+            </div>
+            <div class="overview-stat">
+                <div class="stat-icon"><i class="fas fa-question-circle"></i></div>
+                <strong><?= $courseOverview['total_quizzes'] ?></strong>
+                <span>Quiz</span>
+            </div>
+            <div class="overview-stat">
+                <div class="stat-icon"><i class="fas fa-spell-check"></i></div>
+                <strong><?= $courseOverview['total_vocab'] ?></strong>
+                <span>Từ vựng</span>
+            </div>
+        </div>
+
+        <!-- 3. About Section -->
+        <div class="overview-section">
+            <h3><i class="fas fa-bullseye"></i> Về khóa học này</h3>
+            <div class="about-description"><?= nl2br(htmlspecialchars($course['description'] ?? '')) ?></div>
+            <?php if (!empty($objectives)): ?>
+            <h4>Bạn sẽ học được gì</h4>
+            <ul class="objectives-list">
+                <?php foreach ($objectives as $obj): ?>
+                <li><i class="fas fa-check-circle"></i> <?= htmlspecialchars($obj) ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <?php endif; ?>
+        </div>
+
+        <!-- 4. Skills Section -->
+        <div class="overview-section">
+            <h3><i class="fas fa-chart-bar"></i> Kỹ năng bạn sẽ đạt được</h3>
+            <div class="skills-grid">
+                <?php foreach ($skills as $skill): ?>
+                <div class="skill-bar-item">
+                    <div class="skill-header">
+                        <span class="skill-icon" style="color:<?= $skill['color'] ?>"><i class="fas <?= $skill['icon'] ?>"></i></span>
+                        <span class="skill-name"><?= $skill['name'] ?></span>
+                        <span class="skill-level-badge"><?= $skillLevel ?></span>
                     </div>
-                    <?php endforeach; ?>
+                    <div class="skill-progress-track">
+                        <div class="skill-progress-fill" style="width:<?= $skill['weight'] ?>%; background:<?= $skill['color'] ?>"></div>
+                    </div>
+                    <span class="skill-percent"><?= $skill['weight'] ?>%</span>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <!-- 5. Requirements Section -->
+        <div class="overview-section">
+            <h3><i class="fas fa-clipboard-list"></i> Yêu cầu đầu vào</h3>
+            <?php if (!empty($course['target_audience'])): ?>
+            <div class="target-badge">
+                <i class="fas fa-user-graduate"></i>
+                <span>Đối tượng: <?= htmlspecialchars($course['target_audience']) ?></span>
+            </div>
+            <?php endif; ?>
+            <?php if (!empty($requirements)): ?>
+            <ul class="requirements-list">
+                <?php foreach ($requirements as $req): ?>
+                <li><i class="fas fa-check"></i> <?= htmlspecialchars($req) ?></li>
+                <?php endforeach; ?>
+            </ul>
+            <?php endif; ?>
+            <?php if (empty($requirements) && empty($course['target_audience'])): ?>
+            <p class="overview-empty">Không có yêu cầu đặc biệt. Chỉ cần tinh thần ham học hỏi!</p>
+            <?php endif; ?>
+        </div>
+
+        <!-- 6. Syllabus -->
+        <div class="overview-syllabus">
+            <h3><i class="fas fa-list"></i> Lộ trình khóa học</h3>
+            <?php foreach ($course['chapters'] as $wi => $chapter): ?>
+            <div class="syllabus-item">
+                <span class="syllabus-num"><?= $wi + 1 ?></span>
+                <div class="syllabus-info">
+                    <strong><?= htmlspecialchars($chapter['name']) ?></strong>
+                    <span><?= $chapter['lesson_count'] ?> bài học · <?= $chapter['test_count'] ?> quiz · <?= $chapter['vocab_count'] ?> từ vựng</span>
                 </div>
             </div>
             <?php endforeach; ?>
+        </div>
 
-            <!-- Final Exam Item -->
-            <div class="sidebar-week sidebar-final <?= $canTakeFinal ? 'current' : '' ?>">
-                <div class="sidebar-week-header final-exam-header" onclick="<?= $canTakeFinal ? "location.href='" . BASE_URL . "/test/finalTake/" . ($finalExam['id'] ?? 0) . "'" : '' ?>">
-                    <div class="week-indicator final-indicator">
-                        <?php if ($finalResult && ($finalResult['score']/$finalResult['total_points']*100) >= 70): ?>
-                            <i class="fas fa-trophy"></i>
-                        <?php elseif ($canTakeFinal): ?>
-                            <i class="fas fa-star"></i>
-                        <?php else: ?>
-                            <i class="fas fa-lock"></i>
-                        <?php endif; ?>
+        <!-- 7. Assessment Section -->
+        <div class="overview-section">
+            <h3><i class="fas fa-clipboard-check"></i> Đánh giá kết quả</h3>
+            <div class="assessment-cards">
+                <div class="assessment-card">
+                    <div class="assessment-icon middle-test-icon">
+                        <i class="fas fa-tasks"></i>
                     </div>
-                    <div class="week-info">
+                    <div class="assessment-info">
+                        <strong>Bài kiểm tra giữa chương</strong>
+                        <p><?= $courseOverview['middle_tests'] ?> bài kiểm tra — 1 bài sau mỗi chương để củng cố kiến thức vừa học. Điểm đạt: 60% trở lên.</p>
+                    </div>
+                </div>
+                <div class="assessment-card">
+                    <div class="assessment-icon final-test-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="assessment-info">
                         <strong>Bài thi cuối khóa</strong>
-                        <small><?= $finalExam['question_count'] ?? 0 ?> câu · <?= $finalExam['duration_minutes'] ?? 0 ?> phút</small>
+                        <p>1 bài thi tổng hợp toàn bộ kiến thức khóa học<?php if ($finalExam): ?>. Thời gian: <?= $finalExam['duration_minutes'] ?? 30 ?> phút. Điểm đạt: <?= $finalExam['pass_score'] ?? 70 ?>% trở lên<?php endif; ?>.</p>
                     </div>
                 </div>
             </div>
-        </aside>
-
-        <!-- MAIN CONTENT -->
-        <main class="course-content" id="courseContent">
-            <?php if ($hasLastLesson): ?>
-            <!-- Resume State -->
-            <div class="content-resume" id="contentResume">
-                <div class="resume-icon"><i class="fas fa-play-circle"></i></div>
-                <h2>Tiếp tục học</h2>
-                <p>Bạn đang học dở: <strong><?= htmlspecialchars($lastLesson['title']) ?></strong></p>
-                <div class="resume-actions">
-                    <button class="btn btn-primary btn-lg" onclick="CoursePlayer.loadLesson(<?= $lastLesson['id'] ?>)">
-                        <i class="fas fa-play"></i> Tiếp tục bài học
-                    </button>
-                    <button class="btn btn-outline" onclick="document.getElementById('contentResume').style.display='none';document.getElementById('contentOverview').style.display='block'">
-                        <i class="fas fa-info-circle"></i> Xem tổng quan khóa học
-                    </button>
-                </div>
+            <div class="assessment-note">
+                <i class="fas fa-certificate"></i>
+                <span>Hoàn thành tất cả bài kiểm tra với điểm đạt yêu cầu để nhận <strong>chứng chỉ hoàn thành khóa học</strong>.</span>
             </div>
-            <?php endif; ?>
+        </div>
 
-            <!-- Course Overview -->
-            <div class="content-overview" id="contentOverview" style="<?= $hasLastLesson ? 'display:none' : '' ?>">
-                <div class="overview-hero">
-                    <span class="course-level-badge cefr-<?= strtolower($cefr) ?>" style="font-size: 14px; padding: 6px 16px;"><?= $cefr ?></span>
-                    <h2><?= $courseTitle ?></h2>
-                    <p class="overview-desc"><?= $courseDesc ?></p>
-                </div>
+        <!-- 8. Start Button -->
+        <div class="overview-start" style="text-align: center; margin-top: 32px;">
+            <a href="<?= $learnUrl ?>" class="btn btn-primary btn-lg">
+                <?php if ($hasLastLesson): ?>
+                <i class="fas fa-play"></i> Tiếp tục học
+                <?php else: ?>
+                <i class="fas fa-rocket"></i> Bắt đầu học
+                <?php endif; ?>
+            </a>
+        </div>
 
-                <div class="overview-stats">
-                    <div class="overview-stat">
-                        <div class="stat-icon"><i class="fas fa-layer-group"></i></div>
-                        <strong><?= $courseOverview['total_chapters'] ?></strong>
-                        <span>Chương</span>
-                    </div>
-                    <div class="overview-stat">
-                        <div class="stat-icon"><i class="fas fa-book-open"></i></div>
-                        <strong><?= $courseOverview['total_lessons'] ?></strong>
-                        <span>Bài học</span>
-                    </div>
-                    <div class="overview-stat">
-                        <div class="stat-icon"><i class="fas fa-spell-check"></i></div>
-                        <strong><?= $courseOverview['total_vocab'] ?></strong>
-                        <span>Từ vựng</span>
-                    </div>
-                    <div class="overview-stat">
-                        <div class="stat-icon"><i class="fas fa-question-circle"></i></div>
-                        <strong><?= $courseOverview['total_quizzes'] ?></strong>
-                        <span>Quiz</span>
-                    </div>
-                </div>
+        <!-- 9. Reviews -->
+        <div class="overview-reviews" id="overviewReviews" style="margin-top: 40px;">
+            <button class="btn btn-outline" onclick="CoursePlayer.loadReviews(<?= $course['id'] ?>)">
+                <i class="fas fa-star"></i> Xem đánh giá khóa học
+            </button>
+            <div id="reviewsContainer" style="display:none"></div>
+        </div>
 
-                <div class="overview-syllabus">
-                    <h3><i class="fas fa-list"></i> Lộ trình khóa học</h3>
-                    <?php foreach ($course['chapters'] as $wi => $chapter): ?>
-                    <div class="syllabus-item">
-                        <span class="syllabus-num"><?= $wi + 1 ?></span>
-                        <div class="syllabus-info">
-                            <strong><?= htmlspecialchars($chapter['name']) ?></strong>
-                            <span><?= $chapter['lesson_count'] ?> bài học · <?= $chapter['test_count'] ?> quiz · <?= $chapter['vocab_count'] ?> từ vựng</span>
-                        </div>
-                    </div>
-                    <?php endforeach; ?>
-                </div>
-
-                <div class="overview-start">
-                    <?php
-                    // Tìm bài học đầu tiên
-                    $firstLesson = !empty($lessonList) ? $lessonList[0] : null;
-                    ?>
-                    <?php if ($firstLesson): ?>
-                    <button class="btn btn-primary btn-lg" onclick="CoursePlayer.loadLesson(<?= $firstLesson['id'] ?>)">
-                        <i class="fas fa-rocket"></i> Bắt đầu học
-                    </button>
-                    <?php endif; ?>
-                </div>
-
-                <!-- Course Reviews -->
-                <div class="overview-reviews" id="overviewReviews">
-                    <button class="btn btn-outline" onclick="CoursePlayer.loadReviews(<?= $course['id'] ?>)">
-                        <i class="fas fa-star"></i> Xem đánh giá khóa học
-                    </button>
-                    <div id="reviewsContainer" style="display:none"></div>
-                </div>
-            </div>
-
-            <!-- Dynamic Content Display (lesson/quiz loaded here) -->
-            <div id="contentDisplay"></div>
-
-            <!-- Loading State -->
-            <div class="content-loading" id="contentLoading" style="display:none">
-                <div class="loading-spinner"></div>
-                <p>Đang tải bài học...</p>
-            </div>
-        </main>
     </div>
 </section>
 
-<!-- Lesson Navigation Bar (fixed bottom) -->
-<div class="lesson-nav-bar" id="lessonNavBar" style="display:none">
-    <div class="lesson-nav-container">
-        <button class="nav-btn nav-prev" id="prevLessonBtn" onclick="CoursePlayer.navigateLesson('prev')" disabled>
-            <i class="fas fa-arrow-left"></i> Bài trước
-        </button>
-        <div class="nav-center">
-            <button class="nav-btn nav-complete" id="navCompleteBtn" onclick="CoursePlayer.toggleCurrentComplete()">
-                <span class="nav-complete-icon"><i class="fas fa-check-circle"></i></span>
-                <span>Đánh dấu hoàn thành</span>
-            </button>
-        </div>
-        <button class="nav-btn nav-next" id="nextLessonBtn" onclick="CoursePlayer.navigateLesson('next')" disabled>
-            Bài tiếp theo <i class="fas fa-arrow-right"></i>
-        </button>
-    </div>
-</div>
-
-<!-- Mobile sidebar toggle -->
-<button class="sidebar-toggle-mobile" id="sidebarToggle" onclick="CoursePlayer.toggleMobileSidebar()">
-    <i class="fas fa-list"></i> Nội dung
-</button>
-
-<!-- Toast container -->
-<div class="toast-container" id="toastContainer"></div>
-
-<script>
-// Pass server data to JS
-window.COURSE_DATA = {
-    courseId: <?= $course['id'] ?>,
-    completedLessonIds: <?= json_encode(array_values($completedLessonIds)) ?>,
-    completionPercent: <?= $completionPercent ?>,
-    baseUrl: '<?= BASE_URL ?>',
-    lessonList: <?= json_encode($lessonList) ?>,
-    hasLastLesson: <?= $hasLastLesson ? 'true' : 'false' ?>,
-    lastLessonId: <?= $lastLesson ? $lastLesson['id'] : 'null' ?>,
-};
-</script>
-<script src="<?= BASE_URL ?>/js/course.js?v=<?= time() ?>"></script>
-<link rel="stylesheet" href="<?= BASE_URL ?>/css/course.css?v=<?= time() ?>">
+<script src="<?= BASE_URL ?>/js/course.js?v=<?= APP_VERSION ?>"></script>
+<link rel="stylesheet" href="<?= BASE_URL ?>/css/course.css?v=<?= APP_VERSION ?>">

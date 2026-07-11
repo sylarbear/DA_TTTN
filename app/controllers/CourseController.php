@@ -59,9 +59,98 @@ class CourseController extends Controller
 
     /**
      * GET /course/show/{id}
-     * Chi tiết 1 khóa: timeline chương + final exam
+     * Trang thông tin khóa học (landing page) — overview Coursera-style
      */
     public function show($id = null)
+    {
+        Middleware::requireLogin();
+
+        if (!$id) return $this->redirect('course');
+
+        $userId = $_SESSION['user_id'];
+
+        $courseModel = $this->model('Course');
+        $course = $courseModel->getWithChapters($id);
+        if (!$course) return $this->redirect('course');
+
+        // Kiểm tra quyền truy cập
+        $progress = $courseModel->getUserProgress($userId, $id);
+        if (!$progress || $progress['status'] === 'locked') {
+            $this->setFlash('error', 'Khóa học này chưa được mở khóa. Hãy hoàn thành khóa trước.');
+            return $this->redirect('course');
+        }
+
+        // Lấy bài học đang học dở cuối cùng (cho resume banner)
+        $lastLesson = $this->getLastViewedLesson($userId, $id);
+
+        // Lấy final exam info (cho assessment section)
+        $canTakeFinal = $courseModel->canTakeFinalExam($userId, $id);
+        $finalExam    = $canTakeFinal ? $courseModel->getFinalExam($id) : null;
+
+        // Course overview data
+        $totalLessons = 0;
+        foreach ($course['chapters'] as $ch) {
+            $totalLessons += $ch['lesson_count'];
+        }
+
+        $courseOverview = [
+            'total_hours'    => 0,
+            'total_chapters' => count($course['chapters']),
+            'total_lessons'  => $totalLessons,
+            'total_vocab'    => array_sum(array_column($course['chapters'], 'vocab_count')),
+            'total_quizzes'  => array_sum(array_column($course['chapters'], 'test_count')),
+            'middle_tests'   => 0,
+        ];
+
+        $totalMinutes = $courseModel->getTotalMinutes((int)$id);
+        $totalHours   = $totalMinutes > 0 ? round($totalMinutes / 60, 1) : 0;
+        $middleTestCount = $courseModel->countMiddleTests((int)$id);
+
+        $courseOverview['total_hours']  = $totalHours;
+        $courseOverview['middle_tests'] = $middleTestCount;
+
+        // Skills array
+        $skills = [
+            ['name' => 'Nghe (Listening)',  'icon' => 'fa-headphones',  'weight' => (int)($course['listening_weight'] ?? 25), 'color' => '#3b82f6'],
+            ['name' => 'Nói (Speaking)',    'icon' => 'fa-microphone',  'weight' => (int)($course['speaking_weight'] ?? 25),  'color' => '#f59e0b'],
+            ['name' => 'Đọc (Reading)',     'icon' => 'fa-book-open',   'weight' => (int)($course['reading_weight'] ?? 25),   'color' => '#10b981'],
+            ['name' => 'Viết (Writing)',    'icon' => 'fa-pen',         'weight' => (int)($course['writing_weight'] ?? 25),   'color' => '#8b5cf6'],
+        ];
+
+        $objectives = array_values(array_filter(
+            array_map('trim', explode("\n", $course['objectives'] ?? '')),
+            fn($line) => $line !== ''
+        ));
+
+        $requirements = array_values(array_filter(
+            array_map('trim', explode("\n", $course['requirements'] ?? '')),
+            fn($line) => $line !== ''
+        ));
+
+        $skillLevelMap = ['A1' => 'Cơ bản', 'A2' => 'Cơ bản', 'B1' => 'Trung cấp', 'B2' => 'Trung cấp', 'C1' => 'Nâng cao'];
+        $skillLevel = $skillLevelMap[$course['cefr_level']] ?? 'Cơ bản';
+
+        $this->view('course/show', [
+            'title'          => $course['title'] . ' - ' . APP_NAME,
+            'course'         => $course,
+            'progress'       => $progress,
+            'lastLesson'     => $lastLesson,
+            'courseOverview' => $courseOverview,
+            'finalExam'      => $finalExam,
+            'isReview'       => $progress['status'] === 'mastered',
+            'user'           => Middleware::user(),
+            'skills'         => $skills,
+            'objectives'     => $objectives,
+            'requirements'   => $requirements,
+            'skillLevel'     => $skillLevel,
+        ]);
+    }
+
+    /**
+     * GET /course/learn/{id}
+     * Trang học tập — giao diện 2-panel (sidebar + content)
+     */
+    public function learn($id = null)
     {
         Middleware::requireLogin();
 
@@ -123,19 +212,9 @@ class CourseController extends Controller
             $finalResult = $stmt->fetch();
         }
 
-        // Tổng số bài học, quiz trong khóa
         $totalLessons = count($lessonList);
-        $totalCompleted = count($completedLessonIds);
 
-        // Course overview data
-        $courseOverview = [
-            'total_chapters' => count($course['chapters']),
-            'total_lessons'  => $totalLessons,
-            'total_vocab'    => array_sum(array_column($course['chapters'], 'vocab_count')),
-            'total_quizzes'  => array_sum(array_column($course['chapters'], 'test_count')),
-        ];
-
-        $this->view('course/show', [
+        $this->view('course/learn', [
             'title'              => $course['title'] . ' - ' . APP_NAME,
             'course'             => $course,
             'progress'           => $progress,
@@ -144,8 +223,7 @@ class CourseController extends Controller
             'lessonList'         => $lessonList,
             'lessonMap'          => $lessonMap,
             'lastLesson'         => $lastLesson,
-            'totalCompleted'     => $totalCompleted,
-            'courseOverview'     => $courseOverview,
+            'courseOverview'     => [],
             'canTakeFinal'       => $canTakeFinal,
             'finalExam'          => $finalExam,
             'finalResult'        => $finalResult,
@@ -213,7 +291,7 @@ class CourseController extends Controller
             <h2><?= htmlspecialchars($lesson['title']) ?></h2>
             <?php foreach ($lesson['contents'] as $block): ?>
                 <?php if ($block['content_type'] === 'text'): ?>
-                    <div class="lesson-text"><?= htmlspecialchars($block['content']) ?></div>
+                    <div class="lesson-text"><?= $block['content'] ?></div>
                 <?php elseif ($block['content_type'] === 'image'): ?>
                     <figure class="lesson-figure">
                         <img src="<?= htmlspecialchars($block['content']) ?>" alt="" class="lesson-image" loading="lazy">
@@ -371,14 +449,21 @@ class CourseController extends Controller
         $test = $testModel->getWithQuestions($id);
         if (!$test) return $this->json(['error' => 'Không tìm thấy quiz.'], 404);
 
-        // Chỉ load quiz đơn giản (multiple_choice, true_false, fill_blank) inline
-        // Listening/Reading test redirect ra ngoài
-        $isSimple = in_array($test['test_type'], ['quiz', 'multiple_choice', 'true_false', 'fill_blank']);
+        // Quiz + Listening load inline; Reading redirect ra ngoài
+        $isInline = in_array($test['test_type'], ['quiz', 'multiple_choice', 'true_false', 'fill_blank', 'listening']);
 
-        if (!$isSimple) {
+        if (!$isInline) {
             return $this->json([
                 'success'  => false,
                 'redirect' => BASE_URL . '/test/take/' . $id,
+            ]);
+        }
+
+        // Listening test yêu cầu Pro membership
+        if ($test['test_type'] === 'listening' && !Middleware::isPro()) {
+            return $this->json([
+                'success'  => false,
+                'redirect' => BASE_URL . '/membership',
             ]);
         }
 
@@ -387,10 +472,12 @@ class CourseController extends Controller
         $hasTimer = ($test['duration_minutes'] ?? 0) > 0;
 
         ob_start();
+        $isListening = ($test['test_type'] === 'listening');
+        $headerIcon = $isListening ? 'fa-headphones' : 'fa-question-circle';
         ?>
         <div class="quiz-inline" data-test-id="<?= $id ?>" data-timer="<?= $test['duration_minutes'] ?? 0 ?>">
             <div class="quiz-header">
-                <h2><i class="fas fa-question-circle"></i> <?= htmlspecialchars($test['title']) ?></h2>
+                <h2><i class="fas <?= $headerIcon ?>"></i> <?= htmlspecialchars($test['title']) ?></h2>
                 <div class="quiz-meta">
                     <span><i class="fas fa-list"></i> <?= $totalQuestions ?> câu</span>
                     <?php if ($hasTimer): ?>
@@ -410,6 +497,22 @@ class CourseController extends Controller
                         <span class="quiz-question-num">Câu <?= $i + 1 ?></span>
                         <span class="quiz-question-pts"><?= $q['points'] ?> điểm</span>
                     </div>
+
+                    <?php // Audio / TTS cho listening test ?>
+                    <?php if ($isListening && !empty($q['audio_url'])): ?>
+                    <div class="lesson-media-wrapper" style="margin-bottom:12px">
+                        <div class="lesson-media-label"><i class="fas fa-headphones"></i> Audio</div>
+                        <audio controls src="<?= htmlspecialchars($q['audio_url']) ?>" class="lesson-audio" data-enhanced="true"></audio>
+                    </div>
+                    <?php elseif ($isListening && !empty($q['passage'])): ?>
+                    <div class="quiz-passage-box">
+                        <button type="button" class="btn btn-outline btn-sm quiz-tts-btn" onclick="CoursePlayer.speakPassage(this)" data-passage="<?= htmlspecialchars($q['passage']) ?>">
+                            <i class="fas fa-volume-up"></i> Nghe
+                        </button>
+                        <span class="listen-hint">(Bấm nút để nghe. Có thể nghe lại nhiều lần.)</span>
+                    </div>
+                    <?php endif; ?>
+
                     <div class="quiz-question-text"><?= htmlspecialchars($q['question_text']) ?></div>
 
                     <?php

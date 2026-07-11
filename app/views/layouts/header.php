@@ -3,19 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EngPath - nền tảng học tiếng Anh theo lộ trình, tích hợp từ vựng, bài học, kiểm tra và luyện nói AI.">
+    <meta name="description" content="EngPath - nền tảng học tiếng Anh theo lộ trình, tích hợp từ vựng, bài học và kiểm tra.">
     <title><?= $title ?? APP_NAME ?></title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Be+Vietnam+Pro:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/style.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/components.css?v=<?= time() ?>">
-    <link rel="stylesheet" href="<?= BASE_URL ?>/css/pages.css?v=<?= time() ?>">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/design-system.css?v=<?= APP_VERSION ?>">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/pages.css?v=<?= APP_VERSION ?>">
+    <link rel="stylesheet" href="<?= BASE_URL ?>/css/components-v2.css?v=<?= APP_VERSION ?>">
+    <script>window.BASE_URL = '<?= BASE_URL ?>';</script>
 </head>
 <body>
+    <a href="#main-content" class="skip-link">Bỏ qua điều hướng</a>
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="<?= BASE_URL ?>" class="nav-logo">
@@ -39,8 +41,6 @@
                 <?php else: ?>
                     <li><a href="<?= BASE_URL ?>" class="nav-link"><i class="fas fa-home"></i> Trang chủ</a></li>
                     <li><a href="<?= BASE_URL ?>/course" class="nav-link"><i class="fas fa-book-open"></i> Khóa học</a></li>
-                    <li><a href="<?= BASE_URL ?>/test" class="nav-link"><i class="fas fa-clipboard-check"></i> Bài test</a></li>
-                    <li><a href="<?= BASE_URL ?>/speaking" class="nav-link"><i class="fas fa-microphone"></i> Luyện nói</a></li>
                     <li><a href="<?= BASE_URL ?>/membership" class="nav-link"><i class="fas fa-crown"></i> Pro</a></li>
 
                     <?php if (Middleware::isLoggedIn()): ?>
@@ -48,10 +48,7 @@
                             <button class="nav-link nav-more-btn" id="navMoreBtn"><i class="fas fa-border-all"></i> Thêm <i class="fas fa-chevron-down" style="font-size:0.65rem;"></i></button>
                             <div class="nav-more-menu" id="navMoreMenu">
                                 <a href="<?= BASE_URL ?>/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
-                                <a href="<?= BASE_URL ?>/grammar"><i class="fas fa-graduation-cap"></i> Ngữ pháp</a>
                                 <a href="<?= BASE_URL ?>/leaderboard"><i class="fas fa-trophy"></i> Xếp hạng</a>
-                                <a href="<?= BASE_URL ?>/bookmark"><i class="fas fa-bookmark"></i> Từ đã lưu</a>
-                                <a href="<?= BASE_URL ?>/topic/search"><i class="fas fa-search"></i> Tìm kiếm</a>
                                 <a href="<?= BASE_URL ?>/support"><i class="fas fa-headset"></i> Hỗ trợ</a>
                                 <?php if (!Middleware::isPro()): ?>
                                     <a href="<?= BASE_URL ?>/membership" class="nav-more-upgrade"><i class="fas fa-crown"></i> Nâng cấp Pro</a>
@@ -83,6 +80,20 @@
                     <?php endif; ?>
                 <?php endif; ?>
             </ul>
+
+            <?php if (!Middleware::isAdmin()): ?>
+            <div class="nav-search" id="navSearch">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Tìm kiếm..." autocomplete="off">
+                <div class="search-dropdown" id="searchDropdown">
+                    <div class="search-results" id="searchResults"></div>
+                    <div class="search-empty" id="searchEmpty">
+                        <i class="fas fa-search"></i>
+                        <span>Nhập ít nhất 2 ký tự để tìm kiếm</span>
+                    </div>
+                </div>
+            </div>
+            <?php endif; ?>
         </div>
     </nav>
 
@@ -105,4 +116,4 @@
         <?php unset($_SESSION['flash']); ?>
     <?php endif; ?>
 
-    <main class="main-content">
+    <main class="main-content" id="main-content">

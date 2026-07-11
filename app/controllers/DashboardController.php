@@ -58,7 +58,6 @@ class DashboardController extends Controller
             'scores' => [],
             'vocab' => [],
             'tests' => [],
-            'speaking' => [],
         ];
 
         foreach ($data['topic_progress'] as $tp) {
@@ -66,7 +65,6 @@ class DashboardController extends Controller
             $chartData['scores'][] = $tp['total_score'];
             $chartData['vocab'][] = $tp['vocab_learned'];
             $chartData['tests'][] = $tp['tests_passed'];
-            $chartData['speaking'][] = $tp['speaking_practiced'];
         }
 
         return $this->json($chartData);

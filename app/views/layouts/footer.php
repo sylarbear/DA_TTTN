@@ -5,14 +5,12 @@
             <div class="footer-grid">
                 <div class="footer-brand">
                     <h3><span class="brand-mark"><i class="fas fa-route"></i></span> <?= APP_NAME ?></h3>
-                    <p>Nền tảng học tiếng Anh theo lộ trình, kết hợp từ vựng, bài học, kiểm tra và luyện nói AI trong một trải nghiệm gọn gàng.</p>
+                    <p>Nền tảng học tiếng Anh theo lộ trình, kết hợp từ vựng, bài học và kiểm tra trong một trải nghiệm gọn gàng.</p>
                 </div>
                 <div class="footer-links">
                     <h4>Học tập</h4>
                     <ul>
-                        <li><a href="<?= BASE_URL ?>/topic">Khóa học</a></li>
-                        <li><a href="<?= BASE_URL ?>/test">Bài kiểm tra</a></li>
-                        <li><a href="<?= BASE_URL ?>/speaking">Luyện nói AI</a></li>
+                        <li><a href="<?= BASE_URL ?>/course">Khóa học</a></li>
                     </ul>
                 </div>
                 <div class="footer-links">

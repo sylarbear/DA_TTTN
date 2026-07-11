@@ -134,10 +134,8 @@ class AdminController extends Controller
         $db = getDB();
         $db->prepare('DELETE ua FROM user_answers ua INNER JOIN test_results tr ON ua.test_result_id = tr.id WHERE tr.user_id=:id')->execute(['id' => $userId]);
         $db->prepare('DELETE FROM test_results WHERE user_id=:id')->execute(['id' => $userId]);
-        $db->prepare('DELETE FROM speaking_attempts WHERE user_id=:id')->execute(['id' => $userId]);
         $db->prepare('DELETE FROM membership_orders WHERE user_id=:id')->execute(['id' => $userId]);
         $db->prepare('DELETE FROM user_progress WHERE user_id=:id')->execute(['id' => $userId]);
-        $db->prepare('DELETE FROM bookmarks WHERE user_id=:id')->execute(['id' => $userId]);
         $db->prepare('DELETE FROM xp_history WHERE user_id=:id')->execute(['id' => $userId]);
         $db->prepare("DELETE FROM users WHERE id=:id AND role != 'admin'")->execute(['id' => $userId]);
 

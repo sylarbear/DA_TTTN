@@ -18,4 +18,21 @@ class HomeController extends Controller
             'user' => Middleware::user(),
         ]);
     }
+
+    /**
+     * AJAX search endpoint — trả về JSON
+     */
+    public function search()
+    {
+        $q = trim($_GET['q'] ?? '');
+        if (mb_strlen($q) < 2) {
+            $this->json(['results' => []]);
+            return;
+        }
+
+        $topicModel = $this->model('Topic');
+        $results = $topicModel->search($q);
+
+        $this->json(['results' => $results]);
+    }
 }
