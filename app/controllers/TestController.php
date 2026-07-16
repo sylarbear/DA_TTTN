@@ -207,22 +207,28 @@ class TestController extends Controller
             return $this->redirect('test');
         }
 
-        // Tách câu hỏi theo section (reading sort 1-10, listening sort 11-20)
+        // Tách câu hỏi: Reading = sort 1-10 + 21+, Listening = sort 11-20
+        // (các câu sort 11-20 là listening thật, 21+ là lý thuyết bổ sung cho reading)
         $readingQuestions = [];
         $listeningQuestions = [];
         foreach ($test['questions'] as $q) {
-            if ($q['sort_order'] <= 10) {
-                $readingQuestions[] = $q;
-            } else {
+            $s = (int)$q['sort_order'];
+            if ($s >= 11 && $s <= 20) {
                 $listeningQuestions[] = $q;
+            } else {
+                $readingQuestions[] = $q;
             }
         }
+
+        // Xác định có hiển thị dạng tabs 2 section hay chỉ 1 section
+        $hasBothSections = !empty($readingQuestions) && !empty($listeningQuestions);
 
         $this->view('tests/final_take', [
             'title' => $test['title'] . ' - ' . APP_NAME,
             'test' => $test,
             'readingQuestions' => $readingQuestions,
             'listeningQuestions' => $listeningQuestions,
+            'hasBothSections' => $hasBothSections,
             'user' => Middleware::user(),
         ]);
     }
@@ -258,17 +264,19 @@ class TestController extends Controller
         $readingScore = 0; $readingTotal = 0;
         $listeningScore = 0; $listeningTotal = 0;
 
+        // Dùng sort 11-20 = Listening, còn lại = Reading
         foreach ($test['questions'] as $q) {
             $userAns = $answers[$q['id']] ?? '';
             $correct = strtolower(trim($userAns)) === strtolower(trim($q['correct_answer']));
             $pts = (int)$q['points'];
+            $s = (int)$q['sort_order'];
 
-            if ($q['sort_order'] <= 10) {
-                $readingTotal += $pts;
-                if ($correct) $readingScore += $pts;
-            } else {
+            if ($s >= 11 && $s <= 20) {
                 $listeningTotal += $pts;
                 if ($correct) $listeningScore += $pts;
+            } else {
+                $readingTotal += $pts;
+                if ($correct) $readingScore += $pts;
             }
         }
 

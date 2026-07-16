@@ -83,9 +83,9 @@ class CourseController extends Controller
         // Lấy bài học đang học dở cuối cùng (cho resume banner)
         $lastLesson = $this->getLastViewedLesson($userId, $id);
 
-        // Lấy final exam info (cho assessment section)
+        // Lấy final exam info — luôn hiển thị section, trạng thái do canTakeFinal quyết định
         $canTakeFinal = $courseModel->canTakeFinalExam($userId, $id);
-        $finalExam    = $canTakeFinal ? $courseModel->getFinalExam($id) : null;
+        $finalExam    = $courseModel->getFinalExam($id);
 
         // Course overview data
         $totalLessons = 0;
@@ -137,6 +137,7 @@ class CourseController extends Controller
             'lastLesson'     => $lastLesson,
             'courseOverview' => $courseOverview,
             'finalExam'      => $finalExam,
+            'canTakeFinal'   => $canTakeFinal,
             'isReview'       => $progress['status'] === 'mastered',
             'user'           => Middleware::user(),
             'skills'         => $skills,
@@ -607,11 +608,13 @@ class CourseController extends Controller
         $unlockedCourse  = null;
 
         if ($passed && ($test['is_final'] ?? 0)) {
-            $courseStmt = getDB()->prepare(
-                "SELECT id FROM courses WHERE title = REPLACE(?, 'Final Exam: ', '') AND is_active = 1 LIMIT 1"
-            );
-            $courseStmt->execute([$test['title']]);
-            $course = $courseStmt->fetch();
+            $courseId = $test['course_id'] ?? null;
+            $course = null;
+            if ($courseId) {
+                $courseStmt = getDB()->prepare("SELECT id FROM courses WHERE id = ? AND is_active = 1 LIMIT 1");
+                $courseStmt->execute([$courseId]);
+                $course = $courseStmt->fetch();
+            }
 
             if ($course) {
                 require_once APP_PATH . '/models/CourseProgress.php';
@@ -1000,7 +1003,7 @@ class CourseController extends Controller
     /**
      * Helper: render star HTML
      */
-    private function renderStars(int $rating): string
+    protected function renderStars(int $rating): string
     {
         $html = '';
         for ($i = 1; $i <= 5; $i++) {

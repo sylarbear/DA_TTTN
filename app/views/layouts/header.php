@@ -10,10 +10,51 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300..800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/design-system.css?v=<?= APP_VERSION ?>">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/pages.css?v=<?= APP_VERSION ?>">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/components-v2.css?v=<?= APP_VERSION ?>">
+    <style>
+        /* Fix: old CSS has white elements for dark header. Override for visibility. */
+        .navbar { background:#fff !important; box-shadow:0 1px 3px rgba(0,0,0,0.08) !important; }
+        .nav-logo, .nav-logo span { color:#1e293b !important; }
+        .nav-link { color:#475569 !important; }
+        .nav-link:hover { color:#4f46e5 !important; background:#eef2ff !important; }
+        .nav-search input { background:#f1f5f9 !important; border-color:#e2e8f0 !important; color:#1e293b !important; }
+        .nav-search input::placeholder { color:#94a3b8 !important; }
+        .nav-search > i { color:#94a3b8 !important; }
+        .nav-search input:focus { background:#fff !important; border-color:#4f46e5 !important; }
+        .user-btn { background:transparent !important; border-color:#e2e8f0 !important; color:#1e293b !important; }
+        .user-btn:hover { border-color:#4f46e5 !important; background:#eef2ff !important; }
+        .nav-toggle span { background:#1e293b !important; }
+        .btn-login { color:#1e293b !important; border-color:#cbd5e1 !important; }
+        .btn-login:hover { background:#f1f5f9 !important; }
+        .btn-register { background:#4f46e5 !important; color:#fff !important; }
+        .btn-register:hover { background:#4338ca !important; }
+        .nav-more-btn { color:#475569 !important; }
+        .nav-more-btn:hover { color:#4f46e5 !important; background:#eef2ff !important; border-color:#cbd5e1 !important; }
+        .nav-pro-badge { background:linear-gradient(135deg,#f59e0b,#f97316) !important; color:#fff !important; }
+        @media (max-width:768px) {
+            .nav-menu { background:#fff !important; border-color:#e2e8f0 !important; }
+            .nav-link { color:#1e293b !important; }
+        }
+    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              50: '#eef2ff', 100:'#e0e7ff', 200:'#c7d2fe', 300:'#a5b4fc',
+              400:'#818cf8', 500:'#6366f1', 600:'#4f46e5', 700:'#4338ca', 800:'#3730a3'
+            },
+            navy: { 500:'#64748b', 700:'#334155', 800:'#1e293b', 900:'#0f172a' }
+          },
+          fontFamily: { heading: ['"Plus Jakarta Sans"','Inter','sans-serif'], body: ['Inter','sans-serif'] }
+        }
+      }
+    }
+    </script>
     <script>window.BASE_URL = '<?= BASE_URL ?>';</script>
 </head>
 <body>

@@ -1,21 +1,17 @@
 <mxfile host="Electron">
   <diagram name="State Diagrams v3" id="0">
-    <mxGraphModel dx="2054" dy="1400" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
+    <mxGraphModel dx="1542" dy="914" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1100" pageHeight="850" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-
-        <!-- TITLE -->
-        <mxCell id="title" parent="1" style="text;html=1;fontSize=16;fontStyle=1;fontColor=#0F172A;" value="Sơ đồ Trạng thái — EngPath v3" vertex="1">
-          <mxGeometry height="24" width="350" x="380" y="15" as="geometry" />
+        <mxCell id="title" parent="1" style="text;html=1;fontSize=16;fontStyle=1;fontColor=#0F172A;" value="Sơ đồ Trạng thái — EngPath&amp;nbsp;" vertex="1">
+          <mxGeometry height="24" width="350" x="310" y="20" as="geometry" />
         </mxCell>
-
-        <!-- ═══ 1. COURSE STATE MACHINE (NEW) ═══ -->
-        <mxCell id="c_title" parent="1" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#059669;" value="1. Course Progress (MỚI)" vertex="1">
+        <mxCell id="c_title" parent="1" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#059669;" value="1. Course Progress&amp;nbsp;" vertex="1">
           <mxGeometry height="20" width="200" x="40" y="50" as="geometry" />
         </mxCell>
         <mxCell id="locked" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=10;fontStyle=1;" value="Locked (Khóa)" vertex="1">
-          <mxGeometry height="55" width="110" x="60" y="85" as="geometry" />
+          <mxGeometry height="55" width="110" x="30" y="85" as="geometry" />
         </mxCell>
         <mxCell id="unlocked" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEF3C7;strokeColor=#F59E0B;fontSize=10;fontStyle=1;" value="Unlocked" vertex="1">
           <mxGeometry height="55" width="100" x="240" y="85" as="geometry" />
@@ -24,30 +20,31 @@
           <mxGeometry height="55" width="110" x="410" y="85" as="geometry" />
         </mxCell>
         <mxCell id="completed" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#D1FAE5;strokeColor=#059669;fontSize=10;fontStyle=1;" value="Completed" vertex="1">
-          <mxGeometry height="55" width="100" x="590" y="85" as="geometry" />
+          <mxGeometry height="55" width="100" x="600" y="85" as="geometry" />
         </mxCell>
         <mxCell id="mastered" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=10;fontStyle=1;" value="Mastered" vertex="1">
-          <mxGeometry height="55" width="100" x="760" y="85" as="geometry" />
+          <mxGeometry height="55" width="100" x="800" y="85" as="geometry" />
         </mxCell>
-        <mxCell id="e_l_u" edge="1" parent="1" source="locked" target="unlocked" style="rounded=1;html=1;fontSize=8;fontColor=#059669;" value="Placement / Khóa trước">
+        <mxCell id="e_l_u" edge="1" parent="1" source="locked" style="rounded=1;html=1;fontSize=8;fontColor=#059669;" target="unlocked" value="Placement / Khóa trước">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_u_ip" edge="1" parent="1" source="unlocked" target="in_progress" style="rounded=1;html=1;fontSize=8;fontColor=#4F46E5;" value="Bắt đầu học">
+        <mxCell id="e_u_ip" edge="1" parent="1" source="unlocked" style="rounded=1;html=1;fontSize=8;fontColor=#4F46E5;" target="in_progress" value="Bắt đầu học">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_ip_c" edge="1" parent="1" source="in_progress" target="completed" style="rounded=1;html=1;fontSize=8;fontColor=#059669;" value="100% chapters">
+        <mxCell id="e_ip_c" edge="1" parent="1" source="in_progress" style="rounded=1;html=1;fontSize=8;fontColor=#059669;" target="completed" value="100% chapters">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_c_m" edge="1" parent="1" source="completed" target="mastered" style="rounded=1;html=1;fontSize=8;fontColor=#7C3AED;" value="Pass Final Exam (≥60%)">
+        <mxCell id="e_c_m" edge="1" parent="1" source="completed" style="rounded=1;html=1;fontSize=8;fontColor=#7C3AED;" target="mastered" value="Pass Final Exam (≥60%)">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_m_ip" edge="1" parent="1" source="mastered" target="in_progress" style="rounded=1;html=1;fontSize=8;fontColor=#F97316;exitX=0.5;exitY=1;entryX=0.5;entryY=1;exitDx=0;exitDy=18;entryDx=0;entryDy=18;" value="Ôn tập (Review)">
+        <mxCell id="e_m_ip" edge="1" parent="1" source="mastered" style="rounded=1;html=1;fontSize=8;fontColor=#F97316;exitX=0.5;exitY=1;entryX=0.5;entryY=1;exitDx=0;exitDy=18;entryDx=0;entryDy=18;" target="in_progress" value="Ôn tập (Review)">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="810" y="170"/><mxPoint x="465" y="170"/></mxPoint>
+            <Array as="points">
+              <mxPoint x="810" y="170" />
+              <mxPoint x="465" y="170" />
+            </Array>
           </mxGeometry>
         </mxCell>
-
-        <!-- ═══ 2. MEMBERSHIP ═══ -->
         <mxCell id="m_title" parent="1" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#F97316;" value="2. Membership" vertex="1">
           <mxGeometry height="20" width="200" x="40" y="220" as="geometry" />
         </mxCell>
@@ -57,16 +54,17 @@
         <mxCell id="pro" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFEDD5;strokeColor=#F97316;fontSize=10;fontStyle=1;" value="Pro" vertex="1">
           <mxGeometry height="55" width="90" x="250" y="250" as="geometry" />
         </mxCell>
-        <mxCell id="e_f_p" edge="1" parent="1" source="free" target="pro" style="rounded=1;html=1;fontSize=8;fontColor=#F97316;" value="Admin duyệt đơn">
+        <mxCell id="e_f_p" edge="1" parent="1" source="free" style="rounded=1;html=1;fontSize=8;fontColor=#F97316;" target="pro" value="Admin duyệt đơn">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_p_f" edge="1" parent="1" source="pro" target="free" style="rounded=1;html=1;fontSize=8;fontColor=#DC2626;exitX=0.5;exitY=1;entryX=0.5;entryY=1;exitDx=0;exitDy=18;entryDx=0;entryDy=18;" value="Hết hạn">
+        <mxCell id="e_p_f" edge="1" parent="1" source="pro" style="rounded=1;html=1;fontSize=8;fontColor=#DC2626;exitX=0.5;exitY=1;entryX=0.5;entryY=1;exitDx=0;exitDy=18;entryDx=0;entryDy=18;" target="free" value="Hết hạn">
           <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="295" y="335"/><mxPoint x="105" y="335"/></mxPoint>
+            <Array as="points">
+              <mxPoint x="295" y="335" />
+              <mxPoint x="105" y="335" />
+            </Array>
           </mxGeometry>
         </mxCell>
-
-        <!-- ═══ 3. ORDER ═══ -->
         <mxCell id="o_title" parent="1" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#F59E0B;" value="3. Đơn nâng cấp (Order)" vertex="1">
           <mxGeometry height="20" width="200" x="460" y="220" as="geometry" />
         </mxCell>
@@ -79,14 +77,12 @@
         <mxCell id="cancelled" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FEE2E2;strokeColor=#DC2626;fontSize=10;fontStyle=1;" value="Cancelled" vertex="1">
           <mxGeometry height="55" width="90" x="540" y="345" as="geometry" />
         </mxCell>
-        <mxCell id="e_pe_co" edge="1" parent="1" source="pending" target="order_done" style="rounded=1;html=1;fontSize=8;fontColor=#059669;" value="Admin duyệt">
+        <mxCell id="e_pe_co" edge="1" parent="1" source="pending" style="rounded=1;html=1;fontSize=8;fontColor=#059669;" target="order_done" value="Admin duyệt">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_pe_ca" edge="1" parent="1" source="pending" target="cancelled" style="rounded=1;html=1;fontSize=8;fontColor=#DC2626;" value="Từ chối / Hủy">
+        <mxCell id="e_pe_ca" edge="1" parent="1" source="pending" style="rounded=1;html=1;fontSize=8;fontColor=#DC2626;" target="cancelled" value="Từ chối / Hủy">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- ═══ 4. TICKET ═══ -->
         <mxCell id="t_title" parent="1" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#4F46E5;" value="4. Ticket hỗ trợ" vertex="1">
           <mxGeometry height="20" width="200" x="40" y="410" as="geometry" />
         </mxCell>
@@ -102,41 +98,36 @@
         <mxCell id="t_closed" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#94A3B8;fontSize=10;fontStyle=1;" value="Closed" vertex="1">
           <mxGeometry height="45" width="80" x="455" y="440" as="geometry" />
         </mxCell>
-        <mxCell id="e_to_tp" edge="1" parent="1" source="t_open" target="t_progress" style="rounded=1;html=1;fontSize=8;fontColor=#F59E0B;" value="Tiếp nhận">
+        <mxCell id="e_to_tp" edge="1" parent="1" source="t_open" style="rounded=1;html=1;fontSize=8;fontColor=#F59E0B;" target="t_progress" value="Tiếp nhận">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_tp_tr" edge="1" parent="1" source="t_progress" target="t_resolved" style="rounded=1;html=1;fontSize=8;fontColor=#059669;" value="Phản hồi">
+        <mxCell id="e_tp_tr" edge="1" parent="1" source="t_progress" style="rounded=1;html=1;fontSize=8;fontColor=#059669;" target="t_resolved" value="Phản hồi">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_tr_tc" edge="1" parent="1" source="t_resolved" target="t_closed" style="rounded=1;html=1;fontSize=8;fontColor=#94A3B8;" value="Đóng">
+        <mxCell id="e_tr_tc" edge="1" parent="1" source="t_resolved" style="rounded=1;html=1;fontSize=8;fontColor=#94A3B8;" target="t_closed" value="Đóng">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
-        <!-- ═══ 5. PLACEMENT TEST (NEW) ═══ -->
-        <mxCell id="p_title" parent="1" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#7C3AED;" value="5. Placement Test (MỚI)" vertex="1">
+        <mxCell id="p_title" parent="1" style="text;html=1;fontSize=12;fontStyle=1;fontColor=#7C3AED;" value="5. Placement Test&amp;nbsp;" vertex="1">
           <mxGeometry height="20" width="200" x="40" y="520" as="geometry" />
         </mxCell>
         <mxCell id="p_not" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#F8FAFC;strokeColor=#94A3B8;fontSize=10;" value="Chưa làm test" vertex="1">
           <mxGeometry height="50" width="115" x="40" y="550" as="geometry" />
         </mxCell>
         <mxCell id="p_doing" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#E0E7FF;strokeColor=#4F46E5;fontSize=10;fontStyle=1;" value="Đang làm test" vertex="1">
-          <mxGeometry height="50" width="120" x="215" y="550" as="geometry" />
+          <mxGeometry height="50" width="120" x="250" y="550" as="geometry" />
         </mxCell>
         <mxCell id="p_done" parent="1" style="ellipse;whiteSpace=wrap;html=1;fillColor=#EDE9FE;strokeColor=#7C3AED;fontSize=10;fontStyle=1;" value="Đã có kết quả" vertex="1">
-          <mxGeometry height="50" width="130" x="395" y="550" as="geometry" />
+          <mxGeometry height="50" width="130" x="495" y="560" as="geometry" />
         </mxCell>
-        <mxCell id="e_pn_pd" edge="1" parent="1" source="p_not" target="p_doing" style="rounded=1;html=1;fontSize=8;fontColor=#4F46E5;" value="Bắt đầu test">
+        <mxCell id="e_pn_pd" edge="1" parent="1" source="p_not" style="rounded=1;html=1;fontSize=8;fontColor=#4F46E5;" target="p_doing" value="Bắt đầu test">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_pd_pe" edge="1" parent="1" source="p_doing" target="p_done" style="rounded=1;html=1;fontSize=8;fontColor=#7C3AED;" value="Kết thúc (early termination)">
+        <mxCell id="e_pd_pe" edge="1" parent="1" source="p_doing" style="rounded=1;html=1;fontSize=8;fontColor=#7C3AED;" target="p_done" value="Kết thúc (early termination)">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="e_pe_pd" edge="1" parent="1" source="p_done" target="p_doing" style="rounded=1;html=1;fontSize=8;fontColor=#F97316;exitX=0.5;exitY=1;entryX=0.5;entryY=1;exitDx=0;exitDy=18;entryDx=0;entryDy=18;" value="Làm lại">
-          <mxGeometry relative="1" as="geometry">
-            <Array as="points"><mxPoint x="460" y="635"/><mxPoint x="275" y="635"/></mxPoint>
-          </mxGeometry>
+        <mxCell id="e_pe_pd" edge="1" parent="1" source="p_done" style="rounded=1;html=1;fontSize=8;fontColor=#F97316;exitX=0.5;exitY=1;entryX=0.5;entryY=1;exitDx=0;exitDy=18;entryDx=0;entryDy=18;edgeStyle=orthogonalEdgeStyle;" target="p_doing" value="Làm lại">
+          <mxGeometry relative="1" as="geometry" />
         </mxCell>
-
         <mxCell id="legend" parent="1" style="text;html=1;fontSize=9;color=#475569;align=left;" value="5 State Machines: Course (MỚI), Membership, Order, Ticket, Placement Test (MỚI). Màu xanh lá = hoàn thành, đỏ = khóa/chưa làm, cam = trung gian, tím = mastered/kết quả." vertex="1">
           <mxGeometry height="18" width="800" x="40" y="670" as="geometry" />
         </mxCell>

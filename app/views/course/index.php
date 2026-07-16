@@ -1,111 +1,93 @@
-<!-- Course Catalog — Coursera-style 3-group layout -->
-<section class="page-header">
-    <div class="container">
-        <h1>Khóa học của tôi</h1>
-        <p>Lộ trình học tập được cá nhân hóa dựa trên trình độ của bạn.</p>
+<!-- Course Catalog -->
+<section class="bg-gradient-to-br from-brand-50 to-blue-50 py-16 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6">
+        <h1 class="font-heading text-3xl lg:text-4xl font-bold text-slate-800 mb-2">Khóa học của tôi</h1>
+        <p class="text-slate-500 text-base">Lộ trình học tập được cá nhân hóa dựa trên trình độ của bạn.</p>
     </div>
 </section>
 
-<section class="course-catalog">
-    <div class="container">
+<section class="py-12 bg-slate-50/50">
+    <div class="max-w-7xl mx-auto px-6">
         <?php if (empty($active) && empty($locked) && empty($mastered)): ?>
-            <div class="course-empty">
-                <i class="fas fa-clipboard-check"></i>
-                <h3>Bạn chưa xác định trình độ</h3>
-                <p>Hãy làm bài kiểm tra đầu vào để nhận lộ trình học phù hợp.</p>
-                <a href="<?= BASE_URL ?>/placement/intro" class="btn btn-primary">Làm bài kiểm tra</a>
+            <div class="text-center py-20">
+                <i class="fas fa-clipboard-check text-6xl text-slate-200 mb-6 block"></i>
+                <h3 class="font-heading text-xl font-bold text-slate-600 mb-2">Bạn chưa xác định trình độ</h3>
+                <p class="text-slate-400 mb-8">Hãy làm bài kiểm tra đầu vào để nhận lộ trình học phù hợp.</p>
+                <a href="<?= BASE_URL ?>/placement/intro" class="inline-flex items-center gap-2 px-6 py-3 bg-brand-600 hover:bg-brand-700 text-white font-bold rounded-lg text-sm transition">Làm bài kiểm tra</a>
             </div>
         <?php endif; ?>
 
         <!-- Active Courses -->
         <?php if (!empty($active)): ?>
-        <div class="course-group">
-            <h2 class="course-group-title"><i class="fas fa-play-circle"></i> Đang học</h2>
-            <div class="course-grid">
-                <?php foreach ($active as $c): ?>
-                <?php $cefrIcons = ['A1'=>'fa-seedling','A2'=>'fa-comments','B1'=>'fa-bullseye','B2'=>'fa-chart-line','C1'=>'fa-rocket'];
-                      $cefrGradients = ['A1'=>'linear-gradient(135deg, #059669, #34D399)','A2'=>'linear-gradient(135deg, #0284C7, #38BDF8)','B1'=>'linear-gradient(135deg, #D97706, #FBBF24)','B2'=>'linear-gradient(135deg, #EA580C, #FB923C)','C1'=>'linear-gradient(135deg, #7C3AED, #A78BFA)'];
-                      $icon = $cefrIcons[$c['cefr_level']] ?? 'fa-book'; ?>
-                <a href="<?= BASE_URL ?>/course/show/<?= $c['id'] ?>" class="course-card">
-                    <div class="course-card-img" style="background:<?= $cefrGradients[$c['cefr_level']] ?? '#4f46e5' ?>">
-                        <i class="fas <?= $icon ?>"></i>
-                        <span class="card-badge"><?= $c['cefr_level'] ?></span>
-                    </div>
-                    <h3><?= htmlspecialchars($c['title']) ?></h3>
-                    <p><?= htmlspecialchars($c['description'] ?? '') ?></p>
-                    <div class="course-progress-mini">
-                        <div class="course-progress-bar">
-                            <div class="course-progress-fill" style="width: <?= $c['completion_percent'] ?? 0 ?>%"></div>
-                        </div>
-                        <span><?= $c['completion_percent'] ?? 0 ?>%</span>
-                    </div>
-                    <div class="course-card-footer">
-                        <?php if (!empty($c['last_lesson'])): ?>
-                        <span class="course-card-resume">
-                            <i class="fas fa-history"></i> <?= htmlspecialchars($c['last_lesson']['title']) ?>
-                        </span>
-                        <?php endif; ?>
-                        <span class="course-card-status <?= $c['status'] === 'in_progress' ? 'status-active' : 'status-new' ?>">
-                            <?php if (!empty($c['last_lesson'])): ?>
-                                <i class="fas fa-play"></i> Tiếp tục học
-                            <?php elseif ($c['status'] === 'in_progress'): ?>
-                                Đang học
-                            <?php else: ?>
-                                <i class="fas fa-play"></i> Bắt đầu
-                            <?php endif; ?>
-                        </span>
-                    </div>
-                </a>
-                <?php endforeach; ?>
+        <div class="mb-14">
+            <h2 class="font-heading text-2xl font-bold text-slate-800 mb-7 flex items-center gap-3">
+                <span class="w-2 h-8 rounded bg-brand-500"></span> Đang học
+            </h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <?php foreach ($active as $c):
+                    $card = [
+                        'url'    => BASE_URL . '/course/show/' . $c['id'],
+                        'cefr'   => $c['cefr_level'],
+                        'title'  => htmlspecialchars($c['title']),
+                        'desc'   => htmlspecialchars($c['description'] ?? ''),
+                        'pct'    => $c['completion_percent'] ?? 0,
+                        'opacity'=> '',
+                        'badge'  => '',
+                        'footer_left'  => !empty($c['last_lesson']) ? '<span class="text-xs text-slate-400 flex items-center gap-1.5 truncate max-w-[180px]"><i class="fas fa-history text-amber-500"></i> ' . htmlspecialchars($c['last_lesson']['title']) . '</span>' : '',
+                        'footer_right' => '<span class="text-xs font-bold text-brand-600 flex items-center gap-1.5 ml-auto"><i class="fas fa-play text-[10px]"></i> Tiếp tục học</span>',
+                    ];
+                    require __DIR__ . '/_course-card.php';
+                endforeach; ?>
             </div>
         </div>
         <?php endif; ?>
 
-        <!-- Mastered Courses (có thể ôn tập) -->
+        <!-- Mastered Courses -->
         <?php if (!empty($mastered)): ?>
-        <div class="course-group course-mastered-section">
-            <h2 class="course-group-title"><i class="fas fa-book-open"></i> Ôn tập kiến thức</h2>
-            <div class="course-grid">
-                <?php foreach ($mastered as $c): ?>
-                <?php $cefrIcons = ['A1'=>'fa-seedling','A2'=>'fa-comments','B1'=>'fa-bullseye','B2'=>'fa-chart-line','C1'=>'fa-rocket'];
-                      $cefrGradients = ['A1'=>'linear-gradient(135deg, #059669, #34D399)','A2'=>'linear-gradient(135deg, #0284C7, #38BDF8)','B1'=>'linear-gradient(135deg, #D97706, #FBBF24)','B2'=>'linear-gradient(135deg, #EA580C, #FB923C)','C1'=>'linear-gradient(135deg, #7C3AED, #A78BFA)'];
-                      $icon = $cefrIcons[$c['cefr_level']] ?? 'fa-book'; ?>
-                <a href="<?= BASE_URL ?>/course/show/<?= $c['id'] ?>" class="course-card course-mastered-card">
-                    <div class="course-card-img" style="background:<?= $cefrGradients[$c['cefr_level']] ?? '#4f46e5' ?>; opacity:0.7;">
-                        <i class="fas <?= $icon ?>"></i>
-                        <span class="card-badge"><?= $c['cefr_level'] ?></span>
-                    </div>
-                    <h3><?= htmlspecialchars($c['title']) ?></h3>
-                    <p><?= htmlspecialchars($c['description'] ?? '') ?></p>
-                    <div class="course-card-footer">
-                        <span class="course-mastered-text">Ôn tập ngay</span>
-                        <a href="<?= BASE_URL ?>/course/certificate/<?= $c['id'] ?>" class="cert-link" onclick="event.stopPropagation()">
-                            <i class="fas fa-certificate"></i> Xem chứng chỉ
-                        </a>
-                    </div>
-                </a>
-                <?php endforeach; ?>
+        <div class="mb-14">
+            <h2 class="font-heading text-2xl font-bold text-slate-800 mb-7 flex items-center gap-3">
+                <span class="w-2 h-8 rounded bg-emerald-500"></span> Đã hoàn thành — Ôn tập
+            </h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <?php foreach ($mastered as $c):
+                    $card = [
+                        'url'    => BASE_URL . '/course/show/' . $c['id'],
+                        'cefr'   => $c['cefr_level'],
+                        'title'  => htmlspecialchars($c['title']),
+                        'desc'   => htmlspecialchars($c['description'] ?? ''),
+                        'pct'    => 0,
+                        'opacity'=> 'opacity-85 hover:opacity-100',
+                        'badge'  => '<span class="absolute top-3 left-3 text-white text-lg"><i class="fas fa-check-circle"></i></span>',
+                        'footer_left'  => '<span class="text-xs font-bold text-emerald-600 flex items-center gap-1.5"><i class="fas fa-redo"></i> Ôn tập</span>',
+                        'footer_right' => '<a href="' . BASE_URL . '/course/certificate/' . $c['id'] . '" class="text-xs font-bold text-brand-600 hover:text-brand-700 flex items-center gap-1.5" onclick="event.stopPropagation()"><i class="fas fa-certificate"></i> Chứng chỉ</a>',
+                    ];
+                    require __DIR__ . '/_course-card.php';
+                endforeach; ?>
             </div>
         </div>
         <?php endif; ?>
 
         <!-- Locked Courses -->
         <?php if (!empty($locked)): ?>
-        <div class="course-group">
-            <h2 class="course-group-title"><i class="fas fa-lock"></i> Sẽ mở sau</h2>
-            <div class="course-grid">
-                <?php foreach ($locked as $c): ?>
-                <?php $cefrGradients = ['A1'=>'linear-gradient(135deg, #059669, #34D399)','A2'=>'linear-gradient(135deg, #0284C7, #38BDF8)','B1'=>'linear-gradient(135deg, #D97706, #FBBF24)','B2'=>'linear-gradient(135deg, #EA580C, #FB923C)','C1'=>'linear-gradient(135deg, #7C3AED, #A78BFA)']; ?>
-                <div class="course-card course-locked">
-                    <div class="course-card-img" style="background:<?= $cefrGradients[$c['cefr_level']] ?? '#94a3b8' ?>; opacity:0.45;">
-                        <i class="fas fa-lock" style="font-size:2rem;"></i>
-                        <span class="card-badge"><?= $c['cefr_level'] ?></span>
-                    </div>
-                    <h3><?= htmlspecialchars($c['title']) ?></h3>
-                    <p><?= htmlspecialchars($c['description'] ?? '') ?></p>
-                    <span class="course-locked-text">Hoàn thành khóa trước để mở</span>
-                </div>
-                <?php endforeach; ?>
+        <div>
+            <h2 class="font-heading text-2xl font-bold text-slate-800 mb-7 flex items-center gap-3">
+                <span class="w-2 h-8 rounded bg-slate-300"></span> Sẽ mở sau
+            </h2>
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                <?php foreach ($locked as $c):
+                    $card = [
+                        'url'     => '',
+                        'cefr'    => $c['cefr_level'],
+                        'title'   => htmlspecialchars($c['title']),
+                        'desc'    => htmlspecialchars($c['description'] ?? ''),
+                        'pct'     => 0,
+                        'opacity' => 'opacity-50 pointer-events-none',
+                        'badge'   => '',
+                        'footer_full' => '<span class="text-xs text-slate-400 flex items-center gap-1.5"><i class="fas fa-lock"></i> Hoàn thành khóa trước để mở</span>',
+                        'locked'  => true,
+                    ];
+                    require __DIR__ . '/_course-card.php';
+                endforeach; ?>
             </div>
         </div>
         <?php endif; ?>

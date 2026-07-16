@@ -1,4 +1,5 @@
-<!-- Final Exam Take — 2 tabs Reading/Listening -->
+<!-- Final Exam Take -->
+<?php $hasBoth = !empty($hasBothSections); ?>
 <section class="page-header">
     <div class="container">
         <nav class="breadcrumb">
@@ -7,30 +8,43 @@
             <span><?= htmlspecialchars($test['title']) ?></span>
         </nav>
         <h1><?= htmlspecialchars($test['title']) ?></h1>
-        <p>Bài thi gồm 2 phần: Reading (10 câu) và Listening (10 câu). Cần đạt tối thiểu 70%.</p>
+        <p>
+            <?php if ($hasBoth): ?>
+                Bài thi gồm 2 phần: Reading (<?= count($readingQuestions) ?> câu) và Listening (<?= count($listeningQuestions) ?> câu).
+            <?php else: ?>
+                Bài thi gồm <?= count($readingQuestions) + count($listeningQuestions) ?> câu hỏi.
+            <?php endif; ?>
+            Cần đạt tối thiểu 70%.
+        </p>
     </div>
 </section>
 
 <section class="final-exam">
     <div class="container">
+        <?php if ($hasBoth): ?>
         <!-- Section Tabs -->
         <div class="final-tabs">
             <button class="final-tab active" onclick="switchSection('reading')" id="tab-reading">
-                <i class="fas fa-book-reader"></i> Reading (50 điểm)
+                <i class="fas fa-book-reader"></i> Reading (<?= count($readingQuestions) ?> câu)
             </button>
             <button class="final-tab" onclick="switchSection('listening')" id="tab-listening">
-                <i class="fas fa-headphones"></i> Listening (50 điểm)
+                <i class="fas fa-headphones"></i> Listening (<?= count($listeningQuestions) ?> câu)
             </button>
             <div class="final-timer">
                 <i class="fas fa-clock"></i> <span id="timer"><?= $test['duration_minutes'] ?>:00</span>
             </div>
         </div>
+        <?php else: ?>
+        <div class="final-timer" style="text-align:right; margin-bottom:1rem;">
+            <i class="fas fa-clock"></i> <span id="timer"><?= $test['duration_minutes'] ?>:00</span>
+        </div>
+        <?php endif; ?>
 
         <form id="finalForm">
             <input type="hidden" name="test_id" value="<?= $test['id'] ?>">
 
             <!-- READING Section -->
-            <div class="final-section active" id="section-reading">
+            <div class="final-section<?= $hasBoth ? ' active' : '' ?>" id="section-reading">
                 <?php if (!empty($test['reading_passage'])): ?>
                 <div class="final-reading-passage">
                     <h3><i class="fas fa-book"></i> Đọc đoạn văn sau và trả lời câu hỏi</h3>
@@ -58,6 +72,7 @@
                 <?php endforeach; ?>
             </div>
 
+            <?php if ($hasBoth || !empty($listeningQuestions)): ?>
             <!-- LISTENING Section -->
             <div class="final-section" id="section-listening">
                 <?php if (!empty($test['listening_transcript'])): ?>
@@ -75,7 +90,7 @@
                 <?php foreach ($listeningQuestions as $i => $q): ?>
                 <div class="question-card" id="lq-<?= $i ?>">
                     <div class="question-header">
-                        <span class="question-number">Câu <?= $i + 11 ?></span>
+                        <span class="question-number">Câu <?= count($readingQuestions) + $i + 1 ?></span>
                         <span class="question-points"><?= $q['points'] ?> điểm</span>
                     </div>
                     <div class="question-text"><p><?= htmlspecialchars($q['question_text']) ?></p></div>
@@ -91,6 +106,7 @@
                 </div>
                 <?php endforeach; ?>
             </div>
+            <?php endif; ?>
         </form>
 
         <!-- Submit -->

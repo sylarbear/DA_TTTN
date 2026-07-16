@@ -66,20 +66,15 @@ class Course extends Model
      */
     public function getFinalExam(int $courseId): ?array
     {
-        // Final exam được gán vào course thông qua convention: test liên quan đến course
-        // Hiện tại chưa có course_id trực tiếp trong tests, dùng title lookup
-        $course = $this->find($courseId);
-        if (!$course) return null;
-
         $stmt = $this->db->prepare(
             'SELECT t.*, COUNT(q.id) AS question_count
              FROM tests t
              LEFT JOIN questions q ON q.test_id = t.id
-             WHERE t.is_final = 1 AND t.title LIKE :pattern AND t.is_active = 1
+             WHERE t.is_final = 1 AND t.course_id = :cid AND t.is_active = 1
              GROUP BY t.id
              LIMIT 1'
         );
-        $stmt->execute(['pattern' => '%' . addcslashes($course['title'], '%_') . '%']);
+        $stmt->execute(['cid' => $courseId]);
         return $stmt->fetch() ?: null;
     }
 
