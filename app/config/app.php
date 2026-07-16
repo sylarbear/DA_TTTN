@@ -45,7 +45,11 @@ if (class_exists('Env') && Env::get('SITE_URL')) {
 if (defined('SITE_URL')) {
     define('BASE_URL', SITE_URL);
 } elseif (isset($_SERVER['HTTP_HOST'])) {
-    $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https' : 'http';
+    // Detects HTTPS behind Cloudflare Tunnel / proxy
+    $isHttps = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')
+        || (isset($_SERVER['HTTP_X_FORWARDED_PROTO']) && $_SERVER['HTTP_X_FORWARDED_PROTO'] === 'https')
+        || (isset($_SERVER['HTTP_CF_VISITOR']) && strpos($_SERVER['HTTP_CF_VISITOR'], '"https"') !== false);
+    $protocol = $isHttps ? 'https' : 'http';
     $host = $_SERVER['HTTP_HOST'];
     if (strpos($host, 'localhost') !== false || strpos($host, '127.0.0.1') !== false) {
         define('BASE_URL', $protocol . '://' . $host . '/DA_TTTN/public');

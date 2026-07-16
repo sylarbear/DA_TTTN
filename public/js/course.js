@@ -753,8 +753,6 @@ window.CoursePlayer = (function () {
     async function loadReviews(courseId) {
         var container = document.getElementById('reviewsContainer');
         if (!container) return;
-        if (container.style.display === 'block') { container.style.display = 'none'; return; }
-        container.style.display = 'block';
         container.innerHTML = '<div style="text-align:center;padding:24px"><div class="loading-spinner"></div></div>';
 
         try {
