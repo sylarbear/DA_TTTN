@@ -77,6 +77,16 @@ class Middleware
     public static function user(): ?array
     {
         if (isset($_SESSION['user_id'])) {
+            // Sync membership từ DB (tránh cache cũ sau khi admin nâng cấp)
+            $db = getDB();
+            $stmt = $db->prepare("SELECT membership, membership_expired_at FROM users WHERE id = :id");
+            $stmt->execute(['id' => $_SESSION['user_id']]);
+            $fresh = $stmt->fetch();
+            if ($fresh) {
+                $_SESSION['membership'] = $fresh['membership'];
+                $_SESSION['membership_expired_at'] = $fresh['membership_expired_at'];
+            }
+
             return [
                 'id' => $_SESSION['user_id'],
                 'username' => $_SESSION['username'],
@@ -110,13 +120,23 @@ class Middleware
         if (self::isAdmin()) {
             return false;
         }
-        if (($_SESSION['membership'] ?? 'free') !== 'pro') {
+
+        // Đọc từ DB để tránh session cache cũ sau khi admin nâng cấp
+        $db = getDB();
+        $stmt = $db->prepare("SELECT membership, membership_expired_at FROM users WHERE id = :id");
+        $stmt->execute(['id' => $_SESSION['user_id']]);
+        $user = $stmt->fetch();
+
+        if (!$user || ($user['membership'] ?? 'free') !== 'pro') {
             return false;
         }
-        $expired = $_SESSION['membership_expired_at'] ?? null;
-        if ($expired && strtotime($expired) < time()) {
+        if ($user['membership_expired_at'] && strtotime($user['membership_expired_at']) < time()) {
             return false;
         }
+
+        // Đồng bộ lại session
+        $_SESSION['membership'] = $user['membership'];
+        $_SESSION['membership_expired_at'] = $user['membership_expired_at'];
 
         return true;
     }

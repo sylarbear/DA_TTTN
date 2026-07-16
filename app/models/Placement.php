@@ -381,6 +381,7 @@ class Placement extends Model
 
         // Khởi tạo course progress cho A1
         require_once APP_PATH . '/models/CourseProgress.php';
+        $this->db->prepare('DELETE FROM course_progress WHERE user_id = :uid')->execute(['uid' => $userId]);
         CourseProgress::initializeForUser($userId, 'A1');
     }
 
@@ -453,7 +454,9 @@ class Placement extends Model
         }
 
         // Khởi tạo course progress theo CEFR level
+        // Xóa course_progress cũ để khởi tạo lại theo level mới (hỗ trợ retake)
         require_once APP_PATH . '/models/CourseProgress.php';
+        $this->db->prepare('DELETE FROM course_progress WHERE user_id = :uid')->execute(['uid' => $userId]);
         CourseProgress::initializeForUser($userId, $cefr);
     }
 
